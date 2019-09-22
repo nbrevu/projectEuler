@@ -156,6 +156,13 @@ Very simple, just enumerate all the primes up to $\sqrt L$ (with $L$ being the l
 
 There are many methods that can be used to iterate over the primes, but the Erathostenes sieve is good enough. Saying that it will be used profusely is a big, big understatement.
 
+\section{Largest palindrome product}
+\textbf{Solution}: 906609. \textit{Solved: Sat, 8 Aug 2015, 08:39}.
 
+\textbf{Math knowledge used}: modular arithmetic.
+
+\textbf{Programming techniques used}: none.
+
+The ``modular arithmetic'' I'm referring to is just the fact that I know that all palindrome numbers with an even amount of digits are multiples of $11$. So, the method to found this answer is as simple as iterating downwards over a pair of factors, but this bit of knowledge allows me to reduce the search space by 11, because one of the factors iterates over just multiples of $11$.
 
 \end{document}
