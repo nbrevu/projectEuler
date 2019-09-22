@@ -28,3 +28,8 @@ hs_err_pid*
 *.bbl
 *.blg
 /Analysis/Main analysis.pdf
+/ProjectEuler/.classpath
+/ProjectEuler/.project
+/ProjectEuler/.settings/*.prefs
+**/target
+**/bin
