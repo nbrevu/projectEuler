@@ -1,0 +1,109 @@
+\documentclass[a4paper,12pt]{article}
+
+\usepackage[latin1]{inputenc}
+\usepackage[spanish,es-tabla]{babel}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{latexsym}
+\usepackage{graphicx}
+\usepackage{enumerate}
+\usepackage{setspace}
+\usepackage{units}
+\usepackage{color}
+\usepackage{float}
+\usepackage{longtable}
+\usepackage{mathrsfs}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{relsize}
+\usepackage{mathabx}
+\usepackage{ulem}
+
+\bibliographystyle{alpha}
+
+%\doublespacing
+\clubpenalty=10000
+\widowpenalty=10000
+
+\DeclareMathOperator{\arccot}{arc\ cot}
+\DeclareMathOperator{\arcsec}{arc\ sec}
+\DeclareMathOperator{\arccsc}{arc\ csc}
+\DeclareMathOperator{\sech}{sech}
+\DeclareMathOperator{\csch}{csch}
+\DeclareMathOperator{\argsenh}{arg\ senh}
+\DeclareMathOperator{\argcosh}{arg\ cosh}
+\DeclareMathOperator{\argtgh}{arg\ tgh}
+\DeclareMathOperator{\argcoth}{arg\ coth}
+\DeclareMathOperator{\argsech}{arg\ sech}
+\DeclareMathOperator{\argcsch}{arg\ csch}
+\DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\mcd}{mcd}
+\DeclareMathOperator{\modX}{m\acute od}
+\DeclareMathOperator{\Cov}{Cov}
+
+\pgfplotsset{compat=1.12}
+
+\begin{document}
+
+\newlength{\origpar}
+\setlength{\origpar}{\parindent}
+\setlength{\parindent}{0pt}
+\setlength{\parindent}{\origpar}
+
+\renewcommand {\baselinestretch} {1.0}
+\renewcommand*{\arraystretch}{1.5}
+
+\newcommand{\paren}[1]{\ensuremath{\left(#1\right)}}
+\newcommand{\corch}[1]{\ensuremath{\left[#1\right]}}
+\newcommand{\llave}[1]{\ensuremath{\left\{#1\right\}}}
+\newcommand{\angparen}[1]{\ensuremath{\left<#1\right>}}
+\newcommand{\abs}[1]{\ensuremath{\left|#1\right|}}
+\newcommand{\vecnorm}[1]{\ensuremath{\left|\left|#1\right|\right|}}
+\newcommand{\pdiff}[2]{\ensuremath{\dfrac{\partial#1}{\partial#2}}}
+\newcommand{\tlap}[1]{\ensuremath{\mathscr L\llave{#1}}}
+\newcommand{\itlap}[1]{\ensuremath{\mathscr L^{-1}\llave{#1}}}
+\newcommand{\Section}[1]{\renewcommand{\thesection}{#1}\section}
+\newcommand{\floor}[1]{\ensuremath{\left\lfloor#1\right\rfloor}}
+\newcommand{\ceil}[1]{\ensuremath{\left\lceil#1\right\rceil}}
+
+\newcommand{\zm}[1]{\ensuremath{\mathbb Z/#1\mathbb Z}}
+
+\definecolor{grey}{rgb}{0.50,0.50,0.50}
+\definecolor{moradoesfruta}{rgb}{1,0,1}
+\definecolor{orangeisthenewmorado}{rgb}{1,0.5,0}
+
+\newcommand{\inRed}[1]{\textcolor{red}{#1}}
+\newcommand{\inBlue}[1]{\textcolor{blue}{#1}}
+\newcommand{\inGreen}[1]{\textcolor{green}{#1}}
+\newcommand{\inPurple}[1]{\textcolor{moradoesfruta}{#1}}
+\newcommand{\inOrange}[1]{\textcolor{orangeisthenewmorado}{#1}}
+
+\newcommand{\SectionR}[1]{\renewcommand{\thesection}{\inRed{#1}}\section}
+\newcommand{\SectionG}[1]{\renewcommand{\thesection}{\inGreen{#1}}\section}
+\newcommand{\SectionO}[1]{\renewcommand{\thesection}{\inOrange{#1}}\section}
+
+\newcommand{\matlab}[1]{\begin{singlespace}\noindent\footnotesize{\texttt{\textcolor{black}{#1}}}\end{singlespace}}
+\newcommand{\maxima}[1]{\begin{singlespace}\noindent\footnotesize{\texttt{\textcolor{blue}{#1}}}\end{singlespace}}
+\newcommand{\maximaoutput}[1]{\begin{singlespace}\noindent\footnotesize{\texttt{\textcolor{grey}{#1}}}\end{singlespace}}
+\newcommand{\scilab}[1]{\begin{singlespace}\noindent\footnotesize{\texttt{\textcolor{black}{#1}}}\end{singlespace}}
+
+% Magia negra de Latex a continuación (copiada de http://tex.stackexchange.com/questions/44235/is-there-a-way-to-do-an-upside-down-widehat).
+\makeatletter
+\DeclareRobustCommand\widecheck[1]{{\mathpalette\@widecheck{#1}}}
+\def\@widecheck#1#2{%
+    \setbox\z@\hbox{\m@th$#1#2$}%
+    \setbox\tw@\hbox{\m@th$#1%
+       \widehat{%
+          \vrule\@width\z@\@height\ht\z@
+          \vrule\@height\z@\@width\wd\z@}$}%
+    \dp\tw@-\ht\z@
+    \@tempdima\ht\z@ \advance\@tempdima2\ht\tw@ \divide\@tempdima\thr@@
+    \setbox\tw@\hbox{%
+       \raise\@tempdima\hbox{\scalebox{1}[-1]{\lower\@tempdima\box
+\tw@}}}%
+    {\ooalign{\box\tw@ \cr \box\z@}}}
+\makeatother
+% Fin de la magia negra.
+
+TODO! Add content.
+\end{document}
