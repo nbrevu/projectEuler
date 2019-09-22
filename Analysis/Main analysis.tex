@@ -16,7 +16,7 @@
 \usepackage{tikz}
 \usepackage{pgfplots}
 \usepackage{relsize}
-\usepackage{mathabx}
+%\usepackage{mathabx}
 \usepackage{ulem}
 
 \bibliographystyle{alpha}
@@ -107,13 +107,45 @@
 
 \setcounter{secnumdepth}{3}
 \section{Multiples of 3 and 5}
-\textbf{Solution}: 233168.
+\textbf{Solution}: 233168. \textit{Solved: Sat, 8 Aug 2015, 08:09}.
 
 \textbf{Math knowledge used}: triangular numbers.
 
 \textbf{Programming techniques used}: none.
 
 It's very simple using inclusion-exclusion. We count how many multiples of $3$, $5$ and $15$ are there, then we use triangular numbers to determine each sum, then we return $\mathrm{sum}\paren3+\mathrm{sum}\paren5-\mathrm{sum}\paren{15}$.
+
+\section{Even Fibonacci numbers}
+\textbf{Solution}: 4613732. \textit{Solved: Sat, 8 Aug 2015, 08:23}.
+
+\textbf{Math knowledge used}: recurrence equation theory.
+
+\textbf{Programming techniques used}: none.
+
+You can bruteforce this very easily. Or you can use recurrence equations! Which is of course my preferred method since it's more mathematical and, much more importantly, more scalable.
+
+So, fibonacci numbers follow this formula:
+\begin{equation*}
+f\paren n=\dfrac{\varphi^n-\paren{1-\varphi}^n}{\sqrt5}.
+\end{equation*}
+
+And even fibonacci numbers are precisely those for which $n=\dot3$. That is, the numbers we are looking for follow this other formula:
+\begin{equation*}
+f_{\mathrm even}\paren n=\dfrac{\varphi^{3n}-\paren{1-\varphi}^{3n}}{\sqrt5}.
+\end{equation*}
+
+From this, considering that $\paren{1-\varphi}^{3n}$ tends to $0$ very rapidly, and calling $L=4e6$ the imposed limit, we can get a suitable formula for the largest $n$ we need:
+\begin{equation*}
+N=\floor{\dfrac{\log L}{3\log\varphi}}.
+\end{equation*}
+
+Finally, since we need the sum, we use a basic summation formula (again, considering that the $\paren{1-\varphi}^{3n}$ terms tend quickly to zero):
+\begin{equation*}
+\sum_{i=0}^n\dfrac{\varphi^{3n}-\paren{1-\varphi}^{3n}}{\sqrt5}\approx\sum_{i=0}^n\dfrac{\varphi^{3n}}{\sqrt5}=\dfrac{\varphi^{3n+3}-\varphi^3}{\paren{\varphi^3-1}\sqrt5}.
+\end{equation*}
+Rounding this value into the nearest integer we get the solution.
+
+
 
 
 \end{document}
