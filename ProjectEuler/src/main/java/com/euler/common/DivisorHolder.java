@@ -2,6 +2,7 @@ package com.euler.common;
 
 import java.math.RoundingMode;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.SortedMap;
@@ -151,6 +152,21 @@ public class DivisorHolder	{
 			if (existing==toRemove) result.factors.remove(key);
 			else result.factors.put(key,existing-toRemove);
 		});
+		return result;
+	}
+	public static DivisorHolder getLcm(Collection<DivisorHolder> numbers)	{
+		DivisorHolder result=new DivisorHolder();
+		for (DivisorHolder holder:numbers)	{
+			IntIntCursor cursor=holder.factors.cursor();
+			while (cursor.moveNext()) result.factors.compute(cursor.key(),(int key,int elem)->Math.max(elem,cursor.value()));
+		}
+		return result;
+	}
+	public long getAsLong()	{
+		// Assumes that the results fits in a long (i.e. 63 bits).
+		long result=1l;
+		IntIntCursor cursor=factors.cursor();
+		while (cursor.moveNext()) result*=LongMath.pow(cursor.key(),cursor.value());
 		return result;
 	}
 	public static class Decomposition	{

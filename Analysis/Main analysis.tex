@@ -165,4 +165,16 @@ There are many methods that can be used to iterate over the primes, but the Erat
 
 The ``modular arithmetic'' I'm referring to is just the fact that I know that all palindrome numbers with an even amount of digits are multiples of $11$. So, the method to found this answer is as simple as iterating downwards over a pair of factors, but this bit of knowledge allows me to reduce the search space by 11, because one of the factors iterates over just multiples of $11$.
 
+\section{Smallest multiple}
+\textbf{Solution}: 232792560. \textit{Sat, 8 Aug 2015, 08:49}.
+
+\textbf{Math knowledge used}: none.
+
+\textbf{Programming techniques used}: none.
+
+I'm not sure if ``none'' qualifies as the list of special knowledge used. I just factored all the numbers and then calculated the least common multiple in a more or less intelligent way (i.e. I have the factors, so no need to use Euclid's algorithm). This is the first time I used my DivisorHolder class, which is used for a fuckton of problems all over the list.
+
+
+
+
 \end{document}

@@ -42,6 +42,11 @@
 			<version>1.0.0</version>
 		</dependency>
 		<dependency>
+			<groupId>com.koloboke</groupId>
+			<artifactId>koloboke-impl-jdk8</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+		<dependency>
 			<groupId>com.github.qurben</groupId>
 			<artifactId>libnewicktree</artifactId>
 			<version>1.0</version>
