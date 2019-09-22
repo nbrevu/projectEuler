@@ -145,6 +145,16 @@ Finally, since we need the sum, we use a basic summation formula (again, conside
 \end{equation*}
 Rounding this value into the nearest integer we get the solution.
 
+\section{Largest prime factor}
+\textbf{Solution}: 6857. \textit{Solved: Sat, 8 Aug 2015, 08:33}.
+
+\textbf{Math knowledge used}: Erathostenes sieve.
+
+\textbf{Programming techniques used}: none.
+
+Very simple, just enumerate all the primes up to $\sqrt L$ (with $L$ being the limit) and then divide until either we hit $1$ (meaning that the last prime we divided by is the result) or we run out of primes (meaning that the remaining number is the last prime we're looking for).
+
+There are many methods that can be used to iterate over the primes, but the Erathostenes sieve is good enough. Saying that it will be used profusely is a big, big understatement.
 
 
 
