@@ -166,7 +166,7 @@ There are many methods that can be used to iterate over the primes, but the Erat
 The ``modular arithmetic'' I'm referring to is just the fact that I know that all palindrome numbers with an even amount of digits are multiples of $11$. So, the method to found this answer is as simple as iterating downwards over a pair of factors, but this bit of knowledge allows me to reduce the search space by 11, because one of the factors iterates over just multiples of $11$.
 
 \section{Smallest multiple}
-\textbf{Solution}: 232792560. \textit{Sat, 8 Aug 2015, 08:49}.
+\textbf{Solution}: 232792560. \textit{Solved: Sat, 8 Aug 2015, 08:49}.
 
 \textbf{Math knowledge used}: none.
 
@@ -174,6 +174,29 @@ The ``modular arithmetic'' I'm referring to is just the fact that I know that al
 
 I'm not sure if ``none'' qualifies as the list of special knowledge used. I just factored all the numbers and then calculated the least common multiple in a more or less intelligent way (i.e. I have the factors, so no need to use Euclid's algorithm). This is the first time I used my DivisorHolder class, which is used for a fuckton of problems all over the list.
 
+\section{Sum square difference}
+\textbf{Solution}: 25164150. \textit{Solved: Sat, 8 Aug 2015, 08:54}.
+
+\textbf{Math knowledge used}: basic Faulhaber formulas.
+
+\textbf{Programming techniques used}: none.
+
+The sum of all natural numbers up to $n$ is $\dfrac{n\paren{n+1}}2$, and if we square this we get:
+\begin{equation*}
+f\paren n=\dfrac{n^4+2n^3+n^2}4.
+\end{equation*}
+
+On the other hand, the sum of the squares of all the natural numbers up to $n$ is
+\begin{equation*}
+g\paren n=\dfrac{2n^3+3n^2+n}6.
+\end{equation*}
+
+Subtracting both numbers we get the formula we need:
+\begin{equation*}
+f\paren n-g\paren n=\dfrac{3n^4+2n^3-3n^2-2n}{12}.
+\end{equation*}
+
+Plugging in $n=100$ we get the result. By the way, it can be easily proven that despite the denominator this number is always an integer.
 
 
 
