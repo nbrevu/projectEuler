@@ -216,5 +216,16 @@ Just use an Erathostenes sieve. As for the limit, we know that $\pi\paren x\appr
 
 This is more algorithmic than mathematic, but still, it's not like it has much algoritmic depth. You can either iterate over the list, taking care about how the zeros break the chains, or just split the string into smaller strings of digits using the $0$ as separator, so that the remaining strings are safer to iterate. In any case the search algorithm is basically obvious (take the first $N$ digits as product, then at each step divide by the $\paren{i-N}$-th and multiply by the $i$-th. Take the maximum you found).
 
+\section{Special Pythagorean triplet}
+\textbf{Solution}: 31875000. \textit{Solved: Sat, 8 Aug 2015, 09:20}.
+
+\textbf{Math knowledge used}: Pythagorean triples generation.
+
+\textbf{Programming techniques used}: none.
+
+So, this is the first problem that uses Pythagorean triple generation, another staple of Project Euler (not nearly as ubiquitous as prime generation, but still). This problem is very simple: if we can reliably generate all the primitives, then we will find some primitive so that $a+b+c=k$ and $N=1000$ is a multiple of $k$, $N/k=q\in\mathbb N$. In that case, we scale the triple to get $\paren{qa,qb,qc}$ so that $qa+qb+qc=1000$, and so the answer is $\paren{qa}\paren{qb}\paren{qc}=q^3abc$. By the way, the solution is the triple $\paren{15,8,17}$, which gets scaled into $\paren{375,200,425}$.
+
+
+
 
 \end{document}
