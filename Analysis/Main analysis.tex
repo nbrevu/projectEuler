@@ -225,6 +225,19 @@ This is more algorithmic than mathematic, but still, it's not like it has much a
 
 So, this is the first problem that uses Pythagorean triple generation, another staple of Project Euler (not nearly as ubiquitous as prime generation, but still). This problem is very simple: if we can reliably generate all the primitives, then we will find some primitive so that $a+b+c=k$ and $N=1000$ is a multiple of $k$, $N/k=q\in\mathbb N$. In that case, we scale the triple to get $\paren{qa,qb,qc}$ so that $qa+qb+qc=1000$, and so the answer is $\paren{qa}\paren{qb}\paren{qc}=q^3abc$. By the way, the solution is the triple $\paren{15,8,17}$, which gets scaled into $\paren{375,200,425}$.
 
+\section{Summation of primes}
+\textbf{Solution}: 142913828922. \textit{Solved: Sat, 8 Aug 2015, 09:42}.
+
+\textbf{Math knowledge used}: Prime summation function.
+
+\textbf{Programming techniques used}: none.
+
+This is an \textit{absolutely awesome} problem, disguised as a boring tutorial. Now, in certain way I could say the same about problem 2, right? But in that case, the interesting technique is very widely known and available to every first year maths student. In this case the magic is a little more obscure, although it's still very useful all over Project Euler.
+
+So, the magic is that there is a recursive function that calculates the sum of primes in something like $O\paren{n^{2/3}}$ time, meaning that the result of this problem takes about $30$ milliseconds to get, AND that if I want to calculate the sum of all primes up to, say, $10^{12}$, it's perfectly doable. No need to generate all the primes explicitly. Yes, this \textit{will} be used (sparingly, but decisively) all over Project Euler.
+
+Credits for this awesome function go to user \textbf{Lucy\_Hedgehog} of Project Euler. The algorithm itself is described in the comments of the problem, in what could very well be the highest rated comment of all the site.
+
 
 
 
