@@ -327,6 +327,16 @@ The obvious way to solve this problem is generating all the strings and counting
 
 Finally some actual algorithmics, even if very simple. A greedy algorithm that gets the best sum from both ``parents'' from above is good enough.
 
+\section{Counting Sundays}
+\textbf{Solution}: 171. \textit{Solved: Sat, 8 Aug 2015, 13:14}.
+
+\textbf{Math knowledge used}: none.
+
+\textbf{Programming techniques used}: none.
+
+This is stupidly simple but I kept getting the wrong result because I used a monday as a starting point, but this is not what I need to use since I must count from 1901 onwards and the date I'm given is from 1900, not 1901.
+
+The method itself: well, there are only 14 types of years. So I count how many of each type are there in the period from 1901 to 2000, then for each year type I count how many months start on a Sunday. Multiply and accumulate the sum. End.
 
 
 
