@@ -198,6 +198,17 @@ f\paren n-g\paren n=\dfrac{3n^4+2n^3-3n^2-2n}{12}.
 
 Plugging in $n=100$ we get the result. By the way, it can be easily proven that despite the denominator this number is always an integer.
 
+\section{10001st prime}
+\textbf{Solution}: 104743. \textit{Solved: Sat, 8 Aug 2015, 09:02}.
+
+\textbf{Math knowledge used}: Erathostenes sieve, $\pi\paren n$ counting function.
+
+\textbf{Programming techniques used}: none.
+
+Just use an Erathostenes sieve. As for the limit, we know that $\pi\paren x\approx\dfrac x{\log x}$, so if the limit is $L=10001$, then we can use $N=2L\log L$ (multiplying times $2$ is a safe addition. The formula I gave means that $x\approx\log x\cdot\pi\paren x$, but we have $\pi x$, and this formula doesn't say anything about $\log\pi\paren x\cdot\pi\paren x$). Then just move over the sieve until we have passed over $L$ primes.
+
+
+
 
 
 \end{document}
