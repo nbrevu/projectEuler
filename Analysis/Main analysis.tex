@@ -285,7 +285,16 @@ In most Project Euler problems, and that includes this one, the usage of BigInte
 
 This can be done without memoization, but it's super slow. With memoization, it takes less than half a second, which is much more than anything before this problem but it's still short and sweet.
 
+\section{Lattice paths}
+\textbf{Solution}: 137846528820. \textit{Solved: Sat, 8 Aug 2015, 11:59}.
 
+\textbf{Math knowledge used}: combinatorial numbers.
+
+\textbf{Programming techniques used}: none.
+
+Very simple. The amount of routes is just the amount of permutations between $20$ displacements to the right and $20$ displacements to the bottom. Therefore the result is $\displaystyle\binom{20+20}{20}$.
+
+Of course, you can also try to manually enumerate all the possible paths. Good luck. This might be the first problem where, if you are \textit{completely} clueless, there's no way you are going to get the result.
 
 
 
