@@ -238,6 +238,23 @@ So, the magic is that there is a recursive function that calculates the sum of p
 
 Credits for this awesome function go to user \textbf{Lucy\_Hedgehog} of Project Euler. The algorithm itself is described in the comments of the problem, in what could very well be the highest rated comment of all the site.
 
+\section{Largest product in a grid}
+\textbf{Solution}: 70600674. \textit{Solved: Sat, 8 Aug 2015, 10:23}.
+
+\textbf{Math knowledge used}: none.
+
+\textbf{Programming techniques used}: none.
+
+Just a rehash of problem 8, more complicated because there are a lot more lines to take into account. This is purely algorithmic but it's more grit than anything. What I did was:
+\begin{enumerate}[1.]
+\item Parse the input into a 2D int array.
+\item Generate all the horizontal, vertical and diagonal (in both directions) lines.
+\item For each one of the generated lines, separate them into zero-less chunks, discarding the ones that are too short.
+\item Get the maximum product of each of these chunks, using the very same function as in problem 8.
+\item The maximum of all chunks' maxima is the result.
+\end{enumerate}
+
+
 
 
 
