@@ -265,6 +265,17 @@ Very easy. For each $N\geq2$, get the prime factorization of both $N-1$ and $N$,
 
 By the way, the answer comes from $N=12376$, i.e. from $T\paren{12375}$. $12375=3^2\cdot5^3\cdot11$ and $12376=2^3\cdot7\cdot13\cdot17$, so the resulting triangular number is $2^2\cdot3^2\cdot5^3\cdot7\cdot11\cdot13\cdot17$, which has $3\cdot3\cdot4\cdot2\cdot2\cdot2\cdot2=576$ divisors.
 
+\section{Large sum}
+\textbf{Solution}: 5537376230. \textit{Solved: Sat, 8 Aug 2015, 11:30}.
+
+\textbf{Math knowledge used}: none.
+
+\textbf{Programming techniques used}: none.
+
+I wouldn't call the usage of BigInteger a ``programming technique''. In the end this problem isn't even algorithmic. On the good side, this is a good example of the advantage of Java Streams, since I can do all the additions without resorting to an explicit list of BigInteger; the original stream of lines returned by Files.lines can be used directly. Yay, I guess.
+
+In most Project Euler problems, and that includes this one, the usage of BigInteger (or integers larger than 64 bits, for that matter) is not strictly unneeded. Still, there are many problems where they come in very handy.
+
 
 
 
