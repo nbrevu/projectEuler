@@ -207,8 +207,14 @@ Plugging in $n=100$ we get the result. By the way, it can be easily proven that 
 
 Just use an Erathostenes sieve. As for the limit, we know that $\pi\paren x\approx\dfrac x{\log x}$, so if the limit is $L=10001$, then we can use $N=2L\log L$ (multiplying times $2$ is a safe addition. The formula I gave means that $x\approx\log x\cdot\pi\paren x$, but we have $\pi x$, and this formula doesn't say anything about $\log\pi\paren x\cdot\pi\paren x$). Then just move over the sieve until we have passed over $L$ primes.
 
+\section{Largest product in a series}
+\textbf{Solution}: 23514624000. \textit{Solved: Sat, 8 Aug 2015, 09:11}.
 
+\textbf{Math knowledge used}: none.
 
+\textbf{Programming techniques used}: none.
+
+This is more algorithmic than mathematic, but still, it's not like it has much algoritmic depth. You can either iterate over the list, taking care about how the zeros break the chains, or just split the string into smaller strings of digits using the $0$ as separator, so that the remaining strings are safer to iterate. In any case the search algorithm is basically obvious (take the first $N$ digits as product, then at each step divide by the $\paren{i-N}$-th and multiply by the $i$-th. Take the maximum you found).
 
 
 \end{document}
