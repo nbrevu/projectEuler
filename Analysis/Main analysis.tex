@@ -471,6 +471,18 @@ Of course this calculation is super fast, on par with the first two problems in 
 
 The keys to this algorithm are two: the first one is that the period length of $1/n$ can only have as much as $n-1$ digits; the second one is that $n-1$ is only reached, in fact, if $n$ is prime. While it's not strictly true that the result \textit{needs} to be a prime, it's very likely, so I just iterated downwards over the primes, calculating the cycle length and stopping whenever the current value was smaller than the greatest length found. The result is found almost instantly (less than 1ms) because the result is close to the limit.
 
+\section{Quadratic primes}
+\textbf{Difficulty rating}: 5\%.
+
+\textbf{Solution}: -59231. \textit{Solved: Sat, 8 Aug 2015, 15:20}.
+
+\textbf{Math knowledge used}: none.
+
+\textbf{Programming techniques used}: none.
+
+The only useful insight for this problem is that $b$ has to be a prime, otherwise of course we don't get any prime because for $n=0$ the polynomial doesn't yield a prime and we stop immediately. Also, once this is taken care of, we can start the iterations from $n=1$ instead of $n=0$ since of course we got a prime for $n=0$. This shaves some... nanoseconds? from the run time. Another nano-optimization is calculating the polynomial value by incrementing the previous value in $2n+a-1$, instead of calculating the complete value each time. Aside from all that swill, this is just iterating over $\corch{-L\ldots L}$ for $a$, and over the primes smaller than $L$ for $b$, and then calculating the polynomial values. By the way, the solution is reached for $a=-61$, $b=971$, for a total of $71$ primes.
+
+
 
 
 
