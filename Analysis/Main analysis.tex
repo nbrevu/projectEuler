@@ -460,6 +460,17 @@ We need to calculate the first $n$ so that $F_n\geq10^{1000-1}$ (note that $10^{
 \end{equation*}
 Of course this calculation is super fast, on par with the first two problems in speed.
 
+\section{Reciprocal cycles}
+\textbf{Difficulty rating}: 5\%.
+
+\textbf{Solution}: 983. \textit{Solved: Sat, 8 Aug 2015, 15:03}.
+
+\textbf{Math knowledge used}: infinite decimal period distributions.
+
+\textbf{Programming techniques used}: none.
+
+The keys to this algorithm are two: the first one is that the period length of $1/n$ can only have as much as $n-1$ digits; the second one is that $n-1$ is only reached, in fact, if $n$ is prime. While it's not strictly true that the result \textit{needs} to be a prime, it's very likely, so I just iterated downwards over the primes, calculating the cycle length and stopping whenever the current value was smaller than the greatest length found. The result is found almost instantly (less than 1ms) because the result is close to the limit.
+
 
 
 
