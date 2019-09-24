@@ -382,7 +382,16 @@ Yeah, I refuse to call a sort function a ``programming technique''. I don't like
 
 Using the same divisor function as in problem 21, the algorithm is simple: generate the set all the abundant numbers up to the given limit using said numbers, then generate all the possible sums of two values of the set below the limit. Then iterate over all the numbers up to the limit and add them to a tally if they are not in the set of sums. There is a modicum of brute force in the sum generation process so this takes nearly half a second.
 
+\section{Lexicographic permutations}
+\textbf{Solution}: 2783915460. \textit{Solved: Sat, 8 Aug 2015, 14:36}.
 
+\textbf{Math knowledge used}: factorial number system.
+
+\textbf{Programming techniques used}: none.
+
+I said that I didn't like 22, right? 24 is the opposite. It's very nice, and for such an early problem, it has room for a clever usage of maths that eschews brute force. I could have replaced the math knowledge about the factoradic system with programming technique about permutation enumeration, but that would require a million operations, while using factoradic requires ten, and probably faster ones.
+
+In a nutshell: you can either enumerate a million partitions (slow) or just represent $10^6-1$ in factoradic (fast!). I obviously opted for the second way.
 
 
 
