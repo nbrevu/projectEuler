@@ -364,7 +364,14 @@ S\paren N=\prod_{i=1}^m\dfrac{p_i^{e^i+1}-1}{p_i-1}.
 \end{equation*}
 So the proper sum of divisors is $S\paren N-N$, and that's all the maths needed for this problem. So we keep two maps of $N\rightarrow S\paren N-N$, one with the abundant numbers ($S\paren N>2N$) and another one with the defective numbers ($S\paren N<2N$). No need to store perfect numbers. Then we iterate over the abundant numbers map (which is the smaller of the two), looking for entries where the key-value pair appears as value-key in the defective map. Of course, a single map can be used with all the numbers, but it will be slightly slower.
 
+\section{Names scores}
+\textbf{Solution}: 871198282. \textit{Solved: Sat, 8 Aug 2015, 14:05}.
 
+\textbf{Math knowledge used}: none.
+
+\textbf{Programming techniques used}: none.
+
+Yeah, I refuse to call a sort function a ``programming technique''. I don't like this problem, mostly because it's too streamlined and basically the description tells you exactly what to do. No room for finesse or for improvements. Just read the (single line) file, parse it into a list of names, sort it, then use the given algorithm to calculate the result.
 
 
 
