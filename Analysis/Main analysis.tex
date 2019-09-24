@@ -441,7 +441,24 @@ I said that I didn't like 22, right? 24 is the opposite. It's very nice, and for
 
 In a nutshell: you can either enumerate a million partitions (slow) or just represent $10^6-1$ in factoradic (fast!). I obviously opted for the second way.
 
+\section{1000-digit Fibonacci number}
+\textbf{Difficulty rating}: 5\%.
 
+\textbf{Solution}: 4782. \textit{Solved: Sat, 8 Aug 2015, 14:41}.
+
+\textbf{Math knowledge used}: recurrence equation theory.
+
+\textbf{Programming techniques used}: none.
+
+Just like in problem 2, we can use the formula
+\begin{equation*}
+F_n=\dfrac{\varphi^n-\paren{1-\varphi}^n}{\sqrt5}\approx\dfrac{\varphi^n}{\sqrt5}.
+\end{equation*}
+We need to calculate the first $n$ so that $F_n\geq10^{1000-1}$ (note that $10^{1000}$ has \textit{1001} digits, not 1000). Solving for $n$ we get:
+\begin{equation*}
+\dfrac{\varphi^n}{\sqrt5}\geq10^{999}\Rightarrow n\geq\dfrac{999\log10+\log\sqrt5}{\log\varphi}\Rightarrow n=\ceil{\dfrac{999\log10+\log\sqrt5}{\log\varphi}}.
+\end{equation*}
+Of course this calculation is super fast, on par with the first two problems in speed.
 
 
 
