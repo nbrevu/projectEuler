@@ -482,6 +482,33 @@ The keys to this algorithm are two: the first one is that the period length of $
 
 The only useful insight for this problem is that $b$ has to be a prime, otherwise of course we don't get any prime because for $n=0$ the polynomial doesn't yield a prime and we stop immediately. Also, once this is taken care of, we can start the iterations from $n=1$ instead of $n=0$ since of course we got a prime for $n=0$. This shaves some... nanoseconds? from the run time. Another nano-optimization is calculating the polynomial value by incrementing the previous value in $2n+a-1$, instead of calculating the complete value each time. Aside from all that swill, this is just iterating over $\corch{-L\ldots L}$ for $a$, and over the primes smaller than $L$ for $b$, and then calculating the polynomial values. By the way, the solution is reached for $a=-61$, $b=971$, for a total of $71$ primes.
 
+\section{Number spiral diagonals}
+\textbf{Difficulty rating}: 5\%.
+
+\textbf{Solution}: 669171001. \textit{Solved: Sat, 8 Aug 2015, 15:34}.
+
+\textbf{Math knowledge used}: basic Faulhaber formulas.
+
+\textbf{Programming techniques used}: none.
+
+Another hyper-fast one. Sure, you can iterate over the numbers and build the spiral manually or whatever, but why do that when each half diagonal follows a very clear formula? So, if the length we are looking for is $L=1001$, the half diagonals have a size of $N=\dfrac{L-1}2=500$. The formulas for the half diagonal numbers are very simple:
+\begin{eqnarray*}
+F_1\paren n&=&4n^2-2n+1;\\
+F_2\paren n&=&4n^2+1;\\
+F_3\paren n&=&4n^2+2n+1;\\
+F_4\paren n&=&4n^2+4n+1.
+\end{eqnarray*}
+The sum of all these values is $S\paren n=16n^2+4n+4$, so the result of the problem is
+\begin{equation*}
+1+\sum_{n=1}^N\paren{16n^2+4n+4}=1+4N+4\sum_{n=1}^Nn+16\sum_{n=1}^Nn^2.
+\end{equation*}
+With the Faulhaber formulas for $k=1$ and $2$ we can summarize this result as
+\begin{equation*}
+1+\dfrac{32N^3+60N^2+52N}6.
+\end{equation*}
+Plugging $N=500$ yields the result.
+
+Side note: I'm slightly triggered by the fact that the spiral moves in \sout{clockwise}negative direction.
 
 
 
