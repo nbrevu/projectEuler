@@ -107,6 +107,8 @@
 
 \setcounter{secnumdepth}{3}
 \section{Multiples of 3 and 5}
+\textbf{Difficulty rating}: 5\%.
+
 \textbf{Solution}: 233168. \textit{Solved: Sat, 8 Aug 2015, 08:09}.
 
 \textbf{Math knowledge used}: triangular numbers.
@@ -116,6 +118,8 @@
 It's very simple using inclusion-exclusion. We count how many multiples of $3$, $5$ and $15$ are there, then we use triangular numbers to determine each sum, then we return $\mathrm{sum}\paren3+\mathrm{sum}\paren5-\mathrm{sum}\paren{15}$.
 
 \section{Even Fibonacci numbers}
+\textbf{Difficulty rating}: 5\%.
+
 \textbf{Solution}: 4613732. \textit{Solved: Sat, 8 Aug 2015, 08:23}.
 
 \textbf{Math knowledge used}: recurrence equation theory.
@@ -146,6 +150,8 @@ Finally, since we need the sum, we use a basic summation formula (again, conside
 Rounding this value into the nearest integer we get the solution.
 
 \section{Largest prime factor}
+\textbf{Difficulty rating}: 5\%.
+
 \textbf{Solution}: 6857. \textit{Solved: Sat, 8 Aug 2015, 08:33}.
 
 \textbf{Math knowledge used}: Erathostenes sieve.
@@ -157,6 +163,8 @@ Very simple, just enumerate all the primes up to $\sqrt L$ (with $L$ being the l
 There are many methods that can be used to iterate over the primes, but the Erathostenes sieve is good enough. Saying that it will be used profusely is a big, big understatement.
 
 \section{Largest palindrome product}
+\textbf{Difficulty rating}: 5\%.
+
 \textbf{Solution}: 906609. \textit{Solved: Sat, 8 Aug 2015, 08:39}.
 
 \textbf{Math knowledge used}: modular arithmetic.
@@ -166,6 +174,8 @@ There are many methods that can be used to iterate over the primes, but the Erat
 The ``modular arithmetic'' I'm referring to is just the fact that I know that all palindrome numbers with an even amount of digits are multiples of $11$. So, the method to found this answer is as simple as iterating downwards over a pair of factors, but this bit of knowledge allows me to reduce the search space by 11, because one of the factors iterates over just multiples of $11$.
 
 \section{Smallest multiple}
+\textbf{Difficulty rating}: 5\%.
+
 \textbf{Solution}: 232792560. \textit{Solved: Sat, 8 Aug 2015, 08:49}.
 
 \textbf{Math knowledge used}: none.
@@ -175,6 +185,8 @@ The ``modular arithmetic'' I'm referring to is just the fact that I know that al
 I'm not sure if ``none'' qualifies as the list of special knowledge used. I just factored all the numbers and then calculated the least common multiple in a more or less intelligent way (i.e. I have the factors, so no need to use Euclid's algorithm). This is the first time I used my DivisorHolder class, which is used for a fuckton of problems all over the list.
 
 \section{Sum square difference}
+\textbf{Difficulty rating}: 5\%.
+
 \textbf{Solution}: 25164150. \textit{Solved: Sat, 8 Aug 2015, 08:54}.
 
 \textbf{Math knowledge used}: basic Faulhaber formulas.
@@ -199,6 +211,8 @@ f\paren n-g\paren n=\dfrac{3n^4+2n^3-3n^2-2n}{12}.
 Plugging in $n=100$ we get the result. By the way, it can be easily proven that despite the denominator this number is always an integer.
 
 \section{10001st prime}
+\textbf{Difficulty rating}: 5\%.
+
 \textbf{Solution}: 104743. \textit{Solved: Sat, 8 Aug 2015, 09:02}.
 
 \textbf{Math knowledge used}: Erathostenes sieve, $\pi\paren n$ counting function.
@@ -208,6 +222,8 @@ Plugging in $n=100$ we get the result. By the way, it can be easily proven that 
 Just use an Erathostenes sieve. As for the limit, we know that $\pi\paren x\approx\dfrac x{\log x}$, so if the limit is $L=10001$, then we can use $N=2L\log L$ (multiplying times $2$ is a safe addition. The formula I gave means that $x\approx\log x\cdot\pi\paren x$, but we have $\pi x$, and this formula doesn't say anything about $\log\pi\paren x\cdot\pi\paren x$). Then just move over the sieve until we have passed over $L$ primes.
 
 \section{Largest product in a series}
+\textbf{Difficulty rating}: 5\%.
+
 \textbf{Solution}: 23514624000. \textit{Solved: Sat, 8 Aug 2015, 09:11}.
 
 \textbf{Math knowledge used}: none.
@@ -217,6 +233,8 @@ Just use an Erathostenes sieve. As for the limit, we know that $\pi\paren x\appr
 This is more algorithmic than mathematic, but still, it's not like it has much algoritmic depth. You can either iterate over the list, taking care about how the zeros break the chains, or just split the string into smaller strings of digits using the $0$ as separator, so that the remaining strings are safer to iterate. In any case the search algorithm is basically obvious (take the first $N$ digits as product, then at each step divide by the $\paren{i-N}$-th and multiply by the $i$-th. Take the maximum you found).
 
 \section{Special Pythagorean triplet}
+\textbf{Difficulty rating}: 5\%.
+
 \textbf{Solution}: 31875000. \textit{Solved: Sat, 8 Aug 2015, 09:20}.
 
 \textbf{Math knowledge used}: Pythagorean triples generation.
@@ -226,6 +244,8 @@ This is more algorithmic than mathematic, but still, it's not like it has much a
 So, this is the first problem that uses Pythagorean triple generation, another staple of Project Euler (not nearly as ubiquitous as prime generation, but still). This problem is very simple: if we can reliably generate all the primitives, then we will find some primitive so that $a+b+c=k$ and $N=1000$ is a multiple of $k$, $N/k=q\in\mathbb N$. In that case, we scale the triple to get $\paren{qa,qb,qc}$ so that $qa+qb+qc=1000$, and so the answer is $\paren{qa}\paren{qb}\paren{qc}=q^3abc$. By the way, the solution is the triple $\paren{15,8,17}$, which gets scaled into $\paren{375,200,425}$.
 
 \section{Summation of primes}
+\textbf{Difficulty rating}: 5\%.
+
 \textbf{Solution}: 142913828922. \textit{Solved: Sat, 8 Aug 2015, 09:42}.
 
 \textbf{Math knowledge used}: Prime summation function.
@@ -239,6 +259,8 @@ So, the magic is that there is a recursive function that calculates the sum of p
 Credits for this awesome function go to user \textbf{Lucy\_Hedgehog} of Project Euler. The algorithm itself is described in the comments of the problem, in what could very well be the highest rated comment of all the site.
 
 \section{Largest product in a grid}
+\textbf{Difficulty rating}: 5\%.
+
 \textbf{Solution}: 70600674. \textit{Solved: Sat, 8 Aug 2015, 10:23}.
 
 \textbf{Math knowledge used}: none.
@@ -255,6 +277,8 @@ Just a rehash of problem 8, more complicated because there are a lot more lines 
 \end{enumerate}
 
 \section{Highly divisible triangular number}
+\textbf{Difficulty rating}: 5\%.
+
 \textbf{Solution}: 76576500. \textit{Solved: Sat, 8 Aug 2015, 11:00}.
 
 \textbf{Math knowledge used}: triangular numbers.
@@ -266,6 +290,8 @@ Very easy. For each $N\geq2$, get the prime factorization of both $N-1$ and $N$,
 By the way, the answer comes from $N=12376$, i.e. from $T\paren{12375}$. $12375=3^2\cdot5^3\cdot11$ and $12376=2^3\cdot7\cdot13\cdot17$, so the resulting triangular number is $2^2\cdot3^2\cdot5^3\cdot7\cdot11\cdot13\cdot17$, which has $3\cdot3\cdot4\cdot2\cdot2\cdot2\cdot2=576$ divisors.
 
 \section{Large sum}
+\textbf{Difficulty rating}: 5\%.
+
 \textbf{Solution}: 5537376230. \textit{Solved: Sat, 8 Aug 2015, 11:30}.
 
 \textbf{Math knowledge used}: none.
@@ -277,6 +303,8 @@ I wouldn't call the usage of BigInteger a ``programming technique''. In the end 
 In most Project Euler problems, and that includes this one, the usage of BigInteger (or integers larger than 64 bits, for that matter) is not strictly unneeded. Still, there are many problems where they come in very handy.
 
 \section{Longest Collatz sequence}
+\textbf{Difficulty rating}: 5\%.
+
 \textbf{Solution}: 837799. \textit{Solved: Sat, 8 Aug 2015, 11:54}.
 
 \textbf{Math knowledge used}: none.
@@ -286,6 +314,8 @@ In most Project Euler problems, and that includes this one, the usage of BigInte
 This can be done without memoization, but it's super slow. With memoization, it takes less than half a second, which is much more than anything before this problem but it's still short and sweet.
 
 \section{Lattice paths}
+\textbf{Difficulty rating}: 5\%.
+
 \textbf{Solution}: 137846528820. \textit{Solved: Sat, 8 Aug 2015, 11:59}.
 
 \textbf{Math knowledge used}: combinatorial numbers.
@@ -297,6 +327,8 @@ Very simple. The amount of routes is just the amount of permutations between $20
 Of course, you can also try to manually enumerate all the possible paths. Good luck. This might be the first problem where, if you are \textit{completely} clueless, there's no way you are going to get the result.
 
 \section{Power digit sum}
+\textbf{Difficulty rating}: 5\%.
+
 \textbf{Solution}: 1366. \textit{Solved: Sat, 8 Aug 2015, 12:18}.
 
 \textbf{Math knowledge used}: none.
@@ -308,6 +340,8 @@ This is one of the very few cases where I don't think you can solve this problem
 I'm counting binary exponentiation as a programming technique, although it's a very simple one (and arguably you could put into the ``mathematical knowledge'' bin). This will also be used very often all over Project Euler.
 
 \section{Number letter counts}
+\textbf{Difficulty rating}: 5\%.
+
 \textbf{Solution}: 21124. \textit{Solved: Sat, 8 Aug 2015, 12:37}.
 
 \textbf{Math knowledge used}: none.
@@ -319,6 +353,8 @@ I'm a bit torn about this problem. On one hand, the concept is kind of beautiful
 The obvious way to solve this problem is generating all the strings and counting all the letters. Super-tedious. What I did was different: I enumerated all the words and then counted, for each one, in how many words appeared (all the cases are reasonably simple). Multiplying by the word's length, and adding the results, yields the solution.
 
 \section{Number letter counts}
+\textbf{Difficulty rating}: 5\%.
+
 \textbf{Solution}: 1074. \textit{Solved: Sat, 8 Aug 2015, 13:03}.
 
 \textbf{Math knowledge used}: none.
@@ -328,6 +364,8 @@ The obvious way to solve this problem is generating all the strings and counting
 Finally some actual algorithmics, even if very simple. A greedy algorithm that gets the best sum from both ``parents'' from above is good enough.
 
 \section{Counting Sundays}
+\textbf{Difficulty rating}: 5\%.
+
 \textbf{Solution}: 171. \textit{Solved: Sat, 8 Aug 2015, 13:14}.
 
 \textbf{Math knowledge used}: none.
@@ -339,6 +377,8 @@ This is stupidly simple but I kept getting the wrong result because I used a mon
 The method itself: well, there are only 14 types of years. So I count how many of each type are there in the period from 1901 to 2000, then for each year type I count how many months start on a Sunday. Multiply and accumulate the sum. End.
 
 \section{Factorial digit sum}
+\textbf{Difficulty rating}: 5\%.
+
 \textbf{Solution}: 648. \textit{Solved: Sat, 8 Aug 2015, 13:16}.
 
 \textbf{Math knowledge used}: none.
@@ -348,6 +388,8 @@ The method itself: well, there are only 14 types of years. So I count how many o
 Similar to problem 16, but even more simple because there is no binary exponentiation, just creating the factorial and adding the digits. Not much more to add, except that this is one of the cases where BigInteger or equivalent is really, actually needed.
 
 \section{Amicable numbers}
+\textbf{Difficulty rating}: 5\%.
+
 \textbf{Solution}: 31626. \textit{Solved: Sat, 8 Aug 2015, 13:40}.
 
 \textbf{Math knowledge used}: divisor sum properties.
@@ -365,6 +407,8 @@ S\paren N=\prod_{i=1}^m\dfrac{p_i^{e^i+1}-1}{p_i-1}.
 So the proper sum of divisors is $S\paren N-N$, and that's all the maths needed for this problem. So we keep two maps of $N\rightarrow S\paren N-N$, one with the abundant numbers ($S\paren N>2N$) and another one with the defective numbers ($S\paren N<2N$). No need to store perfect numbers. Then we iterate over the abundant numbers map (which is the smaller of the two), looking for entries where the key-value pair appears as value-key in the defective map. Of course, a single map can be used with all the numbers, but it will be slightly slower.
 
 \section{Names scores}
+\textbf{Difficulty rating}: 5\%.
+
 \textbf{Solution}: 871198282. \textit{Solved: Sat, 8 Aug 2015, 14:05}.
 
 \textbf{Math knowledge used}: none.
@@ -374,6 +418,8 @@ So the proper sum of divisors is $S\paren N-N$, and that's all the maths needed 
 Yeah, I refuse to call a sort function a ``programming technique''. I don't like this problem, mostly because it's too streamlined and basically the description tells you exactly what to do. No room for finesse or for improvements. Just read the (single line) file, parse it into a list of names, sort it, then use the given algorithm to calculate the result.
 
 \section{Non-abundant sums}
+\textbf{Difficulty rating}: 5\%.
+
 \textbf{Solution}: 4179871. \textit{Solved: Sat, 8 Aug 2015, 14:20}.
 
 \textbf{Math knowledge used}: divisor sum properties.
@@ -383,6 +429,8 @@ Yeah, I refuse to call a sort function a ``programming technique''. I don't like
 Using the same divisor function as in problem 21, the algorithm is simple: generate the set all the abundant numbers up to the given limit using said numbers, then generate all the possible sums of two values of the set below the limit. Then iterate over all the numbers up to the limit and add them to a tally if they are not in the set of sums. There is a modicum of brute force in the sum generation process so this takes nearly half a second.
 
 \section{Lexicographic permutations}
+\textbf{Difficulty rating}: 5\%.
+
 \textbf{Solution}: 2783915460. \textit{Solved: Sat, 8 Aug 2015, 14:36}.
 
 \textbf{Math knowledge used}: factorial number system.
