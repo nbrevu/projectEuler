@@ -523,6 +523,20 @@ I overengineered this problem in order to make a generic algorithm that would wo
 
 The obvious algorithm generates all the algorithm (using BigInteger, or logarithms, or whatever). Instead, what I did was counting the amount of powers of each type present in the algorithm, and for each of them, I counted the new exponents that each type could generate. In the given range there are $87$ normal numbers ($99$ new values each), $6$ square numbers ($50$ new values each), $2$ cubes ($50$ new values each), $2$ fourth powers ($41$ new values each), and a fifth and a sixth power ($51$ and $37$ new values respectively). So: $87\cdot99+6\cdot50+2\cdot50+2\cdot41+51+37=9183$.
 
+\section{Digit fifth powers}
+\textbf{Difficulty rating}: 5\%.
+
+\textbf{Solution}: 443839. \textit{Solved: Sat, 8 Aug 2015, 16:13}.
+
+\textbf{Math knowledge used}: none.
+
+\textbf{Programming techniques used}: combination generation (with repetition).
+
+Ah, yes. Reusing pays. I have a generic combination generator which is \textit{very useful} since there are a lot of problems that require generating all the \textit{unordered} combinations of certain set of values. I started it long ago and it's currently refined into a very reasonable, fast and usable class. So, with that generator in my hands, I just need to generate all \textit{six} or less combinations of numbers between $0$ and $9$, and for each of them, verify whether the sum of fifth of powers matches the combination. Why six digits, precisely? Because for seven digits we can't get numbers, because the maximum valus is below the minimum: $7\cdot9^5<10^7$. For six digits it happens that $6\cdot9^5\geq10^6$, so they must be taken into account.
+
+There are six such numbers: $4150$, $4151$, $93084$, $92727$, $54748$ and $194979$. See, I told you, six digits are needed.
+
+
 
 
 \end{document}
