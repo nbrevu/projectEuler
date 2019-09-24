@@ -19,6 +19,7 @@ import java.util.TreeSet;
 import com.google.common.base.Function;
 import com.google.common.collect.Multiset;
 import com.google.common.math.LongMath;
+import com.koloboke.collect.map.IntIntMap;
 import com.koloboke.collect.map.LongIntMap;
 import com.koloboke.collect.set.LongSet;
 import com.koloboke.collect.set.hash.HashLongSets;
@@ -452,6 +453,14 @@ public class EulerUtils {
 			if (n>=cache.size()) addToCache(cache.size(),n);
 			return cache.get(n)[k];
 		}
+	}
+	
+	public static void increaseCounter(IntIntMap map,int key)	{
+		increaseCounter(map,key,1);
+	}
+	
+	public static void increaseCounter(IntIntMap map,int key,int tally)	{
+		map.compute(key,(int unused,int oldValue)->oldValue+tally);
 	}
 	
 	public static void increaseCounter(LongIntMap map,long key)	{

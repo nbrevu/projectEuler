@@ -510,6 +510,18 @@ Plugging $N=500$ yields the result.
 
 Side note: I'm slightly triggered by the fact that the spiral moves in \sout{clockwise}negative direction.
 
+\section{Distinct powers}
+\textbf{Difficulty rating}: 5\%.
+
+\textbf{Solution}: 9183. \textit{Solved: Sat, 8 Aug 2015, 15:46}.
+
+\textbf{Math knowledge used}: none.
+
+\textbf{Programming techniques used}: none.
+
+I overengineered this problem in order to make a generic algorithm that would work for bigger values. It was \textit{delightful}.
+
+The obvious algorithm generates all the algorithm (using BigInteger, or logarithms, or whatever). Instead, what I did was counting the amount of powers of each type present in the algorithm, and for each of them, I counted the new exponents that each type could generate. In the given range there are $87$ normal numbers ($99$ new values each), $6$ square numbers ($50$ new values each), $2$ cubes ($50$ new values each), $2$ fourth powers ($41$ new values each), and a fifth and a sixth power ($51$ and $37$ new values respectively). So: $87\cdot99+6\cdot50+2\cdot50+2\cdot41+51+37=9183$.
 
 
 
