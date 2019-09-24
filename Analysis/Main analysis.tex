@@ -373,6 +373,17 @@ So the proper sum of divisors is $S\paren N-N$, and that's all the maths needed 
 
 Yeah, I refuse to call a sort function a ``programming technique''. I don't like this problem, mostly because it's too streamlined and basically the description tells you exactly what to do. No room for finesse or for improvements. Just read the (single line) file, parse it into a list of names, sort it, then use the given algorithm to calculate the result.
 
+\section{Non-abundant sums}
+\textbf{Solution}: 4179871. \textit{Solved: Sat, 8 Aug 2015, 14:20}.
+
+\textbf{Math knowledge used}: divisor sum properties.
+
+\textbf{Programming techniques used}: none.
+
+Using the same divisor function as in problem 21, the algorithm is simple: generate the set all the abundant numbers up to the given limit using said numbers, then generate all the possible sums of two values of the set below the limit. Then iterate over all the numbers up to the limit and add them to a tally if they are not in the set of sums. There is a modicum of brute force in the sum generation process so this takes nearly half a second.
+
+
+
 
 
 
