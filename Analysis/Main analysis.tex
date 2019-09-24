@@ -536,7 +536,20 @@ Ah, yes. Reusing pays. I have a generic combination generator which is \textit{v
 
 There are six such numbers: $4150$, $4151$, $93084$, $92727$, $54748$ and $194979$. See, I told you, six digits are needed.
 
+\section{Coin sums}
+\textbf{Difficulty rating}: 5\%.
 
+\textbf{Solution}: 73682. \textit{Solved: Sat, 8 Aug 2015, 16:29}.
+
+\textbf{Math knowledge used}: none.
+
+\textbf{Programming techniques used}: dynamic programming.
+
+Classic dynamic programming problem. Only two arrays need to be kept at each time: the previous one, $P$, which for each index $i$ contains the amount of ways to sum up to $i$ using all the previously visited coins, and the new one, $N$, associated to the new coin with value $c$, which we generate like this:
+\begin{equation*}
+N\corch i=\sum_{k=0}^{\floor{\frac ic}}P\corch{i-kc}.
+\end{equation*}
+The first array for $c=1$ is all ones, and then we iterate for each one of the remaining coins, $c\in\llave{2,5,10,20,50,100,200}$. The problem solution is the value for index $200$ in the last array.
 
 
 \end{document}
