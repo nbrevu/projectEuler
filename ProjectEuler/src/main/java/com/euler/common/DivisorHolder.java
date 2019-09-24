@@ -40,6 +40,16 @@ public class DivisorHolder	{
 		for (int pow:factors.values()) prod*=1+pow;
 		return prod;
 	}
+	public long getDivisorSum()	{
+		long prod=1;
+		IntIntCursor cursor=factors.cursor();
+		while (cursor.moveNext())	{
+			int prime=cursor.key();
+			int power=cursor.value();
+			prod*=(LongMath.pow(prime,power+1)-1)/(prime-1);
+		}
+		return prod;
+	}
 	public IntIntMap getFactorMap()	{
 		return factors;
 	}

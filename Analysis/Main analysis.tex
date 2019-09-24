@@ -347,6 +347,23 @@ The method itself: well, there are only 14 types of years. So I count how many o
 
 Similar to problem 16, but even more simple because there is no binary exponentiation, just creating the factorial and adding the digits. Not much more to add, except that this is one of the cases where BigInteger or equivalent is really, actually needed.
 
+\section{Amicable numbers}
+\textbf{Solution}: 31626. \textit{Solved: Sat, 8 Aug 2015, 13:40}.
+
+\textbf{Math knowledge used}: divisor sum properties.
+
+\textbf{Programming techniques used}: memoization.
+
+The formula I've listed under ``divisor sum properties'' is the following: if a number's prime decomposition is
+\begin{equation*}
+N=\prod_{i=1}^mp_i^{e^i},
+\end{equation*}
+then the sum of its divisors is
+\begin{equation*}
+S\paren N=\prod_{i=1}^m\dfrac{p_i^{e^i+1}-1}{p_i-1}.
+\end{equation*}
+So the proper sum of divisors is $S\paren N-N$, and that's all the maths needed for this problem. So we keep two maps of $N\rightarrow S\paren N-N$, one with the abundant numbers ($S\paren N>2N$) and another one with the defective numbers ($S\paren N<2N$). No need to store perfect numbers. Then we iterate over the abundant numbers map (which is the smaller of the two), looking for entries where the key-value pair appears as value-key in the defective map. Of course, a single map can be used with all the numbers, but it will be slightly slower.
+
 
 
 
