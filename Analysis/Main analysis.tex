@@ -604,9 +604,9 @@ There are only two solutions: $145=1+24+120$ and $40585=24+1+120+40320+120$.
 
 \textbf{Solution}: 55. \textit{Solved: Sat, 8 Aug 2015, 18:05}.
 
-\textbf{Math knowledge used}: none.
+\textbf{Math knowledge used}: Erathostenes sieve.
 
-\textbf{Programming techniques used}: Erathostenes sieve and custom combination generation.
+\textbf{Programming techniques used}: custom combination generation.
 
 They are starting to get tricky. It's not that this is impossible or something, but we need to start taking care about things like generating numbers efficiently (well, not really. This is still bruteforceable), avoiding repetition and so on. I created a custom combination class that I expect to use often.
 
@@ -623,6 +623,20 @@ Anyway: the cases for 1 digit are handled separately (i.e. just add 4 to the fin
 
 The easiest way to do this, by far, is to generate all the palindromes in base $10$ and then check whether they are palindromes in base $2$. And in order to generate palindromes in base $10$, we just generate ``half'' of the palindrome (the bottom numbers) and mirror the rest. A bit of cleverness is needed about the leading zeroes, but nothing tough.
 
+\section{Circular primes}
+\textbf{Difficulty rating}: 5\%.
+
+\textbf{Solution}: 748317. \textit{Solved: Sat, 8 Aug 2015, 19:01}.
+
+\textbf{Math knowledge used}: Erathostenes sieve.
+
+\textbf{Programming techniques used}: custom combination generator.
+
+I don't think that providing an explicit limit for the Eraatahostenes sieve is cheating or anything like that. If I had found fewer than $11$ primes, I would have increased the amount of digits.
+
+Anyway: I generate all the candidates (numbers that can start with any odd number or 2, and where the rest of the digits are odd and not $5$), and for each of them, I check whether they are truncatable with the help of a premade Erathostenes sieve. Not much more complicated than that.
+
+The truncatable primes are: $23$, $37$ (of course!), $53$, $73$, $313$, $317$, $373$, $797$, $3137$, $3797$ and $739397$.
 
 
 

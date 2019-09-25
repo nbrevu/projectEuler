@@ -16,12 +16,11 @@ import com.google.common.math.LongMath;
 public class Primes {
 	public static class RabinMiller	{
 		private final Random rand;
-		private final static BigInteger TWO=BigInteger.ONE.add(BigInteger.ONE);
 		private static BigInteger powMod(BigInteger a,BigInteger d,BigInteger in)	{
 			BigInteger res=BigInteger.ONE;
 			BigInteger power=a;
 			do	{
-				BigInteger[] division=d.divideAndRemainder(TWO);
+				BigInteger[] division=d.divideAndRemainder(BigInteger.TWO);
 				if (division[1].equals(BigInteger.ONE)) res=res.multiply(power).mod(in);
 				power=power.multiply(power).mod(in);
 				d=division[0];
@@ -74,7 +73,7 @@ public class Primes {
 			BigInteger d=inMinusOne;
 			int s=0;
 			for (;;)	{
-				BigInteger[] division=d.divideAndRemainder(TWO);
+				BigInteger[] division=d.divideAndRemainder(BigInteger.TWO);
 				if (!division[1].equals(BigInteger.ZERO)) break;
 				d=division[0];
 				++s;
