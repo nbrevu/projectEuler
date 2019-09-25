@@ -575,6 +575,16 @@ The program takes a bit to write but it's very fast. There aren't too many solut
 \item $27\cdot 198=5346$ (already found).
 \end{itemize}
 
+\section{Digit cancelling fractions}
+\textbf{Difficulty rating}: 5\%.
+
+\textbf{Solution}: 100. \textit{Solved: Sat, 8 Aug 2015, 17:25}.
+
+\textbf{Math knowledge used}: none.
+
+\textbf{Programming techniques used}: none.
+
+Obviously all the fractions have to be of the form $\frac{ab}{bc}$. So we just iterate over triples $\paren{a,b,c}$ (we can also assume $b>a$ and $b>c$), and we get the four results very quickly: $\frac{16}{64}=\frac14$, $\frac{19}{95}=\frac15$, $\frac{26}{65}=\frac25$ and $\frac{49}{98}=\frac48$. Then we accumulate the product of all the $\frac ac$ cases, getting $\frac8{800}=\frac1{100}$.
 
 
 
