@@ -612,6 +612,17 @@ They are starting to get tricky. It's not that this is impossible or something, 
 
 Anyway: the cases for 1 digit are handled separately (i.e. just add 4 to the final result). As for the rest, I generate all the combinations of odd numbers with $N$ digits, for $N\in\corch{2,6}$, and for each combination, I search for primality in all the generated circular numbers. Not that difficult, but laborious.
 
+\section{Circular primes}
+\textbf{Difficulty rating}: 5\%.
+
+\textbf{Solution}: 872187. \textit{Solved: Sat, 8 Aug 2015, 18:40}.
+
+\textbf{Math knowledge used}: none.
+
+\textbf{Programming techniques used}: none.
+
+The easiest way to do this, by far, is to generate all the palindromes in base $10$ and then check whether they are palindromes in base $2$. And in order to generate palindromes in base $10$, we just generate ``half'' of the palindrome (the bottom numbers) and mirror the rest. A bit of cleverness is needed about the leading zeroes, but nothing tough.
+
 
 
 
