@@ -178,7 +178,7 @@ The ``modular arithmetic'' I'm referring to is just the fact that I know that al
 
 \textbf{Solution}: 232792560. \textit{Solved: Sat, 8 Aug 2015, 08:49}.
 
-\textbf{Math knowledge used}: none.
+\textbf{Math knowledge used}: ``first prime'' Erathostenes sieve (for divisor generation).
 
 \textbf{Programming techniques used}: none.
 
@@ -281,7 +281,7 @@ Just a rehash of problem 8, more complicated because there are a lot more lines 
 
 \textbf{Solution}: 76576500. \textit{Solved: Sat, 8 Aug 2015, 11:00}.
 
-\textbf{Math knowledge used}: triangular numbers.
+\textbf{Math knowledge used}: triangular numbers, ``first prime'' Erathostenes sieve (for divisor generation).
 
 \textbf{Programming techniques used}: none.
 
@@ -392,7 +392,7 @@ Similar to problem 16, but even more simple because there is no binary exponenti
 
 \textbf{Solution}: 31626. \textit{Solved: Sat, 8 Aug 2015, 13:40}.
 
-\textbf{Math knowledge used}: divisor sum properties.
+\textbf{Math knowledge used}: ``first prime'' Erathostenes sieve (for divisor generation), divisor sum properties.
 
 \textbf{Programming techniques used}: memoization.
 
@@ -422,7 +422,7 @@ Yeah, I refuse to call a sort function a ``programming technique''. I don't like
 
 \textbf{Solution}: 4179871. \textit{Solved: Sat, 8 Aug 2015, 14:20}.
 
-\textbf{Math knowledge used}: divisor sum properties.
+\textbf{Math knowledge used}: ``first prime'' Erathostenes sieve (for divisor generation), divisor sum properties.
 
 \textbf{Programming techniques used}: none.
 
@@ -612,7 +612,7 @@ They are starting to get tricky. It's not that this is impossible or something, 
 
 Anyway: the cases for 1 digit are handled separately (i.e. just add 4 to the final result). As for the rest, I generate all the combinations of odd numbers with $N$ digits, for $N\in\corch{2,6}$, and for each combination, I search for primality in all the generated circular numbers. Not that difficult, but laborious.
 
-\section{Circular primes}
+\section{Double-base palindromes}
 \textbf{Difficulty rating}: 5\%.
 
 \textbf{Solution}: 872187. \textit{Solved: Sat, 8 Aug 2015, 18:40}.
@@ -623,7 +623,7 @@ Anyway: the cases for 1 digit are handled separately (i.e. just add 4 to the fin
 
 The easiest way to do this, by far, is to generate all the palindromes in base $10$ and then check whether they are palindromes in base $2$. And in order to generate palindromes in base $10$, we just generate ``half'' of the palindrome (the bottom numbers) and mirror the rest. A bit of cleverness is needed about the leading zeroes, but nothing tough.
 
-\section{Circular primes}
+\section{Truncatable primes}
 \textbf{Difficulty rating}: 5\%.
 
 \textbf{Solution}: 748317. \textit{Solved: Sat, 8 Aug 2015, 19:01}.
