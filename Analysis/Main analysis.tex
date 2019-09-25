@@ -599,6 +599,20 @@ This is a lot like problem 30, but here I needed to take care about leading zero
 
 There are only two solutions: $145=1+24+120$ and $40585=24+1+120+40320+120$.
 
+\section{Circular primes}
+\textbf{Difficulty rating}: 5\%.
+
+\textbf{Solution}: 55. \textit{Solved: Sat, 8 Aug 2015, 18:05}.
+
+\textbf{Math knowledge used}: none.
+
+\textbf{Programming techniques used}: Erathostenes sieve and custom combination generation.
+
+They are starting to get tricky. It's not that this is impossible or something, but we need to start taking care about things like generating numbers efficiently (well, not really. This is still bruteforceable), avoiding repetition and so on. I created a custom combination class that I expect to use often.
+
+Anyway: the cases for 1 digit are handled separately (i.e. just add 4 to the final result). As for the rest, I generate all the combinations of odd numbers with $N$ digits, for $N\in\corch{2,6}$, and for each combination, I search for primality in all the generated circular numbers. Not that difficult, but laborious.
+
+
 
 
 
