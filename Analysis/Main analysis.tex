@@ -638,6 +638,24 @@ Anyway: I generate all the candidates (numbers that can start with any odd numbe
 
 The truncatable primes are: $23$, $37$ (of course!), $53$, $73$, $313$, $317$, $373$, $797$, $3137$, $3797$ and $739397$.
 
+\section{Pandigital multiples}
+\textbf{Difficulty rating}: 5\%.
+
+\textbf{Solution}: 932718654. \textit{Solved: Sat, 8 Aug 2015, 19:09}.
+
+\textbf{Math knowledge used}: modular arithmetic.
+
+\textbf{Programming techniques used}: none.
+
+This can be solved incredibly fast with the help of some previous analysis.
+\begin{itemize}
+\item We already know a number: $918273645$, which conveniently starts with a $9$, reducing the search space by a lot. Also no other $1$ digit starting number can be greater than this since obviously it would be smaller than $9$.
+\item For two digit numbers, they must verify that $3x<100$ and $4x\geq100$ so that the concatenation has $9$ digits. This means that $25\leq x<34$ and therefore the resulting number will never be greater than the known case.
+\item For three digit numbers, they have to verify $3x<1000$, so $x<334$ and there's no way they can be greater than the known case.
+\item For four digit numbers we need to verify some cases. The only restriction is $2x\geq10000$. Also we don't need to look further than $9182$. Finally, the number must be a multiple of $3$ so that the concatenation of $x$ and $2x$ is a multiple of 9 (this bit is the ``modular arithmetic'' knowledge mentioned above).
+\end{itemize}
+So we can just iterate from $9999$ to $9183$ in intervals of $-3$, return immediately if $\paren{10^5+2}x$ is pandigital, and return $918273645$ if we don't find any.
+
 
 
 

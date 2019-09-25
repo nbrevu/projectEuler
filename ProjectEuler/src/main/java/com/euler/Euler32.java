@@ -3,9 +3,9 @@ package com.euler;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.function.IntConsumer;
 
 import com.euler.common.EulerUtils.Pair;
+import com.euler.common.ArithmeticProgressionIterator;
 import com.euler.common.Timing;
 import com.google.common.math.IntMath;
 import com.koloboke.collect.IntCursor;
@@ -13,40 +13,6 @@ import com.koloboke.collect.set.IntSet;
 import com.koloboke.collect.set.hash.HashIntSets;
 
 public class Euler32 {
-	private static class ArithmeticProgressionIterator implements IntCursor	{
-		private final int initial;
-		private final int increment;
-		private final int maxVal;
-		private int current;
-		public ArithmeticProgressionIterator(int initial,int increment,int maxVal)	{
-			this.initial=initial;
-			this.increment=increment;
-			this.maxVal=maxVal;
-			reset();
-		}
-		@Override
-		public boolean moveNext() {
-			if (current+increment>maxVal) return false;
-			current+=increment;
-			return true;
-		}
-		@Override
-		public void remove() {
-			throw new UnsupportedOperationException();
-		}
-		@Override
-		public void forEachForward(IntConsumer action) {
-			while (moveNext()) action.accept(elem());
-		}
-		@Override
-		public int elem() {
-			return current;
-		}
-		public void reset()	{
-			current=initial-increment;
-		}
-	}
-	
 	private static boolean canAdd(boolean[] digits,int number)	{
 		while (number>0)	{
 			if (digits[number%10]) return false;
