@@ -551,5 +551,33 @@ N\corch i=\sum_{k=0}^{\floor{\frac ic}}P\corch{i-kc}.
 \end{equation*}
 The first array for $c=1$ is all ones, and then we iterate for each one of the remaining coins, $c\in\llave{2,5,10,20,50,100,200}$. The problem solution is the value for index $200$ in the last array.
 
+\section{Pandigital products}
+\textbf{Difficulty rating}: 5\%.
+
+\textbf{Solution}: 45228. \textit{Solved: Sat, 8 Aug 2015, 17:14}.
+
+\textbf{Math knowledge used}: basic modular arithmetic.
+
+\textbf{Programming techniques used}: none.
+
+This is a bit tedious, but the culling process is interesting. First, about the sizes of the numbers: the only valid sizes are $\paren2\times\paren3=\paren4$ and $\paren1\times\paren4=\paren4$. Just iterating over these sizes is enough (less than $20000$ products, not bad), but we can cull even more if we take into account that the moduli of the products have to verify $n1+n2+(n1\cdot n2)\equiv0$ (mod $9$). This leaves jsut a few cases: $\paren{1,4}$, $\paren{3,6}$, $\paren{7,7}$ and $\paren{0,0}$. In the first two cases we also need to consider the reverse pairs, $\paren{4,1}$ and $\paren{6,3}$. So, for each combination of (pair of sizes) and (pair of moduli) we generate the possible pairs using a mere arithmetic progression, and we verify the products. So for each pair or arithmetic progression we have a nested loop, and we can cull a bit further by breaking the inner loop when we hit a product with more than $4$ digits.
+
+The program takes a bit to write but it's very fast. There aren't too many solutions:
+\begin{itemize}
+\item $4\cdot 1738=6952$.
+\item $4\cdot 1963=7852$.
+\item $28\cdot 157=4396$.
+\item $12\cdot 483=5796$.
+\item $39\cdot 186=7254$.
+\item $48\cdot 159=7632$.
+\item $42\cdot 138=5796$ (already found).
+\item $18\cdot 297=5346$.
+\item $27\cdot 198=5346$ (already found).
+\end{itemize}
+
+
+
+
+
 
 \end{document}
