@@ -667,6 +667,27 @@ So we can just iterate from $9999$ to $9183$ in intervals of $-3$, return immedi
 
 We need to generate all the primitive Pythagorean triples with perimeter smaller or equal than the given amount, and then for each perimeter $p$ we increase counters for all the multiples of $p$ below the limit (since the triangle can be scaled). Then we iterate over the counters and return the one where the index is the highest, which is $840$ with a measly $8$ solutions.
 
+\section{Champernowne's constant}
+\textbf{Difficulty rating}: 5\%.
+
+\textbf{Solution}: 210. \textit{Solved: Sat, 8 Aug 2015, 19:30}.
+
+\textbf{Math knowledge used}: none.
+
+\textbf{Programming techniques used}: none.
+
+It's all about being careful about how numbers are being generated. I divided the decimals in ``chunks'' of numbers with fixed amounts of digits: $9$ with $1$ digit, $90$ with $2$, and so on. In the end:
+\begin{itemize}
+\item The $1$st digit is $1$, of course.
+\item The $10$th digit is the $1$ in $10$.
+\item The $100$th digit is the first $5$ (tens) in $55$.
+\item The $1000$th digit is the $3$ in $370$.
+\item The $10000$th digit is the unit $7$ in $2777$.
+\item The $100000$th digit is the $2$ in the thousands from $22222$.
+\item Finally, the millionth digit is the first one (hundreds of thousands) from $185185$.
+\end{itemize}
+It takes a bit too long ($25$ milliseconds), for something that can be reasonably done by hand in a couple minutes top.
+
 
 
 
