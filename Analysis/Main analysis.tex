@@ -718,6 +718,34 @@ Now, if the square root is exact, it must be an odd number, so after subtracting
 
 The algorithm is clear and it doesn't offer much room for improvement: read all the words, calculate their ``value'' shamelessly reusing code from problem 22, and verify whether their value verifies the condition above.
 
+\section{Sub-string divisibility}
+\textbf{Difficulty rating}: 5\%.
+
+\textbf{Solution}: 16695334890. \textit{Solved: Sat, 8 Aug 2015, 21:09}.
+
+\textbf{Math knowledge used}: none.
+
+\textbf{Programming techniques used}: none.
+
+After the previous boring problem, this one is much more fun. The analysis can be done by hand:
+\begin{itemize}
+\item $d_4d_5d_6$ is a multiple of $5$, therefore $d_6$ is either $0$ or $5$.
+\item However, if $d_6=0$, then $d_6d_7d_8=0d_7d_8$, which is only a multiple of $11$ if $d_7=d_8$, which can not happen. So $d_6=5$.
+\item Now we have several possible cases for $d_7d_8$, considering that $5d_7d_8$ must be a multiple of $11$:
+\begin{itemize}
+\item $d_7d_8=06$. In this case, $d_9=5$ so that $065$ is a multiple of $13$, but we have already used the $5$, so this is not valid.
+\item $d_7d_8=17$. There is no three digit multiple of $13$ starting with $17$, so es geht nicht.
+\item $d_7d_8=28$. This forces $d_9=6$ and $d_{10}=7$. Nice so far. Also $d_5$ has to be $9$ (it could be $2$, but we already used it). And looking at $d_3d_4d_5$, we know that $\llave{d_3,d_4}=\llave{0,3}$ so that we get a multiple of $3$. Since $d_4$ must be even, necessarily we get $d_4=0$, $d_3=3$. So we get $d_1d_230952867$ where $\llave{d_1,d_2}=\llave{1,4}$. Great!
+\item $d_7d_8=39$. Then $d_9=0$ and there is no suitable value for $d_{10}$.
+\item $d_7d_8=50$ is not valid because we already are using $5$.
+\item $d_7d_8=61$. The only valid value is $d_9=1$, not available.
+\item $d_7d_8=72$. We need $d_9=8$ and $d_{10}=9$. On the other hand $d_5$ must be $3$. To get a multiple of 3 we need that $\llave{d_3,d_4}=\llave{0,6}$. And $\llave{d_1,d_2}=\llave{1,4}$. This gets us four further solutions. Nice!
+\item $d_7d_8=83$. So $d_9=2$ and $d_{10}=3$. Oops.
+\item $d_7d_8=94$. $d_9=9$, already used.
+\end{itemize}
+\item So we already got the $6$ cases and no programming is needed!
+\end{itemize}
+This is a remarkable problem, in that it can be very easily analysed by hand completely. These are rare, but always fun.
 
 
 
