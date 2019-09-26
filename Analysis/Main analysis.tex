@@ -701,7 +701,22 @@ This is the first usage of the robust permutation iterator based on C++'s next\_
 
 The only sizes we need to iterate over are $1$, $4$ and $7$, since otherwise the sum of the first $N$ digits is a multiple of $3$, so the resulting number is never a prime. Obviously the result has $7$ digits.
 
+\section{Coded triangle numbers}
+\textbf{Difficulty rating}: 5\%.
 
+\textbf{Solution}: 162. \textit{Solved: Sat, 8 Aug 2015, 20:23}.
+
+\textbf{Math knowledge used}: none.
+
+\textbf{Programming techniques used}: none.
+
+Very boring, not much substance. Let's see: suppose that $K$ is a hypothetical triangular number. In that case, some integer $n$ verifies:
+\begin{equation*}
+\dfrac{n^2+n}2=K\Rightarrow n^2+n-2K=0\Rightarrow n=\dfrac{-1\pm\sqrt{1+8K}}2.
+\end{equation*}
+Now, if the square root is exact, it must be an odd number, so after subtracting 1 we get an even one so we can divide by two. In other words, if the square root is exact, then $n$ is an integer, which means that $K$ is a triangular number if an only if $1+8K$ is a perfect square.
+
+The algorithm is clear and it doesn't offer much room for improvement: read all the words, calculate their ``value'' shamelessly reusing code from problem 22, and verify whether their value verifies the condition above.
 
 
 

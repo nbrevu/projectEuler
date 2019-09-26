@@ -40,7 +40,7 @@ public class Euler18 {
 	
 	private static long solve()	{
 		try	{
-			URL resource=Euler11.class.getResource(fileName);
+			URL resource=Euler18.class.getResource(fileName);
 			List<String> lines=Files.lines(Paths.get(resource.toURI())).collect(Collectors.toList());
 			int[][] triangle=parseLines(lines);
 			long[][] bestSums=getBestSums(triangle);
