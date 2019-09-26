@@ -688,6 +688,19 @@ It's all about being careful about how numbers are being generated. I divided th
 \end{itemize}
 It takes a bit too long ($25$ milliseconds), for something that can be reasonably done by hand in a couple minutes top.
 
+\section{Pandigital prime}
+\textbf{Difficulty rating}: 5\%.
+
+\textbf{Solution}: 7652413. \textit{Solved: Sat, 8 Aug 2015, 20:17}.
+
+\textbf{Math knowledge used}: Miller-Rabin primality test.
+
+\textbf{Programming techniques used}: permutation iterator.
+
+This is the first usage of the robust permutation iterator based on C++'s next\_permutation. The algorithm is quite simple: for each amount of digits, iterate downwards over all the possible digit permutations, and then return the first prime found. Using Miller-Rabin for the primality test, just like I could have used a (kind of big) Erathostenes sieve.
+
+The only sizes we need to iterate over are $1$, $4$ and $7$, since otherwise the sum of the first $N$ digits is a multiple of $3$, so the resulting number is never a prime. Obviously the result has $7$ digits.
+
 
 
 
