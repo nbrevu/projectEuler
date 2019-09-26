@@ -11,12 +11,13 @@ import com.google.common.math.LongMath;
 
 public class PythagoreanTriples {
 	public static class SimplePythagoreanTriple	{
-		public long a;
-		public long b;
-		public SimplePythagoreanTriple()	{}
-		public SimplePythagoreanTriple(long a,long b)	{
+		public final long a;
+		public final long b;
+		public final long c;
+		public SimplePythagoreanTriple(long a,long b,long c)	{
 			this.a=a;
 			this.b=b;
+			this.c=c;
 		}
 	}
 	
@@ -65,7 +66,7 @@ public class PythagoreanTriples {
 		for (;;)	{
 			iterator.next();
 			if (iterator.m()>maxBaseValue) return result;
-			result.add(new SimplePythagoreanTriple(iterator.a(),iterator.b()));
+			result.add(new SimplePythagoreanTriple(iterator.a(),iterator.b(),iterator.c()));
 		}
 	}
 	
@@ -101,7 +102,7 @@ public class PythagoreanTriples {
 				long b=2*m*n;
 				long c=m2+n2;
 				if (a+b+c<=limit)	{
-					res.add(new SimplePythagoreanTriple(a,b));
+					res.add(new SimplePythagoreanTriple(a,b,c));
 					any=true;
 				}
 			}

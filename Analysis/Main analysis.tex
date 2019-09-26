@@ -656,6 +656,20 @@ This can be solved incredibly fast with the help of some previous analysis.
 \end{itemize}
 So we can just iterate from $9999$ to $9183$ in intervals of $-3$, return immediately if $\paren{10^5+2}x$ is pandigital, and return $918273645$ if we don't find any.
 
+\section{Integer right triangles}
+\textbf{Difficulty rating}: 5\%.
+
+\textbf{Solution}: 840. \textit{Solved: Sat, 8 Aug 2015, 19:21}.
+
+\textbf{Math knowledge used}: Pythagorean triples generation.
+
+\textbf{Programming techniques used}: none.
+
+We need to generate all the primitive Pythagorean triples with perimeter smaller or equal than the given amount, and then for each perimeter $p$ we increase counters for all the multiples of $p$ below the limit (since the triangle can be scaled). Then we iterate over the counters and return the one where the index is the highest, which is $840$ with a measly $8$ solutions.
+
+
+
+
 
 
 
