@@ -825,7 +825,18 @@ For a veteran, this problem is a bit infuriating. This problems seems to lend it
 
 Not much to describe. Just iterate over all the primes from 1007 to 3339 (ok, this one is not a prime, but it's the upper limit), and for each one, verify whether $p+3330$ and $p+6660$ are also primes and have the same digits in different order. There is a bit of room for finesse, I think, but I haven't thought much about it. The program is super fast anyway.
 
+\section{Consecutive prime sum}
+\textbf{Difficulty rating}: 5\%.
 
+\textbf{Solution}: 997651. \textit{Solved: Sun, 9 Aug 2015, 10:25}.
+
+\textbf{Math knowledge used}: Erathostenes sieve.
+
+\textbf{Programming techniques used}: none.
+
+This is a bit more interesting than it seems, because there is room for improvements. Obviously we need to iterate over sums of primes, and this can be done in several different ways. What I did was: iterate over primes, and then iterate over \textit{upper bounds} for indices in the array of primes. So, for each starting prime I could always start in an upper bound equal to $1$ plus the current upper bound. This sped up the process, and it ensured that every prime found by this method was a suitable candidate and I could update the current maximum length and the current maximum prime.
+
+By the way, 997651 is the sum of $543$ primes, from $7$ to $3931$ included.
 
 
 
