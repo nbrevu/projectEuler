@@ -838,6 +838,27 @@ This is a bit more interesting than it seems, because there is room for improvem
 
 By the way, 997651 is the sum of $543$ primes, from $7$ to $3931$ included.
 
+\section{Consecutive prime sum}
+\textbf{Difficulty rating}: 15\%.
+
+\textbf{Solution}: 121313. \textit{Solved: Sun, 9 Aug 2015, 13:03}.
+
+\textbf{Math knowledge used}: Erathostenes sieve.
+
+\textbf{Programming techniques used}: combination generator (with and without repetition).
+
+What's that? A whopping 15\% difficulty rating! Quite the leap! Just joking, this is still pretty easy, but Project Euler is finally starting to be Project Euler. I think I also pulverized my own longest loop header, using a five-level nested loop in a single header:
+\begin{itemize}
+\item First we iterate by total amount of digits. Which goes from $5$ to infinity (fortunately the solution has just $6$).
+\item The second iteration is over the amount of digits present in the ``variable'' group. Thanks to the pigeonhole principle we know that this digit group must have a length multiple of $3$, because otherwise the group of $10$ different candidates will have at least $3$ multiples of $3$ so there will not be $8$ primes.
+\item Then we iterate over the \textit{positions} of the variable digits. In the case of the solution, $121313$, this refers to positions $0$, $2$ and $4$, since the primes are $x2x3x3$. We use a combination iterator without repetition for this.
+\item Then we iterate over the fixed digits, save for the last one which is a special case. In this case we use a combination iterator with repetition.
+\item Finally we iterate over the last digit, which must be $1$, $3$, $7$ or $9$ since we are looking for primes.
+\end{itemize}
+For each case, we will build the set of possible numbers ($9$ if the first digit is not variable, $10$ if it is) and we return as soon as we generate a set with $8$ or more primes. It's more complicated than most problems so far, but it's also reasonably simple and doable. It's not even optimal and still it has a little more than $50$ lines and runs in $34$ or $35$ milliseconds.
+
+
+
 
 
 
