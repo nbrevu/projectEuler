@@ -871,13 +871,28 @@ Uh... what the fuck is this? It can only have a solution. No programming require
 \section{Consecutive prime sum}
 \textbf{Difficulty rating}: 5\%.
 
-\textbf{Solution}: 142857. \textit{Solved: Sun, 9 Aug 2015, 13:11}.
+\textbf{Solution}: 4075. \textit{Solved: Sun, 9 Aug 2015, 13:11}.
 
 \textbf{Math knowledge used}: combinatorial numbers.
 
 \textbf{Programming techniques used}: none.
 
 There are a million (HA!) ways to do this. The one I use is, I think, possibly one of the fastest approaches. I started with a subarray of the combinatorial numbers $\displaystyle\binom{23}k$ for $k\in\corch{0,9}$, and then I iterated for $n\in\corch{24,100}$, generating at each step the subarray of combinatorial numbers that doesn't exceed the limit of one million. This can be done super fast because it's just a bunch of additions, and checking when the last number is going to surpass the limit (so I need to reduce the array) is quite trivial as well. Then, if this array has length $L$, it means that I have $2L$ combinatorials smaller than one million in this line, and so there must be $n+1-2L$ combinatorials \textit{over} a million. Adding this value for each $n$ yields the solution.
+
+\section{Consecutive prime sum}
+\textbf{Difficulty rating}: 10\%.
+
+\textbf{Solution}: 376. \textit{Solved: Sun, 9 Aug 2015, 23:58}.
+
+\textbf{Math knowledge used}: none.
+
+\textbf{Programming techniques used}: none.
+
+Is this ugly? Is this beautiful? Not sure, really. It's very tedious because there are a lot of cases, but I think that the concept is reasonably interesting. The first time I read this problem, I did it in diagonal and thought about all the possible combinations in which player 1 wins (this is a challenge! But in the end it's about counting ties, subtracting from $\displaystyle\binom{54}{10}$ and dividing by two). The real problem is way, way less challenging. I have read somewhere that there are people who consider this problem to be very difficult! The only way I can understand this is if they are messing with all the cases, but for me this definitely doesn't qualify as difficult.
+
+This is, so far, the problem which requires the largest code. By a wide margin.
+
+
 
 
 
