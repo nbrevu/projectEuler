@@ -905,7 +905,16 @@ Not much to add. There are ways to speed up the process (such as remembering the
 
 This problem warns my heart a little because it makes me nostalgic of certain very old maths book.
 
+\section{Powerful digit sum}
+\textbf{Difficulty rating}: 5\%.
 
+\textbf{Solution}: 972. \textit{Solved: Mon, 10 Aug 2015, 00:15}.
+
+\textbf{Math knowledge used}: none.
+
+\textbf{Programming techniques used}: none.
+
+Another regression to the ``not really Project Euler'' tutorial problems. There seems to be room for improvement by being clever with culling, iterating downwards and returning early, but this doesn't pay much. Since the powers can be reused, speeding up each iteration, in the end it's just better to write the trivial problem: iterate $a$ and $b$ over the range, calculate the current power using $a\times a^{b-1}$ instead of recalculating the result anew each time, get the sum of digits.
 
 
 
