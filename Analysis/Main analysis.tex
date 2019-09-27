@@ -803,6 +803,19 @@ By the way:
 \item $134046=2\cdot3^2\cdot11\cdot677$.
 \end{itemize}
 
+\section{Self powers}
+\textbf{Difficulty rating}: 5\%.
+
+\textbf{Solution}: 9110846700. \textit{Solved: Sun, 9 Aug 2015, 09:37}.
+
+\textbf{Math knowledge used}: none.
+
+\textbf{Programming techniques used}: binary exponentiation.
+
+For a veteran, this problem is a bit infuriating. This problems seems to lend itself easily to binary exponentiation, BUT since the modulus is greater than $2^{31.5}$, temporary results don't fit into a long. So either you eschew the speed of binary exponentiations or you eschew the speed of primitive longs. Since I had to bit the bullet anyway, I tried both approaches. To my surprise, doing full iterations with longs is faster than binary exponentiation with BigInteger. \textit{And faster than binary exponentiation with longs} (which returns the wrong results anyway), which is extra-surprising. Initially I assumed that this happens because the exponents are very small and because division is much slower than multiplication, but that's not true. The real issue, and this is super-interesting, is that calling code from a different class adds some overhead in terms of time! I knew that Java initialisation could be slow, but a delay of $10$ms for a single added class is much more time than I had thought.
+
+
+
 
 
 
