@@ -747,6 +747,17 @@ After the previous boring problem, this one is much more fun. The analysis can b
 \end{itemize}
 This is a remarkable problem, in that it can be very easily analysed by hand completely. These are rare, but always fun.
 
+\section{Pentagon numbers}
+\textbf{Difficulty rating}: 5\%.
+
+\textbf{Solution}: 5482660. \textit{Solved: Sat, 8 Aug 2015, 21:29}.
+
+\textbf{Math knowledge used}: none.
+
+\textbf{Programming techniques used}: none.
+
+Another problem that I don't quite like. It's not like it's super slow or anything, but the lack of a proper limit bothers me. Anyway, the steps I followed where these: generate successive pentagonal numbers $p_i$, and for each $j<i$, verify whether $D=p_i-p_j$ is pentagonal (by looking it up in the set of previously generated) and whether $S=p_i+p_j$ is also pentagonal (by checking that $\dfrac{1+\sqrt{24S+1}}6$ is an integer). If both conditions hold, return $D$.
+
 
 
 
