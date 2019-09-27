@@ -784,6 +784,24 @@ So the hexagonal numbers are precisely the odd triangular numbers. This means th
 
 This can be done in several ways. What I did was: I set up a limit ($10^5$, high enough), then I used a sieve to get primes and composites. Then I iterate over all the squares, generating the sums of primes plus doubled squares, and finishing when any odd composite smaller than the current square hasn't been generated.
 
+\section{Distinct primes factors}
+\textbf{Difficulty rating}: 5\%.
+
+\textbf{Solution}: 134043. \textit{Solved: Sun, 9 Aug 2015, 09:26}.
+
+\textbf{Math knowledge used}: ``first prime'' Erathostenes sieve for divisor generation.
+
+\textbf{Programming techniques used}: none.
+
+Not much room for finesse aside from generating divisors reasonably cleverly. Just generate the divisors for every number, keeping track of numbers with exactly four different prime factors, and finish when four consecutive ones are found.
+
+By the way:
+\begin{itemize}
+\item $134043=3\cdot7\cdot13\cdot491$.
+\item $134044=2^2\cdot23\cdot31\cdot47$.
+\item $134045=5\cdot17\cdot19\cdot83$.
+\item $134046=2\cdot3^2\cdot11\cdot677$.
+\end{itemize}
 
 
 

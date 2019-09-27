@@ -95,7 +95,7 @@ public class DivisorHolder	{
 		SortedMap<Integer,Integer> sorted=new TreeMap<>(factors);
 		for (Map.Entry<Integer,Integer> entry:sorted.entrySet())	{
 			if (first) first=false;
-			else sb.append(" � ");
+			else sb.append(" · ");
 			sb.append(entry.getKey()).append('^').append(entry.getValue());
 		}
 		return sb.toString();
