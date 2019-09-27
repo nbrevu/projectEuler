@@ -758,7 +758,20 @@ This is a remarkable problem, in that it can be very easily analysed by hand com
 
 Another problem that I don't quite like. It's not like it's super slow or anything, but the lack of a proper limit bothers me. Anyway, the steps I followed where these: generate successive pentagonal numbers $p_i$, and for each $j<i$, verify whether $D=p_i-p_j$ is pentagonal (by looking it up in the set of previously generated) and whether $S=p_i+p_j$ is also pentagonal (by checking that $\dfrac{1+\sqrt{24S+1}}6$ is an integer). If both conditions hold, return $D$.
 
+\section{Triangular, pentagonal, and hexagonal}
+\textbf{Difficulty rating}: 5\%.
 
+\textbf{Solution}: 1533776805. \textit{Solved: Sun, 9 Aug 2015, 09:03}.
+
+\textbf{Math knowledge used}: knowledge about polygonal numbers.
+
+\textbf{Programming techniques used}: none.
+
+Unlike the previous one, this one has room for mathematical analysis (aside from the trivial reversal of the pentagonal formula). The nice thing here, and something that apparently I hadn't realized the first time I solved this, is that every hexagonal number is also a triangular number! If we plug $2n-1$ in the formula of the triangular numbers we get:
+\begin{equation*}
+T_{2n-1}=\dfrac{\paren{2n}\paren{2n-1}}2=2n^2-n=H_n.
+\end{equation*}
+So the hexagonal numbers are precisely the odd triangular numbers. This means that we can solve this problem by generating hexagonal numbers and checking whether they are pentagonal. We could also do it the opposite way, but since hexagonal numbers are more spaced than pentagonal ones, by iterating this way we perform fewer checks. The result is $P_{31977}=H_{27693}$, so about one seventh of checks is saved.
 
 
 
