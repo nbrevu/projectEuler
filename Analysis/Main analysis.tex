@@ -773,6 +773,17 @@ T_{2n-1}=\dfrac{\paren{2n}\paren{2n-1}}2=2n^2-n=H_n.
 \end{equation*}
 So the hexagonal numbers are precisely the odd triangular numbers. This means that we can solve this problem by generating hexagonal numbers and checking whether they are pentagonal. We could also do it the opposite way, but since hexagonal numbers are more spaced than pentagonal ones, by iterating this way we perform fewer checks. The result is $P_{31977}=H_{27693}$, so about one seventh of checks is saved.
 
+\section{Goldbach's other conjecture}
+\textbf{Difficulty rating}: 5\%.
+
+\textbf{Solution}: 5777. \textit{Solved: Sun, 9 Aug 2015, 09:12}.
+
+\textbf{Math knowledge used}: Erathostenes sieve.
+
+\textbf{Programming techniques used}: none.
+
+This can be done in several ways. What I did was: I set up a limit ($10^5$, high enough), then I used a sieve to get primes and composites. Then I iterate over all the squares, generating the sums of primes plus doubled squares, and finishing when any odd composite smaller than the current square hasn't been generated.
+
 
 
 
