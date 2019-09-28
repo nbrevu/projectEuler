@@ -1058,6 +1058,19 @@ See problem $57$ for a comprehensive description of the method used to generate 
 
 My existing implementation of continued fractions only allowed periodic ones, i.e. those which come from square roots. So I created a generic interface to accomodate custom continued fractions, which required remarkably little tweaking in my Convergents.java file. Then, for this problem, I created a new class for the (very simple) continued fraction of $e$, defining only two tiny methods, and the common class did the rest. Hooray!
 
+\section{Diophantine equation}
+\textbf{Difficulty rating}: 25\%.
+
+\textbf{Solution}: 661. \textit{Solved: Tue, 11 Aug 2015, 09:46}.
+
+\textbf{Math knowledge used}: continued fractions and its convergents; plus Pell's equation.
+
+\textbf{Programming techniques used}: none.
+
+THIS. This is it. This is the first actual, real, pure, distilled Project Euler problem. This is where Project Euler finally shows its teeth. And this is the first time I hit a wall. Why? Simple. Because the reason why this is the first real Project Euler problem is that this is the first one where no amount of brute force will get you anywhere. To give context: the value of $x$ is $16421658242965910275055840472270471049$. Yes, that's a $38$ digit number. Good luck waiting for the end of the universe while you find that by brute force.
+
+Now, with the help of convergents, the solution is much easier. In order to solve the equation $x^2-Dy^2=1$, you just need to find the convergents for the square root of $D$, and iterate over all of them until you find some $\dfrac{p_i}{q_i}$ so that $p_i^2-Dq_i^2=1$. If you can generate convergents, which you should thanks to the previous problems, then the algorithm is trivial. Of course, you still need to know about Pell's equation. I didn't and that's why I hit a wall. Then I read a hint randomly in another problem's thread (I don't even remember which one). And that's when I realized that Project Euler was much deeper, and much more fun, than I initially had thought. This is, in a very real sense, the problem that got me actually hooked.
+
 
 
 
