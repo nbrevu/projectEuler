@@ -974,6 +974,19 @@ Easy, but fun. The idea is that the english text will contain the string ``the''
 
 \textit{An extract taken from the introduction of one of Euler's most celebrated papers, "De summis serierum reciprocarum" [On the sums of series of reciprocals]: I have recently found, quite unexpectedly, an elegant expression for the entire sum of this series 1 + 1/4 + 1/9 + 1/16 + etc., which depends on the quadrature of the circle, so that if the true sum of this series is obtained, from it at once the quadrature of the circle follows. Namely, I have found that the sum of this series is a sixth part of the square of the perimeter of the circle whose diameter is 1; or by putting the sum of this series equal to s, it has the ratio sqrt(6) multiplied by s to 1 of the perimeter to the diameter. I will soon show that the sum of this series to be approximately 1.644934066842264364; and from multiplying this number by six, and then taking the square root, the number 3.141592653589793238 is indeed produced, which expresses the perimeter of a circle whose diameter is 1. Following again the same steps by which I had arrived at this sum, I have discovered that the sum of the series 1 + 1/16 + 1/81 + 1/256 + 1/625 + etc. also depends on the quadrature of the circle. Namely, the sum of this multiplied by 90 gives the biquadrate (fourth power) of the circumference of the perimeter of a circle whose diameter is 1. And by similar reasoning I have likewise been able to determine the sums of the subsequent series in which the exponents are even numbers.}
 
+\section{Prime pair sets}
+\textbf{Difficulty rating}: 20\%.
+
+\textbf{Solution}: 26033. \textit{Solved: Mon, 10 Aug 2015, 12:37}.
+
+\textbf{Math knowledge used}: Erathostenes sieve and Miller-Rabin primality test.
+
+\textbf{Programming techniques used}: dynamic programming/memoization (sort of).
+
+I find that $20\%$ quite reasonable. It's not like this is a super difficult method, but it's tricky to get it right, there is no obvious solution (no, the solution is not the one for $4$ primes plus an additional one) and getting it efficiently can be a challenge. I used a complicated structure with trees where for each prime I stored possible combinations of less than $5$ primes verifying the conditions. For each prime, and for $n\in\llave{0,3}$, I have a tree storing the combinations including the prime and $n$ additional numbers. So, each time I add a prime, I need to traverse the structure for each prime less than the one given, and if I can traverse successfully a tree of level $3$, then I can add the three associated numbers, plus the prime ``owner'' of the tree, plus the prime we're currently iterating. It's a bit weird but it's efficient and the code is not that complicated.
+
+This is also the first problem where my algorithm took more than $1$ second. A bit more than $5$ seconds, in fact. The final solution is composed of these primes: $\llave{13,5197,5701,6733,8389}$.
+
 
 
 
