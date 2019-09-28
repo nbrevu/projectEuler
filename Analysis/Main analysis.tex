@@ -987,7 +987,24 @@ I find that $20\%$ quite reasonable. It's not like this is a super difficult met
 
 This is also the first problem where my algorithm took more than $1$ second. A bit more than $5$ seconds, in fact. The final solution is composed of these primes: $\llave{13,5197,5701,6733,8389}$.
 
+\section{Cyclical figurate numbers}
+\textbf{Difficulty rating}: 20\%.
 
+\textbf{Solution}: 28684. \textit{Solved: Mon, 10 Aug 2015, 13:34}.
+
+\textbf{Math knowledge used}: polygonal numbers.
+
+\textbf{Programming techniques used}: none.
+
+This is very fast because the obvious way is to start the iterations from the octogonal numbers, since there are fewer of them, and it happens that the octogonal number is the smallest of them all. Although it's not like it would be horribly slow otherwise.
+
+The method is: generate all the triangular, square, pentagonal, hexagonal and heptagonal numbers. You can use a map for each type, or a single map with all the data with a tag indicating the kind of polygonal type. Index the map by the first two digits of the polygonal number. Then, iterate over all the octogonal numbers, and follow a recursive search where at each step you look for the first two digits in the map, which come from the last two digits of the previous number. The search succeeds when all the polygons have been fulfilled and the end digits of the last number are the first ones of the first octogonal number.
+
+This is the chain:
+\begin{equation*}
+\hspace{-1.5cm}
+P_{8,21}=1281\Rightarrow P_{6,64}=8128\Rightarrow P_{5,44}=2882\Rightarrow P_{3,128}=8256\Rightarrow P_{4,75}=5625\Rightarrow P_{7,32}=2512.
+\end{equation*}
 
 
 
