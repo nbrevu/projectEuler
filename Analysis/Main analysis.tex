@@ -948,6 +948,19 @@ Now, back to problem $57$. Yes, all that shit above doesn't mean much because th
 
 This explanation is too long for problem $57$, yes. However, it's not too long for problems $66$, $192$ or $656$.
 
+\section{Spiral primes}
+\textbf{Difficulty rating}: 5\%.
+
+\textbf{Solution}: 26241. \textit{Solved: Mon, 10 Aug 2015, 10:23}.
+
+\textbf{Math knowledge used}: Erathostenes sieve and Miller-Rabin primality test.
+
+\textbf{Programming techniques used}: none.
+
+Unlike that awful problem 28, this one spirals in the right, positive direction. The problem itself is pretty easy, because we can keep counters for each branch tip: $f_{\llave{1\ldots4}}={3,5,7,9}$ at the start, and then, starting with $i=4$ and in increments of two we can do $f_k=f_{k-1}+i$ (starting with $f_1=f_4+i$) and check primalities as we go.
+
+This problem is the first one where my execution time exceeds half a second ($\approx0.6$s).
+
 
 
 
