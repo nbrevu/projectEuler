@@ -110,6 +110,9 @@ public class Convergents {
 		public Iterator<Convergent> iterator() {
 			return new ConvergentIterator(this);
 		}
+		public int getPeriodLength()	{
+			return periodicConvergents.length;
+		}
 	}
 
 	public static class Convergent	{
