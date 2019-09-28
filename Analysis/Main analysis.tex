@@ -916,6 +916,37 @@ This problem warns my heart a little because it makes me nostalgic of certain ve
 
 Another regression to the ``not really Project Euler'' tutorial problems. There seems to be room for improvement by being clever with culling, iterating downwards and returning early, but this doesn't pay much. Since the powers can be reused, speeding up each iteration, in the end it's just better to write the trivial problem: iterate $a$ and $b$ over the range, calculate the current power using $a\times a^{b-1}$ instead of recalculating the result anew each time, get the sum of digits.
 
+\section{Square root convergents}
+\textbf{Difficulty rating}: 5\%.
+
+\textbf{Solution}: 153. \textit{Solved: Mon, 10 Aug 2015, 00:20}.
+
+\textbf{Math knowledge used}: continued fractions and convergents.
+
+\textbf{Programming techniques used}: none.
+
+The fun begins! Project Euler still holds your hand, but it's getting ready for the main show. At this point it's reasonably easy to just follow the instructions, and you can even use doubles to get the periodic fraction (which is laughably simple), but since the convergents are going to be used from time to time (yes $192$ and $656$, I'm talking to you) and actual accuracy is required there, let's talk a bit about how to generate the periodic continued fraction of a square root.
+
+The trivial calculations uses double precision without restriction. We define variables $x=\sqrt k$ and $l=\floor{x}$ ($l$ for ``\textbf{l}ast convergent''), and we iterate: at each step, $y=\dfrac1{x-l}$, and then we assign $x\leftarrow y$, $l\leftarrow\floor y$. If we are calculating the period of a square root, we end when we get $l=2\floor{\sqrt k}$ (yes, really). So far so good, right? The problem is that floating point numbers are really crappy, so around $n=130$ you will start getting problems, so a more careful analysis is necessary.
+
+Where to start that careful analysis? It seems clear that both the numerator and the denominator are going to be elements from $\mathbb Q\corch{\sqrt n}$, so we can just model $x$ and $y$ as fractions of the form $\dfrac{A\sqrt n+B}{C\sqrt n+D}$. Let's call the succession of convergents $a_n$, because it will ease the reasoning. So $a_0=\floor{\sqrt n}$ and $a_1=\dfrac1{\sqrt x-a_0}$. Now, the basic iteration calculates the new terms as follows:
+\begin{itemize}
+\item $A_{n+1}=C_n$.
+\item $B_{n+1}=D_n$.
+\item $C_{n+1}=A_n-a_nC_n$.
+\item $D_{n+1}=B_n-a_nD_n$.
+\item $a_{n+1}=\floor{\dfrac{A_{n+1}\sqrt k+B_{n+1}}{C_{n+1}\sqrt k+D_{n+1}}}$.
+\end{itemize}
+This looks very promising! But... we will encounter precision problems \textit{even a bit before} than with the previous method, because floating point is a bitch. Oh, yes, the values for $A_n$, $B_n$, $C_n$ and $D_n$ will be correct because they use integer arithmetic, by which I mean BigInteger arithmetic. But in order to reduce precision problems regarding $a_n$, we need to rationalize the denominator. So, in order to actually calculate the convergents, we need to change the formula for $a_n$ into this one:
+\begin{equation*}
+a_n=\floor{\dfrac{\paren{B_nC_n-A_nD_n}\sqrt k+\paren{A_nC_nk-B_nD_n}}{C_n^2k-D_n^2}}.
+\end{equation*}
+
+It's a bit soon to write all this since this is not needed at all for problem $57$ (for which we only need to calculate $a_1=2$, which is even given as part of the problem description), but the convergent library is going to be the same for a few problems in the future.
+
+Now, back to problem $57$. Yes, all that shit above doesn't mean much because the succession of terms in the periodic fraction is $a_n=\llave{2,2,2,\ldots}$. Now, how to \textit{really} calculate the convergents? As in, the whole $\dfrac pq$ fractions? The formula is quite simple. We call $a_0=\floor{\sqrt k}$ ($k=2$ in our case) and then $a_n$ starting in $n=1$ is the aforementioned succession. So, we define: $p_{-1}=1$; $q_{-1}=0$; $p_0=\floor{\sqrt k}$, $q_0=1$. The iterative process just follows the formulas $p_n=a_np_{n-1}+p_{n-2}$, $q_n=a_nq_{n-1}+q_{n-2}$. This is the general calculation that will be used often. Now, for problem $57$ specifically, we just need to calculate $\llave{p_n,q_n}$ for $k=2$ and $n\in\corch{1,1000}$ and count in how many cases $p_n$ has more digits than $q_n$. Which is far too simple and can be done using the imprecise double calculations, but then it wouldn't be reusable.
+
+This explanation is too long for problem $57$, yes. However, it's not too long for problems $66$, $192$ or $656$.
 
 
 
