@@ -1006,6 +1006,22 @@ This is the chain:
 P_{8,21}=1281\Rightarrow P_{6,64}=8128\Rightarrow P_{5,44}=2882\Rightarrow P_{3,128}=8256\Rightarrow P_{4,75}=5625\Rightarrow P_{7,32}=2512.
 \end{equation*}
 
+\section{Cyclical figurate numbers}
+\textbf{Difficulty rating}: 15\%.
+
+\textbf{Solution}: 127035954683. \textit{Solved: Mon, 10 Aug 2015, 13:57}.
+
+\textbf{Math knowledge used}: none.
+
+\textbf{Programming techniques used}: none.
+
+Very simple, just use a Multimap-like cache with the digit representation of all the cubes (the key should be a summary of the digits that doesn't take the order into account; an IntIntMap of digit to count of digits is good enough), update it with all the cubes, and stop as soon as the current digit representation has $5$ different values.
+
+The cubes that share the same digits are: $5027^3=127035954683$; $7061^3=352045367981$; $7202^3=373559126408$; $8288^3=569310543872$; and $8384^3=589323567104$.
+
+Updating the code so that we can find the solution for values of $N$ greater than $5$ shows that the solution grows relatively slowly, and the execution time is not preposterous. For example for $N=15$ the cubes are between $47456^3=106874325794816$ and $95636^3=874710238619456$, and the solution is found in less than $15$ seconds (the one for $N=5$ takes a bit more than $0.2$ seconds).
+
+
 
 
 
