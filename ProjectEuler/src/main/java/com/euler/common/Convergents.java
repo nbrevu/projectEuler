@@ -10,13 +10,13 @@ import com.google.common.math.IntMath;
 
 public class Convergents {
 	private static class ConvergentIterator implements Iterator<Convergent>	{
-		private final PeriodicContinuedFraction contFraction;
+		private final ContinuedFraction contFraction;
 		private BigInteger prevP;
 		private BigInteger prevQ;
 		private BigInteger p;
 		private BigInteger q;
 		private int index;
-		public ConvergentIterator(PeriodicContinuedFraction contFraction)	{
+		public ConvergentIterator(ContinuedFraction contFraction)	{
 			this.contFraction=contFraction;
 			prevP=BigInteger.ONE.negate();
 			prevQ=BigInteger.ONE.negate();
@@ -47,8 +47,16 @@ public class Convergents {
 			return new Convergent(p,q);
 		}
 	}
+	
+	public static interface ContinuedFraction extends Iterable<Convergent>	{
+		public int getRoot();
+		public int getTerm(int n);
+		public default Iterator<Convergent> iterator() {
+			return new ConvergentIterator(this);
+		}
+	}
 
-	public static class PeriodicContinuedFraction implements Iterable<Convergent>	{
+	public static class PeriodicContinuedFraction implements ContinuedFraction	{
 		private final int root;
 		private final int[] periodicConvergents;
 		private PeriodicContinuedFraction(int root,int[] periodicConvergents)	{
@@ -88,9 +96,11 @@ public class Convergents {
 			int[] arrayConvergents=convergents.stream().mapToInt(Integer::intValue).toArray();
 			return new PeriodicContinuedFraction(root,arrayConvergents);
 		}
+		@Override
 		public int getRoot()	{
 			return root;
 		}
+		@Override
 		public int getTerm(int n)	{
 			--n;
 			return periodicConvergents[n%periodicConvergents.length];
@@ -105,10 +115,6 @@ public class Convergents {
 			}
 			sb.append(']');
 			return sb.toString();
-		}
-		@Override
-		public Iterator<Convergent> iterator() {
-			return new ConvergentIterator(this);
 		}
 		public int getPeriodLength()	{
 			return periodicConvergents.length;

@@ -1047,6 +1047,17 @@ Oooh! More contiuned fractions. Project Euler still holds your hand, but it forc
 
 See problem $57$ for a comprehensive description of the method used to generate continued fractions.
 
+\section{Convergents of e}
+\textbf{Difficulty rating}: 15\%.
+
+\textbf{Solution}: 272. \textit{Solved: Tue, 11 Aug 2015, 09:44}.
+
+\textbf{Math knowledge used}: continued fractions.
+
+\textbf{Programming techniques used}: none.
+
+My existing implementation of continued fractions only allowed periodic ones, i.e. those which come from square roots. So I created a generic interface to accomodate custom continued fractions, which required remarkably little tweaking in my Convergents.java file. Then, for this problem, I created a new class for the (very simple) continued fraction of $e$, defining only two tiny methods, and the common class did the rest. Hooray!
+
 
 
 
