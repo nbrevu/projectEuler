@@ -1170,6 +1170,26 @@ It might not look like it, but this is actually awesome because it trims the sea
 
 This additional analysis is not super necessary, because the obvious program is already very fast. But it speeds up the program, from more than $20$ms to less than a quarter of a millisecond.
 
+\section{Counting fractions}
+\textbf{Difficulty rating}: 20\%.
+
+\textbf{Solution}: 303963552391. \textit{Solved: Tue, 11 Aug 2015, 12:15}.
+
+\textbf{Math knowledge used}: sum of totients function.
+
+\textbf{Programming techniques used}: none.
+
+Super high level magical function to the rescue!
+
+This is very easy if you have the proper tools. Now, admittedly, I didn't have this function until much later, and the first time I solved this problem, I just added the totients. However, this is \textit{so much} faster that I must accept it as the proper way.
+
+So, for each denominator $d$, the proper fractions $\dfrac nd$ are those for which $\mathrm{gcd}\paren{n,d}=1$. Of course we know that $\varphi\paren n=\#\llave{d\in\corch{1,n}:\mathrm{gcd}\paren{d,n}=1}$, so this problem is as simple as calculating
+\begin{equation*}
+\sum_{n=2}^{1000000}\varphi\paren n.
+\end{equation*}
+Now, we can calculate all the totients and add them. But there is a wonderful magical way of calculating the sum of totients directly, with an algorithm whose run time is about $O\paren{N^{2/3}}$ (the trivial one would be about $O\paren{N\log N}$, much slower). This algorithm works in a more or less similar way than the also magical ``sum of primes'' algorithm that Lucy\_Hedgehog gracefully bestowed us in the comments of Euler10. I have used this sum of totients algorithm in a few places, and the full description can be found at the link in the comments of the SumOfTotientCalculator class.
+
+Now, this wonderful function returns $\displaystyle\sum_{n=1}^L\varphi\paren n$, so we need to subtract $\varphi\paren1=1$ to get the final result. But no additional work is needed.
 
 
 
