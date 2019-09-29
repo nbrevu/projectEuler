@@ -1093,6 +1093,33 @@ This is the same as problem $18$, only with a bigger size. The only way this wou
 
 I'm very surprised that this problem gets a difficulty rating as high as problem $66$. This one is ultimately a reasonably doable search. I mean, it surely can be done by hand with some work, but I got lazy for this one (didn't feel like a lot of trial and error) and just iterated over all the $10!$ possibilities. It takes about a quarter of a second; it's not like it's terribly complicated.
 
+\section{Totient maximum}
+\textbf{Difficulty rating}: 10\%.
+
+\textbf{Solution}: 510510. \textit{Solved: Tue, 11 Aug 2015, 11:34}.
+
+\textbf{Math knowledge used}: Euler's totient function.
+
+\textbf{Programming techniques used}: none.
+
+In hindsight, it's surprising that we need to go as far as problem $69$ to find the first reference to the totient function. In fact, the totient function is not needed at all until now (although the divisor function used in problems $21$ and $23$ is very close). However, from now on it will be used reasonably often. Much more often than convergents, for example.
+
+I can see three approaches to this problem: first, brute force, as in counting the divisors by hand. This is $O\paren{n^2}$ and therefore it's not really bruteforceable, which I guess is why the difficulty rating is $10\%$ and not $5\%$. Second, ``kind of'' brute force, that is, calculating $\dfrac n{\varphi\paren n}$ for all $n$ and taking the maximum. This is much more reasonable (and this is how I solved this for the first time), but then there is the much better third approach, which I'll explain in the next paragraphs.
+
+So, the totient function is multiplicative. This means that if $\mathrm{gcd}\paren{m,n}=1$, then $\varphi\paren{mn}=\varphi\paren m\varphi\paren n$. In particular, if the prime decomposition of $n$ is
+\begin{equation*}
+n=\prod_ip_i^{e_i},
+\end{equation*}
+where $p_i$ are prime factors each raised to the $e_i$-th power, then
+\begin{equation*}
+\varphi\paren n=\prod_i\varphi\paren{p_i^{e_i}}.
+\end{equation*}
+
+Also, for any prime $p$ we have $\varphi\paren{p}=p-1$ and $\varphi\paren{p^n}=\paren{p-1}p^{n-1}$ (note that these formulas alone are enough to calculate the totient of any number, given its prime decomposition). Now, all this means that
+\begin{equation*}
+\dfrac n{\varphi\paren n}=\dfrac{\prod_ip_i^{e_i}}{\prod_i\paren{p_i-1}p^{e_i-1}}=\dfrac{\prod_ip_i}{\prod_ip_i-1}=\prod_i\dfrac{p_i}{p_i-1}.
+\end{equation*}
+This is super useful because it means that the quotient we are looking for depends on just the prime factors present on the number, not on their multiplicity. Now, there is something even better: the quotient $\dfrac p{p-1}=1+\dfrac1{p-1}$ is a decreasing function in $p$, which means that smaller primes beget bigger quotients. Since each factor is bigger than $1$, it's clear that what we want to do is cramming as many primes as possible, and as small as possible. So: the solution to this problem is the product of the $N$ smallest primes (this is called a primorial), but we can't exceed one million. That is, the solution of this problem is the biggest primorial that doesn't exceed one million. Which is $2\cdot3\cdot5\cdot7\cdot11\cdot13\cdot17=510510$. Of course, multiplying this number times any $17$-smooth number will result in the same $\dfrac n{\varphi\paren n}$ quotient, but since $2\cdot510510>10^6$, there aren't any other numbers smaller than a million with the same quotient, and therefore $510510$ is the solution.
 
 
 
