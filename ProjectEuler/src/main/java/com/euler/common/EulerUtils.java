@@ -21,6 +21,7 @@ import com.google.common.collect.Multiset;
 import com.google.common.math.LongMath;
 import com.koloboke.collect.map.IntIntMap;
 import com.koloboke.collect.map.LongIntMap;
+import com.koloboke.collect.map.hash.HashIntIntMaps;
 import com.koloboke.collect.set.LongSet;
 import com.koloboke.collect.set.hash.HashLongSets;
 
@@ -740,5 +741,14 @@ public class EulerUtils {
 			t=(t*c)%prime;
 			r=(r*b)%prime;
 		}
+	}
+	public static IntIntMap getDigitDistribution(int n)	{
+		IntIntMap result=HashIntIntMaps.newMutableMap();
+		while (n>0)	{
+			int d=n%10;
+			n/=10;
+			if (d>0) EulerUtils.increaseCounter(result,d);
+		}
+		return result;
 	}
 }

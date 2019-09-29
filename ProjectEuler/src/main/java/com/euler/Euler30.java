@@ -21,18 +21,9 @@ public class Euler30 {
 				sum+=POWERS[i];
 			}
 			if (nonZeroValues<2) return 0;
-			IntIntMap summed=getDistributionFromNumber(sum);
+			IntIntMap summed=EulerUtils.getDigitDistribution(sum);
 			IntIntMap original=getDistributionFromDigits(combination);
 			return summed.equals(original)?sum:0;
-		}
-		private static IntIntMap getDistributionFromNumber(int n)	{
-			IntIntMap result=HashIntIntMaps.newMutableMap();
-			while (n>0)	{
-				int d=n%10;
-				n/=10;
-				if (d>0) EulerUtils.increaseCounter(result,d);
-			}
-			return result;
 		}
 		private static IntIntMap getDistributionFromDigits(int[] combination)	{
 			IntIntMap result=HashIntIntMaps.newMutableMap();

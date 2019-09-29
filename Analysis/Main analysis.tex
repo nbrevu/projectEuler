@@ -1121,6 +1121,31 @@ Also, for any prime $p$ we have $\varphi\paren{p}=p-1$ and $\varphi\paren{p^n}=\
 \end{equation*}
 This is super useful because it means that the quotient we are looking for depends on just the prime factors present on the number, not on their multiplicity. Now, there is something even better: the quotient $\dfrac p{p-1}=1+\dfrac1{p-1}$ is a decreasing function in $p$, which means that smaller primes beget bigger quotients. Since each factor is bigger than $1$, it's clear that what we want to do is cramming as many primes as possible, and as small as possible. So: the solution to this problem is the product of the $N$ smallest primes (this is called a primorial), but we can't exceed one million. That is, the solution of this problem is the biggest primorial that doesn't exceed one million. Which is $2\cdot3\cdot5\cdot7\cdot11\cdot13\cdot17=510510$. Of course, multiplying this number times any $17$-smooth number will result in the same $\dfrac n{\varphi\paren n}$ quotient, but since $2\cdot510510>10^6$, there aren't any other numbers smaller than a million with the same quotient, and therefore $510510$ is the solution.
 
+\section{Totient permutation}
+\textbf{Difficulty rating}: 20\%.
+
+\textbf{Solution}: 8319823. \textit{Solved: Tue, 11 Aug 2015, 11:55}.
+
+\textbf{Math knowledge used}: Euler's totient function.
+
+\textbf{Programming techniques used}: none.
+
+Unlink in the previous case, we want to maximize the quotient, so we need few primes and as big as possible. However:
+\begin{itemize}
+\item The result can't be a prime because $p$ and $p-1$ will never be an anagram.
+\item It also can't be $p^2$ because if $p$ is prime then $\varphi\paren{p^2}=p^2-p$ and since $p$ is not a multiple of $9$ then $p^2\not\equiv\varphi\paren{p^2}$ (mod $9$), so $p^2$ can't be an anagram of $\varphi\paren{p^2}$.
+\item Then, ideally the result is the product of two primes. This is not \textit{strictly} true, but it's a very good heuristic; we can assume it and in this problem it gets the correct solution.
+\end{itemize}
+The obvious solution is to iterate over pairs of primes, but we can trim the search space even more. The properties of anagrams imply that, if our solution is $pq$, then $pq\equiv\paren{p-1}\paren{q-1}$ (mod $9$). Now this means that (excluding the case $p=3$, not important since $3$ is very small), if any of the primes is of the form $3k+1$, then $\varphi\paren{pq}$ is a multiple of $3$ and therefore it can't be an anagram of $pq$, which is not a multiple of $3$. This removes a lot. And now that we know that $p,q\equiv2$, $5$ or $8$ (mod $9$) we can analyze the six possibilities:
+\begin{itemize}
+\item $p\equiv2$, $q\equiv2$. Then $pq\equiv4$, $\varphi\paren{pq}\equiv1$.
+\item $p\equiv2$, $q\equiv5$. Then $pq\equiv1$, $\varphi\paren{pq}\equiv4$.
+\item $p\equiv2$, $q\equiv8$. Then $pq\equiv7$, $\varphi\paren{pq}\equiv7$.
+\item $p\equiv5$, $q\equiv5$. Then $pq\equiv7$, $\varphi\paren{pq}\equiv7$.
+\item $p\equiv5$, $q\equiv8$. Then $pq\equiv4$, $\varphi\paren{pq}\equiv1$.
+\item $p\equiv8$, $q\equiv8$. Then $pq\equiv1$, $\varphi\paren{pq}\equiv4$.
+\end{itemize}
+So the only valid cases are the pairs $\llave{2,8}$, $\llave{5,5}$ and $\llave{8,2}$. This is really neat. This means that not only we can discard a lot more, but that we can just look for products of the form $pq\equiv7$. In fact: take the initial code, add two additional control sentences ($p\equiv2$ mod $3$ and $pq\equiv7$ mod $9$) and the run time speeds up from $0.56$s to less than $0.23$s. And that's even being conservative and ``wasteful'' and starting from $p=2$ instead of a much higher prime. The result, in fact, is $2339\cdot3557$.
 
 
 
