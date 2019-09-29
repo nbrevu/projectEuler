@@ -1147,6 +1147,30 @@ The obvious solution is to iterate over pairs of primes, but we can trim the sea
 \end{itemize}
 So the only valid cases are the pairs $\llave{2,8}$, $\llave{5,5}$ and $\llave{8,2}$. This is really neat. This means that not only we can discard a lot more, but that we can just look for products of the form $pq\equiv7$. In fact: take the initial code, add two additional control sentences ($p\equiv2$ mod $3$ and $pq\equiv7$ mod $9$) and the run time speeds up from $0.56$s to less than $0.23$s. And that's even being conservative and ``wasteful'' and starting from $p=2$ instead of a much higher prime. The result, in fact, is $2339\cdot3557$.
 
+\section{Ordered fractions}
+\textbf{Difficulty rating}: 10\%.
+
+\textbf{Solution}: 428570. \textit{Solved: Tue, 11 Aug 2015, 12:03}.
+
+\textbf{Math knowledge used}: none.
+
+\textbf{Programming techniques used}: none.
+
+Once you see the solution, it's kind of obvious, considering that $3/7=428571/999999$, isn't it? But there is a formal process that can reliably get the solution for any random fraction. The obvious solution is to take, for every denominator $d$, the numerator $\ceil{\dfrac{3d}7}-1$, calculate the difference and store the best one. But there is a better way: we can iterate downwards, and once we get a suitable value, we can aggresively trim the search space. ACHTUNG! The following analysis is basically lifted from the problem overview from the Project Euler page.
+
+So, let's suppose that we have a current solution $\dfrac pq$. We are looking for a hypothetical fraction $\dfrac rs$ so that $\dfrac ND-\dfrac rs>\dfrac ND-\dfrac pq$. We can operate like this:
+\begin{equation*}
+\dfrac ND-\dfrac rs=\dfrac{Ns-Dr}{Ds}\geq\dfrac1{Ds}.
+\end{equation*}
+Therefore we are looking for denominators $s$ that verify that
+\begin{equation*}
+\dfrac1{Ds}<\dfrac{Nq-Dp}{Dq}\Rightarrow s>Nq-Dp.
+\end{equation*}
+It might not look like it, but this is actually awesome because it trims the search space really, really fast. And even better, if you hit $Nq-Dp=1$ then it's guaranteed that the next iteration will finish. And yes, this does happen in this problem.
+
+This additional analysis is not super necessary, because the obvious program is already very fast. But it speeds up the program, from more than $20$ms to less than a quarter of a millisecond.
+
+
 
 
 
