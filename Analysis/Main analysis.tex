@@ -1204,6 +1204,21 @@ Well. The overview for the problem uses a more complicated structure and gives a
 
 Honestly, Stern-Brocot trees are not that much faster than the obvious approach (iterate denominator from $4$ to $L$; for each one, iterate numerator between $\floor{\dfrac d3}+1$ and $\ceil{\dfrac d2}-1$, included; increase a counter if $\mathrm{gcd}\paren{n,d}=1$). But at least it is faster. I assume that the alternate approaches described in the problem overview would be much faster. If they worked...
 
+\section{Digit factorial chains}
+\textbf{Difficulty rating}: 15\%.
+
+\textbf{Solution}: 402. \textit{Solved: Tue, 11 Aug 2015, 14:33}.
+
+\textbf{Math knowledge used}: none.
+
+\textbf{Programming techniques used}: memoization.
+
+I'm completely baffled by the results I got from this. Not about the result per se, but about the time. Initially I copied my old C++ implementation. It uses a cache for the next number at each step, an int array of length $9\cdot9!$. Super slow. Ok, let's be clever and find the highest number that does get visited. It's something like $2170000$. Let's use the cache just up to that number. $33$ seconds, $32$ of which go to the initialization? WOW. What if I used an IntIntMap (i.e. a lazy cache)? Down to less than $1.5$ seconds. This is pretty crazy. Hail IntIntMap.
+
+In the Project Euler forums there are people following clever combinatorial schemes (like, if you find that $1479$ has a chain of $60$, then so does $4971$, and so on). I didn't trust this because I couldn't be sure that permutations aren't fucking with the chains (i.e. if the chain for $1479$ repeats because it eventually gets to $4971$, then the chain for $4971$ doesn't have $60$ elements, but $59$). The brute-forcish approach still gets the result in $1.5$ seconds so it's good enough.
+
+
+
 
 
 
