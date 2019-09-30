@@ -1250,6 +1250,25 @@ Classic dynamic programming problem. Very similar to the one about the pounds.
 
 Very similar to the previous one, with a small twist. Still calculated with a 2D array, but in this case the rows use an increment equal to a prime number, instead of having a constant difference of 1.
 
+\section{Coin partitions}
+\textbf{Difficulty rating}: 30\%.
+
+\textbf{Solution}: 55374. \textit{Solved: Tue, 11 Aug 2015, 16:26}.
+
+\textbf{Math knowledge used}: partition function, generalized pentagonal numbers.
+
+\textbf{Programming techniques used}: memoization.
+
+No wonder this has a whooping $30\%$ difficulty rating: this can't be done using brute force, plus the formula to calculate the result is, well, relatively obscure. In a sense, this is the opposite of problem 66: for that one, the previous problems were centered about a technique (continued fractions and convergents) that appeared to be unrelated but ended being fundamental to the solution. In this case we have the opposite: leading problems that seem to be similar, but then the knowledge required for this one changes completely. To be fair, dynamic programming could work, but it's harder to get it right, especially considering that there is no limit. However, there is a formula using generalized pentagonal numbers, which is what I used.
+
+The formula is the following: if $P\paren n$ are the partitions of $n$, then:
+\begin{equation*}
+P\paren n=\left\{\begin{array}{ll}n<0:&0;\\n=0:&1;\\\mathrm{ otherwise}:&{\displaystyle\sum_{k=1}^\infty}\paren{-1}^{k-1}\paren{P\paren{n-\frac{k\paren{3k-1}}2}+P\paren{n-\frac{k\paren{3k+1}}2}}.\end{array}\right.
+\end{equation*}
+The values $\dfrac{k\paren{3k\pm1}}2$ are those ``generalized pentagonal numbers''. In the end the algorithm has about order $O\paren{n^{3/2}}$ where $n$ is the solution (that sum up to infinity is misleading. When $n$ minus the generalized pentagonal is smaller than $0$, we stop), so it's a bit slow, but still, a third of a second is not too slow.
+
+
+
 
 
 
