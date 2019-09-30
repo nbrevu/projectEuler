@@ -1217,7 +1217,16 @@ I'm completely baffled by the results I got from this. Not about the result per 
 
 In the Project Euler forums there are people following clever combinatorial schemes (like, if you find that $1479$ has a chain of $60$, then so does $4971$, and so on). I didn't trust this because I couldn't be sure that permutations aren't fucking with the chains (i.e. if the chain for $1479$ repeats because it eventually gets to $4971$, then the chain for $4971$ doesn't have $60$ elements, but $59$). The brute-forcish approach still gets the result in $1.5$ seconds so it's good enough.
 
+\section{Singular integer right triangles}
+\textbf{Difficulty rating}: 25\%.
 
+\textbf{Solution}: 161667. \textit{Solved: Tue, 11 Aug 2015, 14:37}.
+
+\textbf{Math knowledge used}: Pythagorean triples generation.
+
+\textbf{Programming techniques used}: none.
+
+Oh, come on! How does this have the same difficulty as the mythical problem 66? Ahem.  So, just generate all the triples, and for each one, increase a counter for every multiple of the perimeter found. That is, for $\paren{3,4,5}$ the perimeter is $12$ so we would increase a counter for $12$, $24$, $36\ldots$ Similar to Erathostenes sieve. Then iterate over the counters and note how many of them have been increased exactly one time.
 
 
 
