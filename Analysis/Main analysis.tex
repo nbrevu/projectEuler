@@ -1267,6 +1267,17 @@ P\paren n=\left\{\begin{array}{ll}n<0:&0;\\n=0:&1;\\\mathrm{ otherwise}:&{\displ
 \end{equation*}
 The values $\dfrac{k\paren{3k\pm1}}2$ are those ``generalized pentagonal numbers''. In the end the algorithm has about order $O\paren{n^{3/2}}$ where $n$ is the solution (that sum up to infinity is misleading. When $n$ minus the generalized pentagonal is smaller than $0$, we stop), so it's a bit slow, but still, a third of a second is not too slow.
 
+\section{Passcode derivation}
+\textbf{Difficulty rating}: 5\%.
+
+\textbf{Solution}: 73162890. \textit{Solved: Tue, 11 Aug 2015, 16:37}.
+
+\textbf{Math knowledge used}: none.
+
+\textbf{Programming techniques used}: none.
+
+I have done this by hand in the past, but this time, I felt like writing a program. I actually worked with characters, not with numbers; in fact there is nothing actually mathematical, or arithmetical, about this problem. So, for each character $c$ I kept the list of all the characters that must precede $c$ in the password. This creates a map from character to set of characters, which I then iterate over, choosing at each time any character who has had all its prerequisites already fulfilled (note that this implies that we will create an empty map for the initial character). Runs in about $0.08$ seconds, much more than I had imagined, maybe because the I/O and because of the repeated additions to the maps.
+
 
 
 
