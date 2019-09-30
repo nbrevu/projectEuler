@@ -1191,7 +1191,18 @@ Now, we can calculate all the totients and add them. But there is a wonderful ma
 
 Now, this wonderful function returns $\displaystyle\sum_{n=1}^L\varphi\paren n$, so we need to subtract $\varphi\paren1=1$ to get the final result. But no additional work is needed.
 
+\section{Counting fractions in a range}
+\textbf{Difficulty rating}: 15\%.
 
+\textbf{Solution}: 7295372. \textit{Solved: Tue, 11 Aug 2015, 13:25}.
+
+\textbf{Math knowledge used}: Farey sequences and Stern-Brocot trees.
+
+\textbf{Programming techniques used}: none.
+
+Well. The overview for the problem uses a more complicated structure and gives an algorithm that I swear I've tried, noting that it \textit{doesn't} return the actual solution. Farey sequences are generated like this: if you have $\dfrac ab$ and $\dfrac cd$, the middle term is $\dfrac{a+c}{b+d}$; and Stern-Brocot trees go like this: now that you have these three fractions, repeat the procedure, this time using both $\llave{\dfrac ab,\dfrac{a+c}{b+d}}$ and $\llave{\dfrac{a+c}{b+d},\dfrac cd}$ as limits. This lends naturally to a recursive approach that doesn't work very well because the recursion level is too deep, so I used an explicit stack.
+
+Honestly, Stern-Brocot trees are not that much faster than the obvious approach (iterate denominator from $4$ to $L$; for each one, iterate numerator between $\floor{\dfrac d3}+1$ and $\ceil{\dfrac d2}-1$, included; increase a counter if $\mathrm{gcd}\paren{n,d}=1$). But at least it is faster. I assume that the alternate approaches described in the problem overview would be much faster. If they worked...
 
 
 
