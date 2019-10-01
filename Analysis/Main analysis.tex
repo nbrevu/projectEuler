@@ -502,7 +502,7 @@ The sum of all these values is $S\paren n=16n^2+4n+4$, so the result of the prob
 \begin{equation*}
 1+\sum_{n=1}^N\paren{16n^2+4n+4}=1+4N+4\sum_{n=1}^Nn+16\sum_{n=1}^Nn^2.
 \end{equation*}
-With the Faulhaber formulas for $k=1$ and $2$ we can summarize this result as
+With the Faulhaber formulas for $k=1$ and $2$ we can summarise this result as
 \begin{equation*}
 1+\dfrac{32N^3+60N^2+52N}6.
 \end{equation*}
@@ -767,7 +767,7 @@ Another problem that I don't quite like. It's not like it's super slow or anythi
 
 \textbf{Programming techniques used}: none.
 
-Unlike the previous one, this one has room for mathematical analysis (aside from the trivial reversal of the pentagonal formula). The nice thing here, and something that apparently I hadn't realized the first time I solved this, is that every hexagonal number is also a triangular number! If we plug $2n-1$ in the formula of the triangular numbers we get:
+Unlike the previous one, this one has room for mathematical analysis (aside from the trivial reversal of the pentagonal formula). The nice thing here, and something that apparently I hadn't realised the first time I solved this, is that every hexagonal number is also a triangular number! If we plug $2n-1$ in the formula of the triangular numbers we get:
 \begin{equation*}
 T_{2n-1}=\dfrac{\paren{2n}\paren{2n-1}}2=2n^2-n=H_n.
 \end{equation*}
@@ -847,7 +847,7 @@ By the way, 997651 is the sum of $543$ primes, from $7$ to $3931$ included.
 
 \textbf{Programming techniques used}: combination generator (with and without repetition).
 
-What's that? A whopping 15\% difficulty rating! Quite the leap! Just joking, this is still pretty easy, but Project Euler is finally starting to be Project Euler. I think I also pulverized my own longest loop header, using a five-level nested loop in a single header:
+What's that? A whopping 15\% difficulty rating! Quite the leap! Just joking, this is still pretty easy, but Project Euler is finally starting to be Project Euler. I think I also pulverised my own longest loop header, using a five-level nested loop in a single header:
 \begin{itemize}
 \item First we iterate by total amount of digits. Which goes from $5$ to infinity (fortunately the solution has just $6$).
 \item The second iteration is over the amount of digits present in the ``variable'' group. Thanks to the pigeonhole principle we know that this digit group must have a length multiple of $3$, because otherwise the group of $10$ different candidates will have at least $3$ multiples of $3$ so there will not be $8$ primes.
@@ -937,7 +937,7 @@ Where to start that careful analysis? It seems clear that both the numerator and
 \item $D_{n+1}=B_n-a_nD_n$.
 \item $a_{n+1}=\floor{\dfrac{A_{n+1}\sqrt k+B_{n+1}}{C_{n+1}\sqrt k+D_{n+1}}}$.
 \end{itemize}
-This looks very promising! But... we will encounter precision problems \textit{even a bit before} than with the previous method, because floating point is a bitch. Oh, yes, the values for $A_n$, $B_n$, $C_n$ and $D_n$ will be correct because they use integer arithmetic, by which I mean BigInteger arithmetic. But in order to reduce precision problems regarding $a_n$, we need to rationalize the denominator. So, in order to actually calculate the convergents, we need to change the formula for $a_n$ into this one:
+This looks very promising! But... we will encounter precision problems \textit{even a bit before} than with the previous method, because floating point is a bitch. Oh, yes, the values for $A_n$, $B_n$, $C_n$ and $D_n$ will be correct because they use integer arithmetic, by which I mean BigInteger arithmetic. But in order to reduce precision problems regarding $a_n$, we need to rationalise the denominator. So, in order to actually calculate the convergents, we need to change the formula for $a_n$ into this one:
 \begin{equation*}
 a_n=\floor{\dfrac{\paren{B_nC_n-A_nD_n}\sqrt k+\paren{A_nC_nk-B_nD_n}}{C_n^2k-D_n^2}}.
 \end{equation*}
@@ -1069,7 +1069,7 @@ My existing implementation of continued fractions only allowed periodic ones, i.
 
 THIS. This is it. This is the first actual, real, pure, distilled Project Euler problem. This is where Project Euler finally shows its teeth. And this is the first time I hit a wall. Why? Simple. Because the reason why this is the first real Project Euler problem is that this is the first one where no amount of brute force will get you anywhere. To give context: the value of $x$ is $16421658242965910275055840472270471049$. Yes, that's a $38$ digit number. Good luck waiting for the end of the universe while you find that by brute force.
 
-Now, with the help of convergents, the solution is much easier. In order to solve the equation $x^2-Dy^2=1$, you just need to find the convergents for the square root of $D$, and iterate over all of them until you find some $\dfrac{p_i}{q_i}$ so that $p_i^2-Dq_i^2=1$. If you can generate convergents, which you should thanks to the previous problems, then the algorithm is trivial. Of course, you still need to know about Pell's equation. I didn't and that's why I hit a wall. Then I read a hint randomly in another problem's thread (I don't even remember which one). And that's when I realized that Project Euler was much deeper, and much more fun, than I initially had thought. This is, in a very real sense, the problem that got me actually hooked.
+Now, with the help of convergents, the solution is much easier. In order to solve the equation $x^2-Dy^2=1$, you just need to find the convergents for the square root of $D$, and iterate over all of them until you find some $\dfrac{p_i}{q_i}$ so that $p_i^2-Dq_i^2=1$. If you can generate convergents, which you should thanks to the previous problems, then the algorithm is trivial. Of course, you still need to know about Pell's equation. I didn't and that's why I hit a wall. Then I read a hint randomly in another problem's thread (I don't even remember which one). And that's when I realised that Project Euler was much deeper, and much more fun, than I initially had thought. This is, in a very real sense, the problem that got me actually hooked.
 
 \section{Maximum path sum II}
 \textbf{Difficulty rating}: 5\%.
@@ -1130,7 +1130,7 @@ This is super useful because it means that the quotient we are looking for depen
 
 \textbf{Programming techniques used}: none.
 
-Unlink in the previous case, we want to maximize the quotient, so we need few primes and as big as possible. However:
+Unlike in the previous case, we want to maximise the quotient, so we need few primes and as big as possible. However:
 \begin{itemize}
 \item The result can't be a prime because $p$ and $p-1$ will never be an anagram.
 \item It also can't be $p^2$ because if $p$ is prime then $\varphi\paren{p^2}=p^2-p$ and since $p$ is not a multiple of $9$ then $p^2\not\equiv\varphi\paren{p^2}$ (mod $9$), so $p^2$ can't be an anagram of $\varphi\paren{p^2}$.
@@ -1255,17 +1255,17 @@ Very similar to the previous one, with a small twist. Still calculated with a 2D
 
 \textbf{Solution}: 55374. \textit{Solved: Tue, 11 Aug 2015, 16:26}.
 
-\textbf{Math knowledge used}: partition function, generalized pentagonal numbers.
+\textbf{Math knowledge used}: partition function, generalised pentagonal numbers.
 
 \textbf{Programming techniques used}: memoization.
 
-No wonder this has a whooping $30\%$ difficulty rating: this can't be done using brute force, plus the formula to calculate the result is, well, relatively obscure. In a sense, this is the opposite of problem 66: for that one, the previous problems were centered about a technique (continued fractions and convergents) that appeared to be unrelated but ended being fundamental to the solution. In this case we have the opposite: leading problems that seem to be similar, but then the knowledge required for this one changes completely. To be fair, dynamic programming could work, but it's harder to get it right, especially considering that there is no limit. However, there is a formula using generalized pentagonal numbers, which is what I used.
+No wonder this has a whooping $30\%$ difficulty rating: this can't be done using brute force, plus the formula to calculate the result is, well, relatively obscure. In a sense, this is the opposite of problem 66: for that one, the previous problems were centered about a technique (continued fractions and convergents) that appeared to be unrelated but ended being fundamental to the solution. In this case we have the opposite: leading problems that seem to be similar, but then the knowledge required for this one changes completely. To be fair, dynamic programming could work, but it's harder to get it right, especially considering that there is no limit. However, there is a formula using generalised pentagonal numbers, which is what I used.
 
 The formula is the following: if $P\paren n$ are the partitions of $n$, then:
 \begin{equation*}
 P\paren n=\left\{\begin{array}{ll}n<0:&0;\\n=0:&1;\\\mathrm{ otherwise}:&{\displaystyle\sum_{k=1}^\infty}\paren{-1}^{k-1}\paren{P\paren{n-\frac{k\paren{3k-1}}2}+P\paren{n-\frac{k\paren{3k+1}}2}}.\end{array}\right.
 \end{equation*}
-The values $\dfrac{k\paren{3k\pm1}}2$ are those ``generalized pentagonal numbers''. In the end the algorithm has about order $O\paren{n^{3/2}}$ where $n$ is the solution (that sum up to infinity is misleading. When $n$ minus the generalized pentagonal is smaller than $0$, we stop), so it's a bit slow, but still, a third of a second is not too slow.
+The values $\dfrac{k\paren{3k\pm1}}2$ are those ``generalised pentagonal numbers''. In the end the algorithm has about order $O\paren{n^{3/2}}$ where $n$ is the solution (that sum up to infinity is misleading. When $n$ minus the generalised pentagonal is smaller than $0$, we stop), so it's a bit slow, but still, a third of a second is not too slow.
 
 \section{Passcode derivation}
 \textbf{Difficulty rating}: 5\%.
@@ -1309,6 +1309,21 @@ Since $\ceil{\log_2\paren{100\log_210}}=8$, that's the amount of iterations to u
 \textbf{Programming techniques used}: dynamic programming.
 
 This is basically a rehash of problems $18$ and $67$. The minimal path to each point equals the value of the current cell, plus the minimum of the minimal paths to the cells directly up and to the left.
+
+\section{Path sum: three ways}
+\textbf{Difficulty rating}: 20\%.
+
+\textbf{Solution}: 260324. \textit{Solved: Tue, 11 Aug 2015, 22:24}.
+
+\textbf{Math knowledge used}: none.
+
+\textbf{Programming techniques used}: dynamic programming.
+
+The approach is basically the same as in the previous case, but column by column. We start by initialising the first column, then for each one of the following, we initialise the values with the sum to the left plus the value in this cell, and then we follow an iterative process where each cell can be updated with the contents directly upwards or downwards (plus the current cell value, of course) if that's less than the current sum. It finishes quickly, in about $50$ms.
+
+Also, it appears that the file for this problem is the same one as the previous one.
+
+
 
 
 
