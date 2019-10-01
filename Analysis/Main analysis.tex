@@ -1278,7 +1278,26 @@ The values $\dfrac{k\paren{3k\pm1}}2$ are those ``generalized pentagonal numbers
 
 I have done this by hand in the past, but this time, I felt like writing a program. I actually worked with characters, not with numbers; in fact there is nothing actually mathematical, or arithmetical, about this problem. So, for each character $c$ I kept the list of all the characters that must precede $c$ in the password. This creates a map from character to set of characters, which I then iterate over, choosing at each time any character who has had all its prerequisites already fulfilled (note that this implies that we will create an empty map for the initial character). Runs in about $0.08$ seconds, much more than I had imagined, maybe because the I/O and because of the repeated additions to the maps.
 
+\section{Square root digital expansion}
+\textbf{Difficulty rating}: 20\%.
 
+\textbf{Solution}: 40886. \textit{Solved: Tue, 11 Aug 2015, 16:44}.
+
+\textbf{Math knowledge used}: none.
+
+\textbf{Programming techniques used}: none.
+
+I can't fucking believe that this program is rated $20\%$. A lot of maths-oriented or otherwise high level programming languages offer arbitrary precision decimals as a basic feature, so I expected most people to solve this using a lazy predefined call.
+
+What I did was the following: for each number $A$, at each time I have an approximation of the square root as a fraction: $\sqrt A\approx\dfrac nd$. This means that $\abs{\sqrt A-\dfrac nd}<1$, meaning that if I square the left term, I will get something in the range $\corch{0,1}$, and with a smaller absolute value, i.e., reducing the error. So the next approximation comes from this:
+\begin{equation*}
+\paren{\sqrt A-\dfrac nd}^2\approx0\Rightarrow A-\dfrac{2n\sqrt A}d+\dfrac{n^2}{d^2}\approx 0\Rightarrow\sqrt A\approx\dfrac d{2n}\paren{A+\dfrac{n^2}{d^2}}=\dfrac{Ad^2+n^2}{2nd}.
+\end{equation*}
+When do we need to stop iterating? Ok, let's be a bit clever. Let's say that $x=\floor{\sqrt A}$. If, say, $A=\paren{x+1}^2-1$, then $\sqrt A-x$ is almost 1, so by squaring it we get something that is also close to $1$, i.e. the iterations will converge slowly. Not good. In this case, we would be much better served by starting with $x+1$. In fact, it's quite easy to see that there is some value $y\in\paren{x^2,\paren{x+1}^2}$ so that for smaller values we should use $x$ as first approximation, and for bigger values we should use $x+1$. The tipping point should be around $\paren{x+0.5}^2=x^2+x+0.25$. Well, simple enough, right? This suggests the usage of $\floor{\sqrt A}=x$ if $x\paren{x+1}\leq A$, and $\ceil{\sqrt A}=x+1$ otherwise. This guarantees that $\abs{\sqrt A-x}<\dfrac12$, which is wonderful because at each step we square that error. This means that after $n$ steps the error is $\dfrac1{2^{2^n}}$. We need this to be smaller than $10^{-100}$, so
+\begin{equation*}
+2^{2^n}>10^{100}\Rightarrow2^n\log2>100\log10\Rightarrow n>\log_2\paren{100\log_210}.
+\end{equation*}
+Since $\ceil{\log_2\paren{100\log_210}}=8$, that's the amount of iterations to use.
 
 
 
