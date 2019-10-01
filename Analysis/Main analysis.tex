@@ -1299,7 +1299,16 @@ When do we need to stop iterating? Ok, let's be a bit clever. Let's say that $x=
 \end{equation*}
 Since $\ceil{\log_2\paren{100\log_210}}=8$, that's the amount of iterations to use.
 
+\section{Path sum: two ways}
+\textbf{Difficulty rating}: 10\%.
 
+\textbf{Solution}: 427337. \textit{Solved: Tue, 11 Aug 2015, 22:05}.
+
+\textbf{Math knowledge used}: none.
+
+\textbf{Programming techniques used}: dynamic programming.
+
+This is basically a rehash of problems $18$ and $67$. The minimal path to each point equals the value of the current cell, plus the minimum of the minimal paths to the cells directly up and to the left.
 
 
 
