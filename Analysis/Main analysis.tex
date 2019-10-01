@@ -1323,6 +1323,19 @@ The approach is basically the same as in the previous case, but column by column
 
 Also, it appears that the file for this problem is the same one as the previous one.
 
+\section{Path sum: four ways}
+\textbf{Difficulty rating}: 25\%.
+
+\textbf{Solution}: 425185. \textit{Solved: Tue, 11 Aug 2015, 23:08}.
+
+\textbf{Math knowledge used}: none.
+
+\textbf{Programming techniques used}: dynamic programming.
+
+The approach for this problem mixes the one from the two previous ones. First we initialise the 2D matrix with blatantly copypasted code from problem 81 (this provides a sensible first approximation using dynamic programming), and then, for each cell in the whole matrix, we try to update the current value with its four neighbours, same as in the previous problem (where only three were used). And we finish when a whole iteration doesn't update any value.
+
+Again, the in file is the same as in the previous problems.
+
 
 
 
