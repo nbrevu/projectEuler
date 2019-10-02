@@ -1355,7 +1355,20 @@ Finally, the equation $M'x'=v$ is solvable, and yes I used gaussian elimination 
 
 Now, this gets me the right solution for both the $6$-sided case ($102400$) and the $4$-sided case ($101524$). So far so good. However, the probabilities I'm getting are NOT the same that the problem gives. I'm sure it has to do something with the fucking ``3rd double, go to jail'' rule (which I didn't expect to be meaningful), but that would require a more complicated analysis and frankly I'm not bothering. The analysis, roughly, would require a $120\times120$ matrix, and the current state would be determined by the pair (current square, amount of doubles). The solution would require some additional post-processing in order to condense the three instances of each square in the final vector.
 
+\section{Counting rectangles}
+\textbf{Difficulty rating}: 15\%.
 
+\textbf{Solution}: 2772. \textit{Solved: Tue, 11 Aug 2015, 23:20}.
+
+\textbf{Math knowledge used}: triangular numbers.
+
+\textbf{Programming techniques used}: none.
+
+This is much easier than the previous one. The trick here is that the sides of the rectangle can be counted ``orthogonally''. That is: given a rectangle with $R$ rows, independently of the columns, we will have $R$ combinations which are one row thick, $R-1$ combinations which are two rows thick, and so on, up to $1$ combination with all the rows. And for the columns we have the same, orthogonal to the rows. This means that we have $T\paren RT\paren C$ cases, where $T\paren i$ denotes the triangular number $i$. This means that we can iterate over triangular numbers, looking for the best approximation product.
+
+The best way to iterate is this: iterate over one dimension, from $1$ to $\infty$. For that dimension, get the closest triangular index, $k=T^{-1}\paren{\floor{\dfrac{2000000}{T\paren i}}}$ (where $T^{-1}\paren i=\floor{\dfrac{-1+\sqrt{8i+1}}2}$ is the inverse triangular number function), and iterate from $k$ up to the first value $l$ so that $T\paren iT\paren l$ exceeds $200000$. Which should be about $2$ values of $k$ for each $i$, i.e. very fast.
+
+We only need to iterate up to $i=53$ since $T\paren{53}^2>2000000$. The best solution is found for a $36\cdot77$ rectangle, because $T\paren{36}=666$ and $T\paren{77}=3003$, giving an area of $1999998$.
 
 
 
