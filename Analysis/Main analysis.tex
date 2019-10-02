@@ -1355,6 +1355,16 @@ Finally, the equation $M'x'=v$ is solvable, and yes I used gaussian elimination 
 
 Now, this gets me the right solution for both the $6$-sided case ($102400$) and the $4$-sided case ($101524$). So far so good. However, the probabilities I'm getting are NOT the same that the problem gives. I'm sure it has to do something with the fucking ``3rd double, go to jail'' rule (which I didn't expect to be meaningful), but that would require a more complicated analysis and frankly I'm not bothering. The analysis, roughly, would require a $120\times120$ matrix, and the current state would be determined by the pair (current square, amount of doubles). The solution would require some additional post-processing in order to condense the three instances of each square in the final vector.
 
+UPDATE: it wasn't so complicated to solve the $120\times120$ problem. I'm getting the right probabilities for the $6$ sided dice (although I would have normalized the $3.095\ldots$ for the $00$ square as $3.10$, not $3.09$. Perhaps this is still wrong?), and the least probable square, barring the impossible square $30$, is square $07$ with a measly $0.86\%$ probability; the least probable non-card square is square $01$ with a probability of $2.13\%$. And for $4$ sided dice I'm getting these results:
+\begin{itemize}
+\item $P=7.02\%$ for square $10$.
+\item $P=3.62\%$ for square $15$.
+\item $P=3.29\%$ for square $24$.
+\item The fourth most probable square is square $16$ with $P=3.22\%$.
+\item The least probable square (except the trivial $P\paren{30}=0\%$) is square $07$ with $P=0.775\%$.
+\item The least probable non-card square is square $01$, with $P=1.76\%$.
+\end{itemize}
+
 \section{Counting rectangles}
 \textbf{Difficulty rating}: 15\%.
 
