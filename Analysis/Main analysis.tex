@@ -285,7 +285,7 @@ Just a rehash of problem 8, more complicated because there are a lot more lines 
 
 \textbf{Programming techniques used}: none.
 
-Very easy. For each $N\geq2$, get the prime factorization of both $N-1$ and $N$, combine them, then remove a $2$. Count the amount of divisors of the resulting number, and if it's greater than the limit, return the number $\dfrac{N\paren{N-1}}2$. All of this can be reliably done with my DivisorHolder class that keeps the factorization using an IntIntMap.
+Very easy. For each $N\geq2$, get the prime factorisation of both $N-1$ and $N$, combine them, then remove a $2$. Count the amount of divisors of the resulting number, and if it's greater than the limit, return the number $\dfrac{N\paren{N-1}}2$. All of this can be reliably done with my DivisorHolder class that keeps the factorisation using an IntIntMap.
 
 By the way, the answer comes from $N=12376$, i.e. from $T\paren{12375}$. $12375=3^2\cdot5^3\cdot11$ and $12376=2^3\cdot7\cdot13\cdot17$, so the resulting triangular number is $2^2\cdot3^2\cdot5^3\cdot7\cdot11\cdot13\cdot17$, which has $3\cdot3\cdot4\cdot2\cdot2\cdot2\cdot2=576$ divisors.
 
@@ -309,9 +309,9 @@ In most Project Euler problems, and that includes this one, the usage of BigInte
 
 \textbf{Math knowledge used}: none.
 
-\textbf{Programming techniques used}: memoization.
+\textbf{Programming techniques used}: memoisation.
 
-This can be done without memoization, but it's super slow. With memoization, it takes less than half a second, which is much more than anything before this problem but it's still short and sweet.
+This can be done without memoisation, but it's super slow. With memoisation, it takes less than half a second, which is much more than anything before this problem but it's still short and sweet.
 
 \section{Lattice paths}
 \textbf{Difficulty rating}: 5\%.
@@ -394,7 +394,7 @@ Similar to problem 16, but even more simple because there is no binary exponenti
 
 \textbf{Math knowledge used}: ``first prime'' Erathostenes sieve (for divisor generation), divisor sum properties.
 
-\textbf{Programming techniques used}: memoization.
+\textbf{Programming techniques used}: memoisation.
 
 The formula I've listed under ``divisor sum properties'' is the following: if a number's prime decomposition is
 \begin{equation*}
@@ -480,7 +480,7 @@ The keys to this algorithm are two: the first one is that the period length of $
 
 \textbf{Programming techniques used}: none.
 
-The only useful insight for this problem is that $b$ has to be a prime, otherwise of course we don't get any prime because for $n=0$ the polynomial doesn't yield a prime and we stop immediately. Also, once this is taken care of, we can start the iterations from $n=1$ instead of $n=0$ since of course we got a prime for $n=0$. This shaves some... nanoseconds? from the run time. Another nano-optimization is calculating the polynomial value by incrementing the previous value in $2n+a-1$, instead of calculating the complete value each time. Aside from all that swill, this is just iterating over $\corch{-L\ldots L}$ for $a$, and over the primes smaller than $L$ for $b$, and then calculating the polynomial values. By the way, the solution is reached for $a=-61$, $b=971$, for a total of $71$ primes.
+The only useful insight for this problem is that $b$ has to be a prime, otherwise of course we don't get any prime because for $n=0$ the polynomial doesn't yield a prime and we stop immediately. Also, once this is taken care of, we can start the iterations from $n=1$ instead of $n=0$ since of course we got a prime for $n=0$. This shaves some... nanoseconds? from the run time. Another nano-optimisation is calculating the polynomial value by incrementing the previous value in $2n+a-1$, instead of calculating the complete value each time. Aside from all that swill, this is just iterating over $\corch{-L\ldots L}$ for $a$, and over the primes smaller than $L$ for $b$, and then calculating the polynomial values. By the way, the solution is reached for $a=-61$, $b=971$, for a total of $71$ primes.
 
 \section{Number spiral diagonals}
 \textbf{Difficulty rating}: 5\%.
@@ -981,7 +981,7 @@ Easy, but fun. The idea is that the english text will contain the string ``the''
 
 \textbf{Math knowledge used}: Erathostenes sieve and Miller-Rabin primality test.
 
-\textbf{Programming techniques used}: dynamic programming/memoization (sort of).
+\textbf{Programming techniques used}: dynamic programming/memoisation (sort of).
 
 I find that $20\%$ quite reasonable. It's not like this is a super difficult method, but it's tricky to get it right, there is no obvious solution (no, the solution is not the one for $4$ primes plus an additional one) and getting it efficiently can be a challenge. I used a complicated structure with trees where for each prime I stored possible combinations of less than $5$ primes verifying the conditions. For each prime, and for $n\in\llave{0,3}$, I have a tree storing the combinations including the prime and $n$ additional numbers. So, each time I add a prime, I need to traverse the structure for each prime less than the one given, and if I can traverse successfully a tree of level $3$, then I can add the three associated numbers, plus the prime ``owner'' of the tree, plus the prime we're currently iterating. It's a bit weird but it's efficient and the code is not that complicated.
 
@@ -1211,9 +1211,9 @@ Honestly, Stern-Brocot trees are not that much faster than the obvious approach 
 
 \textbf{Math knowledge used}: none.
 
-\textbf{Programming techniques used}: memoization.
+\textbf{Programming techniques used}: memoisation.
 
-I'm completely baffled by the results I got from this. Not about the result per se, but about the time. Initially I copied my old C++ implementation. It uses a cache for the next number at each step, an int array of length $9\cdot9!$. Super slow. Ok, let's be clever and find the highest number that does get visited. It's something like $2170000$. Let's use the cache just up to that number. $33$ seconds, $32$ of which go to the initialization? WOW. What if I used an IntIntMap (i.e. a lazy cache)? Down to less than $1.5$ seconds. This is pretty crazy. Hail IntIntMap.
+I'm completely baffled by the results I got from this. Not about the result per se, but about the time. Initially I copied my old C++ implementation. It uses a cache for the next number at each step, an int array of length $9\cdot9!$. Super slow. Ok, let's be clever and find the highest number that does get visited. It's something like $2170000$. Let's use the cache just up to that number. $33$ seconds, $32$ of which go to the initialisation? WOW. What if I used an IntIntMap (i.e. a lazy cache)? Down to less than $1.5$ seconds. This is pretty crazy. Hail IntIntMap.
 
 In the Project Euler forums there are people following clever combinatorial schemes (like, if you find that $1479$ has a chain of $60$, then so does $4971$, and so on). I didn't trust this because I couldn't be sure that permutations aren't fucking with the chains (i.e. if the chain for $1479$ repeats because it eventually gets to $4971$, then the chain for $4971$ doesn't have $60$ elements, but $59$). The brute-forcish approach still gets the result in $1.5$ seconds so it's good enough.
 
@@ -1257,7 +1257,7 @@ Very similar to the previous one, with a small twist. Still calculated with a 2D
 
 \textbf{Math knowledge used}: partition function, generalised pentagonal numbers.
 
-\textbf{Programming techniques used}: memoization.
+\textbf{Programming techniques used}: memoisation.
 
 No wonder this has a whooping $30\%$ difficulty rating: this can't be done using brute force, plus the formula to calculate the result is, well, relatively obscure. In a sense, this is the opposite of problem 66: for that one, the previous problems were centered about a technique (continued fractions and convergents) that appeared to be unrelated but ended being fundamental to the solution. In this case we have the opposite: leading problems that seem to be similar, but then the knowledge required for this one changes completely. To be fair, dynamic programming could work, but it's harder to get it right, especially considering that there is no limit. However, there is a formula using generalised pentagonal numbers, which is what I used.
 
@@ -1351,7 +1351,7 @@ The analysis starts from a transition matrix. In order to generate the transitio
 
 So we have the transition matrix $M$. The Markov chain theory says that the vector of steady state probabilities, which is what we want, verifies $x^TM=x^T$. That's slightly unusual, but if we transpose the matrix, we get $M^Tx=x$. Which means $\paren{M^T-I}x=0$. That's good, except for the problematic fact that this is an indeterminate system (specifically, $M^T-I$ is singular). We want a particular solution that verifies $\sum_ix_i=1$, but we can get it from any solution that verifies $\sum_ix_i\neq0$. Then, we force the last member of $x$ to $1$, and by doing that we transform the equation into $M'x'=v$, where $M'$ is the result of removing the last row and last column of $M^T-I$, $x'$ is $x$ without the last element, and $v$ is the remainder after assigning $x_{40}=1$: the last column of $M^T-I$ (minus the last element), negated.
 
-Finally, the equation $M'x'=v$ is solvable, and yes I used gaussian elimination in Java because why not. So we get the solution $x'$, append the $x_{40}=1$, and divide by $\sum_ix_i$ to get a normalized solution. Then we search for the three squares with highest probability, and done.
+Finally, the equation $M'x'=v$ is solvable, and yes I used gaussian elimination in Java because why not. So we get the solution $x'$, append the $x_{40}=1$, and divide by $\sum_ix_i$ to get a normalised solution. Then we search for the three squares with highest probability, and done.
 
 Now, this gets me the right solution for both the $6$-sided case ($102400$) and the $4$-sided case ($101524$). So far so good. However, the probabilities I'm getting are NOT the same that the problem gives. I'm sure it has to do something with the fucking ``3rd double, go to jail'' rule (which I didn't expect to be meaningful), but that would require a more complicated analysis and frankly I'm not bothering. The analysis, roughly, would require a $120\times120$ matrix, and the current state would be determined by the pair (current square, amount of doubles). The solution would require some additional post-processing in order to condense the three instances of each square in the final vector.
 
@@ -1370,6 +1370,18 @@ The best way to iterate is this: iterate over one dimension, from $1$ to $\infty
 
 We only need to iterate up to $i=53$ since $T\paren{53}^2>2000000$. The best solution is found for a $36\cdot77$ rectangle, because $T\paren{36}=666$ and $T\paren{77}=3003$, giving an area of $1999998$.
 
+\section{Counting rectangles}
+\textbf{Difficulty rating}: 35\%.
+
+\textbf{Solution}: 1818. \textit{Solved: Tue, 11 Aug 2015, 23:31}.
+
+\textbf{Math knowledge used}: none.
+
+\textbf{Programming techniques used}: none.
+
+Given three lengths, $x$, $y$, $z$, we are looking for the point $p$ that minimises the sum of $\sqrt{x^2+p^2}+\sqrt{\paren{y-p}^2+z^2}$. There's no need to derive! By ``folding'' the side where the middle intersection point is, so that both sides become a plane, it can be seen that the three possible minimal paths will be $\sqrt{a^2+\paren{b+c}^2}$ where $\paren{a,b,c}$ are the sides in no particular order. It can be proven that the shortest route appears when $a=z$ (assuming $x\leq y\leq z$), and this gives enough information to create an algorithm: we iterate from $z=1$ upwards, and then we use a variable for $x+y$. We iterate that from $2$ to $2z$, and if $z^2+\paren{x+y}^2$ is a perfect square, then we can count $\floor{\dfrac{x+y}2}$ solutions if $x+y<z$, or $\floor{\dfrac{z+2-\paren{x+y}}2}$ otherwise. We keep counting until for some $z$ we exceed the count of one million, and then we return $z$.
+
+As a further optimisation, we can start iterating $z$ from $3$ and $x+y$ from $4$, since there are no pythagorean triangles whose sides are smaller than $3$.
 
 
 \end{document}
