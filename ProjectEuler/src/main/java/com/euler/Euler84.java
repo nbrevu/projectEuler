@@ -16,12 +16,27 @@ public class Euler84 {
 	private final static IntSet CC=HashIntSets.newImmutableSetOf(2,17,33);
 	private final static IntSet CH=HashIntSets.newImmutableSetOf(7,22,36);
 	
-	private static double[][] getBaseMatrix(IntDoubleMap diceAdvances)	{
-		double[][] result=new double[40][40];
-		IntDoubleCursor cursor=diceAdvances.cursor();
-		while (cursor.moveNext()) for (int i=0;i<40;++i)	{
-			int nextSquare=(i+cursor.key())%40;
-			result[i][nextSquare]=cursor.value();
+	private final static int SQUARES=40;
+	private final static int MAX_DOUBLES=3;
+	private final static int STATES=MAX_DOUBLES*SQUARES;
+	private final static int DIE_SIDES=4;
+	
+	private static double[][] getBaseMatrix(IntDoubleMap baseAdvances,IntDoubleMap doubleAdvances)	{
+		double[][] result=new double[STATES][STATES];
+		for (int n=0;n<MAX_DOUBLES;++n) for (int i=0;i<SQUARES;++i)	{
+			int index=SQUARES*n+i;
+			IntDoubleCursor cursor=baseAdvances.cursor();
+			while (cursor.moveNext())	{
+				int nextSquare=(i+cursor.key())%SQUARES;
+				result[index][nextSquare]=cursor.value();
+			}
+			IntDoubleCursor doubleCursor=doubleAdvances.cursor();
+			if (n>=2) while (doubleCursor.moveNext()) result[index][10]+=doubleCursor.value();
+			else while (doubleCursor.moveNext())	{
+				int nextSquare=(i+doubleCursor.key())%SQUARES;
+				nextSquare+=SQUARES*(n+1);
+				result[index][nextSquare]=doubleCursor.value();
+			}
 		}
 		return result;
 	}
@@ -29,55 +44,55 @@ public class Euler84 {
 	private static int nextR(int current)	{
 		int mod=current%10;
 		int toAdvance=((mod<5)?5:15)-mod;
-		return (current+toAdvance)%40;
+		return (current+toAdvance)%SQUARES;
 	}
 	
 	private static int nextU(int current)	{
 		return ((current>12)&&(current<28))?28:12;
 	}
 	
-	private static void applySpecialRules(double[][] matrix)	{
+	private static void applySpecialRules(double[][] matrix,int offsetM,int offsetN)	{
 		// G2J
-		for (int i=0;i<40;++i) if (matrix[i][30]!=0)	{
-			matrix[i][10]+=matrix[i][30];
-			matrix[i][30]=0;
+		for (int i=0;i<SQUARES;++i) if (matrix[offsetM+i][offsetN+30]!=0)	{
+			matrix[offsetM+i][offsetN+10]+=matrix[offsetM+i][offsetN+30];
+			matrix[offsetM+i][offsetN+30]=0;
 		}
 		// CH
 		IntCursor chCursor=CH.cursor();
-		while (chCursor.moveNext()) for (int i=0;i<40;++i) if (matrix[i][chCursor.elem()]!=0)	{
-			double sixteenth=matrix[i][chCursor.elem()]/16;
-			matrix[i][0]+=sixteenth;
-			matrix[i][10]+=sixteenth;
-			matrix[i][11]+=sixteenth;
-			matrix[i][24]+=sixteenth;
-			matrix[i][39]+=sixteenth;
-			matrix[i][5]+=sixteenth;
-			matrix[i][nextR(chCursor.elem())]+=2*sixteenth;
-			matrix[i][nextU(chCursor.elem())]+=sixteenth;
-			matrix[i][(chCursor.elem()+37)%40]+=sixteenth;
-			matrix[i][chCursor.elem()]-=10*sixteenth;
+		while (chCursor.moveNext()) for (int i=0;i<SQUARES;++i) if (matrix[offsetM+i][offsetN+chCursor.elem()]!=0)	{
+			double sixteenth=matrix[offsetM+i][offsetN+chCursor.elem()]/16;
+			matrix[offsetM+i][offsetN]+=sixteenth;
+			matrix[offsetM+i][offsetN+10]+=sixteenth;
+			matrix[offsetM+i][offsetN+11]+=sixteenth;
+			matrix[offsetM+i][offsetN+24]+=sixteenth;
+			matrix[offsetM+i][offsetN+39]+=sixteenth;
+			matrix[offsetM+i][offsetN+5]+=sixteenth;
+			matrix[offsetM+i][offsetN+nextR(chCursor.elem())]+=2*sixteenth;
+			matrix[offsetM+i][offsetN+nextU(chCursor.elem())]+=sixteenth;
+			matrix[offsetM+i][offsetN+((chCursor.elem()+SQUARES-3)%SQUARES)]+=sixteenth;
+			matrix[offsetM+i][offsetN+chCursor.elem()]-=10*sixteenth;
 		}
 		// CC
 		IntCursor ccCursor=CC.cursor();
-		while (ccCursor.moveNext()) for (int i=0;i<40;++i) if (matrix[i][ccCursor.elem()]!=0)	{
-			double sixteenth=matrix[i][ccCursor.elem()]/16;
-			matrix[i][0]+=sixteenth;
-			matrix[i][10]+=sixteenth;
-			matrix[i][ccCursor.elem()]-=2*sixteenth;
+		while (ccCursor.moveNext()) for (int i=0;i<SQUARES;++i) if (matrix[offsetM+i][offsetN+ccCursor.elem()]!=0)	{
+			double sixteenth=matrix[offsetM+i][offsetN+ccCursor.elem()]/16;
+			matrix[offsetM+i][offsetN]+=sixteenth;
+			matrix[offsetM+i][offsetN+10]+=sixteenth;
+			matrix[offsetM+i][offsetN+ccCursor.elem()]-=2*sixteenth;
 		}
 	}
 	
+	private static void applySpecialRules(double[][] matrix)	{
+		for (int m=0;m<STATES;m+=SQUARES) for (int n=0;n<STATES;n+=SQUARES) applySpecialRules(matrix,m,n);
+	}
+	
 	private static Pair<double[][],double[]> getLinearProblem(double[][] baseTransitionMatrix)	{
-		/*
-		 * Assumes P(39)=1 and creates a deterministic problem (the original matrix, after subtracting 1 to the main diagonal,
-		 * has infinite solutions including all zeros).
-		 */
-		double[][] matrix=new double[39][39];
-		double[] vector=new double[39];
-		for (int i=0;i<39;++i)	{
-			for (int j=0;j<39;++j) matrix[i][j]=baseTransitionMatrix[j][i];
+		double[][] matrix=new double[STATES-1][STATES-1];
+		double[] vector=new double[STATES-1];
+		for (int i=0;i<STATES-1;++i)	{
+			for (int j=0;j<STATES-1;++j) matrix[i][j]=baseTransitionMatrix[j][i];
 			matrix[i][i]-=1.0;
-			vector[i]=-baseTransitionMatrix[39][i];
+			vector[i]=-baseTransitionMatrix[STATES-1][i];
 		}
 		return new Pair<>(matrix,vector);
 	}
@@ -86,7 +101,7 @@ public class Euler84 {
 		int N=matrix.length;
 		for (int i=0;i<N;++i)	{
 			double pivot=matrix[i][i];
-			if (pivot==0) throw new RuntimeException("I should exchange rows here. But let's assume this doesn't happen.");
+			if (pivot==0) throw new RuntimeException("I should exchange rows here. But let's assume this doesn't happen!");
 			for (int j=i+1;j<N;++j) matrix[i][j]/=pivot;
 			vector[i]/=pivot;
 			matrix[i][i]=1;
@@ -105,38 +120,28 @@ public class Euler84 {
 	private static double[] getTrueSolution(double[] in)	{
 		double sum=1;	// The 40th element, assumed to be 1.
 		for (int i=0;i<in.length;++i) sum+=in[i];
-		double[] result=new double[1+in.length];
-		for (int i=0;i<in.length;++i) result[i]=in[i]/sum;
-		result[in.length]=1/sum;
+		double[] expanded=new double[1+in.length];
+		for (int i=0;i<in.length;++i) expanded[i]=in[i]/sum;
+		expanded[in.length]=1/sum;
+		double[] result=new double[SQUARES];
+		for (int i=0;i<SQUARES;++i) for (int j=0;j<MAX_DOUBLES;++j) result[i]+=expanded[SQUARES*j+i];
 		return result;
 	}
 	
-	private static IntDoubleMap getDieConfiguration(int howManySides)	{
-		IntDoubleMap result=HashIntDoubleMaps.newMutableMap();
-		double baseProb=1d/(double)howManySides;
-		for (int i=1;i<=howManySides;++i) result.put(i,baseProb);
-		return result;
-	}
-	
-	private static IntDoubleMap addDie(IntDoubleMap currentConfiguration,IntDoubleMap die)	{
-		IntDoubleMap result=HashIntDoubleMaps.newMutableMap();
-		IntDoubleCursor cursor1=currentConfiguration.cursor();
-		while (cursor1.moveNext())	{
-			IntDoubleCursor cursor2=die.cursor();
-			while (cursor2.moveNext())	{
-				int position=cursor1.key()+cursor2.key();
-				double prob=cursor1.value()*cursor2.value();
-				result.compute(position,(int currentKey,double currentValue)->currentValue+prob);
+	private static Pair<IntDoubleMap,IntDoubleMap> get2DiceConfiguration(int sides)	{
+		IntDoubleMap baseResult=HashIntDoubleMaps.newMutableMap();
+		IntDoubleMap doubleResult=HashIntDoubleMaps.newMutableMap();
+		double baseProb=1d/(sides*sides);
+		int s2=sides*2;
+		for (int i=2;i<=s2;++i)	{
+			int cases=(i<=sides)?(i-1):(s2+1-i);
+			if ((i%2)==0)	{
+				doubleResult.put(i,baseProb);
+				--cases;
 			}
+			if (cases>0) baseResult.put(i,cases*baseProb);
 		}
-		return result;
-	}
-	
-	private static IntDoubleMap getDiceConfiguration(int howManyDice,int howManySides)	{
-		IntDoubleMap result=HashIntDoubleMaps.newImmutableMapOf(0,1d);
-		IntDoubleMap singleDie=getDieConfiguration(howManySides);
-		for (int i=0;i<howManyDice;++i) result=addDie(result,singleDie);
-		return result;
+		return new Pair<>(baseResult,doubleResult);
 	}
 	
 	private static class Square implements Comparable<Square>	{
@@ -162,8 +167,8 @@ public class Euler84 {
 	}
 	
 	private static String solve()	{
-		IntDoubleMap diceConfiguration=getDiceConfiguration(2,4);
-		double[][] baseMatrix=getBaseMatrix(diceConfiguration);
+		Pair<IntDoubleMap,IntDoubleMap> diceConfiguration=get2DiceConfiguration(DIE_SIDES);
+		double[][] baseMatrix=getBaseMatrix(diceConfiguration.first,diceConfiguration.second);
 		applySpecialRules(baseMatrix);
 		Pair<double[][],double[]> linearProblem=getLinearProblem(baseMatrix);
 		double[][] matrix=linearProblem.first;
