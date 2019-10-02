@@ -1393,5 +1393,18 @@ Given three lengths, $x$, $y$, $z$, we are looking for the point $p$ that minimi
 
 As a further optimisation, we can start iterating $z$ from $3$ and $x+y$ from $4$, since there are no pythagorean triangles whose sides are smaller than $3$.
 
+\section{Prime power triples}
+\textbf{Difficulty rating}: 20\%.
+
+\textbf{Solution}: 1097343. \textit{Solved: Tue, 11 Aug 2015, 23:44}.
+
+\textbf{Math knowledge used}: none.
+
+\textbf{Programming techniques used}: none.
+
+I can't believe that this has a $20\%$ rating. I assume that people started deserting once they thad to battle with $66$ or $84$. So: generate primes up to $\sqrt L$. Generate their squares, their cubes and their fourth powers (in each case, stop when you get to $L$). Then use a doubly nested loop (i.e. three levels) to sum squares, cubes and fourths. Use a set or a boolean array, whatever you prefer. Then count the size of the set and/or the amount of set numbers in the array. End! Very easy.
+
+
+
 
 \end{document}
