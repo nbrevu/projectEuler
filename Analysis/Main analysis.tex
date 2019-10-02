@@ -1336,6 +1336,25 @@ The approach for this problem mixes the one from the two previous ones. First we
 
 Again, the in file is the same as in the previous problems.
 
+\section{Monopoly odds}
+\textbf{Difficulty rating}: 35\%.
+
+\textbf{Solution}: 101524. \textit{Solved: Tue, 11 Aug 2015, 22:45}.
+
+\textbf{Math knowledge used}: Markov chains, linear algebra.
+
+\textbf{Programming techniques used}: none.
+
+Yeah, this is one of those cases where the basics are reasonably easy to get right, but the details can be tricky. So tricky that I strongly suspect that \textit{I actually got the problem wrong} despite getting the right result. That $35\%$ is totally warranted, and there is good reason for this problem to be one of the most difficult from the first $100$.
+
+The analysis starts from a transition matrix. In order to generate the transition matrix, one must start from the ``dice'' transition. This is a map that, for each possible amount of squares, calculates the probability of moving exactly that amount. In the case of standard dice, we have $\dfrac1{36}$ probability to move $2$ squares, $\dfrac1{18}$ to move $3$ squares, and so on. With this is mind, the first matrix is filled like this: for each row $i$, the square $i+j$ is set to the probability of moving $j$ squares (apply mod $40$ when necessary). And after this we apply the special conditions, which are a bit of a bitch because they must be applied in certain specific order. Specifically, ``chance'' must be applied before ``community chest'' because there is a possibility that you get the second after the first makes you go back three squares. Side note, I'm pretty sure that I must have botched something here but I don't know what.
+
+So we have the transition matrix $M$. The Markov chain theory says that the vector of steady state probabilities, which is what we want, verifies $x^TM=x^T$. That's slightly unusual, but if we transpose the matrix, we get $M^Tx=x$. Which means $\paren{M^T-I}x=0$. That's good, except for the problematic fact that this is an indeterminate system (specifically, $M^T-I$ is singular). We want a particular solution that verifies $\sum_ix_i=1$, but we can get it from any solution that verifies $\sum_ix_i\neq0$. Then, we force the last member of $x$ to $1$, and by doing that we transform the equation into $M'x'=v$, where $M'$ is the result of removing the last row and last column of $M^T-I$, $x'$ is $x$ without the last element, and $v$ is the remainder after assigning $x_{40}=1$: the last column of $M^T-I$ (minus the last element), negated.
+
+Finally, the equation $M'x'=v$ is solvable, and yes I used gaussian elimination in Java because why not. So we get the solution $x'$, append the $x_{40}=1$, and divide by $\sum_ix_i$ to get a normalized solution. Then we search for the three squares with highest probability, and done.
+
+Now, this gets me the right solution for both the $6$-sided case ($102400$) and the $4$-sided case ($101524$). So far so good. However, the probabilities I'm getting are NOT the same that the problem gives. I'm sure it has to do something with the fucking ``3rd double, go to jail'' rule (which I didn't expect to be meaningful), but that would require a more complicated analysis and frankly I'm not bothering. The analysis, roughly, would require a $120\times120$ matrix, and the current state would be determined by the pair (current square, amount of doubles). The solution would require some additional post-processing in order to condense the three instances of each square in the final vector.
+
 
 
 
