@@ -1404,6 +1404,23 @@ As a further optimisation, we can start iterating $z$ from $3$ and $x+y$ from $4
 
 I can't believe that this has a $20\%$ rating. I assume that people started deserting once they thad to battle with $66$ or $84$. So: generate primes up to $\sqrt L$. Generate their squares, their cubes and their fourth powers (in each case, stop when you get to $L$). Then use a doubly nested loop (i.e. three levels) to sum squares, cubes and fourths. Use a set or a boolean array, whatever you prefer. Then count the size of the set and/or the amount of set numbers in the array. End! Very easy.
 
+\section{Product-sum numbers}
+\textbf{Difficulty rating}: 40\%.
+
+\textbf{Solution}: 7587457. \textit{Solved: Tue, 11 Aug 2015, 23:49}.
+
+\textbf{Math knowledge used}: none.
+
+\textbf{Programming techniques used}: dynamic programming.
+
+I don't quite agree with the difficulty rating: this is the highest rated problem from the first $100$ ($40\%$ is shared with $90$, but this one solved by fewer people), and I don't think it's that complicated, but then again, that might be my years of experience talking.
+
+The gist of the problem is: we need to find all the decompositions of natural numbers as a product of numbers greater than $1$ (for example, for $12$ we have $2\cdot\cdot3=2\cdot6=3\cdot4=12$; four decompositions, because yes, we include $\llave{12}$, which won't be used to generate candidates but is needed as a base for multiples of $12$. Now, for each decomposition we can add as many ones as we please. So, if we take (say) the case of $2\cdot6$, since the sum of these factors is $8$ (note that as long as there are two or more factors, and they are greater or equal than $2$, the product will always be higher than the sum, so we will add a positive amount of ones), we can add four ones and we will get a decomposition of $1\cdot1\cdot1\cdot1\cdot2\cdot6$, where the factors sum $12$. In general, if we have a list of $k$ factors whose product is $n$ and whose sum is $s$, we can add $n-s$ ones, so that the product is still $n$ (of course), the sum of the factors is now $\paren{n-s}+s=n$, and the final amount of factors is $k+n-s$. So far so good. This gives us a suitable candidate, $n$, for the case for $k+n-s$ factors.
+
+Now, it's not like this is super complicated, but you need to be a bit careful to get it right: to ensure that you always get the minimum $n$ for each $k+n-s$, the best way is to iterate using increasing values of $n$, and fill any structure that verifies that numbers are not fulfilled twice (I used a boolean array and a counter with the amount of pending values). So, the code iterates for all the numbers from $n=4$, and for each one, calculates the decompositions (using a bit of dynamic programming, i.e. reuse of previous solutions to speed up calculations), and finds suitable decompositions for which $k+n-s$ hasn't been fulfilled yet. Storing the results in a set, and adding all its contents at the end, gets the solution. The run time is kind of high (about $0.6$ seconds) but it's still very reasonable.
+
+By the way, the highest number needed is as low as $12200$. 
+
 
 
 
