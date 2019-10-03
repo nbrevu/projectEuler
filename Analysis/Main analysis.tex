@@ -1430,7 +1430,18 @@ By the way, the highest number needed is as low as $12200$. Needed for the case 
 
 \textbf{Programming techniques used}: none.
 
-I expected this to be as tedious as $17$, but it was in fact much simpler. Since we have the guarantee that characters are going to be repeated only as much as four times, we can enumerate a very short list of potentially problematic strings, and scan each input for all of them. Each one of the six problematic strings is reduced to a string of two characters, so each time we find one of them we add its length minus two to the result. The only special care needed is to ensure that, say $IIII$ is not counted if $VIIII$ has been already found. Replacing each problematic string with ``\_'' after each find is good enough.
+I expected this to be as tedious as $17$, but it was in fact much simpler. Since we have the guarantee that characters are going to be repeated only as much as four times, we can enumerate a very short list of potentially problematic strings, and scan each input for all of them. Each one of the six problematic strings is reduced to a string of two characters, so each time we find one of them we add its length minus two to the result. The only special care needed is to ensure that, say \textbf{IIII} is not counted if \textbf{VIIII} has been already found. Replacing each problematic string with ``\_'' after each find is good enough.
+
+\section{Cube digit pairs}
+\textbf{Difficulty rating}: 40\%.
+
+\textbf{Solution}: 1217. \textit{Solved: Wed, 12 Aug 2015, 10:16}.
+
+\textbf{Math knowledge used}: none.
+
+\textbf{Programming techniques used}: combination generation (without repetition).
+
+My trusty CombinationIterator class saves the day again. There are only $\displaystyle\binom{10}6=210$ possible dice, so we only need to test $\dfrac{210\cdot209}2=21945$ pairs of dice. And no, the two dice can't be the same, since in that case we will have at most seven different digits, but there are nine digits requiring display. Pigeonhole principle and all that shit. Once we have all the dice, the only remote difficulty is to take care of the $6$ and $9$. A custom ``contains'' function does the trick. The code is supersimple and, aside from the CombinationIterator class, about 50 lines of overengineered code return the right solution in $0.1$ seconds. $40\%$ my ass.
 
 
 
