@@ -1443,6 +1443,25 @@ I expected this to be as tedious as $17$, but it was in fact much simpler. Since
 
 My trusty CombinationIterator class saves the day again. There are only $\displaystyle\binom{10}6=210$ possible dice, so we only need to test $\dfrac{210\cdot209}2=21945$ pairs of dice. And no, the two dice can't be the same, since in that case we will have at most seven different digits, but there are nine digits requiring display. Pigeonhole principle and all that shit. Once we have all the dice, the only remote difficulty is to take care of the $6$ and $9$. A custom ``contains'' function does the trick. The code is supersimple and, aside from the CombinationIterator class, about 50 lines of overengineered code return the right solution in $0.1$ seconds. $40\%$ my ass.
 
+\section{Right triangles with integer coordinates}
+\textbf{Difficulty rating}: 20\%.
+
+\textbf{Solution}: 14234. \textit{Solved: Wed, 12 Aug 2015, 23:07}.
+
+\textbf{Math knowledge used}: none.
+
+\textbf{Programming techniques used}: none.
+
+I dislike this problem, but maybe it's just me. This is about enumeration, and the only tricky part is to ensure that you haven't missed any case. Fortunately this is not too tedious, since there are only three cases and they are simple to get:
+\begin{itemize}
+\item Right angle at $\paren{0,0}$. Any pair of vertices $\paren{0,x}$ and ${y,0}$ with $x,y>0$ fit the bill. So if $X$ and $Y$ are the maximum values allowed for $x$ and $y$ respectively, we can add $XY$ to the counter.
+\item Right angle in the $X$ or $Y$ axis. These are symmetric cases of the previous case. Each axis allows $XY$ additional cases.
+\item Right angle at some point $\paren{x,y}$ with $x,y>0$. One cathetus goes from $\paren{0,0}$ to $\paren{x,y}$, and the other cathetus must be orthogonal to this one. So: each lattice point $\paren{x',y'}$ in an orthogonal line to the first cathetus that crosses the $\paren{x,y}$ point generates a triangle. To look for these triangles, first we calculate $g=\mathrm{gcd}\paren{x,y}$ and then we set $i_x=\frac xg$, $i_y=\frac yg$. Then the lattice points are of the form $\paren{x\pm ni_y,y\mp ni_x}$ for as big a value of $n$ we can use without crossing the limits of the $\paren{0,X}\times\paren{0,Y}$ square. That's it.
+\end{itemize}
+My first run time was $0.036686868$ seconds and I find it funny because I'm very simple.
+
+
+
 
 
 \end{document}
