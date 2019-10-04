@@ -1497,6 +1497,19 @@ Yep, Pythagorean triples, since an ``almost equilateral'' triangle can be built 
 
 Yes, this is weird, but it works. And it's fast (about $16$ms). Of course, in the problem thread you see a lot of alternative solutions, but I'm happy because quite a few of them are considerably slower than mine. Others are even faster, of course...
 
+\section{Amicable chains}
+\textbf{Difficulty rating}: 30\%.
+
+\textbf{Solution}: 14316. \textit{Solved: Thu, 13 Aug 2015, 11:23}.
+
+\textbf{Math knowledge used}: ``first prime'' Erathostenes sieve for divisor generation.
+
+\textbf{Programming techniques used}: none.
+
+I'm not sure if there is a better way to do this than with brute force, but well, less than $1$ second is always a good time. In about $0.8$ seconds, my program generates the divisor list for all the numbers up to one million, storing it in an array and looking for chains. When a long chain is stored, I store the minimum (which coincidentally is the number we're iterating over). Also, all the numbers from a chain are marked as ``visited'' so that they aren't iterated over again.
+
+The longest chain has a length of $28$ and the highest number is $629072$.
+
 
 
 \end{document}
