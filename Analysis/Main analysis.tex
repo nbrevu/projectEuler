@@ -1484,6 +1484,19 @@ This can be a bitch. Getting a working prototype takes a bit of work, but it can
 
 Once you have everything rightly defined, just iterate: for every combination of digits, for every combination of orderings, for every combination of operations: calculate and store all the generated numbers. Then loop over the generated set until a number is missing. The result is the set of digits for which the smallest missing number is the highest. It happens to be $\llave{1,2,5,8}$, which can generate everything up to $44=\paren{\dfrac12+5}8$.
 
+\section{Almost equilateral triangles}
+\textbf{Difficulty rating}: 35\%.
+
+\textbf{Solution}: 1258. \textit{Solved: Thu, 13 Aug 2015, 00:57}.
+
+\textbf{Math knowledge used}: Pythagorean triples generation.
+
+\textbf{Programming techniques used}: none.
+
+Yep, Pythagorean triples, since an ``almost equilateral'' triangle can be built by juxtapositioning two identical right triangles. Now, this is pure, distilled Project Euler: just by iterating over Pythagorean triples will not get you much information, but if you run a lot of simulations you will see a pattern appearing. In this case, the pattern I found (\textit{side note: of course there is a better way to do this. But this is \textbf{my} solution}) is: we are generating triples starting from $m$ and $n$, right? (as in: $a=m^2-n^2$, $b=2mn$, $c=m^2+n^2$). Here it is: for a given $m$ or $n$, there are three other values of $m/n$ that generates a valid triangle: one is lower, the other is higher than this one but not higher than its double, and the third one is more than twice this last one. AND! This last number we found is exactly the one we need to use as a base for iterations in the next search.
+
+Yes, this is weird, but it works. And it's fast (about $16$ms). Of course, in the problem thread you see a lot of alternative solutions, but I'm happy because quite a few of them are considerably slower than mine. Others are even faster, of course...
+
 
 
 \end{document}
