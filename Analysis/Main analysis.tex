@@ -1460,7 +1460,16 @@ I dislike this problem, but maybe it's just me. This is about enumeration, and t
 \end{itemize}
 My first run time was $0.036686868$ seconds and I find it funny because I'm very simple.
 
+\section{Square digit chains}
+\textbf{Difficulty rating}: 5\%.
 
+\textbf{Solution}: 8581146. \textit{Solved: Wed, 12 Aug 2015, 23:17}.
+
+\textbf{Math knowledge used}: none.
+
+\textbf{Programming techniques used}: memoisation.
+
+As the difficulty rating suggests, this is indeed at the level of the first $50$ problems. Use an array up to ten million, and for each number, store either 1 or 89 (use 0 to indicate that it's not set yet). Then use a recursive function that calculates the value as: if it's set in the array, return immediately; otherwise, get the next value in chain, call the recursive function to get the value, store it and return.
 
 
 
