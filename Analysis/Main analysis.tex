@@ -1471,6 +1471,19 @@ My first run time was $0.036686868$ seconds and I find it funny because I'm very
 
 As the difficulty rating suggests, this is indeed at the level of the first $50$ problems. Use an array up to ten million, and for each number, store either 1 or 89 (use 0 to indicate that it's not set yet). Then use a recursive function that calculates the value as: if it's set in the array, return immediately; otherwise, get the next value in chain, call the recursive function to get the value, store it and return.
 
+\section{Arithmetic expressions}
+\textbf{Difficulty rating}: 35\%.
+
+\textbf{Solution}: 1258. \textit{Solved: Thu, 13 Aug 2015, 00:39}.
+
+\textbf{Math knowledge used}: none.
+
+\textbf{Programming techniques used}: combination (with repetition) generation, variations (with repetition) generation.
+
+This can be a bitch. Getting a working prototype takes a bit of work, but it can be done (iterate over possible combinations of numbers, iterate over possible combinations of operations, and don't forget to iterate over possible orderings). But getting the details right is tricky, hence that $35\%$ for a relatively simple brute force problem. Rational numbers are needed because at some point you will need to ensure that the operation $\paren{\dfrac12+5}8$ is calculated, meaning that $\dfrac12$ and $\dfrac{11}2$ will need to be stored. Also, depending on how you manage the ordering, you might need explicit ``reverse subtraction'' and ``reverse division'' since these operations are not commutative. You can either use these or use some scheme of parentheses application (which ends being more costly since commutative operations are checked in both directions).
+
+Once you have everything rightly defined, just iterate: for every combination of digits, for every combination of orderings, for every combination of operations: calculate and store all the generated numbers. Then loop over the generated set until a number is missing. The result is the set of digits for which the smallest missing number is the highest. It happens to be $\llave{1,2,5,8}$, which can generate everything up to $44=\paren{\dfrac12+5}8$.
+
 
 
 \end{document}
