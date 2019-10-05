@@ -1521,6 +1521,19 @@ The longest chain has a length of $28$ and the highest number is $629072$.
 
 For something that I've written so much times, this Sudoku solving algorithm sure gave me a lot of headaches. From very subtle errors after translating my old C++ code, to other very subtle errors detecting inconsistencies in half solved puzzles. Anyway the final algorithm is reasonably fast, with a run time of $0.3$s, give or take, which means a nice average of about $5$ms per Sudoku. Surely there are faster ways to do this, but I'm happy with my result.
 
+\section{Large non-Mersenne prime}
+\textbf{Difficulty rating}: 5\%.
+
+\textbf{Solution}: 8739992577. \textit{Solved: Thu, 13 Aug 2015, 11:35}.
+
+\textbf{Math knowledge used}: none.
+
+\textbf{Programming techniques used}: binary exponentiation.
+
+Very stupid, streamlined problem. I hate that the mod is so big that BigInteger is required (it was either that or calculating the power linearly instead of with binary exponentiation). Fortunately, modular binary exponentiation is very fast and BigIntegers won't grow much because $20$ digits is the highest amount needed during the calculations. So this gets solved in abot $2$ms.
+
+Save for $206$, which we aren't going to tackle for a while, this is the last problem with $5\%$ difficulty.
+
 
 
 
