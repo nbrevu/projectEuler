@@ -1534,6 +1534,25 @@ Very stupid, streamlined problem. I hate that the mod is so big that BigInteger 
 
 Save for $206$, which we aren't going to tackle for a while, this is the last problem with $5\%$ difficulty.
 
+\section{Anagramic squares}
+\textbf{Difficulty rating}: 35\%.
+
+\textbf{Solution}: 18769. \textit{Solved: Thu, 13 Aug 2015, 11:42}.
+
+\textbf{Math knowledge used}: none.
+
+\textbf{Programming techniques used}: none.
+
+After spending a good 10 minutes debugging, I found what might be my most stupid error ever. Instead of calling pow(10,n-1) I was calling pow(10-1,n), thus calculating $9^n$ instead of $10^{n-1}$. Incredibly stupid but also very funny.
+
+So: for each one of the words provided, I generated a multiset with its digits, AND with that multiset I generated a set of the repetition patterns (i.e. for 698896 I would generate the pattern $6,6,8,8,9,9$ and then $2,2,2$; for $59049$ I would generate $0,4,5,9,9$ and then $1,1,1,2$; and so on). So I had two tables where the first key was the repetition pattern (note that this needs to match between the string and the number), the second key was the actual pattern (a multiset of either characters or digits) and the value was a list of strings or numbers. Generating these data structures takes by far most of the time, but matching them is almost instantaneous, since we can group the matches by the repetition patterns, and there aren't many matches. Matching the strings and the numbers is a bit tricky but not super complicated.
+
+There is a grand total of \textit{one single anagram match} in the whole set: BOARD $\Leftrightarrow17689$, BROAD $\Leftrightarrow18769$. The run time is a bit less than $0.6$ secs. The initial structure generation takes easily something like $95\%$ or more of that time.
+
+By the way, the input file for this problem is exactly the same as for problem 42.
+
+
+
 
 
 
