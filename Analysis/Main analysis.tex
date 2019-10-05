@@ -1562,6 +1562,29 @@ By the way, the input file for this problem is exactly the same as for problem 4
 
 Another incredibly easy one for the last problem with a two digit index. If a line is $a,b$ then its numeric value is the usually untractable $a^b$, but its logarithm is the pitifully small $b\log a$. The max value is found for $895447^{504922}$, whose logarithm is $6919994.617152235$ and whose numeric value I'm not going to bother calculating.
 
+\section{Arranged probability}
+\textbf{Difficulty rating}: 30\%.
+
+\textbf{Solution}: 756872327473. \textit{Solved: Thu, 13 Aug 2015, 12:37}.
+
+\textbf{Math knowledge used}: Diophantine pairs.
+
+\textbf{Programming techniques used}: none.
+
+Let $N$ be the total amount of discs and $B$ the amount of blue discs. There are $N^2-N$ ways to choose two discs, and $B^2-B$ ways to choose two blue discs. Therefore the numbers we're looking for will verify $\dfrac{B^2-B}{N^2-N}=\dfrac12\Rightarrow2\paren{B^2-B}=N^2-N$. It turns out that this is a very well known problem (diophantine pairs) and the solution can be found in OEIS (namely, it's the sequence A011900). The formula is a simple recurrence:
+
+\begin{equation*}
+a_n=\left\{\begin{array}{ll}n=0:&1;\\n=1:&3;\\\mathrm{otherwise:}&6a_{n-1}-a_{n-2}-2.\end{array}\right.
+\end{equation*}
+The result takes about $8\mu$s to be calculated, making this one of the few problems where the solution has $12$ digits yet it can be calculated by hand without needing an infuriating amount of patience. Also, the recurrence grows so fast that it really isn't worth the complete recurrence analysis, since the usage of double numbers to determine the limit is slow enough to eat the time gained by binary exponentiation. Go figure.
+
+The first time I solved this, I used a different recurrence, which I found by inspection. It works just as well:
+\begin{equation*}
+\begin{array}{cc}
+a_0=15;&a_n=3a_{n-1}+2b_{n-1}-2;\\
+b_0=21;&b_n=4a_{n-1}+2b_{n-1}-3.
+\end{array}
+\end{equation*}
 
 
 
