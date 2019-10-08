@@ -1647,6 +1647,23 @@ I don't think there is a reliable way of doing this with algorithmic magic, cons
 
 The last digits are obvious to calculate: just compute modulo $10^9$ at each step. The first digits are more tricky, and I can see two ways of doing it. The first, which I used, is storing a big amount of digits (we can use up to $18$) and an offset, so that at each step we need to ensure that the offsets are ``leveled'', meaning that if one number has a lesser offset, then the number has to be divided to verify that the offsets are equal and the sum actually makes sense. The other way uses the formula $F_n\approx\dfrac{\varphi^n}{\sqrt5}$ so that, at each step, we can calculate $\log_{10}F_n$ just by adding $\log_{10}\varphi$ to the previous value, then we subtract $1$ if necessary so that the value is less than $9$, we exponentiate, and get the nearest integer. This procedure is definitely slower, but I expect it to be marginally more precise for extremely high values of $n$, which aren't necessary anyway.
 
+\section{Special subset sums: testing}
+\textbf{Difficulty rating}: 45\%.
+
+\textbf{Solution}: 73702. \textit{Solved: Thu, 13 Aug 2015, 20:41}.
+
+\textbf{Math knowledge used}: none.
+
+\textbf{Programming techniques used}: none.
+
+I did this with a kind of brute force approach. It works, but as the next problem shows, it's probably not optimal. I relied on java Sets (namely, NavigableSets with a dash of IntObjMaps) to perform the comparisons.
+
+The algorithm itself is not super complicated; for each set of numbers of length $N$, there are $2^N$ combinations of sums (although the first and last one are trivial), so generate all of them (I used some bit set black magic, not too difficult to understand, to do this), and check whether the conditions apply by filling a map of ordered sets where the key is the amount of addends and the value is the set of currently generated sums.
+
+Out of the $100$ sets, there are $28$ that verify the condition. The algorithm runs in about one sixth of a second, which is kind of high. This is to be expected because it's brute force.
+
+
+
 
 
 
