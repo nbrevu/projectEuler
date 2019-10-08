@@ -72,4 +72,7 @@ public class Rational	{
 		if (isInteger()) return Long.toString(getIntegerValue());
 		return num+"/"+den;
 	}
+	public int signum()	{
+		return (int)(Math.signum(num)*Math.signum(den));
+	}
 }

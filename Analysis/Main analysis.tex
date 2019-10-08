@@ -1599,6 +1599,28 @@ I can't believe that I spent so much time debugging this. For once, it's a bit o
 
 This problem shouldn't be rated so high. Not even close.
 
+\section{Triangle containment}
+\textbf{Difficulty rating}: 15\%.
+
+\textbf{Solution}: 228. \textit{Solved: Thu, 13 Aug 2015, 17:14}.
+
+\textbf{Math knowledge used}: algebraic geometry.
+
+\textbf{Programming techniques used}: none.
+
+The issue here is: how to determine when does a triangle include the origin? It's quite easy. Given any two points, $p=\paren{p_x,p_y}$ and $q=\paren{q_x,q_y}$, we can extend the segment that joins these two points into a line whose equation is
+\begin{equation*}
+\paren{p_y-q_y}x+\paren{q_x-p_x}y+\paren{q_yp_x-q_xp_y}=0.
+\end{equation*}
+It's easy to see that this line includes $p$ and $q$ so it's the line we're looking for. Now, if we evaluate points at one side of the line we will always get positive numbers, and at the other side we will always get negative numbers. This is all we need to calculate the result, because we can do this:
+\begin{itemize}
+\item For each triangle, generate the three segment-extending lines.
+\item Generate the triangle centroid as well, which will always be inside the triangle.
+\item The origin is inside the triangle if and only if it's at the same side of all the three lines than the centroid.
+\item Therefore we just evaluate the lines in both the center and the origin, and we increase the counter if the evaluation yields the same sign.
+\end{itemize}
+$15\%$ sounds about right.
+
 
 
 
