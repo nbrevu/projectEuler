@@ -6,6 +6,8 @@ import static com.euler.common.EulerUtils.lcm;
 import java.util.NoSuchElementException;
 
 public class Rational	{
+	public final static Rational ZERO=new Rational(0,1);
+	public final static Rational ONE=new Rational(1,1);
 	private final long num;
 	private final long den;
 	public Rational(long integer)	{

@@ -7,61 +7,46 @@ import java.util.OptionalInt;
 
 import com.euler.common.CustomCombinationIterator;
 import com.euler.common.EulerUtils;
+import com.euler.common.Rational;
 import com.euler.common.Timing;
 import com.euler.common.VariationIterator;
 import com.koloboke.collect.set.IntSet;
 import com.koloboke.collect.set.hash.HashIntSets;
 
 public class Euler93 {
-	private static class IntRational	{
-		public final int n;
-		public final int d;
-		public IntRational(int x)	{
-			n=x;
-			d=1;
-		}
-		public IntRational(int n,int d)	{
-			int g=EulerUtils.gcd(n,d);
-			this.n=n/g;
-			this.d=d/g;
-		}
-	}
-	
 	private static enum Operation	{
 		ADDITION	{
 			@Override
-			public IntRational apply(IntRational a,IntRational b)	{
-				return new IntRational(a.n*b.d+a.d*b.n,a.d*b.d);
+			public Rational apply(Rational a,Rational b)	{
+				return a.sum(b);
 			}
 		},	SUBTRACTION	{
 			@Override
-			public IntRational apply(IntRational a,IntRational b)	{
-				return new IntRational(a.n*b.d-a.d*b.n,a.d*b.d);
+			public Rational apply(Rational a,Rational b)	{
+				return a.subtract(b);
 			}
 		},	PRODUCT	{
 			@Override
-			public IntRational apply(IntRational a,IntRational b)	{
-				return new IntRational(a.n*b.n,a.d*b.d);
+			public Rational apply(Rational a,Rational b)	{
+				return a.multiply(b);
 			}
 		},	DIVISION	{
 			@Override
-			public IntRational apply(IntRational a,IntRational b)	{
-				if (b.n==0) return null;
-				else return new IntRational(a.n*b.d,a.d*b.n);
+			public Rational apply(Rational a,Rational b)	{
+				return b.isNotZero()?a.divide(b):null;
 			}
 		},	REV_SUBTRACTION	{
 			@Override
-			public IntRational apply(IntRational a,IntRational b)	{
-				return new IntRational(a.d*b.n-a.n*b.d,a.d*b.d);
+			public Rational apply(Rational a,Rational b)	{
+				return b.subtract(a);
 			}
 		},	REV_DIVISION	{
 			@Override
-			public IntRational apply(IntRational a,IntRational b)	{
-				if (a.n==0) return null;
-				else return new IntRational(b.n*a.d,a.n*b.d);
+			public Rational apply(Rational a,Rational b)	{
+				return a.isNotZero()?b.divide(a):null;
 			}
 		};
-		public abstract IntRational apply(IntRational a,IntRational b);
+		public abstract Rational apply(Rational a,Rational b);
 	}
 	
 	private static Operation[][] getAllOperatorCombinations()	{
@@ -88,18 +73,17 @@ public class Euler93 {
 			for (int i=1;;++i) if (!generated.contains(i)) return i-1;
 		}
 		private static OptionalInt reduce(int[] values,Operation[] operations)	{
-			Deque<IntRational> digits=new ArrayDeque<>();
-			for (int v:values) digits.add(new IntRational(v));
+			Deque<Rational> digits=new ArrayDeque<>();
+			for (int v:values) digits.add(new Rational(v));
 			for (int i=0;i<3;++i) {
-				IntRational d1=digits.poll();
-				IntRational d2=digits.poll();
-				IntRational result=operations[i].apply(d1,d2);
+				Rational d1=digits.poll();
+				Rational d2=digits.poll();
+				Rational result=operations[i].apply(d1,d2);
 				if (result==null) return OptionalInt.empty();
 				digits.addFirst(result);
 			}
-			IntRational ratResult=digits.poll();
-			if (ratResult.d!=1) return OptionalInt.empty();
-			return OptionalInt.of(ratResult.n);
+			Rational ratResult=digits.poll();
+			return ratResult.isInteger()?OptionalInt.of((int)ratResult.getIntegerValue()):OptionalInt.empty();
 		}
 	}
 	

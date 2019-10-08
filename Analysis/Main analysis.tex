@@ -1586,6 +1586,18 @@ b_0=21;&b_n=4a_{n-1}+2b_{n-1}-3.
 \end{array}
 \end{equation*}
 
+\section{Optimum polynomial}
+\textbf{Difficulty rating}: 35\%.
+
+\textbf{Solution}: 37076114526. \textit{Solved: Thu, 13 Aug 2015, 16:41}.
+
+\textbf{Math knowledge used}: Lagrange interpolation.
+
+\textbf{Programming techniques used}: none.
+
+I can't believe that I spent so much time debugging this. For once, it's a bit of Java's fault, in that translating an assignment of the form $a+=b\cdot c$ into named functions was erroneously interpreted as $a=b.\mathrm{mul}\paren c$ instead of $a=a.\mathrm{add}\paren{b.\mathrm{mul}\paren c}$. Definitely my fault; but Java verbosity, for once, was a hindrance (math expressions have always been Java's Achilles heel...). Aside from that, the problem is incredibly simple: for $n=1\ldots10$, get the original polynomial values for $k=1\ldots n$, interpolate to get the $k-1$-th degree polynomial, and evaluate for $k=n+1$ (theoretically you should find the first value for which the interpolated polynomial does not equal the original one; but it's always $k=n+1$), add the result, which took me about $40$ms to compute.
+
+This problem shouldn't be rated so high. Not even close.
 
 
 
