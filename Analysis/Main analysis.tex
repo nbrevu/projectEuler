@@ -1662,7 +1662,25 @@ The algorithm itself is not super complicated; for each set of numbers of length
 
 Out of the $100$ sets, there are $28$ that verify the condition. The algorithm runs in about one sixth of a second, which is kind of high. This is to be expected because it's brute force.
 
+\section{Special subset sums: meta-testing}
+\textbf{Difficulty rating}: 50\%.
 
+\textbf{Solution}: 21384. \textit{Solved: Thu, 13 Aug 2015, 20:46}.
+
+\textbf{Math knowledge used}: combinatorial numbers.
+
+\textbf{Programming techniques used}: combination generation without repetition.
+
+So, this is where Project Euler starts getting really hard. This problem has the property of being much more purely mathematical than ``operational'', in the sense that there is no way brute force could conceivably help you and you really need to analyse the problem.
+
+What I did was the following: for each $n\in\corch{1,6}$, generate all the possible ordered rearrangements of the set $\corch{1,2n}$ into two arrays of size $n$, and if the arrays are not strictly ordered, in the sense that for index $i$ the first array has a bigger value than the second, but for other index $j$ it's the other way around, increase a counter, meaning that, if we started from an ordered array of size $2n$, we would need to check the sums for these pairs of indices. So, for each $n$ we end up with a counter $f\paren n$, but since there are of course $\displaystyle\binom{12}{2n}$ ways of choose $2n$ numbers from a set of $12$, the end result we need to calculate is this:
+\begin{equation*}
+\sum_{n=1}^6\binom{12}{2n}f\paren n.
+\end{equation*}
+
+This is a reasonably basic approach and it takes less than $4$ms in my machine. However, in the problem thread there are all kinds of wacky super-fast ways to calculate the result, including a lot of combinatorial arcane magic and some unexpected guests like the Catalan numbers. In particular, someone posted (without comment) some code implying that $f\paren n=\displaystyle\binom{2n-1}{n+1}$, which surely sounds kind or right, but it would be nice to prove it (I guess I could do it with a bit of time? I'm very sleepy right now). This reduces the problem to the calculation of a handful of combinatorial numbers (it also implies that $f\paren 1=0$, which again, sounds about right).
+
+From now on, difficult problems appear without warning. This is what we came here for.
 
 
 
