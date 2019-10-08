@@ -1634,6 +1634,21 @@ Is this cheating? I don't know if it is. The fact is, the supposed ``algorithm t
 
 So, the center element is $20$. We start with $20$, and then we add $20$ to each of $\llave{11,18,19,20,22,25}$. And yes, that's the result. Sure, it can be done properly, but this is kind of a trick question and it can be answered as such, right?
 
+\section{Pandigital Fibonacci ends}
+\textbf{Difficulty rating}: 25\%.
+
+\textbf{Solution}: 329468. \textit{Solved: Thu, 13 Aug 2015, 20:13}.
+
+\textbf{Math knowledge used}: none.
+
+\textbf{Programming techniques used}: none.
+
+I don't think there is a reliable way of doing this with algorithmic magic, considering that the condition is difficult to translate to modular arithmetic and such. So this is about calculating a ``Fibonacci summary'' with the first and last digits, and updating both sets simply by doing $f_n=f_{n-1}+f_{n-2}$ where the addition operation is special.
+
+The last digits are obvious to calculate: just compute modulo $10^9$ at each step. The first digits are more tricky, and I can see two ways of doing it. The first, which I used, is storing a big amount of digits (we can use up to $18$) and an offset, so that at each step we need to ensure that the offsets are ``leveled'', meaning that if one number has a lesser offset, then the number has to be divided to verify that the offsets are equal and the sum actually makes sense. The other way uses the formula $F_n\approx\dfrac{\varphi^n}{\sqrt5}$ so that, at each step, we can calculate $\log_{10}F_n$ just by adding $\log_{10}\varphi$ to the previous value, then we subtract $1$ if necessary so that the value is less than $9$, we exponentiate, and get the nearest integer. This procedure is definitely slower, but I expect it to be marginally more precise for extremely high values of $n$, which aren't necessary anyway.
+
+
+
 
 
 
