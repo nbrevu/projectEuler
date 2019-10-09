@@ -1415,7 +1415,7 @@ I can't believe that this has a $20\%$ rating. I assume that people started dese
 
 I don't quite agree with the difficulty rating: this is the highest rated problem from the first $100$ ($40\%$ is shared with $90$, but this one solved by fewer people), and I don't think it's that complicated, but then again, that might be my years of experience talking.
 
-The gist of the problem is: we need to find all the decompositions of natural numbers as a product of numbers greater than $1$ (for example, for $12$ we have $2\cdot\cdot3=2\cdot6=3\cdot4=12$; four decompositions, because yes, we include $\llave{12}$, which won't be used to generate candidates but is needed as a base for multiples of $12$. Now, for each decomposition we can add as many ones as we please. So, if we take (say) the case of $2\cdot6$, since the sum of these factors is $8$ (note that as long as there are two or more factors, and they are greater or equal than $2$, the product will always be higher than the sum, so we will add a positive amount of ones), we can add four ones and we will get a decomposition of $1\cdot1\cdot1\cdot1\cdot2\cdot6$, where the factors sum $12$. In general, if we have a list of $k$ factors whose product is $n$ and whose sum is $s$, we can add $n-s$ ones, so that the product is still $n$ (of course), the sum of the factors is now $\paren{n-s}+s=n$, and the final amount of factors is $k+n-s$. So far so good. This gives us a suitable candidate, $n$, for the case for $k+n-s$ factors.
+The gist of the problem is: we need to find all the decompositions of natural numbers as a product of numbers greater than $1$ (for example, for $12$ we have $2\cdot\cdot3=2\cdot6=3\cdot4=12$; four decompositions, because yes, we include $\llave{12}$, which won't be used to generate candidates but is needed as a base for multiples of $12$). Now, for each decomposition we can add as many ones as we please. So, if we take (say) the case of $2\cdot6$, since the sum of these factors is $8$ (note that as long as there are two or more factors, and they are greater or equal than $2$, the product will always be higher than the sum, so we will add a positive amount of ones), we can add four ones and we will get a decomposition of $1\cdot1\cdot1\cdot1\cdot2\cdot6$, where the factors sum $12$. In general, if we have a list of $k$ factors whose product is $n$ and whose sum is $s$, we can add $n-s$ ones, so that the product is still $n$ (of course), the sum of the factors is now $\paren{n-s}+s=n$, and the final amount of factors is $k+n-s$. So far so good. This gives us a suitable candidate, $n$, for the case for $k+n-s$ factors.
 
 Now, it's not like this is super complicated, but you need to be a bit careful to get it right: to ensure that you always get the minimum $n$ for each $k+n-s$, the best way is to iterate using increasing values of $n$, and fill any structure that verifies that numbers are not fulfilled twice (I used a boolean array and a counter with the amount of pending values). So, the code iterates for all the numbers from $n=4$, and for each one, calculates the decompositions (using a bit of dynamic programming, i.e. reuse of previous solutions to speed up calculations), and finds suitable decompositions for which $k+n-s$ hasn't been fulfilled yet. Storing the results in a set, and adding all its contents at the end, gets the solution. The run time is kind of high (about $0.6$ seconds) but it's still very reasonable.
 
@@ -1693,7 +1693,28 @@ From now on, difficult problems appear without warning. This is what we came her
 
 Much easier than the previous one. Especially since it's an uber-standard problem for a first year Maths graduate. While it doesn't say it directly, the problem consists on calculating a minimal expansion tree. This can be done with a greedy algorithm called Kruskal's algorithm, as every discrete math student knows. I'm very surprised by that $35\%$ rating; I guess that at the time most of Project Euler participants came from CS backgrounds? But even then, they should know about Kruskal's algorithm. The only thing remotely difficult about this problem is how to determine that two vertices of a partial graph are connected, and ``remotely difficult'' still means ``almost trivially easy'' here.
 
+\section{Diophantine reciprocals I}
+\textbf{Difficulty rating}: 30\%.
 
+\textbf{Solution}: 180180. \textit{Solved: Thu, 13 Aug 2015, 23:37}.
+
+\textbf{Math knowledge used}: amount of divisors function.
+
+\textbf{Programming techniques used}: prime power combination generation, lazily evaluated infinite lists.
+
+This problem allows a very reasonably simple analysis. The example allows us to observe that $n<x\leq2n$, and indeed it's easy to show that both $x$ and $y$ need to be greater than $n$, and that the highest value of $\mathrm{min}\llave{x,y}$ must be $2n$. This suggests to redefine $x=n+a$ where $a\in\corch{1,n}$, which gets us to:
+\begin{equation*}
+\dfrac1{n+a}+\dfrac1y=\dfrac1n\Rightarrow\dfrac{y+n+a}{y\paren{n+a}}=\dfrac1n\Rightarrow\paren{n+a}y=n\paren{y+n+a}.
+\end{equation*}
+From here we can clear $a$:
+\begin{equation*}
+\paren{n+a}y=n\paren{y+n+a}\Rightarrow ay=n^2+na\Rightarrow a=\dfrac{n^2}{y-n}.
+\end{equation*}
+So the possible values for $a$ are the divisors of $n^2$. However, this counts all solutions twice, since it includes the fraction sum in both directions. So if $n^2$ has $N$ divisors (which is always an odd number since, blatantly, $n^2$ is a perfect square), then the amount of distinct possible fractions is $\dfrac{N+1}2$.
+
+We can start from this analysis and quickly get to a solution that works both for this problem and $110$ (which has the same problem definition, but a different input value). We need to generate all the possible prime power combination, and for each of them, we need to generate a representative, referring to the smallest number that has exactly that distribution of prime powers (i.e. for the set of prime powers $\corch{3,1,1}$ it would be $2^33^15^1$). Also we only need to generate prime powers in descending order, so $\corch{2,3,1}$ is not valid because we would use just $\corch{3,2,1}$. It's easy to uniquely generate all the powers as a lazily evaluated list if at each step we take the head, check it (finishing if the condition is met), and we create the children by either incrementing the last power value (unless it would result in an invalid number) or adding a new power. That is, for $\corch{3,2,1}$ the children would be $\corch{3,2,2}$ and $\corch{3,2,1,1}$, whereas for $\corch{4,4}$ the only child is $\corch{4,4,1}$.
+
+The description looks longer than what is actually done. The code is quite simple, actually.
 
 
 
