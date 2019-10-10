@@ -838,7 +838,7 @@ This is a bit more interesting than it seems, because there is room for improvem
 
 By the way, 997651 is the sum of $543$ primes, from $7$ to $3931$ included.
 
-\section{Consecutive prime sum}
+\section{Prime digit replacements}
 \textbf{Difficulty rating}: 15\%.
 
 \textbf{Solution}: 121313. \textit{Solved: Sun, 9 Aug 2015, 13:03}.
@@ -857,7 +857,7 @@ What's that? A whopping 15\% difficulty rating! Quite the leap! Just joking, thi
 \end{itemize}
 For each case, we will build the set of possible numbers ($9$ if the first digit is not variable, $10$ if it is) and we return as soon as we generate a set with $8$ or more primes. It's more complicated than most problems so far, but it's also reasonably simple and doable. It's not even optimal and still it has a little more than $50$ lines and runs in $34$ or $35$ milliseconds.
 
-\section{Consecutive prime sum}
+\section{Permuted multiples}
 \textbf{Difficulty rating}: 5\%.
 
 \textbf{Solution}: 142857. \textit{Solved: Sun, 9 Aug 2015, 12:33}.
@@ -868,7 +868,7 @@ For each case, we will build the set of possible numbers ($9$ if the first digit
 
 Uh... what the fuck is this? It can only have a solution. No programming required. I find this easier than problem $1$. You could as well ask me about how much is $1+2$.
 
-\section{Consecutive prime sum}
+\section{Combinatoric selections}
 \textbf{Difficulty rating}: 5\%.
 
 \textbf{Solution}: 4075. \textit{Solved: Sun, 9 Aug 2015, 13:11}.
@@ -879,7 +879,7 @@ Uh... what the fuck is this? It can only have a solution. No programming require
 
 There are a million (HA!) ways to do this. The one I use is, I think, possibly one of the fastest approaches. I started with a subarray of the combinatorial numbers $\displaystyle\binom{23}k$ for $k\in\corch{0,9}$, and then I iterated for $n\in\corch{24,100}$, generating at each step the subarray of combinatorial numbers that doesn't exceed the limit of one million. This can be done super fast because it's just a bunch of additions, and checking when the last number is going to surpass the limit (so I need to reduce the array) is quite trivial as well. Then, if this array has length $L$, it means that I have $2L$ combinatorials smaller than one million in this line, and so there must be $n+1-2L$ combinatorials \textit{over} a million. Adding this value for each $n$ yields the solution.
 
-\section{Consecutive prime sum}
+\section{Poker hands}
 \textbf{Difficulty rating}: 10\%.
 
 \textbf{Solution}: 376. \textit{Solved: Sun, 9 Aug 2015, 23:58}.
@@ -1715,6 +1715,19 @@ So the possible values for $a$ are the divisors of $n^2$. However, this counts a
 We can start from this analysis and quickly get to a solution that works both for this problem and $110$ (which has the same problem definition, but a different input value). We need to generate all the possible prime power combination, and for each of them, we need to generate a representative, referring to the smallest number that has exactly that distribution of prime powers (i.e. for the set of prime powers $\corch{3,1,1}$ it would be $2^33^15^1$). Also we only need to generate prime powers in descending order, so $\corch{2,3,1}$ is not valid because we would use just $\corch{3,2,1}$. It's easy to uniquely generate all the powers as a lazily evaluated list if at each step we take the head, check it (finishing if the condition is met), and we create the children by either incrementing the last power value (unless it would result in an invalid number) or adding a new power. That is, for $\corch{3,2,1}$ the children would be $\corch{3,2,2}$ and $\corch{3,2,1,1}$, whereas for $\corch{4,4}$ the only child is $\corch{4,4,1}$.
 
 The description looks longer than what is actually done. The code is quite simple, actually.
+
+\section{Darts}
+\textbf{Difficulty rating}: 45\%.
+
+\textbf{Solution}: 38182. \textit{Solved: Thu, 13 Aug 2015, 23:58}.
+
+\textbf{Math knowledge used}: none.
+
+\textbf{Programming techniques used}: none.
+
+For somethinig rated at $45\%$, this is underwhelmingly easy. I admit that the first time I confronted this problem I thought it could be one of the difficult ones. Then I read carefully the description and I didn't find the difficulty anywhere. More or less like with $54$, it looks like there could be a deeper, more interesting problem there, but there isn't. Sure, it's a bit tricky to get it right, but honestly I had more problems with stupid bugs (like using a $<$ where I should have used a $\leq$) than with the problem itself.
+
+My method consists of keeping maps with amount of possible cases for each amount. So the first thing I do is to create a ``single throw'' map where I have added all the single throws, $\llave{1,2,3}\times\corch{1,20}$ and $\llave{25,50}$. Then I combine this map with itself to create a ``double throw'' set: for each pair (score,$n$) in the single set, I increase (score,$n$) and (2$\times$score,$\dfrac{n\paren{n+1}}2$) in the ``double throw'' set; and for each (unordered) pair, ((score1,$n$), (score2,$m$)), I increase (score1$+$score2,$nm$). Finally I add a single combination for $0$. After this I use a similar combination method to get all the triples from the set of doubles and the ``double value'' throws. In the resulting set, I just need to add all the values from the list of keys that are strictly smaller than $100$.
 
 
 
