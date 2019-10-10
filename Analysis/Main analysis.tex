@@ -1729,6 +1729,16 @@ For somethinig rated at $45\%$, this is underwhelmingly easy. I admit that the f
 
 My method consists of keeping maps with amount of possible cases for each amount. So the first thing I do is to create a ``single throw'' map where I have added all the single throws, $\llave{1,2,3}\times\corch{1,20}$ and $\llave{25,50}$. Then I combine this map with itself to create a ``double throw'' set: for each pair (score,$n$) in the single set, I increase (score,$n$) and (2$\times$score,$\dfrac{n\paren{n+1}}2$) in the ``double throw'' set; and for each (unordered) pair, ((score1,$n$), (score2,$m$)), I increase (score1$+$score2,$nm$). Finally I add a single combination for $0$. After this I use a similar combination method to get all the triples from the set of doubles and the ``double value'' throws. In the resulting set, I just need to add all the values from the list of keys that are strictly smaller than $100$.
 
+\section{Diophantine reciprocals II}
+\textbf{Difficulty rating}: 40\%.
+
+\textbf{Solution}: 9350130049860600. \textit{Solved: Thu, 13 Aug 2015, 23:39}.
+
+\textbf{Math knowledge used}: amount of divisors function.
+
+\textbf{Programming techniques used}: prime power combination generation, lazily evaluated infinite lists.
+
+This is exactly the same problem as $108$, with a higher limit. The algorithm works just as well, naturally.
 
 
 \end{document}
