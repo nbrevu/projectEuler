@@ -1740,5 +1740,56 @@ My method consists of keeping maps with amount of possible cases for each amount
 
 This is exactly the same problem as $108$, with a higher limit. The algorithm works just as well, naturally.
 
+\section{Primes with runs}
+\textbf{Difficulty rating}: 45\%.
+
+\textbf{Solution}: 612407567715. \textit{Solved: Fri, 14 Aug 2015, 00:02}.
+
+\textbf{Math knowledge used}: Miller-Rabin primality test.
+
+\textbf{Programming techniques used}: combination (without repetition) generation, variations (with repetition) generation.
+
+This is laborious, but ultimately simple. Given the total amount of digits $D$, we iterate over the digits $d\in\corch{0,9}$; for each $d$ we iterate over the each amount of digits $n\in\corch{1,D-1}$ in reverse order. For each amount of digits $n$ we generate all the possible numbers with $D$ digits, $n$ of which are equal to $d$. Then we use a primality test to check whether they are prime or not, and whenever we find a value of $n$ for which we have fount at least one prime, we accept that set of primes for the digit $d$ (with $M\paren{D,d}=n$, $N\paren{D,d}$ is the amount of primes found and $S\paren{D,d}$ is its sum).
+
+Of course, the difficult part is the generation of the numbers. I did the following: use a variation iterator for $D-n$ different digits from $0$ to $9$; discard the variation if it contains the ``repeating'' digit or if it would in a multiple of $3$; then, once that filter has passed, use a combination iterator to locate these new digits in a $D$ digit number (returning immediately if the number starts with $0$ or doesn't end in $1$, $3$, $7$ or $9$). It's a bit complicated but very doable in less than $100$ lines of code, and the run time is less than one sixth of a second, which is less than double what it takes for $4$ digits; not bad.
+
+This is the table of results for $D=10$:
+\begin{table}[H]
+\centering\begin{tabular}{|c|c|c|c|}
+\hline
+Digit, $d$&$M\paren{10,d}$&$N\paren{10,d}$&$S\paren{10,d}$\\\hline
+$0$&$8$&$8$&$38000000042$\\\hline
+$1$&$9$&$11$&$12882626601$\\\hline
+$2$&$8$&$39$&$97447914665$\\\hline
+$3$&$9$&$7$&$23234122821$\\\hline
+$4$&$9$&$1$&$4444444447$\\\hline
+$5$&$9$&$1$&$5555555557$\\\hline
+$6$&$9$&$1$&$6666666661$\\\hline
+$7$&$9$&$9$&$59950904793$\\\hline
+$8$&$8$&$32$&$285769942206$\\\hline
+$9$&$9$&$8$&$78455389922$\\\hline
+\end{tabular}
+\end{table}
+
+I've also adapted my code to run with BigIntegers, and using the highest set of Miller-Rabin witnesses I found on wikipedia, I was able to get the same table for $D=24$ in less than $0.9$ seconds, which is a very nice mark.
+\begin{table}[H]
+\centering\begin{tabular}{|c|c|c|c|}
+\hline
+Digit, $d$&$M\paren{24,d}$&$N\paren{24,d}$&$S\paren{24,d}$\\\hline
+$0$&$21$&$363$&$187410752573439271524566739$\\\hline
+$1$&$23$&$10$&$1251011015112011122111112$\\\hline
+$2$&$22$&$25$&$5759572152579555626170689$\\\hline
+$3$&$23$&$10$&$3833333342335338388332360$\\\hline
+$4$&$22$&$33$&$14678463706598666441772499$\\\hline
+$5$&$22$&$31$&$17462251567895192217959211$\\\hline
+$6$&$22$&$29$&$18832048026225966363303047$\\\hline
+$7$&$23$&$13$&$10112411111106122611119181$\\\hline
+$8$&$22$&$26$&$23108009099049133406097586$\\\hline
+$9$&$23$&$19$&$18592549180951350989999981$\\\hline
+\end{tabular}
+\end{table}
+Total: $301040401775292608691432405$.
+
+
 
 \end{document}
