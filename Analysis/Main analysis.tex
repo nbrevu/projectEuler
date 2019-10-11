@@ -1790,6 +1790,15 @@ $9$&$23$&$19$&$18592549180951350989999981$\\\hline
 \end{table}
 Total: $301040401775292608691432405$.
 
+\section{Bouncy numbers}
+\textbf{Difficulty rating}: 15\%.
 
+\textbf{Solution}: 1587000. \textit{Solved: Fri, 14 Aug 2015, 00:56}.
+
+\textbf{Math knowledge used}: none.
+
+\textbf{Programming techniques used}: none.
+
+I'm not super proud of this, but it's fast and frankly I'm not sure if there is a \textit{precise} method to determine whether we hit or not any bouncy digit limit in a range. So I used brute force. That's it, check any number starting from $n=101$ (no number from $1$ to $100$ can be bouncy) until the counter is such that the nonbouncy numbers are $1\%$ of the total. I guess that you could increase the counter in hundreds instead of ones, with a bit of additional logic. Whatever: this finishes is $24$ms.
 
 \end{document}
