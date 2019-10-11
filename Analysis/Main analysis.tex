@@ -1801,4 +1801,15 @@ Total: $301040401775292608691432405$.
 
 I'm not super proud of this, but it's fast and frankly I'm not sure if there is a \textit{precise} method to determine whether we hit or not any bouncy digit limit in a range. So I used brute force. That's it, check any number starting from $n=101$ (no number from $1$ to $100$ can be bouncy) until the counter is such that the nonbouncy numbers are $1\%$ of the total. I guess that you could increase the counter in hundreds instead of ones, with a bit of additional logic. Whatever: this finishes is $24$ms.
 
+\section{Non-bouncy numbers}
+\textbf{Difficulty rating}: 30\%.
+
+\textbf{Solution}: 51161058134250. \textit{Solved: Fri, 14 Aug 2015, 01:03}.
+
+\textbf{Math knowledge used}: none.
+
+\textbf{Programming techniques used}: dynamic programming.
+
+Now we're talking This problem is a bit more interesting than the previous one even if it's just a standard dynamic programming problem with a small twist. We need to count the amount of increasing numbers (dynamic programming with digits from $1$ to $9$; at each step, the value for digit $d$ is the sum of values for digits from $1$ to $d$ from the previous step) and the amount of decreasing numbers (dynamic programming with digits from $0$ to $9$; at each step, the value for digit $d$ is the sum of values for digits from $d$ to $9$ from the previous step), minus the $9\times100$ digits with same digits at all position, which have been counted twice because they appear in both cases. Finishes in less than one third of a millisecond!
+
 \end{document}
