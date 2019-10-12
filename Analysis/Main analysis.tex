@@ -1415,7 +1415,7 @@ I can't believe that this has a $20\%$ rating. I assume that people started dese
 
 I don't quite agree with the difficulty rating: this is the highest rated problem from the first $100$ ($40\%$ is shared with $90$, but this one solved by fewer people), and I don't think it's that complicated, but then again, that might be my years of experience talking.
 
-The gist of the problem is: we need to find all the decompositions of natural numbers as a product of numbers greater than $1$ (for example, for $12$ we have $2\cdot\cdot3=2\cdot6=3\cdot4=12$; four decompositions, because yes, we include $\llave{12}$, which won't be used to generate candidates but is needed as a base for multiples of $12$). Now, for each decomposition we can add as many ones as we please. So, if we take (say) the case of $2\cdot6$, since the sum of these factors is $8$ (note that as long as there are two or more factors, and they are greater or equal than $2$, the product will always be higher than the sum, so we will add a positive amount of ones), we can add four ones and we will get a decomposition of $1\cdot1\cdot1\cdot1\cdot2\cdot6$, where the factors sum $12$. In general, if we have a list of $k$ factors whose product is $n$ and whose sum is $s$, we can add $n-s$ ones, so that the product is still $n$ (of course), the sum of the factors is now $\paren{n-s}+s=n$, and the final amount of factors is $k+n-s$. So far so good. This gives us a suitable candidate, $n$, for the case for $k+n-s$ factors.
+The gist of the problem is: we need to find all the decompositions of natural numbers as a product of numbers greater than $1$ (for example, for $12$ we have $2\cdot2\cdot3=2\cdot6=3\cdot4=12$; four decompositions, because yes, we include $\llave{12}$, which won't be used to generate candidates but is needed as a base for multiples of $12$). Now, for each decomposition we can add as many ones as we please. So, if we take (say) the case of $2\cdot6$, since the sum of these factors is $8$ (note that as long as there are two or more factors, and they are greater or equal than $2$, the product will always be higher than the sum, so we will add a positive amount of ones), we can add four ones and we will get a decomposition of $1\cdot1\cdot1\cdot1\cdot2\cdot6$, where the factors sum $12$. In general, if we have a list of $k$ factors whose product is $n$ and whose sum is $s$, we can add $n-s$ ones, so that the product is still $n$ (of course), the sum of the factors is now $\paren{n-s}+s=n$, and the final amount of factors is $k+n-s$. So far so good. This gives us a suitable candidate, $n$, for the case for $k+n-s$ factors.
 
 Now, it's not like this is super complicated, but you need to be a bit careful to get it right: to ensure that you always get the minimum $n$ for each $k+n-s$, the best way is to iterate using increasing values of $n$, and fill any structure that verifies that numbers are not fulfilled twice (I used a boolean array and a counter with the amount of pending values). So, the code iterates for all the numbers from $n=4$, and for each one, calculates the decompositions (using a bit of dynamic programming, i.e. reuse of previous solutions to speed up calculations), and finds suitable decompositions for which $k+n-s$ hasn't been fulfilled yet. Storing the results in a set, and adding all its contents at the end, gets the solution. The run time is kind of high (about $0.6$ seconds) but it's still very reasonable.
 
@@ -1678,7 +1678,7 @@ What I did was the following: for each $n\in\corch{1,6}$, generate all the possi
 \sum_{n=1}^6\binom{12}{2n}f\paren n.
 \end{equation*}
 
-This is a reasonably basic approach and it takes less than $4$ms in my machine. However, in the problem thread there are all kinds of wacky super-fast ways to calculate the result, including a lot of combinatorial arcane magic and some unexpected guests like the Catalan numbers. In particular, someone posted (without comment) some code implying that $f\paren n=\displaystyle\binom{2n-1}{n+1}$, which surely sounds kind or right, but it would be nice to prove it (I guess I could do it with a bit of time? I'm very sleepy right now). This reduces the problem to the calculation of a handful of combinatorial numbers (it also implies that $f\paren 1=0$, which again, sounds about right).
+This is a reasonably basic approach and it takes less than $4$ms in my machine. However, in the problem thread there are all kinds of wacky super-fast ways to calculate the result, including a lot of combinatorial arcane magic and some unexpected guests like the Catalan numbers. In particular, someone posted (without comment) some code implying that $f\paren n=\displaystyle\binom{2n-1}{n+1}$, which surely sounds kind of right, but it would be nice to prove it (I guess I could do it with a bit of time? I'm very sleepy right now). This reduces the problem to the calculation of a handful of combinatorial numbers (it also implies that $f\paren 1=0$, which again, sounds about right).
 
 From now on, difficult problems appear without warning. This is what we came here for.
 
@@ -1861,5 +1861,19 @@ Also, yes, the case for $L=2$ is just Fibonacci numbers.
 \textbf{Programming techniques used}: dynamic programming.
 
 Like in the previous problem, a single array is needed. You can do $A\corch i=\sum_{j=1}^4A\corch{i-j}$, or compress the formula a little using a kind of telescopic reasoning, getting the slightly simpler $A\corch i=2A\corch{i-1}-A\corch{i-5}$. Runs in less than \textit{$9$ microseconds}.
+
+\section{Pandigital prime sets}
+\textbf{Difficulty rating}: 45\%.
+
+\textbf{Solution}: 44680. \textit{Solved: Fri, 14 Aug 2015, 12:39}.
+
+\textbf{Math knowledge used}: none.
+
+\textbf{Programming techniques used}: array partition generation, permutation generation.
+
+Not that much of a real difficulty spike, but at least a real problem after the last four, which were laughably easy.
+
+In order to solve this one, first I generated all the possible partitions of an array of nine length which could conceivably generate a set of primes (there are $24$). Generating these partitions is a bit tricky, so I wrote a partition generator class that could be useful in the future. Then I iterated over all the $9!$ possible permutations of the digits of $1$ to $9$, and for each combination of permutation and partition, I checked whether the combination generates an ordered set of primes (the ordered requirement ensures that no duplication happens; sets with two primes with the same length will be generated twice under this scheme). This takes a bit less than $3$ seconds, which is a lot compared with most problems so far (this is like the third or fourth problem that I didn't solve in less than $1$ second). I can think of an opposite approach that starts from the partitions, and for each of them, tries to generates prime sets given the partition sizes. Prime generation up to $10^8$ is still necessary, so I still wouldn't be able to get below $1$ second with this method, though.
+
 
 \end{document}
