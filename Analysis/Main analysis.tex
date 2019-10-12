@@ -1836,6 +1836,19 @@ Anyway: keep two arrays of length $N+1$, one for chains ending in a gray block a
 
 Slightly less brutally easy than the previous one, since the length is unknown, but basically it's the same. Iterate in exactly the same way than before (except using $M=50$ instead of $3$), return when $G\corch i+R\corch i$ exceeds the limit. It takes about one millisecond and a half to run, and I blame this excessive run time in the dynamic memory allocation.
 
+\section{Red, green or blue tiles}
+\textbf{Difficulty rating}: 30\%.
 
+\textbf{Solution}: 20492570929. \textit{Solved: Fri, 14 Aug 2015, 12:02}.
+
+\textbf{Math knowledge used}: none.
+
+\textbf{Programming techniques used}: dynamic programming.
+
+Another variation in the coloured tiles dynamic programming problem, arguably even easier than the previous one since only one dimensional arrays are needed. In fact these ones have a very easy closed analysis and I could probably have used matrix exponentiation. I'm pretty sure that it would take more time than the current code, because the length $N=50$ is so small.
+
+Anyway: you need a dynamic programming ``instance'' (i.e. a different array) for each of the colours. For each one of them, iterate using the formula $A\corch i=A\corch{i-1}+A\corch{i-L}$ where $L$ is the length of the color bar. Then return $A\corch N-1$ (we need to subtract the case with all gray tiles). Repeat for $L=2$, $L=3$ and $L=4$, add the results. It takes less than $20$ microseconds!
+
+Also, yes, the case for $L=2$ is just Fibonacci numbers.
 
 \end{document}
