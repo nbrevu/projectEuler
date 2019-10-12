@@ -1895,7 +1895,34 @@ The thirtieth number is $63^8$ (multiples of $9$ abound, as expected; there is a
 \end{itemize}
 My program takes about $12$ms, which is nice.
 
+\section{Square remainders}
+\textbf{Difficulty rating}: 25\%.
 
+\textbf{Solution}: 333082500. \textit{Solved: Fri, 14 Aug 2015, 14:27}.
+
+\textbf{Math knowledge used}: Newton's binomial theorem, Faulhaber formulas.
+
+\textbf{Programming techniques used}: none.
+
+This can be computed in \textit{constant} time. Assuming that the result fits in a long. Which totally does.
+
+With Newton's binomial theorem we can easily get the following formula:
+\begin{equation*}
+r_{\max}=\corch{\paren{a-1}^n+\paren{a+1}^n}\equiv\paren{-1}^{n-1}na+\paren{-1}^n+na+1\text{ (mod }a^2\text{)}.
+\end{equation*}
+For even values of $n$, the result is always $2$. For odd values, it's $2na$ (but we need to apply further modding), and now we're talking. If $a$ is odd, we can take either $n=\dfrac{a-1}2$ or $n=a+\dfrac{a-1}2$: we can guarantee that at least one of them will be even, and for that one, we arrive at $r_{\max}=a\paren{a-1}$. On the other hand, if $a$ is even, there are two cases that arrive at the same $r_{\max}$: if $\dfrac a2$ is even, $n=\dfrac a2-1$ does the trick; if it's odd, we need $n=a-1$.In both cases, $r_{\max}=a\paren{a-2}$. This is good enough to start operating:
+\begin{equation*}
+\sum_{a=3}^{1000}r_{\max}=\sum_{a=3,a\text{ odd}}^{1000}a\paren{a-1}+\sum_{a=3,a\text{ even}}^{1000}a\paren{a-2}.
+\end{equation*}
+Then we do $a=2k+1$ for odd numbers and $a=2k+2$ for even numbers, leaving:
+\begin{equation*}
+\sum_{a=3}^{1000}r_{\max}=\sum_{k=1}^{499}2k\paren{2k+1}+\sum_{k=1}^{499}2k\paren{2k+2}=\sum_{k=1}^{499}8k^2+6k.
+\end{equation*}
+Then, we define $N=\dfrac{1000-2}2=499$, and with Faulhaber formulas and a bit of additional cleaning we get
+\begin{equation*}
+\sum_{a=3}^{1000}r_{\max}=\dfrac{16N^3+30N^2+11N}6.
+\end{equation*}
+This formula runs in constant time and gets the result in $10\mu$s.
 
 
 \end{document}
