@@ -1825,6 +1825,17 @@ Incredibly easy dynamic programming problem. The difficulty rating is fucked. I 
 
 Anyway: keep two arrays of length $N+1$, one for chains ending in a gray block and another one for chains ending in a red block. At each time you can do $G\corch i=G\corch{i-1}+R\corch{i-1}$, and $R\corch i=\sum_{j=0}^{i-3}G\corch j$. Iterate using these formulas, and return $G\corch N+R\corch N$. It takes about $80$ fucking \textit{microseconds}.
 
+\section{Counting block combinations II}
+\textbf{Difficulty rating}: 35\%.
+
+\textbf{Solution}: 168. \textit{Solved: Fri, 14 Aug 2015, 11:48}.
+
+\textbf{Math knowledge used}: none.
+
+\textbf{Programming techniques used}: dynamic programming.
+
+Slightly less brutally easy than the previous one, since the length is unknown, but basically it's the same. Iterate in exactly the same way than before (except using $M=50$ instead of $3$), return when $G\corch i+R\corch i$ exceeds the limit. It takes about one millisecond and a half to run, and I blame this excessive run time in the dynamic memory allocation.
+
 
 
 \end{document}
