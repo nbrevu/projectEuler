@@ -814,7 +814,7 @@ By the way:
 
 For a veteran, this problem is a bit infuriating. This problems seems to lend itself easily to binary exponentiation, BUT since the modulus is greater than $2^{31.5}$, temporary results don't fit into a long. So either you eschew the speed of binary exponentiations or you eschew the speed of primitive longs. Since I had to bit the bullet anyway, I tried both approaches. To my surprise, doing full iterations with longs is faster than binary exponentiation with BigInteger. \textit{And faster than binary exponentiation with longs} (which returns the wrong results anyway), which is extra-surprising. Initially I assumed that this happens because the exponents are very small and because division is much slower than multiplication, but that's not true. The real issue, and this is super-interesting, is that calling code from a different class adds some overhead in terms of time! I knew that Java initialisation could be slow, but a delay of $10$ms for a single added class is much more time than I had thought.
 
-\section{Self powers}
+\section{Prime permutations}
 \textbf{Difficulty rating}: 5\%.
 
 \textbf{Solution}: 296962999629. \textit{Solved: Sun, 9 Aug 2015, 10:06}.
@@ -903,7 +903,7 @@ This is, so far, the problem which requires the largest code. By a wide margin.
 
 Not much to add. There are ways to speed up the process (such as remembering the intermediate number, i.e. if I found the chain $49\rightarrow143\rightarrow484$ when looking for $49$, I shouldn't need to do the calculations for $143$; or noting that any number whose digits are strictly below $5$ will result in a palindrome immediately), but frankly it's not worth the hassle. The procedure is basically described in the problem: iterate, check, return if the last iteration hasn't found anything.
 
-This problem warns my heart a little because it makes me nostalgic of certain very old maths book.
+This problem warms my heart a little because it makes me nostalgic of certain very old maths book.
 
 \section{Powerful digit sum}
 \textbf{Difficulty rating}: 5\%.
@@ -1700,7 +1700,7 @@ Much easier than the previous one. Especially since it's an uber-standard proble
 
 \textbf{Math knowledge used}: amount of divisors function.
 
-\textbf{Programming techniques used}: prime power combination generation, lazily evaluated infinite lists.
+\textbf{Programming techniques used}: prime power combination generation, lazily evaluated infinite lists, switched queues.
 
 This problem allows a very reasonably simple analysis. The example allows us to observe that $n<x\leq2n$, and indeed it's easy to show that both $x$ and $y$ need to be greater than $n$, and that the highest value of $\mathrm{min}\llave{x,y}$ must be $2n$. This suggests to redefine $x=n+a$ where $a\in\corch{1,n}$, which gets us to:
 \begin{equation*}
@@ -1736,7 +1736,7 @@ My method consists of keeping maps with amount of possible cases for each amount
 
 \textbf{Math knowledge used}: amount of divisors function.
 
-\textbf{Programming techniques used}: prime power combination generation, lazily evaluated infinite lists.
+\textbf{Programming techniques used}: prime power combination generation, lazily evaluated infinite lists, switched queues.
 
 This is exactly the same problem as $108$, with a higher limit. The algorithm works just as well, naturally.
 
@@ -1874,6 +1874,28 @@ Like in the previous problem, a single array is needed. You can do $A\corch i=\s
 Not that much of a real difficulty spike, but at least a real problem after the last four, which were laughably easy.
 
 In order to solve this one, first I generated all the possible partitions of an array of nine length which could conceivably generate a set of primes (there are $24$). Generating these partitions is a bit tricky, so I wrote a partition generator class that could be useful in the future. Then I iterated over all the $9!$ possible permutations of the digits of $1$ to $9$, and for each combination of permutation and partition, I checked whether the combination generates an ordered set of primes (the ordered requirement ensures that no duplication happens; sets with two primes with the same length will be generated twice under this scheme). This takes a bit less than $3$ seconds, which is a lot compared with most problems so far (this is like the third or fourth problem that I didn't solve in less than $1$ second). I can think of an opposite approach that starts from the partitions, and for each of them, tries to generates prime sets given the partition sizes. Prime generation up to $10^8$ is still necessary, so I still wouldn't be able to get below $1$ second with this method, though.
+
+\section{Digit power sum}
+\textbf{Difficulty rating}: 30\%.
+
+\textbf{Solution}: 248155780267521. \textit{Solved: Fri, 14 Aug 2015, 13:48}.
+
+\textbf{Math knowledge used}: none.
+
+\textbf{Programming techniques used}: switched queues.
+
+Is it cheating to assume that the number fits in a long? By that, we can assume that the number will have $18$ digits or less, so the sum of digits is going to be less than $162$. We can have a queue per number from $2$ to $162$, iterating over its powers, and switching the queues with a NavigableMap of queues' heads, so that at each moment the head of the queue is the smallest number we need to check.
+
+The thirtieth number is $63^8$ (multiples of $9$ abound, as expected; there is a slight improvement to be made by using just powers that are guaranteed to preserve modulo $9$, but the gain is expected to be tiny). The bases range from $7$ (since $a_3=7^4=2401$) to $68$ (since $a_{27}=68^7=6722988818432$), and the exponents range from $2$ (for $a_1=9^2=81$) to $8$ (for $a_{28}=46^8$, $a_{29}=54^8$ and $a_{30}=63^8$). We can also find four more elements from the succession that also fit in a long:
+\begin{itemize}
+\item $a_{31}=54^9=3904305912313344$.
+\item $a_{32}=71^9=45848500718449031$.
+\item $a_{33}=20^{13}=81920000000000000$ (lovely, isn't it?).
+\item $a_{34}=81^9=150094635296999121$.
+\end{itemize}
+My program takes about $12$ms, which is nice.
+
+
 
 
 \end{document}
