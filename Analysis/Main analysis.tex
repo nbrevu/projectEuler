@@ -1851,4 +1851,15 @@ Anyway: you need a dynamic programming ``instance'' (i.e. a different array) for
 
 Also, yes, the case for $L=2$ is just Fibonacci numbers.
 
+\section{Red, green and blue tiles}
+\textbf{Difficulty rating}: 35\%.
+
+\textbf{Solution}: 100808458960497. \textit{Solved: Fri, 14 Aug 2015, 12:10}.
+
+\textbf{Math knowledge used}: none.
+
+\textbf{Programming techniques used}: dynamic programming.
+
+Like in the previous problem, a single array is needed. You can do $A\corch i=\sum_{j=1}^4A\corch{i-j}$, or compress the formula a little using a kind of telescopic reasoning, getting the slightly simpler $A\corch i=2A\corch{i-1}-A\corch{i-5}$. Runs in less than \textit{$9$ microseconds}.
+
 \end{document}
