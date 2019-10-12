@@ -1935,6 +1935,25 @@ This formula runs in constant time and gets the result in $10\mu$s.
 
 At turn $n$, there is a probability $\dfrac1n$ of getting a blue disc, and $\dfrac{n-1}n$ of getting a red one. So, I use some black magic (based on permutation iteration. C++'s next\_perm, we don't thank you enough) to enumerate all the winning combinations (for example, for $N=4$ turns the winning combinations would be $0111$, $1011$, $1101$, $1110$ and $1111$). For each one of them I calculate the numerator as a product of all the $n-1$ for the indices equal to $0$ in the combination, and then the denominator would be $\paren{N+1}!$. Dividing this denominator by the sum of all numerators and taking the floor returns the result. Less than $0.05$s, which is still kind of a lot, but then again I'm using permutation black magic.
 
+\section{Efficient exponentiation}
+\textbf{Difficulty rating}: 40\%.
+
+\textbf{Solution}: 1582. \textit{Solved: Sat, 15 Aug 2015, 02:44}.
+
+\textbf{Math knowledge used}: none.
+
+\textbf{Programming techniques used}: breadth-first search.
+
+Yes, after writing the algorithm I realised that it was actually a multiple, condensed breadth-first search. With a lot of implicit memoisation. It sounds like I'm throwing random polysyllabic words, but I promise that it makes sense.
+
+So, the problem looks like a standard partition problem, but it's more complicated (and that $40\%$ has reasons to be there). The important part is that dynamic programming won't work. Unless you generate \textit{all the possible ways} to generate each number. Which is not dynamic programming, but rather, brute force. A more elegant approach is to use a breadth-based search where you try to look for all the cases that can be generated at each depth level. And you store full ``paths'', meaning that if you are able to find $4$ with 2 steps, you need to store the full set of $\llave{1,2,4}$, because you will need to try all the combinations during the next level (actually you only need to combine $4$ with the other three? This would save some time, but it would require a more finely tuned structure). So far it seems kind of doable. However, if a number $x$'s optimum result is for depth $N$, then we need to make sure that \textit{every way of generating $x$ with $N$ multiplications is stored for the next level search}. Yes, this is necessary, otherwise you'll miss some cases and will get a wrong 1584 instead of the correct 1582. This took me off guard, because initially I was storing just the first path.
+
+Anyway. Non optimized, yet it takes eighty-something milliseconds. Good, even if there is a bit of room for improvement.
+
+By the way, the highest depth needed is $191$, with a depth of $11$. The generating set is $\llave{1,2,3,5,7,14,19,38,57,95,190}$. This is the only number with depth $11$, all the other can be obtained with $10$ or less.
+
+
+
 
 
 \end{document}
