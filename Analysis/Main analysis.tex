@@ -1924,5 +1924,17 @@ Then, we define $N=\dfrac{1000-2}2=499$, and with Faulhaber formulas and a bit o
 \end{equation*}
 This formula runs in constant time and gets the result in $10\mu$s.
 
+\section{Disc game prize fund}
+\textbf{Difficulty rating}: 35\%.
+
+\textbf{Solution}: 2269. \textit{Solved: Sat, 15 Aug 2015, 02:32}.
+
+\textbf{Math knowledge used}: none.
+
+\textbf{Programming techniques used}: permutation iterator.
+
+At turn $n$, there is a probability $\dfrac1n$ of getting a blue disc, and $\dfrac{n-1}n$ of getting a red one. So, I use some black magic (based on permutation iteration. C++'s next\_perm, we don't thank you enough) to enumerate all the winning combinations (for example, for $N=4$ turns the winning combinations would be $0111$, $1011$, $1101$, $1110$ and $1111$). For each one of them I calculate the numerator as a product of all the $n-1$ for the indices equal to $0$ in the combination, and then the denominator would be $\paren{N+1}!$. Dividing this denominator by the sum of all numerators and taking the floor returns the result. Less than $0.05$s, which is still kind of a lot, but then again I'm using permutation black magic.
+
+
 
 \end{document}
