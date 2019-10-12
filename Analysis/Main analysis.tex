@@ -1812,4 +1812,19 @@ I'm not super proud of this, but it's fast and frankly I'm not sure if there is 
 
 Now we're talking This problem is a bit more interesting than the previous one even if it's just a standard dynamic programming problem with a small twist. We need to count the amount of increasing numbers (dynamic programming with digits from $1$ to $9$; at each step, the value for digit $d$ is the sum of values for digits from $1$ to $d$ from the previous step) and the amount of decreasing numbers (dynamic programming with digits from $0$ to $9$; at each step, the value for digit $d$ is the sum of values for digits from $d$ to $9$ from the previous step), minus the $9\times100$ digits with same digits at all position, which have been counted twice because they appear in both cases. Finishes in less than one third of a millisecond!
 
+\section{Counting block combinations I}
+\textbf{Difficulty rating}: 35\%.
+
+\textbf{Solution}: 16475640049. \textit{Solved: Fri, 14 Aug 2015, 11:41}.
+
+\textbf{Math knowledge used}: none.
+
+\textbf{Programming techniques used}: dynamic programming.
+
+Incredibly easy dynamic programming problem. The difficulty rating is fucked. I distinctly remember solving all problems from $114$ to $117$ in half an hour (that's half an hour for \textit{all of them}, not half an hour per problem) one Sunday night after travelling from Málaga to Madrid, back in the day. Saying that these problems are easy is an understatement.
+
+Anyway: keep two arrays of length $N+1$, one for chains ending in a gray block and another one for chains ending in a red block. At each time you can do $G\corch i=G\corch{i-1}+R\corch{i-1}$, and $R\corch i=\sum_{j=0}^{i-3}G\corch j$. Iterate using these formulas, and return $G\corch N+R\corch N$. It takes about $80$ fucking \textit{microseconds}.
+
+
+
 \end{document}
