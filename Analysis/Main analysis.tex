@@ -1908,7 +1908,7 @@ This can be computed in \textit{constant} time. Assuming that the result fits in
 
 With Newton's binomial theorem we can easily get the following formula:
 \begin{equation*}
-r_{\max}=\corch{\paren{a-1}^n+\paren{a+1}^n}\equiv\paren{-1}^{n-1}na+\paren{-1}^n+na+1\text{ (mod }a^2\text{)}.
+r=\corch{\paren{a-1}^n+\paren{a+1}^n}\equiv\paren{-1}^{n-1}na+\paren{-1}^n+na+1\text{ (mod }a^2\text{)}.
 \end{equation*}
 For even values of $n$, the result is always $2$. For odd values, it's $2na$ (but we need to apply further modding), and now we're talking. If $a$ is odd, we can take either $n=\dfrac{a-1}2$ or $n=a+\dfrac{a-1}2$: we can guarantee that at least one of them will be even, and for that one, we arrive at $r_{\max}=a\paren{a-1}$. On the other hand, if $a$ is even, there are two cases that arrive at the same $r_{\max}$: if $\dfrac a2$ is even, $n=\dfrac a2-1$ does the trick; if it's odd, we need $n=a-1$.In both cases, $r_{\max}=a\paren{a-2}$. This is good enough to start operating:
 \begin{equation*}
@@ -1951,6 +1951,20 @@ So, the problem looks like a standard partition problem, but it's more complicat
 Anyway. Non optimized, yet it takes eighty-something milliseconds. Good, even if there is a bit of room for improvement.
 
 By the way, the highest depth needed is $191$, with a depth of $11$. The generating set is $\llave{1,2,3,5,7,14,19,38,57,95,190}$. This is the only number with depth $11$, all the other can be obtained with $10$ or less.
+
+\section{Prime square remainders}
+\textbf{Difficulty rating}: 30\%.
+
+\textbf{Solution}:  21035. \textit{Solved: Sat, 15 Aug 2015, 03:04}.
+
+\textbf{Math knowledge used}: Newton's binomial theorem, Erathostenes sieve.
+
+\textbf{Programming techniques used}: none.
+
+This can be tricky to get right because of two reasons: 1) indices are, infuriatingly, starting from $0$ and not from $1$ (this makes sense mathematically, but fucks with calculations a bit), 2) we need to make sure that only odd indices are valid.
+
+We determined in problem $120$ (using Newton's binomial theorem, which is otherwise not used at all in this problem, but it's necessary for the formula so I have included it) that $r=2$ if $n$ is even, and $r\equiv2na$ (mod $a^2$) if $n$ is odd. With this in mind, I did the following: first I generated an array of primes (I need the connection between primes and its index here!). Since Java arrays are $0$ based, \textbf{as they obviously and rightfully should be}\footnote{Have I mentioned today how \textit{much} do I hate Python?}, if the index of a prime $p$ in the array is $i$, the actual value of $n$ is $i+1$. Therefore I need to consider only \text{even} values of $i$. I also can start the search from the first prime that exceeds $10000$ (which can be found in the array with a binary search), and after that it's just a matter of iterating onwards. The prime limit I used was $1000000$, and the prime is actually $237733$, found in about $16$ ms.
+
 
 
 
