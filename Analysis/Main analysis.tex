@@ -1965,7 +1965,18 @@ This can be tricky to get right because of two reasons: 1) indices are, infuriat
 
 We determined in problem $120$ (using Newton's binomial theorem, which is otherwise not used at all in this problem, but it's necessary for the formula so I have included it) that $r=2$ if $n$ is even, and $r\equiv2na$ (mod $a^2$) if $n$ is odd. With this in mind, I did the following: first I generated an array of primes (I need the connection between primes and its index here!). Since Java arrays are $0$ based, \textbf{as they obviously and rightfully should be}\footnote{Have I mentioned today how \textit{much} do I hate Python?}, if the index of a prime $p$ in the array is $i$, the actual value of $n$ is $i+1$. Therefore I need to consider only \text{even} values of $i$. I also can start the search from the first prime that exceeds $10000$ (which can be found in the array with a binary search), and after that it's just a matter of iterating onwards. The prime limit I used was $1000000$, and the prime is actually $237733$, found in about $16$ ms.
 
+\section{Ordered radicals}
+\textbf{Difficulty rating}: 25\%.
 
+\textbf{Solution}:  21417. \textit{Solved: Sat, 15 Aug 2015, 03:16}.
+
+\textbf{Math knowledge used}: none
+
+\textbf{Programming techniques used}: ``first prime'' Erathostenes sieve, memoisation.
+
+There are two ways to solve this. Either you generate all the possible radicals (which means every squarefree number), and for each of them you generate all the numbers below the limit that have that radical, or you just generate all the radicals below the limit and sort them. The first alternative is better when the limit is very high, but it's not the case, so I opted for the second, which takes a bit less than $50$ms so all is good. For radical generation I can use a ``first prime'' sieve. If a number $n$ is prime, then the radical is $n$; if it has a prime factor $p$, then we can get $q=\mathrm{rad}\paren{n/p}$; if $q$ is a multiple of $p$, then $\mathrm{rad}\paren n=q$. Otherwise, it's $pq$.
+
+By the way, the result is $3\cdot11^2\cdot59$.
 
 
 
