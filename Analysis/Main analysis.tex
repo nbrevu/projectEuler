@@ -1955,7 +1955,7 @@ By the way, the highest depth needed is $191$, with a depth of $11$. The generat
 \section{Prime square remainders}
 \textbf{Difficulty rating}: 30\%.
 
-\textbf{Solution}:  21035. \textit{Solved: Sat, 15 Aug 2015, 03:04}.
+\textbf{Solution}: 21035. \textit{Solved: Sat, 15 Aug 2015, 03:04}.
 
 \textbf{Math knowledge used}: Newton's binomial theorem, Erathostenes sieve.
 
@@ -1968,7 +1968,7 @@ We determined in problem $120$ (using Newton's binomial theorem, which is otherw
 \section{Ordered radicals}
 \textbf{Difficulty rating}: 25\%.
 
-\textbf{Solution}:  21417. \textit{Solved: Sat, 15 Aug 2015, 03:16}.
+\textbf{Solution}: 21417. \textit{Solved: Sat, 15 Aug 2015, 03:16}.
 
 \textbf{Math knowledge used}: none
 
@@ -1977,6 +1977,19 @@ We determined in problem $120$ (using Newton's binomial theorem, which is otherw
 There are two ways to solve this. Either you generate all the possible radicals (which means every squarefree number), and for each of them you generate all the numbers below the limit that have that radical, or you just generate all the radicals below the limit and sort them. The first alternative is better when the limit is very high, but it's not the case, so I opted for the second, which takes a bit less than $50$ms so all is good. For radical generation I can use a ``first prime'' sieve. If a number $n$ is prime, then the radical is $n$; if it has a prime factor $p$, then we can get $q=\mathrm{rad}\paren{n/p}$; if $q$ is a multiple of $p$, then $\mathrm{rad}\paren n=q$. Otherwise, it's $pq$.
 
 By the way, the result is $3\cdot11^2\cdot59$.
+
+\section{Palindromic sums}
+\textbf{Difficulty rating}: 25\%.
+
+\textbf{Solution}: 2906969179. \textit{Solved: Sat, 15 Aug 2015, 03:20}.
+
+\textbf{Math knowledge used}: none
+
+\textbf{Programming techniques used}: none.
+
+I used an array with all the sums of squares (that is, element in position $n$ holds $\displaystyle\sum_{k=0}^nk^2$). I only need to check values up to $L'=\sqrt{L/2}$ since a sum needs to contain at least $2$ elements, and therefore the maximum possible is $L'^2+\paren{L'-1}^2$. After filling the array, I get all the possible differences from two values of this array whose indices differ in $2$ or more, and by doing this I'm iterating over all the possible differences. For all those values, I store the palindromes into a set, which I sum in the end (a set is needed because some values, namely $554455$ and $9343439$, are found twice). The result of the problem is the sum of all elements in the set. Finishes in $75$ milliseconds.
+
+
 
 
 
