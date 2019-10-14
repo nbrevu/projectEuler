@@ -2019,6 +2019,27 @@ A well-deserved $50\%$, for such a relatively early problem. The radical of a nu
 
 Also, take care about overflow. Either use longs, or compare $\mathrm{rad}\paren a\mathrm{rad}\paren b$ against $\frac{\mathrm{rad}\paren c}c$ instead of doing the full calculation.
 
+\section{Hexagonal tile differences}
+\textbf{Difficulty rating}: 55\%.
+
+\textbf{Solution}: 14516824220. \textit{Solved: Sat, 15 Aug 2015, 12:25}.
+
+\textbf{Math knowledge used}: Erathostenes sieve, Faulhaber formulas.
+
+\textbf{Programming techniques used}: none.
+
+I get why this problem has a $55\%$, but I still don't think it's quite right. There is a lot of preanalysis to be made, though.
+
+First: cases $1$ and $2$ are special, and should be counted initially. So is $7$, but this one doesn't verify the condition, so no need to count it. Now, we work in rings (this is not a particularly difficult epiphany to get, but it's an essential one); and for each ring $r$, it's easy to see that only the first and last elements might have $3$ prime differences: let $n$ be an ``internal'' element; both $n-1$ and $n+1$ are present, and there are also two contiguous elements from both the previous and the next rings: $m$ and $m+1$ from one side, $p$ and $p+1$ from other. Since only one at most of $\llave{m,m+1}$ and only one at most of $\llave{p,p+1}$ may have a prime difference with $n$, the maximum difference is $2$. However, for the first and last of the ring, the difference between them is $6r+5$; if it's prime, the first and last elements in the ring may verify the condition. They have to be checked separately.
+\begin{itemize}
+\item For the first one, the differences are: $6r+6$; $12r+17$; $6r+5$; $6r$; $1$; and $6r+7$. Out of these, only $6r+5$, $6r+7$ and $12r+17$ might be prime. The number itself is $3r\paren{r+1}+2=3r^2+3r+2$.
+\item For the last one, the differences are: $6r+12$; $6r+11$; $1$; $6r+6$; $12r+5$; and $6r+5$. The only possible primes are $6r+5$, $6r+11$ and $12r+5$. The number itself is $3\paren{r+1}\paren{r+2}+1=3r^2+9r+7$.
+\end{itemize}
+Note that the indices of the number can be calculated using a careful but basic approach with triangular numbers (or Faulhaber formulas if you want to be posh).
+
+To check for primality you could use Miller-Rabin, but the numbers don't get very high, so you can use a sieve with some low value. I used $10^6$ without thinking much, and it seems that the highest number checked is $834761$. The runtime is very low thanks to the sieve; about $16$ms.
+
+
 
 
 \end{document}
