@@ -1987,10 +1987,24 @@ By the way, the result is $3\cdot11^2\cdot59$.
 
 \textbf{Programming techniques used}: none.
 
-I used an array with all the sums of squares (that is, element in position $n$ holds $\displaystyle\sum_{k=0}^nk^2$). I only need to check values up to $L'=\sqrt{L/2}$ since a sum needs to contain at least $2$ elements, and therefore the maximum possible is $L'^2+\paren{L'-1}^2$. After filling the array, I get all the possible differences from two values of this array whose indices differ in $2$ or more, and by doing this I'm iterating over all the possible differences. For all those values, I store the palindromes into a set, which I sum in the end (a set is needed because some values, namely $554455$ and $9343439$, are found twice). The result of the problem is the sum of all elements in the set. Finishes in $75$ milliseconds.
+I used an array with all the sums of squares (that is, element in position $n$ holds $\displaystyle\sum_{k=0}^nk^2$). I only need to check values up to $L'=\ceil{\sqrt{L/2}}$ since a sum needs to contain at least $2$ elements, and therefore the maximum possible is $L'^2+\paren{L'-1}^2$. After filling the array, I get all the possible differences from two values of this array whose indices differ in $2$ or more, and by doing this I'm iterating over all the possible differences. For all those values, I store the palindromes into a set, which I sum in the end (a set is needed because some values, namely $554455$ and $9343439$, are found twice). The result of the problem is the sum of all elements in the set. Finishes in $75$ milliseconds.
 
+\section{Cuboid layers}
+\textbf{Difficulty rating}: 55\%.
 
+\textbf{Solution}: 18522. \textit{Solved: Sat, 15 Aug 2015, 04:04}.
 
+\textbf{Math knowledge used}: none
+
+\textbf{Programming techniques used}: none.
+
+I have a low-key dislike for this problem. Sure, it's one of these ``barrier-breaking'' ones whose difficulty is higher than any problem before, but I feel like the reason for it is not that the problem is interesting, but rather, that the interesting and elegant approaches don't work.
+
+First, the basics: if I have a cuboid of size $x\times y\times z$, the $n$-th layer has exactly this many cubes:
+\begin{equation*}
+f_n\paren{x,y,z}=2\paren{xy+xz+yz}+4\paren{x+y+z+n-2}\paren{n-1}.
+\end{equation*}
+This is all fine until you notice that the second term has a quadratic term in $n$, meaning that $f_n\paren{x,y,z}=L$ (for whichever $L$) isn't just a diophantic equation: it's a \textit{quadratic} diophantic equation. With $4$ variables. This means that it's quite hard to solve, even with the help of the mighty Alpertron. It can be done, though, and this suggests a method: iterate over even $L$ values, count the amount of solutions, return when it's higher than the limit. However, this method is both difficult to get right and surprisingly slow. A much better solution is to just use brute force, counting all the layers up to certain arbitrary limit (I used $30000$). That's it: iterate over triples $\paren{x,y,z}$, adding the condition $x\leq y\leq z$, and for each one, iterate $n$ until $f_n\paren{x,y,z}$ exceeds the limit, increasing a counter for each resulting amount of blocks. Then, when you have finished iterating, check the counters and return the first one that equals the given limit. This gets the result in about $50$ms.
 
 
 
