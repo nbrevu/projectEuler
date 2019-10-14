@@ -2006,6 +2006,19 @@ f_n\paren{x,y,z}=2\paren{xy+xz+yz}+4\paren{x+y+z+n-2}\paren{n-1}.
 \end{equation*}
 This is all fine until you notice that the second term has a quadratic term in $n$, meaning that $f_n\paren{x,y,z}=L$ (for whichever $L$) isn't just a diophantic equation: it's a \textit{quadratic} diophantic equation. With $4$ variables. This means that it's quite hard to solve, even with the help of the mighty Alpertron. It can be done, though, and this suggests a method: iterate over even $L$ values, count the amount of solutions, return when it's higher than the limit. However, this method is both difficult to get right and surprisingly slow. A much better solution is to just use brute force, counting all the layers up to certain arbitrary limit (I used $30000$). That's it: iterate over triples $\paren{x,y,z}$, adding the condition $x\leq y\leq z$, and for each one, iterate $n$ until $f_n\paren{x,y,z}$ exceeds the limit, increasing a counter for each resulting amount of blocks. Then, when you have finished iterating, check the counters and return the first one that equals the given limit. This gets the result in about $50$ms.
 
+\section{abc-hits}
+\textbf{Difficulty rating}: 50\%.
+
+\textbf{Solution}: 18407904. \textit{Solved: Sat, 15 Aug 2015, 12:17}.
+
+\textbf{Math knowledge used}: none
+
+\textbf{Programming techniques used}: ``first prime'' Erathostenes sieve, memoisation.
+
+A well-deserved $50\%$, for such a relatively early problem. The radical of a number is calculated in the same way than in problem $12$. We are looking for highly powerful (as in, contains powers) values of $c$ (if $c$ is squarefree, then $\mathrm{rad}\paren c=c$, therefore $\mathrm{rad}\paren{abc}\geq c$). For each $c$, we can look for values of $a$ that are coprime with $c$ and that verify the conditions. So, we iterate from $1$ to $\floor{\dfrac c2}$ (since $a<b$) and check every case. Very slow (almost $1.5$ seconds), but does the job. It's helpful to note that we can compute $\mathrm{rad}\paren{abc}$ quickly since the coprimality implies $\mathrm{rad}\paren{abc}=\mathrm{rad}\paren a\mathrm{rad}\paren b\mathrm{rad}\paren c$, thus the memoisation.
+
+Also, take care about overflow. Either use longs, or compare $\mathrm{rad}\paren a\mathrm{rad}\paren b$ against $\frac{\mathrm{rad}\paren c}c$ instead of doing the full calculation.
+
 
 
 \end{document}
