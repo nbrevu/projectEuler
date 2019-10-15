@@ -2096,7 +2096,16 @@ I want $n^3+n^2p=n^2\paren{n+p}$ to be a perfect cube. Since $p$ is prime, the o
 
 The algorithm from here is simple: iterate over cube differences until the difference exceeds $10^6$ (this should happen around $n=\ceil{\sqrt{\dfrac{10^6}3}}=578$), increase a counter when a prime is found. About $8$ms of runtime, and I assume that most of it goes to the sieve generation.
 
+\section{Large repunit factors}
+\textbf{Difficulty rating}: 45\%.
 
+\textbf{Solution}: 843296. \textit{Solved: Sat, 15 Aug 2015, 13:17}.
+
+\textbf{Math knowledge used}: infinite decimal period distributions, Erathostenes sieve.
+
+\textbf{Programming techniques used}: none.
+
+What we are looking for are numbers whose minimum repunit multiple has such a number of digits, $d$, that $10^9$ is a multiple of $d$. Some cases are obvious ($11$), other are just obvious in hindsight (primes like $2^k+1$ such as $17$), other are just interesting: $353$ with a period of $32$ (acceptable since $353=32\cdot11+1$, but not at all trivial). You could use a ``shortcut'' of immediately accepting any prime $p$ so that $p-1$ divides $10^9$, but that means an extra division per number, so there isn't any real gain. Both with and without this check, my code runs in about $2.87$s and I don't think I'll be able to improve that mark. Also, the highest number is $160001$ with a period of $1250$, so you can just use a sieve with $10^6$ to check primality.
 
 
 \end{document}
