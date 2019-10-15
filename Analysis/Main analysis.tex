@@ -2107,5 +2107,18 @@ The algorithm from here is simple: iterate over cube differences until the diffe
 
 What we are looking for are numbers whose minimum repunit multiple has such a number of digits, $d$, that $10^9$ is a multiple of $d$. Some cases are obvious ($11$), other are just obvious in hindsight (primes like $2^k+1$ such as $17$), other are just interesting: $353$ with a period of $32$ (acceptable since $353=32\cdot11+1$, but not at all trivial). You could use a ``shortcut'' of immediately accepting any prime $p$ so that $p-1$ divides $10^9$, but that means an extra division per number, so there isn't any real gain. Both with and without this check, my code runs in about $2.87$s and I don't think I'll be able to improve that mark. Also, the highest number is $160001$ with a period of $1250$, so you can just use a sieve with $10^6$ to check primality.
 
+\section{Repunit nonfactors}
+\textbf{Difficulty rating}: 50\%.
+
+\textbf{Solution}: 453647705. \textit{Solved: Sat, 15 Aug 2015, 13:24}.
+
+\textbf{Math knowledge used}: infinite decimal period distributions, Erathostenes sieve.
+
+\textbf{Programming techniques used}: none.
+
+This is a bit of a trick question, in that the standard algorithm should start iterating from $7$, but you need to include $2$, $3$ and $5$ as well. Save for these three numbers, the algorithm is: iterate over all the primes, and for each prime $p$, calculate the smallest repunit divisible by $p$ using the same algorithm we have been using in ther previous problems. If the amount of digits has a prime factor which is not $2$ or $5$, then the prime can't be a factor of a repunit $R\paren{10^n}$. Since the repunit calculation is kind of expensive and there are $10^5$ numbers, the run time exceeds one second (a bit less than $1.18$s).
+
+
+
 
 \end{document}
