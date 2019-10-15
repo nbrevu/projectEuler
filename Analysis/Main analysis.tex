@@ -2052,6 +2052,33 @@ The period of a number $n$ is always smaller than $n$; the period is always a mu
 
 Start from $10^6$ (otherwise, your algorithm will be $O\paren{n^2}$ instead of $O\paren n$. Not good when $n=10^6$), and for each one, keep iterating from $m=1$ to $m=10(m\%n)+1$ until some $m\%n$ equals $0$. Starting from $10^6$ and ignoring even numbers and multiples of $5$, only $10$ numbers need to be checked. There are a lot of divisions, though, so the run time is a bit more than $10$ms.
 
+\section{Composites with prime repunit proper-ty} % Fuck the bad box. I want my results to be 0-0-0-nº of pages, no exceptions.
+\textbf{Difficulty rating}: 45\%.
 
+\textbf{Solution}: 149253. \textit{Solved: Sat, 15 Aug 2015, 12:59}.
+
+\textbf{Math knowledge used}: infinite decimal period distributions, Erathostenes sieve.
+
+\textbf{Programming techniques used}: none.
+
+Similar to the previous one: iterate over numbers that aren't multiples of $2$, $3$ or $5$ (I used an array of numbers not multiple of those in the range $\corch{1,30}$, then iterated first over multiples of $30$ and then over this array), ignore prime numbers, check repunit divisibility using the same function as in the previous problem. The last composite found is $14701=61\cdot241$, so you can use a sieve with $10^5$ as limit, or even less (I initially used $10^6$). You can also be über-cautious and resort to Miller-Rabin, which is overkill. Anyway the repunit checks are a bit slow so this lasts about $30$ms. There is a bit of finesse regarding prime factors, but it requires such a complicated scheme that in the end it's just better to iterate normally (for very big values, I would consider doing it the elegant way, but for $N<15000$, it's just not worth it).
+
+Some of the numbers from this series are somewhat interesting:
+\begin{itemize}
+\item $6$th element: $1729=7\cdot13\cdot19$ and period $18$ (Ramanujan's constant!).
+\item $9$th element: $3367=7\cdot13\cdot37$ and period $6$ (kind of expected).
+\item $15th$ element: $6601=7\cdot23\cdot41$ and period $330$. This has the highest period of all the values in the first $25$ ones.
+\item $17$th element: $7777=7\cdot11\cdot101$ and period $12$.
+\item $21$st element: $10001=73\cdot137$ and period $8$ (two new divisibility rules for the price of one!!).
+\item $22$st element: $11111=41\cdot271$ and period $5$ (of course).
+\item $36$th element, now outside the range of the problem: $34133=11\cdot29\cdot107$ and period $1484$ (!). Finding this with a fine tuned algorithm would have been a bitch.
+\item $42$nd element: $46657=6^6+1=13\cdot37\cdot97$ with period $96$.
+\item $63$rd element: $100001=11\cdot9091$ and period $10$.
+\item $64$rd element: $101101=7\cdot11\cdot13\cdot101$ and period $12$.
+\item $73$rd element: $122221=11\cdot41\cdot271$ and period $10$, product of $2$-repunit and $5$-repunit.
+\item $80$th element: $137137=7\cdot11\cdot13\cdot137$ and period $24$.
+\item $143$rd and $144$th elements are $401401=7\cdot11\cdot13\cdot401$ and $410041=41\cdot73\cdot137$ with periods $600$ and $40$, respectively.
+\item $154$rd element: $488881=37\cdot73\cdot181$ and period $360$.
+\end{itemize}
 
 \end{document}

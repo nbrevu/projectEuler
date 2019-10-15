@@ -751,4 +751,15 @@ public class EulerUtils {
 		}
 		return result;
 	}
+
+	public static int minRepunitDivisible(int n)	{
+		int count=1;
+		int mod=1;
+		for (;;)	{
+			mod%=n;
+			if (mod==0) return count;
+			++count;
+			mod=10*mod+1;
+		}
+	}
 }
