@@ -2039,6 +2039,18 @@ Note that the indices of the number can be calculated using a careful but basic 
 
 To check for primality you could use Miller-Rabin, but the numbers don't get very high, so you can use a sieve with some low value. I used $10^6$ without thinking much, and it seems that the highest number checked is $834761$. The runtime is very low thanks to the sieve; about $16$ms.
 
+\section{Repunit divisibility}
+\textbf{Difficulty rating}: 45\%.
+
+\textbf{Solution}: 1000023. \textit{Solved: Sat, 15 Aug 2015, 12:47}.
+
+\textbf{Math knowledge used}: infinite decimal period distributions.
+
+\textbf{Programming techniques used}: none.
+
+The period of a number $n$ is always smaller than $n$; the period is always a multiple of the first divisible repunit, and both number are equal, at the very least, if $n$ is not a multiple of $3$. I expected this to be a prime, which caught me off guard, but it turns out that you can't skip composite numbers because the answer is in fact composite.
+
+Start from $10^6$ (otherwise, your algorithm will be $O\paren{n^2}$ instead of $O\paren n$. Not good when $n=10^6$), and for each one, keep iterating from $m=1$ to $m=10(m\%n)+1$ until some $m\%n$ equals $0$. Starting from $10^6$ and ignoring even numbers and multiples of $5$, only $10$ numbers need to be checked. There are a lot of divisions, though, so the run time is a bit more than $10$ms.
 
 
 
