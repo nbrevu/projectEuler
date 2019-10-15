@@ -2081,4 +2081,22 @@ Some of the numbers from this series are somewhat interesting:
 \item $154$rd element: $488881=37\cdot73\cdot181$ and period $360$.
 \end{itemize}
 
+\section{Prime cube partnership}
+\textbf{Difficulty rating}: 40\%.
+
+\textbf{Solution}: 173. \textit{Solved: Sat, 15 Aug 2015, 13:10}.
+
+\textbf{Math knowledge used}: Erathostenes sieve.
+
+\textbf{Programming techniques used}: none.
+
+I remember having a lot of fun solving this one, back in the day. Here's the thing: there is a very simple standard way of finding values of $p$ so that $n^3+n^2p$ is a cube, so we just need to generate these and keep the prime ones.
+
+I want $n^3+n^2p=n^2\paren{n+p}$ to be a perfect cube. Since $p$ is prime, the only possibility is that both $n^2$ and $n+p$ are cubes, meaning that $n$ is a cube and so is $n+p$, therefore $p$ is the difference of two cubes. However, the difference between two cubes can only be prime if they are consecutive primes; otherwise $b^3-a^3=\paren{b-a}\paren{a^2+ab+b^2}$ can't be prime since it would have two factors bigger than $1$. So $n=k^3$, $p=\paren{k+1}^3-k^3$, and $n^2+np=\paren{k^2\paren{k+1}}^3$.
+
+The algorithm from here is simple: iterate over cube differences until the difference exceeds $10^6$ (this should happen around $n=\ceil{\sqrt{\dfrac{10^6}3}}=578$), increase a counter when a prime is found. About $8$ms of runtime, and I assume that most of it goes to the sieve generation.
+
+
+
+
 \end{document}
