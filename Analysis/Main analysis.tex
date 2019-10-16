@@ -2118,6 +2118,25 @@ What we are looking for are numbers whose minimum repunit multiple has such a nu
 
 This is a bit of a trick question, in that the standard algorithm should start iterating from $7$, but you need to include $2$, $3$ and $5$ as well. Save for these three numbers, the algorithm is: iterate over all the primes, and for each prime $p$, calculate the smallest repunit divisible by $p$ using the same algorithm we have been using in ther previous problems. If the amount of digits has a prime factor which is not $2$ or $5$, then the prime can't be a factor of a repunit $R\paren{10^n}$. Since the repunit calculation is kind of expensive and there are $10^5$ numbers, the run time exceeds one second (a bit less than $1.18$s).
 
+There are $9552$ such primes.
+
+\section{Prime pair connection}
+\textbf{Difficulty rating}: 45\%.
+
+\textbf{Solution}: 18613426663617118. \textit{Solved: Sat, 15 Aug 2015, 14:10}.
+
+\textbf{Math knowledge used}: modular arithmetic, modulus inverse, Erathostenes sieve.
+
+\textbf{Programming techniques used}: none.
+
+This one is mathematically easy (at least, it's straightforward) but it's also easy to get the details wrong. So, let's say that the primes involved are $p_{n-1}$ and $p_n$. Of course there is some integer $r$ so that $10^{r-1}<p_{n-1}<10^r$, and we need to find some value $q$ so that $q\cdot10^r+p_{n-1}$ is a multiple of $p_n$. Which means that $q\cdot10^r\equiv p_n-p_{n-1}$ (mod $p_n$), or in other words, if $x$ is the inverse of $10^r$ (mod $p_n$), then $q\equiv x\paren{p_n-p_{n-1}}$ (mod $p_n$). And $S_p=10^rq+p_{n-1}$. So far so good.
+
+First nitpick: you don't need to skip $5$; you need to start after $5$, meaning that you also need to skip $3$ (stupid, sure; but I fell for this). Just start calculating at the pair $\paren{5,7}$. Second nitpick: it looks like you need just all primes up to $10^6$, but that's wrong, since we also need one last pair: the one $\paren{p_{n-1},p_n}$ where $p_{n-1}<10^6<p_n$. Meaning that we need one prime just after $10^6$. I also fell for this.
+
+Then, small nitpick about efficiency: how to calculate $10^r$? No need to count digits or use logarithms or anything like that, since the primes should be ordered; at the start of each iteration, compare $p_{n-1}$ with $10^r$ and, if the first one is greater, multiply your current $10^r$ times $10$ to update it. With this, I get a run time of less than $50$ms.
+
+By the way, it's funny that modular inverses are used ``directly''. We are going to need Euclid's modular inverse for a \textit{huge} amount of problems, but for the vast majority of them, the reason is not ``mathematical'' in the sense that the formula lends itself to the usage of inverses; rather, the reason is that we need to calculate a huge number modulo $10^9\pm x$ for some small $x$, and whenever the calculation of the huge number involves a division, we replace it by a multiplication times a modulo inverse. This will be extremely common in later problems, and in retrospect, it's curious that not only we haven't used modular inverses until problem $134$, but we haven't yet even encountered one of those ``calculate a huge number, modulo a small prime'' problems.
+
 
 
 
