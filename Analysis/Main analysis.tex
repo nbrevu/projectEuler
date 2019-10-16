@@ -2137,6 +2137,25 @@ Then, small nitpick about efficiency: how to calculate $10^r$? No need to count 
 
 By the way, it's funny that modular inverses are used ``directly''. We are going to need Euclid's modular inverse for a \textit{huge} amount of problems, but for the vast majority of them, the reason is not ``mathematical'' in the sense that the formula lends itself to the usage of inverses; rather, the reason is that we need to calculate a huge number modulo $10^9\pm x$ for some small $x$, and whenever the calculation of the huge number involves a division, we replace it by a multiplication times a modulo inverse. This will be extremely common in later problems, and in retrospect, it's curious that not only we haven't used modular inverses until problem $134$, but we haven't yet even encountered one of those ``calculate a huge number, modulo a small prime'' problems.
 
+\section{Same differences}
+\textbf{Difficulty rating}: 45\%.
+
+\textbf{Solution}: 4989. \textit{Solved: Sat, 15 Aug 2015, 15:02}.
+
+\textbf{Math knowledge used}: none.
+
+\textbf{Programming techniques used}: none.
+
+This is more difficult than it looks; a respectable problem. Knowing that $x$, $y$ and $z$ are an arithmetic progression, we can rewrite them as $y+d$, $y$, $y-d$, which leaves the equation as
+\begin{equation*}
+\paren{y+d}^2-y^2-\paren{y-d}^2=n\Rightarrow4yd-y^2=n\Rightarrow y\paren{4d-y}=n.
+\end{equation*}
+This suggests that we look for pairs of numbers $\paren{a,b}$ whose sum is $4d$, i.e., a multiple of $4$. We can call for example $b=y$ and, with the condition $y-d>0$ we can arrive to $b-\dfrac{a+b}4>0\Rightarrow b>\dfrac a3$. Since we need the product $ab$ to be smaller or equal than $L=10^6$, we can iterate for values of $a$ up to $\sqrt{3L}$, and then iterate for $b$ in increases of $4$, from $\ceil{\dfrac a3}$ up to $\floor{\dfrac La}$, increasing a counter for $ab$, and in the end, checking which counters arrived to $10$ exactly. This scheme is about $O\paren{L\log L}$, not very good, but $L$ is smallish so it's OK and the run time stays in a very acceptable $21$ms.
+
+Geting the iterating scheme right is harder than it looks. Choosing $b=y$ instead of $a=y$, for example, yields a slightly different scheme that I believe is a bit more inefficient.
+
+
+
 
 
 
