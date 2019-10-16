@@ -2173,9 +2173,67 @@ So, we start counting from $2$ (i.e. including $4$ and $16$ from the start), the
 
 This is linear in $L$ save for the sieve generation, and ends in about $0.42$s ($0.38$ of which come from the sieve!), less than a fourth of the initial algorithm.
 
+\section{Fibonacci golden nuggets}
+\textbf{Difficulty rating}: 50\%.
 
+\textbf{Solution}: 1120149658760. \textit{Solved: Sat, 15 Aug 2015, 15:38}.
 
+\textbf{Math knowledge used}: generating functions and recurrence equation theory.
 
+\textbf{Programming techniques used}: none.
+
+This is one of these problems where you can do an awful lot of analysis and then, after a lot of work, you end with a reasonably simple formula (constant time! We won't see many of them from this point on...). In this case it happens that the formula is the OEIS sequence A081018 (arriving to this is the ``lot of work'', really. Either you do it yourself or you find it by chance), which happens to have a simple formula in terms of Fibonacci numbers:
+\begin{equation*}
+G\paren k=\sum_{n=1}^kf_{4n-1}.
+\end{equation*}
+Yes, that's it. So we can do:
+\begin{equation*}
+G\paren k=\sum_{n=1}^k\dfrac{\varphi^{4n-1}-\paren{1-\varphi}^{4n-1}}{\sqrt5}=\dfrac{\varphi^{4k+4}-\varphi^4}{\sqrt5\varphi\paren{1-\varphi^4}}-\dfrac{\paren{1-\varphi}^{4k+4}-\paren{1-\varphi}^4}{\sqrt5\paren{1-\varphi}\corch{1-\paren{1-\varphi}^4}}.
+\end{equation*}
+The second term, for all its complexity, is well below $1$ in absolute value, so we can just do this:
+\begin{equation*}
+G\paren k\approx\dfrac{\varphi^{4k+4}-\varphi^4}{\sqrt5\varphi\paren{1-\varphi^4}}.
+\end{equation*}
+Rounding to the nearest integer results in the correct solution. In less than $50\mu$s. This simplicity is very misleading, since the analysis required to get to this is quite complicated, and it includes generating functions, a topic I'm not as fluent in as I would like to be.
+
+The generating function of the Fibonacci numbers is $F\paren x=\dfrac1{1-x-x^2}$. The function we are presented with happens to be $xF\paren x=\dfrac x{1-x-x^2}$. We need to look for values of $x$ so that $xF\paren x$ is an integer, and after that, we need to look for rational values in these $x$. This part is actually easy:
+\begin{equation*}
+\begin{array}{l}
+xF\paren x=N\Rightarrow\dfrac x{1-x-x^2}=N\Rightarrow Nx^2+\paren{N+1}x-N=0\Rightarrow\\\Rightarrow x=\dfrac{-\paren{N+1}\pm\sqrt{5N^2+2N+1}}{2N}.
+\end{array}
+\end{equation*}
+Clearly this will be a rational number if an only if $5N^2+2N+1$ is a perfect square. Now here goes a complicated procedure involving a diophantine solution calculation (thanks once again, Alpertron), which yields the following solutions:
+\begin{eqnarray*}
+g_1&=&2,\\
+g_2&=&15,\\
+g_n&=&7g_{n-1}-g_{n-2}+1.
+\end{eqnarray*}
+The next terms of the succession are $104$, $714$ and $4895$. And we can get this interesting recurrence for the differences $a_n=g_n-g_{n-1}$:
+\begin{eqnarray*}
+a_0&=&0,\\
+a_1&=&2,\\
+a_n&=&7a_{n-1}-a_{n-2}.
+\end{eqnarray*}
+If we output these values, we see that they are equally spaced Fibonacci numbers: $2=f_3$, $13=f_7$, $89=f_{11}\ldots$ And post facto, we can actually prove that relatively easily, since the classic formula $f_n=f_{n-1}+f_{n-2}$, applied recursively, implies that
+\begin{eqnarray*}
+f_{n+4}&=&8f_{n-1}+5f_{n-2},\\
+f_{n+8}&=&55f_{n-1}+34f_{n-2}.
+\end{eqnarray*}
+And combining the three formulas we arrive to
+\begin{equation*}
+f_{n+8}=7f_{n+4}-f_n.
+\end{equation*}
+This, combined with $f_3=2$, $f_{-1}=0$, concludes that $a_n=f_{4n-1}$, therefore finishing the proof that $g_n=\displaystyle\sum_{k=1}^nf_{4k-1}$.
+
+I'd like to add some additional formulas I've found while reseaching this:
+\begin{eqnarray*}
+f_{n+2}&=&f_{n+1}+f_n,\\
+f_{n+4}&=&3f_{n+2}-f_n,\\
+f_{n+6}&=&4f_{n+3}+f_n,\\
+f_{n+8}&=&7f_{n+4}-f_n,\\
+f_{n+10}&=&11f_{n+5}+f_n\ldots
+\end{eqnarray*}
+This suggests that the formulas are always $f_{n+2a}=A_nf_{n+a}+B_nf_n$ where $A_n=L_{n-1}$ is a Lucas number and $B_n=\paren{-1}^n+1$. The formula even holds for $a=0$: $f_n=2f_n-f_n$.
 
 
 \end{document}
