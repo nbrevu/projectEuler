@@ -2154,6 +2154,25 @@ This suggests that we look for pairs of numbers $\paren{a,b}$ whose sum is $4d$,
 
 Geting the iterating scheme right is harder than it looks. Choosing $b=y$ instead of $a=y$, for example, yields a slightly different scheme that I believe is a bit more inefficient.
 
+\section{Singleton difference}
+\textbf{Difficulty rating}: 50\%.
+
+\textbf{Solution}: 2544559. \textit{Solved: Sat, 15 Aug 2015, 15:07}.
+
+\textbf{Math knowledge used}: Erathostenes sieve.
+
+\textbf{Programming techniques used}: none.
+
+I can reuse the same algorithm for the previous problem, which is still of order $O\paren{L\log L}$ and finishes in $1.7$s. OR! I can use some arcane magic found in the problem thread, which states that all the values of $n$ are in one of the following exclusive sets:
+\begin{itemize}
+\item $n=p$ for $p$ prime of the form $4k+1$.
+\item $n=4p$ for $p=1$ or $p$ an odd prime.
+\item $n=16p$ for $p=1$ or $p$ an odd prime.
+\end{itemize}
+So, we start counting from $2$ (i.e. including $4$ and $16$ from the start), then we increase the counter twice for every odd prime in $\corch{3,\floor{\dfrac L{16}}}$, once for every odd prime in $\corch{3,\floor{\dfrac L4}}$ and once again for every $4k+3$ prime in $\corch{3,L}$.
+
+This is linear in $L$ save for the sieve generation, and ends in about $0.42$s ($0.38$ of which come from the sieve!), less than a fourth of the initial algorithm.
+
 
 
 
