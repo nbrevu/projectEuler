@@ -2260,5 +2260,25 @@ f_{n+12}=18f_{n+6}-f_n,
 \end{equation*}
 \noindent a recurrence equation that very obviously will keep working if we use the halves of the original fibonacci values as the starting point. Starting with $L_0=\dfrac{f_3}2=1$, $L_1=\dfrac{f_9}2=17$, we can calculate $\sum_{n=1}^{12}L_n$ in $15\mu$s. Which funnily is less than the run time of the constant time solution.
 
+\section{Pythagorean tiles}
+\textbf{Difficulty rating}: 50\%.
+
+\textbf{Solution}: 10057761. \textit{Solved: Sat, 15 Aug 2015, 17:39}.
+
+\textbf{Math knowledge used}: Pythagorean triples generation.
+
+\textbf{Programming techniques used}: none.
+
+This is much more reasonable than the previous two ones, and that $50\%$ is not warranted, really. Given that:
+\begin{itemize}
+\item a primitive triple $\paren{a,b,c}$ will allow the tiling if and only if $c$ is a multiple of $a-b$, and
+\item any triple, primitive or not, allows the tiling if and only if its primitive triple allows is,
+\end{itemize}
+we can just enumerate triples with the given perimeter limit; for each one, we calculate whether the first condition holds, and if it does, we can increase the counter in $\floor{\dfrac L{a+b+c}}$, which is the amount of tiles we can ``scale'' the original one up to. It's so simple, after the two previous problems!
+
+Pythagorean triples generation is kind of expensive so this takes a bit less than $1$s.
+
+
+
 
 \end{document}
