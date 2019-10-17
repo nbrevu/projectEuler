@@ -2235,5 +2235,30 @@ f_{n+10}&=&11f_{n+5}+f_n\ldots
 \end{eqnarray*}
 This suggests that the formulas are always $f_{n+2a}=A_nf_{n+a}+B_nf_n$ where $A_n=L_{n-1}$ is a Lucas number and $B_n=\paren{-1}^n+1$. The formula even holds for $a=0$: $f_n=2f_n-f_n$.
 
+\section{Special isosceles triangles}
+\textbf{Difficulty rating}: 45\%.
+
+\textbf{Solution}: 1118049290473932. \textit{Solved: Sat, 15 Aug 2015, 16:08}.
+
+\textbf{Math knowledge used}: recurrence equation theory.
+
+\textbf{Programming techniques used}: none.
+
+The analysis is similar to the previous problem's, actually. Copying from OEIS A007805: these are the values of $c$ in the Pythagorean triples $\paren{a,b,c}$ that verify $\abs{2a-b}=1$. These correspond to the solutions of the Pell's equation $x^2-5y^2+1=0$ (the solution we're interested in is $y$). This equation has an interwoven recurrence relation between $x$ and $y$. We could descend to eigenvalue hell in order to solve this in terms of $y$ and discarding $x$, OR we could observe that $L_n=y_n=\dfrac{f_{6n+9}}2$. That's right. This gives us the following obvious solution in constant time!:
+\begin{equation*}
+\sum_{n=1}^{12}L_n=\sum_{n=1}^{12}f_{6n+9}\approx\dfrac{\varphi^{6\cdot12+9}-\varphi^9}{2\sqrt5\paren{1-\varphi^6}}.
+\end{equation*}
+Except that this, infuriatingly, doesn't work properly because of some fucking precision problem. It works correctly for all values of $n$ up to $11$, and returns a slightly different value for $n=12$. Because the ways of Murphy are inscrutable. The whole, supposedly exact, formula is this one:
+\begin{equation*}
+\sum_{n=1}^{12}L_n=\dfrac{\varphi^{6\cdot12+9}-\varphi^9}{2\sqrt5\paren{1-\varphi^6}}-\dfrac{\paren{1-\varphi}^{6\cdot12+9}-\paren{1-\varphi}^9}{2\sqrt5\paren{1-\paren{1-\varphi}^6}};
+\end{equation*}
+\noindent and it returns the same slightly wrong value because the precision problem is in the first term, and the second one (which equals about $-0.003$) doesn't have any effect if we are rounding to an integer. We need the actual recurrence equations.
+
+Fortunately we know thanks to the previous problem that, or Fibonacci numbers spaced in intervals of $6$, 
+\begin{equation*}
+f_{n+12}=18f_{n+6}-f_n,
+\end{equation*}
+\noindent a recurrence equation that very obviously will keep working if we use the halves of the original fibonacci values as the starting point. Starting with $L_0=\dfrac{f_3}2=1$, $L_1=\dfrac{f_9}2=17$, we can calculate $\sum_{n=1}^{12}L_n$ in $15\mu$s. Which funnily is less than the run time of the constant time solution.
+
 
 \end{document}
