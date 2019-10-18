@@ -2278,6 +2278,45 @@ we can just enumerate triples with the given perimeter limit; for each one, we c
 
 Pythagorean triples generation is kind of expensive so this takes a bit less than $1$s.
 
+\section{Modified Fibonacci golden nuggets}
+\textbf{Difficulty rating}: 55\%.
+
+\textbf{Solution}: 5673835352990. \textit{Solved: Sat, 15 Aug 2015, 18:13}.
+
+\textbf{Math knowledge used}: generating functions, quadratic diophantine equations.
+
+\textbf{Programming techniques used}: none.
+
+Is it cheating to use Alpertron to solve the equation? I don't think so, since that's the mechanical part of the problem (but it might be cheating to consider the runtime to be $1.6$ms, considering that the heavy loading has been done beforehand).
+
+The generating function of the succession $G$ is $G\paren x=\dfrac{3x+1}{1-x-x^2}$ since $G_1=1$ and $G_2-G_1=3$ (the denominator is obviously the same as in the Fibonacci succession). In our case we're asked to find rational solutions of the equation $xG\paren x=N$ with $N$ integer, so the generating function we actually need to use is $f\paren x=\dfrac{3x^2+x}{1-x-x^2}$. The equation $f\paren x=N$ can be transformed after simple operations into:
+
+\begin{equation*}
+\paren{3+N}x^2+\paren{N+1}x-N=0.
+\end{equation*}
+The solutions of this equation are
+\begin{equation*}
+x=\dfrac{-\paren{N+1}\pm\sqrt{5N^2+14N+1}}{2\paren{3+N}},
+\end{equation*}
+which means that the ``golden nuggets'' are found whenever $5N^2+14N+1$ is a perfect square. So we need to find solutions of this diophantine equation:
+\begin{equation*}
+5N^2+14N+1-M^2=0.
+\end{equation*}
+After a visit to Alpertron, we find that there are six pairs of basic solutions: $\paren{2,-7}$, $\paren{0,-1}$, $\paren{0,1}$, $\paren{-4,5}$, $\paren{-3,2}$ and $\paren{-3,-2}$, and that we can find recursive solutions with:
+\begin{eqnarray*}
+x_{n+1}&=&-9x_n-4y_n-14,\\
+y_{n+1}&=&-20x_n-9y_n-28.
+\end{eqnarray*}
+It's a matter of iterating all these solutions using these formulas.
+
+We can twist the knife a little further, by observing that these solutions alternate between positive and negative values of $x$, and then deciding that we can iterate over only positive values of $x$. With some basic matrix operations we can see that
+\begin{eqnarray*}
+x_{n+2}&=&161x_n+72y_n+224,\\
+y_{n+2}&=&360x_n+161y_n+504.
+\end{eqnarray*}
+We can then start iterating over the first positive solution found with each basic solution: $\paren{2,-7}$, $\paren{152,343}$, $\paren{296,665}$, $\paren{2,7}$, $\paren{5,14}$ and $\paren{21,50}$. The solutions are found slightly faster using this new iteration scheme.
+
+Considering that both $\paren{2,7}$ and $\paren{2,-7}$ are basic solutions (i.e. removing them causes the program to miss necessary solutions), it's clear that there isn't a single formula that iterates over $x$ eschewing $y$ (there could be a pair of values for each $x$, though).
 
 
 
