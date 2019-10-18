@@ -2318,6 +2318,31 @@ We can then start iterating over the first positive solution found with each bas
 
 Considering that both $\paren{2,7}$ and $\paren{2,-7}$ are basic solutions (i.e. removing them causes the program to miss necessary solutions), it's clear that there isn't a single formula that iterates over $x$ eschewing $y$ (there could be a pair of values for each $x$, though).
 
+\section{Investigating progressive numbers, $n$,\\which are also square} % You won't get me, Bad Box.
+\textbf{Difficulty rating}: 60\%.
+
+\textbf{Solution}: 878454337159. \textit{Solved: Sat, 15 Aug 2015, 18:58}.
+
+\textbf{Math knowledge used}: none.
+
+\textbf{Programming techniques used}: none.
+
+So, the three numbers are members of a geometric progression of integers. Meaning that there is a fraction, $\dfrac ND$, so that $\llave{p,q,r}=\llave{c,c\dfrac ND,c\dfrac{N^2}{D^2}}$ for some integer $c$. We can make all of them integers with a variable change, $c\rightarrow cD^2$: $\llave{d,q,r}=\llave{cD^2,cDN,cN^2}$. Now, $n=dq+r$, so which one is $r$? If we assume, without loss of generality, that $N>D$ (it can't be $N=D$ because all three numbers would be the same one), then the remainder must be smaller than the divisor, so it can't be the smallest one. But it also can't be the middle one, because in that case we would have:
+\begin{equation*}
+n=dq+r=\paren{cN^2}\paren{cD^2}+cDN=c^2D^2N^2+cDN=cDN\paren{cDN+1}.
+\end{equation*}
+Since the product of two consecutive numbers can never be a square, the remainder must always be the smallest number. Therefore:
+\begin{equation*}
+n=dq+r=\paren{cN^2}\paren{cDN}+cD^2=c^2DN^3+cD^2.
+\end{equation*}
+So we can do the following:
+\begin{itemize}
+\item Start iterating for $N=2$ up to $\sqrt[3]L$.
+\item For each $N$, iterate values of $D$ from $1$ to $N-1$. Skip non-coprime $\paren{N,D}$ pairs, which will lead to repeated solutions.
+\item And for each $c\geq1$, use the given formula for $n$ in terms of $c,D,N$. Note the solution if $n$ is square, stop iterating $c$ if $n\geq L$.
+\end{itemize}
+Theoretically we should use a set to control for duplicates, but they don't happen, so we can add the solution as they come. There are only $23$ of them and it takes less than $100$ms to find them all. I don't think this is worth $60\%$, and it's definitely easier than the ``golden nuggets'' problems, even if you know about generating functions.
+
 
 
 \end{document}
