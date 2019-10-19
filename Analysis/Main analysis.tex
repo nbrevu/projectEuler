@@ -2343,6 +2343,52 @@ So we can do the following:
 \end{itemize}
 Theoretically we should use a set to control for duplicates, but they don't happen, so we can add the solution as they come. There are only $23$ of them and it takes less than $100$ms to find them all. I don't think this is worth $60\%$, and it's definitely easier than the ``golden nuggets'' problems, even if you know about generating functions.
 
+\section{Perfect Square Collection}
+\textbf{Difficulty rating}: 45\%.
 
+\textbf{Solution}: 1006193. \textit{Solved: Sat, 15 Aug 2015, 19:16}.
+
+\textbf{Math knowledge used}: none.
+
+\textbf{Programming techniques used}: none.
+
+I guess that you can use Pythagorean triple generation for this problem, but in that case you need to be very careful about order of iteration in order to get the minimum. It's probably better to just iterate over squares, which needs some care as well, but not so much. We can define:
+\begin{eqnarray*}
+a&=&x+y,\\
+b&=&x-y,\\
+c&=&x+z,\\
+d&=&x-z,\\
+e&=&y+z,\\
+f&=&y-z.
+\end{eqnarray*}
+All of them need to be square, and you will need to iterate over three numbers (since the other three depend on the first three), therefore it makes sense to iterate over three squares. Also, clearly $a>c$, and both of these are greater than everything else. We also have $d>b$, $d>f$ and $e>f$, but we can't say anything about the order between these pairs: $\paren{b,e}$, $\paren{b,f}$, $\paren{d,e}$. And finally we have some restrictions on parity, so that the following congruencies modulo $2$ must hold:
+\begin{eqnarray*}
+a&\equiv&b,\\
+c&\equiv&d,\\
+e&\equiv&f.
+\end{eqnarray*}
+
+I chose to iterate over $i$, $j$ and $k$ so that:
+\begin{eqnarray*}
+a&=&i^2,\\
+c&=&j^2,\\
+d&=&k^2.
+\end{eqnarray*}
+This means that $i>j>k$, and also that the other three numbers are:
+\begin{eqnarray*}
+f&=&a-c,\\
+e&=&a-d,\\
+b&=&c-e.
+\end{eqnarray*}
+
+Since $c\equiv d$ (mod $2$), we must also guarantee that $j\equiv k$ (mod $2$), which is easy to fulfill. This is enough to verify the other congruencies, since $b=c-a+d$ means that $b+a=c+d$, and $e-f=c-d$. We can include an additional iteration limit to ensure that no negative numbers appear: since $0<b=c-a+d=j^2-i^2+k^2$, the condition $k^2>i^2-j^2$ must hold as well. This provides a lower limit for $k$. As for the other differences, $d$ will obviously never be negative, and $f$ can't be negative since $a>c$ by design.
+
+Using this iteration scheme, it's just a matter of increasing $i$ as far as necessary, and $j$ and $k$ within the limits. Once we hit square values for $f$ (which can be verified early, before starting the iterations on $k$), $b$ and $e$, we can get:
+\begin{eqnarray*}
+x&=&\dfrac{a+b}2=\dfrac{c+d}2,\\
+y&=&\dfrac{a-b}2=\dfrac{e+f}2,\\
+z&=&\dfrac{c-d}2=\dfrac{e-f}2.
+\end{eqnarray*}
+So the result $x+y+z$ can be calculated, for example, as $\dfrac{c+d}2+\dfrac{e+f}2+\dfrac{c-d}2=c+\dfrac{e+f}2$. In my machine it takes about $41$ms.
 
 \end{document}
