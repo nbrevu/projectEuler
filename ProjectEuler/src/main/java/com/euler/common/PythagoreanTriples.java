@@ -10,17 +10,6 @@ import com.google.common.collect.TreeMultimap;
 import com.google.common.math.LongMath;
 
 public class PythagoreanTriples {
-	public static class SimplePythagoreanTriple	{
-		public final long a;
-		public final long b;
-		public final long c;
-		public SimplePythagoreanTriple(long a,long b,long c)	{
-			this.a=a;
-			this.b=b;
-			this.c=c;
-		}
-	}
-	
 	public static class PrimitiveTriplesIterator	{
 		private long m;
 		private long n;
@@ -51,22 +40,13 @@ public class PythagoreanTriples {
 		}
 	}
 	
-	public static List<SimplePythagoreanTriple> getSimpleTriplesUpTo(long maxBaseValue)	{
-		/*
-		List<SimplePythagoreanTriple> res=new ArrayList<>();
-		for (long m=2;m<=maxBaseValue;++m) for (long n=((m%2)==0)?1:2;n<m;n+=2) if (areCoprime(m,n))	{
-			long a=m*m-n*n;
-			long b=2*m*n;
-			res.add(new SimplePythagoreanTriple(a,b));
-		}
-		return res;
-		*/
+	public static List<Triangle> getSimpleTriplesUpTo(long maxBaseValue)	{
 		PrimitiveTriplesIterator iterator=new PrimitiveTriplesIterator();
-		List<SimplePythagoreanTriple> result=new ArrayList<>();
+		List<Triangle> result=new ArrayList<>();
 		for (;;)	{
 			iterator.next();
 			if (iterator.m()>maxBaseValue) return result;
-			result.add(new SimplePythagoreanTriple(iterator.a(),iterator.b(),iterator.c()));
+			result.add(new Triangle(iterator.a(),iterator.b(),iterator.c()));
 		}
 	}
 	
@@ -88,8 +68,8 @@ public class PythagoreanTriples {
 		return res;
 	}
 	
-	public static List<SimplePythagoreanTriple> getSimpleTriplesWithPerimeterLimit(long limit)	{
-		List<SimplePythagoreanTriple> res=new ArrayList<>();
+	public static List<Triangle> getSimpleTriplesWithPerimeterLimit(long limit)	{
+		List<Triangle> res=new ArrayList<>();
 		boolean lastOdd=false;
 		boolean lastEven=false;
 		for (long m=2;;++m)	{
@@ -102,7 +82,7 @@ public class PythagoreanTriples {
 				long b=2*m*n;
 				long c=m2+n2;
 				if (a+b+c<=limit)	{
-					res.add(new SimplePythagoreanTriple(a,b,c));
+					res.add(new Triangle(a,b,c));
 					any=true;
 				}
 			}

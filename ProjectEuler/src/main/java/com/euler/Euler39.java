@@ -1,15 +1,15 @@
 package com.euler;
 
 import com.euler.common.PythagoreanTriples;
-import com.euler.common.PythagoreanTriples.SimplePythagoreanTriple;
 import com.euler.common.Timing;
+import com.euler.common.Triangle;
 
 public class Euler39 {
 	private final static int LIMIT=1000;
 	
 	public static long solve()	{
 		int[] solutions=new int[1+LIMIT];
-		for (SimplePythagoreanTriple triple:PythagoreanTriples.getSimpleTriplesWithPerimeterLimit(LIMIT))	{
+		for (Triangle triple:PythagoreanTriples.getSimpleTriplesWithPerimeterLimit(LIMIT))	{
 			int perimeter=(int)(triple.a+triple.b+triple.c);
 			int q=LIMIT/perimeter;
 			for (int i=1;i<=q;++i) ++solutions[i*perimeter];

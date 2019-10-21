@@ -1970,7 +1970,7 @@ We determined in problem $120$ (using Newton's binomial theorem, which is otherw
 
 \textbf{Solution}: 21417. \textit{Solved: Sat, 15 Aug 2015, 03:16}.
 
-\textbf{Math knowledge used}: none
+\textbf{Math knowledge used}: none.
 
 \textbf{Programming techniques used}: ``first prime'' Erathostenes sieve, memoisation.
 
@@ -1983,7 +1983,7 @@ By the way, the result is $3\cdot11^2\cdot59$.
 
 \textbf{Solution}: 2906969179. \textit{Solved: Sat, 15 Aug 2015, 03:20}.
 
-\textbf{Math knowledge used}: none
+\textbf{Math knowledge used}: none.
 
 \textbf{Programming techniques used}: none.
 
@@ -1994,7 +1994,7 @@ I used an array with all the sums of squares (that is, element in position $n$ h
 
 \textbf{Solution}: 18522. \textit{Solved: Sat, 15 Aug 2015, 04:04}.
 
-\textbf{Math knowledge used}: none
+\textbf{Math knowledge used}: none.
 
 \textbf{Programming techniques used}: none.
 
@@ -2011,7 +2011,7 @@ This is all fine until you notice that the second term has a quadratic term in $
 
 \textbf{Solution}: 18407904. \textit{Solved: Sat, 15 Aug 2015, 12:17}.
 
-\textbf{Math knowledge used}: none
+\textbf{Math knowledge used}: Euclid's greater common divisor algorithm.
 
 \textbf{Programming techniques used}: ``first prime'' Erathostenes sieve, memoisation.
 
@@ -2323,7 +2323,7 @@ Considering that both $\paren{2,7}$ and $\paren{2,-7}$ are basic solutions (i.e.
 
 \textbf{Solution}: 878454337159. \textit{Solved: Sat, 15 Aug 2015, 18:58}.
 
-\textbf{Math knowledge used}: none.
+\textbf{Math knowledge used}: Euclid's greater common divisor algorithm.
 
 \textbf{Programming techniques used}: none.
 
@@ -2390,5 +2390,33 @@ y&=&\dfrac{a-b}2=\dfrac{e+f}2,\\
 z&=&\dfrac{c-d}2=\dfrac{e-f}2.
 \end{eqnarray*}
 So the result $x+y+z$ can be calculated, for example, as $\dfrac{c+d}2+\dfrac{e+f}2+\dfrac{c-d}2=c+\dfrac{e+f}2$. In my machine it takes about $41$ms.
+
+\section{Investigating the Torricelli point of a tri-angle}	% Another Bad Box averted.
+\textbf{Difficulty rating}: 65\%.
+
+\textbf{Solution}: 30758397. \textit{Solved: Tue, 8 Sep 2015, 06:00}.
+
+\textbf{Math knowledge used}: circular geometry, Eisenstenian triple generation.
+
+\textbf{Programming techniques used}: none.
+
+This is a lot like $66$, in that this was a full stop for me, for a long time. Much longer than $66$, in fact. That $65\%$ is very well deserved, and even if the problem is ``easy'' for late game standards, the difficulty spike is very real and some of the involved concepts can be quite obscure.
+
+First part of the problem (``circular geometry''): you need to know a not so well known fact, which is that if a quadrilateral has all of its vertices in a circumference, then the opposite angles sum $\pi$ radians. I mean, $180$ degrees. So, in the (actually helpful) diagram of the problem you can see that all the angles in $T$ are opposite an equilateral triangle's vertex, and in fact the equilateral triangle and $T$ form a quadrilateral inscribed in a circumference. Therefore the angle in $T$ and the angle in the equilateral triangle sum up to $180$ degrees, which of course means that the angle in $T$ is $120$ degrees, and this is true for all three triangles: $pqb$, $qra$ and $rpc$. This is actually all the geometry that you need; all the other properties from the two lines above the diagram are a useless red herring.
+
+Second part of the problem (``Eisenstenian triples''): similar to Pythagorean triples, these triples beget triangles where one of the angles is exactly $120$ degrees. There is also a version for $60$ degrees that will be used in problem $270$. These are a bitch to get right because there are subtle differences with respect to Pythagorean triples. We iterate over $m$ and $n$, with $m>n$, AND:
+$m$ and $n$ must be coprime, but $m-n$ can't be a multiple of $3$. This is annoying, because in the Pythagorean triples the restriction was that $m-n$ can't be a multiple of $2$, meaning that for even $m$ you could just iterate over odd values of $n$, and vice versa. Here, you must iterate over all values of $n$ (well, you can skip even-even pairs, at least), and both $m-n\neq\dot3$ and $\mathrm{gcd}\paren{m,n}=1$ must be checked. Also, the formulas for the triangle sides are slightly different, as expected: $a=2mn+n^2$; $b=m^2-n^2$; $c=m^2+mn+n^2$. These formulas verify $a^2+ab+b^2=c^2$, which means as per the cosine theorem that the angle at $ab$ is exactly $120$ degrees.
+
+Third part of the problem (actual search): this is also a bitch to get right. The algorithm above generates \textit{primitive} triples, but we need all of them, meaning that we need to scale them. This means more than $10^5$ triples, so forget about checking pairs. Instead, I did the following:
+\begin{itemize}
+\item Create a multimap by iterating over all the scaled triples and, for each  of them, $\paren{ka,kb,kc}$, mapping $ka$ to $kb$ and $kb$ to $ka$. We don't actually need $c$ at all in this problem.
+\item Iterate over the set of scaled triples. Now, go to the map and check the values mapped: if there is any intersection between the set associated to $ka$ and the set associated to $kb$, every $c'$ found in the map is a hit: $\paren{ka,kb,c'}=\paren{p,q,r}$.
+\item Sum all the triples found. You need to account for repetition because each hit is found twice with this scheme.
+\end{itemize}
+This is a bit intensive and more than $600$ms are required to get the result.
+
+
+
+
 
 \end{document}
