@@ -2438,5 +2438,26 @@ t=-\dfrac{8xm_x'+2ym_y'}{4m_x'^2+m_y'^2}.
 \end{equation*}
 That's it. We can do $x'=x+tm_x'$ and $y'=y+tm_y'$ and get the next point. Iterate, return when the point exits the ellipse ($y>0$, $\abs x\leq0.01$). About $0.12$ms, a nice mark.
 
+\section{How many reversible numbers are there below one-billion?}
+\textbf{Difficulty rating}: 20\%.
+
+\textbf{Solution}: 608720. \textit{Solved: Mon, 17 Aug 2015, 23:02}.
+
+\textbf{Math knowledge used}: none.
+
+\textbf{Programming techniques used}: none.
+
+For a $20\%$ problem, I sure learned a few things with this one. First: computers were so slow in $2007$ that bruteforcing this would have taken way more than one minute. I did it in less than $4$ seconds (and the similar C++ code takes even less). Second: there is a combinatory formula for this problem! Which I learned on the always helpful problem comments. Third: LongMath.pow is fucking slow, although I strongly suspect that most of the time is spent just loading the class.
+
+Let's skip the brute force approach (which still had some finesse, and ``only'' checked one tenth of the $5e8$ candidates) and go directly to the formula, which depends on the amount of digits, $N$:
+\begin{itemize}
+\item If $N=2k$, then there are $20\cdot30^{k-1}$ cases.
+\item If $N=4k+1$, there are no possible cases.
+\item If $N=4k+3$, there are $100\cdot500^k$ cases.
+\end{itemize}
+That's it. The full explanation can be found in the comments and it's a bit long but reasonable. With this formula, my run time descends from the initial, horrible $~4$ seconds to a much better $10\mu$s. If I use LongMath for the exponentiations, the run time is about $20$ms!
+
+
+
 
 \end{document}
