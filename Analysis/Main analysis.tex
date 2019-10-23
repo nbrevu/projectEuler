@@ -2415,8 +2415,28 @@ Third part of the problem (actual search): this is also a bitch to get right. Th
 \end{itemize}
 This is a bit intensive and more than $600$ms are required to get the result.
 
+\section{Investigating multiple reflections of a laser beam}
+\textbf{Difficulty rating}: 50\%.
 
+\textbf{Solution}: 354. \textit{Solved: Tue, 18 Aug 2015, 14:29}.
 
+\textbf{Math knowledge used}: algebraic geometry.
+
+\textbf{Programming techniques used}: none.
+
+This problem is not super difficult, but I kept getting the wrong formulas because of transcription mistakes. In fact, this problem is reasonably simple (although I guess you may accumulate precision errors if you are careless), but there are several ways to approach it and many of them overcomplicate things. The obvious approach, in fact, uses trigonometric functions, which are prone to precision errors on the long run (although the amount of iterations is low, so maybe it's tolerable).
+
+The problem description helpfully points out (although it can be deduced from the ellipse's equation) that the slope of the tangent line is $m=-\dfrac{4x}y$. This means that the tangent vector is $T=\paren{-y,4x}$, and therefore the normal vector is $N=\paren{4x,y}$. Now, at each time we have one point $P=\paren{x,y}$ and one incidence vector $I=\paren{m_x,m_y}$ (in the first case, it can be calculated as the difference between the two starting points). The first thing we need to do is to calculate the reflected vector. This means calculating the component of $I$ that is orthogonal to $N$ (or parallel to $T$, if you like) and then subtracting it twice from $I$ (subtracting it once would yield a parallel vector to $N$). This component is $\paren{I\cdot T}T$ (fun fact: you can use $\paren{I\cdot N}N$ as well). Since $T$ is not normalised, the actual calculation $\dfrac{\paren{I\cdot T}T}{\vecnorm T}$. You can do all this with trigonometry, and it gets pretty horrible. All hail algebraic geometry!
+
+Now that we have the reflected vector, $R=I-\dfrac{\paren{I\cdot T}T}{\vecnorm T}=\paren{m_x',m_y'}$, we need to calculate the reflection point. The reflected ray follows the equation $\paren{x+m_x't,y+m_y't}$; if we plug these values into the equation of the ellipse and reorder the terms a bit, we get
+\begin{equation*}
+\paren{4m_x'^2+m_y'^2}t^2+\paren{8xm_x'+2ym_y'}t+4x^2+y^2-100=0.
+\end{equation*}
+We don't need to solve the quadratic equation because, obviously, for $t=0$ we have the starting point, since $4x^2+y^2=100$ must hold. This means that we have one single solution,
+\begin{equation*}
+t=-\dfrac{8xm_x'+2ym_y'}{4m_x'^2+m_y'^2}.
+\end{equation*}
+That's it. We can do $x'=x+tm_x'$ and $y'=y+tm_y'$ and get the next point. Iterate, return when the point exits the ellipse ($y>0$, $\abs x\leq0.01$). About $0.12$ms, a nice mark.
 
 
 \end{document}
