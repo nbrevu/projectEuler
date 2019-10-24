@@ -6,8 +6,6 @@ import com.euler.common.EulerUtils.IntPermutation;
 import com.euler.common.EulerUtils.IntPermutationGenerator;
 import com.euler.common.Primes.RabinMiller;
 import com.euler.common.Timing;
-import com.koloboke.collect.set.IntSet;
-import com.koloboke.collect.set.hash.HashIntSets;
 
 public class Euler41 {
 	private static int transform(int[] digits)	{
@@ -21,7 +19,7 @@ public class Euler41 {
 	}
 	
 	private static long solve()	{
-		IntSet witnesses=HashIntSets.newImmutableSetOf(31,73);
+		int[] witnesses=new int[] {31,73};
 		RabinMiller tester=new RabinMiller();
 		for (int i=7;;i-=3) for (IntPermutation perm:new IntPermutationGenerator(i))	{
 			int[] base=perm.getNumbers();

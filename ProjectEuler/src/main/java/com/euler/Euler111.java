@@ -2,7 +2,6 @@ package com.euler;
 
 import java.math.BigInteger;
 import java.util.Arrays;
-import java.util.List;
 
 import com.euler.common.CombinationIterator;
 import com.euler.common.Primes.RabinMiller;
@@ -15,7 +14,7 @@ import com.koloboke.collect.set.hash.HashLongSets;
 public class Euler111 {
 	private final static int DIGITS=10;
 	
-	private final static List<Integer> WITNESSES=Arrays.asList(2,13,23,1662803);
+	private final static int[] WITNESSES=new int[] {2,13,23,1662803};
 	
 	private static class CandidateGenerator	{
 		private final static RabinMiller TESTER=new RabinMiller();

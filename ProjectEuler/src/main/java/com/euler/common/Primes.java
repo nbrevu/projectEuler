@@ -67,8 +67,7 @@ public class Primes {
 			}
 			return true;
 		}
-		public boolean isPrime(BigInteger in,Collection<Integer> witnesses)	{
-			for (Integer i:witnesses) if (in.equals(BigInteger.valueOf((long)i))) return true;
+		public boolean isPrime(BigInteger in,int[] witnesses)	{
 			BigInteger inMinusOne=in.subtract(BigInteger.ONE);
 			BigInteger d=inMinusOne;
 			int s=0;
@@ -78,7 +77,7 @@ public class Primes {
 				d=division[0];
 				++s;
 			}
-			for (Integer a:witnesses)	{
+			for (int a:witnesses)	{
 				BigInteger x=powMod(BigInteger.valueOf(a),d,in);
 				if (x.equals(BigInteger.ONE)||x.equals(inMinusOne)) continue;
 				boolean anyNeg=false;

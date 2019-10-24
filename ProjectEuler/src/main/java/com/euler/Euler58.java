@@ -6,14 +6,12 @@ import com.euler.common.Primes;
 import com.euler.common.Primes.RabinMiller;
 import com.euler.common.Timing;
 import com.google.common.math.IntMath;
-import com.koloboke.collect.set.IntSet;
-import com.koloboke.collect.set.hash.HashIntSets;
 
 public class Euler58 {
 	private final static int SIEVE_LIMIT=IntMath.pow(10,7);
 	
 	private static class PrimeChecker	{
-		private final static IntSet WITNESSES=HashIntSets.newImmutableSetOf(2,3,5,7);
+		private final static int[] WITNESSES=new int[] {2,3,5,7};
 		private interface InternalPrimeChecker	{
 			public boolean isPrime(long in);
 		}

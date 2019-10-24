@@ -12,15 +12,13 @@ import com.google.common.math.LongMath;
 import com.koloboke.collect.LongCursor;
 import com.koloboke.collect.map.IntObjMap;
 import com.koloboke.collect.map.hash.HashIntObjMaps;
-import com.koloboke.collect.set.IntSet;
 import com.koloboke.collect.set.LongSet;
-import com.koloboke.collect.set.hash.HashIntSets;
 import com.koloboke.collect.set.hash.HashLongSets;
 
 public class Euler60 {
 	private final static int DEEPEST_MATCH=5;
 	
-	private final static IntSet WITNESSES=HashIntSets.newImmutableSetOf(2,7,61);
+	private final static int[] WITNESSES=new int[] {2,7,61};
 	private final static RabinMiller RABIN_MILLER=new RabinMiller();
 	private final static int MAX_PRIME=IntMath.pow(10,6);
 	

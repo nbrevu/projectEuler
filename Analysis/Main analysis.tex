@@ -2457,6 +2457,33 @@ Let's skip the brute force approach (which still had some finesse, and ``only'' 
 \end{itemize}
 That's it. The full explanation can be found in the comments and it's a bit long but reasonable. With this formula, my run time descends from the initial, horrible $~4$ seconds to a much better $10\mu$s. If I use LongMath for the exponentiations, the run time is about $20$ms!
 
+\section{Investigating a Prime Pattern}
+\textbf{Difficulty rating}: 50\%.
+
+\textbf{Solution}: 676333270. \textit{Solved: Tue, 18 Aug 2015, 14:01}.
+
+\textbf{Math knowledge used}: Miller-Rabin primality test.
+
+\textbf{Programming techniques used}: multithreading.
+
+We're already deep in Project Euler, even if the fucked up problems haven't started appearing yet. So, struggling is expected. In this case, I encountered several problems:
+\begin{itemize}
+\item I'm forced to use BigIntegers because Miller-Rabin includes exponentiation modulus prime candidates, and prime candidates exceed $2^{31.5}$, so an integer bigger than $2^{63}$ is needed. Java BigIntegers are useful, but they are \textit{slow}. Like, ``20 times slower than longs'' slow.
+\item I was almost going to give up on the one minute rule, so I ended up resorting to multithreading. I don't quite like it, but it works.
+\item Very subtle condition fucking up the result: you need to verify that all the string of numbers is composed of primes, AND that there isn't any other prime in between. Yes, there is a false positive, \textit{a single one}, because $n^2+21$ is prime and therefore $n^2+13$ and $n^2+27$ aren't consecutive primes. To add insult to injury, the only false positive is $144774340$, very near the end of the problem interval, and almost definitely the last candidate you will find (depends on how do you iterate, exactly). This is very much Project Euler evilness, and this insidiousness that forces you to be super anal about the conditions specified is kind of common.
+\end{itemize}
+The good news is that we definitely don't need to iterate over all the $15e7$ numbers. We only need to iterate over values of $n$ congruent with $10$, $80$, $130$ or $200$ modulo $210$. This is because:
+\begin{itemize}
+\item $n$ must be a multiple of $10$. It must be a multiple of $2$ because otherwise $n^2+3$ is always composite; and it needs to be a multiple of $5$, because $\paren{5k+1}^2+9$, $\paren{5k+2}^2+1$, $\paren{5k+3}^2+1$ and $\paren{5k+1}^4+9$ are all multiples of $5$.
+\item $n\not\equiv0$ (mod $3$). Otherwise, $\paren{n^2+3}$ is composite.
+\item With congruencies modulo $7$ we can trim a lot: $n\not\equiv0$ because of $n^2+7$; $n\not\equiv1$ and $n\not\equiv6$ because of $n^2+27$; $n\not\equiv2$ and $n\not\equiv5$ because of $n^2+3$.
+\end{itemize}
+Now, for the intermediate primes. Since $n$ is a multiple of $5$, only $n^2+11$, $n^2+17$, $n^2+19$, $n^2+21$ and $n^2+23$ remain. However, $n^2\equiv1$ mod $3$, so $n^2+11$, $n^2+17$ and $n^2+23$ are composites. As for $n^2+19$, we had established that $n$ is congruent with either $3$ or $4$ (modulo $7$), meaning that $n^2\equiv2$ and therefore $n^2+19$ is always composite. The only fucker that remains is $n^2+21$.
+
+Since we have four possible values modulo $210$, I used a thread for each one of them. For every thread, the algorithm is super direct: iterate over values of $n$ up to the limit, check all the prime candidates, and check that sneaky $n^2+21$ as well. This is about the minimum amount of checks that needs to be done, and still, it takes between $25$ and $30$ seconds because of the fucking BigIntegers. And I was complaining about $3$ seconds in the brute force version of the last problem!
+
+I feel like this is one of the problems with the highest Kolmogorov complexity. There is no reliably way to do it magically fast, that I know. The only way to seepd it up a little is checking primality against a small set of primes (I used $<1000$). This really speeds up the computation because it effectively prunes the space without resorting to BigIntegers.
+
 
 
 
