@@ -1,6 +1,5 @@
 package com.euler;
 
-import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,7 +26,7 @@ public class Euler60 {
 	}
 	
 	private static boolean checkMatch(long v1,long v2)	{
-		return RABIN_MILLER.isPrime(BigInteger.valueOf(concat(v1,v2)),WITNESSES)&&RABIN_MILLER.isPrime(BigInteger.valueOf(concat(v2,v1)),WITNESSES);
+		return RABIN_MILLER.isPrime(concat(v1,v2),WITNESSES)&&RABIN_MILLER.isPrime(concat(v2,v1),WITNESSES);
 	}
 	
 	private static class Tree	{

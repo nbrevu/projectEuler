@@ -9,13 +9,11 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 
 import com.google.common.math.LongMath;
 
 public class Primes {
 	public static class RabinMiller	{
-		private final Random rand;
 		private static BigInteger powMod(BigInteger a,BigInteger d,BigInteger in)	{
 			BigInteger res=BigInteger.ONE;
 			BigInteger power=a;
@@ -27,38 +25,23 @@ public class Primes {
 			}	while (!d.equals(BigInteger.ZERO));
 			return res;
 		}
-		private static int powMod(int a,int d,int in)	{
-			long res=a;
-			while (d>1)	{
-				res*=a;
-				res%=in;
-				--d;
-			}
-			return (int)res;
-		}
-		private static int squareMod(int a,int in)	{
-			long res=a*a;
-			return (int)(res%in);
-		}
-		public RabinMiller()	{
-			rand=new Random();
-		}
-		public boolean isPrime(int in,int k)	{
-			int d=in-1;
+		public RabinMiller()	{}
+		public boolean isPrime(long in,int[] witnesses)	{
+			long inMinusOne=in-1;
+			long d=inMinusOne;
 			int s=0;
-			while ((d%2)==0)	{
+			do	{
 				d/=2;
 				++s;
-			}
-			for (int i=0;i<k;++i)	{
-				int a=rand.nextInt(in-4)+2;
-				int x=powMod(a,d,in);
-				if ((x==1)||(x==(in-1))) continue;
+			}	while ((d%2)==0);
+			for (int a:witnesses)	{
+				long x=EulerUtils.expMod(a,d,in);
+				if ((x==1)||(x==inMinusOne)) continue;
 				boolean anyNeg=false;
 				for (int r=1;r<s;++r)	{
-					x=squareMod(x,in);
+					x=(x*x)%in;
 					if (x==1) return false;
-					if (x==(in-1))	{
+					if (x==inMinusOne)	{
 						anyNeg=true;
 						break;
 					}

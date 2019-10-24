@@ -1,7 +1,5 @@
 package com.euler;
 
-import java.math.BigInteger;
-
 import com.euler.common.Primes;
 import com.euler.common.Primes.RabinMiller;
 import com.euler.common.Timing;
@@ -34,7 +32,7 @@ public class Euler58 {
 			private final RabinMiller rabinMiller=new RabinMiller();
 			@Override
 			public boolean isPrime(long in)	{
-				return rabinMiller.isPrime(BigInteger.valueOf(in),WITNESSES);
+				return rabinMiller.isPrime(in,WITNESSES);
 			}
 		}
 		private InternalPrimeChecker checker;

@@ -959,7 +959,7 @@ This explanation is too long for problem $57$, yes. However, it's not too long f
 
 Unlike that awful problem 28, this one spirals in the right, positive direction. The problem itself is pretty easy, because we can keep counters for each branch tip: $f_{\llave{1\ldots4}}={3,5,7,9}$ at the start, and then, starting with $i=4$ and in increments of two we can do $f_k=f_{k-1}+i$ (starting with $f_1=f_4+i$) and check primalities as we go.
 
-This problem is the first one where my execution time exceeds half a second ($\approx0.6$s).
+This problem is the first one where my execution time exceeds half a second ($\approx0.6$s). EDIT: after the Miller-Rabin refactor, reduced to about $0.1$ seconds.
 
 \section{Spiral primes}
 \textbf{Difficulty rating}: 5\%.
@@ -985,7 +985,7 @@ Easy, but fun. The idea is that the english text will contain the string ``the''
 
 I find that $20\%$ quite reasonable. It's not like this is a super difficult method, but it's tricky to get it right, there is no obvious solution (no, the solution is not the one for $4$ primes plus an additional one) and getting it efficiently can be a challenge. I used a complicated structure with trees where for each prime I stored possible combinations of less than $5$ primes verifying the conditions. For each prime, and for $n\in\llave{0,3}$, I have a tree storing the combinations including the prime and $n$ additional numbers. So, each time I add a prime, I need to traverse the structure for each prime less than the one given, and if I can traverse successfully a tree of level $3$, then I can add the three associated numbers, plus the prime ``owner'' of the tree, plus the prime we're currently iterating. It's a bit weird but it's efficient and the code is not that complicated.
 
-This is also the first problem where my algorithm took more than $1$ second. A bit more than $5$ seconds, in fact. The final solution is composed of these primes: $\llave{13,5197,5701,6733,8389}$.
+This is also the first problem where my algorithm took more than $1$ second. A bit more than $5$ seconds, in fact (EDIT: reduced to less than $0.5$s after refactoring Miller-Rabin). The final solution is composed of these primes: $\llave{13,5197,5701,6733,8389}$.
 
 \section{Cyclical figurate numbers}
 \textbf{Difficulty rating}: 20\%.

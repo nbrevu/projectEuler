@@ -1,7 +1,5 @@
 package com.euler;
 
-import java.math.BigInteger;
-
 import com.euler.common.EulerUtils.IntPermutation;
 import com.euler.common.EulerUtils.IntPermutationGenerator;
 import com.euler.common.Primes.RabinMiller;
@@ -25,7 +23,7 @@ public class Euler41 {
 			int[] base=perm.getNumbers();
 			if ((base[0]%2)==1) continue;
 			int candidate=transform(base);
-			if (tester.isPrime(BigInteger.valueOf(candidate),witnesses)) return candidate;
+			if (tester.isPrime(candidate,witnesses)) return candidate;
 		}
 	}
 	
