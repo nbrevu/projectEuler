@@ -2482,7 +2482,51 @@ Now, for the intermediate primes. Since $n$ is a multiple of $5$, only $n^2+11$,
 
 Since we have four possible values modulo $210$, I used a thread for each one of them. For every thread, the algorithm is super direct: iterate over values of $n$ up to the limit, check all the prime candidates, and check that sneaky $n^2+21$ as well. This is about the minimum amount of checks that needs to be done, and still, it takes between $25$ and $30$ seconds because of the fucking BigIntegers. And I was complaining about $3$ seconds in the brute force version of the last problem!
 
-I feel like this is one of the problems with the highest Kolmogorov complexity. There is no reliably way to do it magically fast, that I know. The only way to seepd it up a little is checking primality against a small set of primes (I used $<1000$). This really speeds up the computation because it effectively prunes the space without resorting to BigIntegers.
+I feel like this is one of the problems with the highest Kolmogorov complexity. There is no reliably way to do it magically fast, that I know. The only way to speed it up a little is checking primality against a small set of primes (I used $<1000$). This really speeds up the computation because it effectively prunes the space without resorting to BigIntegers.
+
+\section{Rectangles in cross-hatched grids}
+\textbf{Difficulty rating}: 65\%.
+
+\textbf{Solution}: 846910284. \textit{Solved: Tue, 8 Sep 2015, 05:31}.
+
+\textbf{Math knowledge used}: Faulhaber formulas.
+
+\textbf{Programming techniques used}: none.
+
+There is a constant time expression for this problem, and I had a lot of fun calculating it, even if Matlab ended up doing most of the heavy lifting.
+
+The only problematic formula for this problem is the amount of oblique rectangles in an $a\times b$ grid. After some pen and paper (whole explanations available in the problem thread), the formula is this:
+\begin{equation*}
+f\paren{a,b}=\left\{\begin{array}{ll}a\geq b:&\dfrac{b\paren{2a-b}\paren{4b^2-1}}6;\\a<b:&f\paren{b,a}.\end{array}\right.
+\end{equation*}
+
+So we need to calculate $S=\displaystyle{\sum_{a=1}^A\sum_{b=1}^Bf\paren{a,b}}$. For convenience, we want an homogeneous formula, so we want to remove that conditional expression. Therefore we need to divide the sums into smaller sums where we can guarantee that the first argument is always greater or equal than the second. We certainly can guarantee that when $a\geq B$, so the first partition is this:
+\begin{equation*}
+S=\sum_{a=B}^A\sum_{b=1}^Bf\paren{a,b}+\sum_{a=1}^{B-1}\sum_{b=1}^Bf\paren{a,b}.
+\end{equation*}
+Now we can partition the second summatory's internal sum into two different parts, one where $a\geq b$ and another one where $a<b$:
+\begin{equation*}
+S=\sum_{a=B}^A\sum_{b=1}^Bf\paren{a,b}+\sum_{a=1}^{B-1}\paren{\sum_{b=1}^af\paren{a,b}+\sum_{b=a+1}^Bf\paren{a,b}}.
+\end{equation*}
+Since $f\paren{a,b}=f\paren{b,a}$, this expression can be transformed into:
+
+\begin{equation*}
+S=\sum_{a=B}^A\sum_{b=1}^Bf\paren{a,b}+\sum_{a=1}^{B-1}\sum_{b=1}^af\paren{a,b}+\sum_{a=1}^{B-1}\sum_{b=a+1}^Bf\paren{b,a}.
+\end{equation*}
+And although it's not strictly necessary, we can reorder the last summatory so that we sum first over the second variable, yielding a slightly more homogeneous result:
+\begin{equation*}
+S=\sum_{a=B}^A\sum_{b=1}^Bf\paren{a,b}+\sum_{a=1}^{B-1}\sum_{b=1}^af\paren{a,b}+\sum_{b=2}^B\sum_{a=1}^{b-1}f\paren{b,a}.
+\end{equation*}
+Now we can use the first, nonconditional expression of $f$, replace and sum. With a heavy usage of Faulhaber formulas, which at some point need to be used up to the formula for $n^5$. But wait! $S$ is just the formula for oblique rectangles. We need to add the formula for straight rectangles, which was used in problem $85$. The whole formula becomes:
+\begin{equation*}
+\begin{array}{l}
+\displaystyle R=\sum_{a=B}^A\sum_{b=1}^B\dfrac{b\paren{2a-b}\paren{4b^2-1}}6+\sum_{a=1}^{B-1}\sum_{b=1}^a\dfrac{b\paren{2a-b}\paren{4b^2-1}}6+\\\displaystyle+\sum_{b=2}^B\sum_{a=1}^{b-1}\dfrac{a\paren{2b-a}\paren{4a^2-1}}6+\sum_{a=1}^A\sum_{b=1}^B\dfrac{\paren{a^2+a}\paren{b^2+b}}4.
+\end{array}
+\end{equation*}
+After some calculations including a large Matlab oneliner, we get a closed form expression, which gets the correct result in $7\mu$s:
+\begin{eqnarray*}
+&&R=\dfrac{\paren{5b^3+15b^2+10b}a^3+\paren{30b^4+75b^3+60b^2+15b}a^2}{180}+\\&&+\dfrac{\paren{-24b^5-30b^4+40b^3+15b^2-31b}a+\paren{6b^6+6b^5-15b^4+9b^2-6b}}{180}.
+\end{eqnarray*}
 
 
 
