@@ -2528,6 +2528,25 @@ After some calculations including a large Matlab oneliner, we get a closed form 
 &&R=\dfrac{\paren{5b^3+15b^2+10b}a^3+\paren{30b^4+75b^3+60b^2+15b}a^2}{180}+\\&&+\dfrac{\paren{-24b^5-30b^4+40b^3+15b^2-31b}a+\paren{6b^6+6b^5-15b^4+9b^2-6b}}{180}.
 \end{eqnarray*}
 
+\section{Exploring Pascal's triangle}
+\textbf{Difficulty rating}: 50\%.
+
+\textbf{Solution}: 2129970655314432. \textit{Solved: Tue, 8 Sep 2015, 05:31}.
+
+\textbf{Math knowledge used}: triangular numbers, $7$-adic representation, properties of Pascal's triangle.
+
+\textbf{Programming techniques used}: none.
+
+Solid problem, tricky to get right even if the formula is simple. Thanks to the fact that $7$ is prime, non-divisors follow a simple Sierpi\'{n}ski triangle-like figure. And this allows for an easy algorithm that runs in $O\paren{\log_7\paren N}$ time.
+
+Let $a_na_{n-1}\ldots a_1a_0$ be the $7$-adic (aka ``base $7$'') representation of the input number ($10^9$, in our case). Then, starting with $b=1$, we iterate from $n$ to $0$, and at each step $i$, we do:
+\begin{eqnarray*}
+R_i&=&T\paren{a_i}\cdot28^i\cdot b;\\
+b&=&\paren{a_i+1},
+\end{eqnarray*}
+\noindent where $T\paren x$ is the $x$-th triangular number, $\dfrac{x\paren{x+1}}2$. Adding all the $R_i$ values yields the result. In about $0.27$ms.
+
+Getting to this formula requires a bit of pen and paper, but not much. As usual, the whole explanation is in the problem thread.
 
 
 
