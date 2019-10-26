@@ -2566,6 +2566,33 @@ That's it. Single pass, no complex storage required, $0.26$ seconds ($0.05$ of w
 
 The greatest streak is composed of $1828$ numbers, found in the $270$th column (0-index 269), starting at some point near the start and finishing at the end of the column. The first element is $M_{173,270}=133659$ and the last element is $M_{2000,270}=11280$. There are $845$ negative numbers and $983$ positive numbers in this chain.
 
+\section{Searching a triangular array for a sub-triangle having minimum-sum}
+\textbf{Difficulty rating}: 55\%.
+
+\textbf{Solution}: -271248680. \textit{Solved: Tue, 8 Sep 2015, 09:04}.
+
+\textbf{Math knowledge used}: none.
+
+\textbf{Programming techniques used}: dynamic programming.
+
+Another purely algorithmic problem, superficially similar to the previous one but quite different. We need some level of memoisation-slash-dynamic programming; the brute force algorithm is $O\paren{n^5}$ or at best $O\paren{n^4}$, which is feasible but somewhat prohibitive; but there are ``only'' $O\paren{n^3}$, so we should be able to reduce the count. There are $N=1000$ levels of elements; at level $i\in\corch{1,N}$ we have exactly $i$ elements, each of which is the apex of $N+1-i$ different triangles; therefore (thanks once again, Faulhaber) we have exactly
+\begin{equation*}
+\sum_{i=1}^Ni\paren{N+1-i}=\paren{N+1}\sum_{i=1}^Ni-\sum_{i=1}^Ni^2=\dfrac{N^3+3N^2+2N}6
+\end{equation*}
+\noindent triangles.
+
+The trick to reuse calculations and calculate each triangle in constant time lies in noticing the following structure: each triangle consists of the apex, plus the two immediately lower triangles, minus the intersection between these two, which happens to be one of the triangles calculated for the row two positions below (we can use an analogy using triangular numbers, since in fact we have $T\paren{n+1}=1+2T\paren{n}-T\paren{n-1}$). With this in mind, we can fins the correct result using this algorithm:
+\begin{itemize}
+\item For each row $i\in\corch{0,N-1}$ and for each element $j\in\corch{0,j}$, we are going to store $N-i$ sums, corresponding to the triangles with depth $1$, $2$, $\ldots N-i$ with its apex at $\paren{i,j}$. This suggests a structure of sums of the form $S_{i,j,k}$ with $k\in\corch{1,N-i}$.
+\item We need to iterate row to row, starting from the bottom.
+\item Let $T_{i,j}$ be the element of the triangle at row $i$ and position $j$. We will have for $k=0$ one degenerate ``triangle'' consisting of one element, for $k=1$ a simple two row triangle where no intersection calculation is needed, and for $k\geq2$ we need to take the intersection into account. Therefore:
+\end{itemize}
+
+\begin{equation*}
+S_{i,j,k}=\left\{\begin{array}{ll}k=0:&T_{i,j},\\k=1:&T_{i,j}+T_{i+1,j}+T_{i+1,j+1},\\k\geq2:&T_{i,j}+S_{i+1,j,k-1}+S_{i+1,j+1,k-1}-S_{i+2,j+1,k-2}.\end{array}\right.
+\end{equation*}
+At each step we only need the current row and the two previous ones, so there is no need to store the whole 3D array at all times. With this scheme I can find the solution in about $1.5$ seconds (I suspect that much of it comes from Java zeroing arrays upon allocation), and I don't think there is more room for improvement. The minimum triangle has its apex at row $7$, element $7$ (these are the \textit{eighth} elements. Unlike Python, this is an actual, serious programming language and arrays start at $0$) and $k=885$, i.e. the depth is $886$ and the triangle contains $392941$ elements.
+
 
 
 \end{document}
