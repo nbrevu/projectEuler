@@ -2548,6 +2548,24 @@ b&=&\paren{a_i+1},
 
 Getting to this formula requires a bit of pen and paper, but not much. As usual, the whole explanation is in the problem thread.
 
+\section{Searching for a maximum-sum subse-\\quence}	% Another bad box bites the dust.
+\textbf{Difficulty rating}: 50\%.
+
+\textbf{Solution}: 52852124. \textit{Solved: Tue, 8 Sep 2015, 08:09}.
+
+\textbf{Math knowledge used}: none.
+
+\textbf{Programming techniques used}: none.
+
+A purely algorithmic problem, without any math aside from addition and subtraction. These are increasingly rare. This is basically problem $11$ on steroids, with the added difficulty that we don't know the length of the chain, because the de facto limits are the negative numbers. The iterating scheme is basically the same (for every horizontal, vertical or $\pm45$ diagonal direction, look in all the lines), but in order to get the maximum, we do this for every streak:
+\begin{itemize}
+\item Keep a currentSum value. Initialize at 0. At each step, increase the currentSum with the value we're iterating over. But if the result is negative, set currentSum to 0.
+\item Also at each step, update the maximum with currentSum if needed.
+\end{itemize}
+That's it. Single pass, no complex storage required, $0.26$ seconds ($0.05$ of which go to the matrix generation).
+
+The greatest streak is composed of $1828$ numbers, found in the $270$th column (0-index 269), starting at some point near the start and finishing at the end of the column. The first element is $M_{173,270}=133659$ and the last element is $M_{2000,270}=11280$. There are $845$ negative numbers and $983$ positive numbers in this chain.
+
 
 
 \end{document}
