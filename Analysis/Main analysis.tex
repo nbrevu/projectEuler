@@ -113,7 +113,7 @@
 
 \textbf{Math knowledge used}: triangular numbers.
 
-\textbf{Programming techniques used}: none.
+\textbf{Programming techniques used}: inclusion-exclusion.
 
 It's very simple using inclusion-exclusion. We count how many multiples of $3$, $5$ and $15$ are there, then we use triangular numbers to determine each sum, then we return $\mathrm{sum}\paren3+\mathrm{sum}\paren5-\mathrm{sum}\paren{15}$.
 
@@ -145,7 +145,7 @@ N=\floor{\dfrac{\log L}{3\log\varphi}}.
 
 Finally, since we need the sum, we use a basic summation formula (again, considering that the $\paren{1-\varphi}^{3n}$ terms tend quickly to zero):
 \begin{equation*}
-\sum_{i=0}^n\dfrac{\varphi^{3n}-\paren{1-\varphi}^{3n}}{\sqrt5}\approx\sum_{i=0}^n\dfrac{\varphi^{3n}}{\sqrt5}=\dfrac{\varphi^{3n+3}-\varphi^3}{\paren{\varphi^3-1}\sqrt5}.
+\sum_{n=0}^N\dfrac{\varphi^{3n}-\paren{1-\varphi}^{3n}}{\sqrt5}\approx\sum_{i=0}^n\dfrac{\varphi^{3n}}{\sqrt5}=\dfrac{\varphi^{3n+3}-\varphi^3}{\paren{\varphi^3-1}\sqrt5}.
 \end{equation*}
 Rounding this value into the nearest integer we get the solution.
 
@@ -171,7 +171,7 @@ There are many methods that can be used to iterate over the primes, but the Erat
 
 \textbf{Programming techniques used}: none.
 
-The ``modular arithmetic'' I'm referring to is just the fact that I know that all palindrome numbers with an even amount of digits are multiples of $11$. So, the method to found this answer is as simple as iterating downwards over a pair of factors, but this bit of knowledge allows me to reduce the search space by 11, because one of the factors iterates over just multiples of $11$.
+The ``modular arithmetic'' I'm referring to is just the fact that I know that all palindrome numbers with an even amount of digits are multiples of $11$. So, the method to find this answer is as simple as iterating downwards over a pair of factors, but this bit of knowledge allows me to reduce the search space by 11, because one of the factors iterates over just multiples of $11$.
 
 \section{Smallest multiple}
 \textbf{Difficulty rating}: 5\%.
@@ -182,7 +182,7 @@ The ``modular arithmetic'' I'm referring to is just the fact that I know that al
 
 \textbf{Programming techniques used}: none.
 
-I'm not sure if ``none'' qualifies as the list of special knowledge used. I just factored all the numbers and then calculated the least common multiple in a more or less intelligent way (i.e. I have the factors, so no need to use Euclid's algorithm). This is the first time I used my DivisorHolder class, which is used for a fuckton of problems all over the list.
+I just factored the numbers $1$-$20$ and then calculated the least common multiple in a more or less intelligent way (i.e. I have the factors, so no need to use Euclid's algorithm). This is the first time I used my DivisorHolder class, which is used for a fuckton of problems all over the list.
 
 \section{Sum square difference}
 \textbf{Difficulty rating}: 5\%.
@@ -219,7 +219,7 @@ Plugging in $n=100$ we get the result. By the way, it can be easily proven that 
 
 \textbf{Programming techniques used}: none.
 
-Just use an Erathostenes sieve. As for the limit, we know that $\pi\paren x\approx\dfrac x{\log x}$, so if the limit is $L=10001$, then we can use $N=2L\log L$ (multiplying times $2$ is a safe addition. The formula I gave means that $x\approx\log x\cdot\pi\paren x$, but we have $\pi x$, and this formula doesn't say anything about $\log\pi\paren x\cdot\pi\paren x$). Then just move over the sieve until we have passed over $L$ primes.
+Just use an Erathostenes sieve. As for the limit, we know that $\pi\paren x\approx\dfrac x{\log x}$, so if the limit is $L=10001$, then we can use $N=2L\log L$ (multiplying times $2$ is a safe addition. The formula I gave means that $x\approx\log x\cdot\pi\paren x$, but we have $\pi\paren x$, and this formula doesn't say anything about $\log\pi\paren x\cdot\pi\paren x$). Then just move over the sieve until we have passed over $L$ primes.
 
 \section{Largest product in a series}
 \textbf{Difficulty rating}: 5\%.
@@ -361,7 +361,7 @@ The obvious way to solve this problem is generating all the strings and counting
 
 \textbf{Programming techniques used}: greedy algorithm.
 
-Finally some actual algorithmics, even if very simple. A greedy algorithm that gets the best sum from both ``parents'' from above is good enough.
+Finally some actual algorithmics, even if very simple. A greedy algorithm that starts from the top and gets the best sum from both ``parents'' from above is good enough.
 
 \section{Counting Sundays}
 \textbf{Difficulty rating}: 5\%.
@@ -397,6 +397,7 @@ Similar to problem 16, but even more simple because there is no binary exponenti
 \textbf{Programming techniques used}: memoisation.
 
 The formula I've listed under ``divisor sum properties'' is the following: if a number's prime decomposition is
+
 \begin{equation*}
 N=\prod_{i=1}^mp_i^{e^i},
 \end{equation*}
@@ -521,7 +522,7 @@ Side note: I'm slightly triggered by the fact that the spiral moves in \sout{clo
 
 I overengineered this problem in order to make a generic algorithm that would work for bigger values. It was \textit{delightful}.
 
-The obvious algorithm generates all the algorithm (using BigInteger, or logarithms, or whatever). Instead, what I did was counting the amount of powers of each type present in the algorithm, and for each of them, I counted the new exponents that each type could generate. In the given range there are $87$ normal numbers ($99$ new values each), $6$ square numbers ($50$ new values each), $2$ cubes ($50$ new values each), $2$ fourth powers ($41$ new values each), and a fifth and a sixth power ($51$ and $37$ new values respectively). So: $87\cdot99+6\cdot50+2\cdot50+2\cdot41+51+37=9183$.
+The obvious algorithm generates all the powers (using BigInteger, or logarithms, or whatever). Instead, what I did was counting the amount of powers of each type present in the algorithm, and for each of them, I counted the new exponents that each type could generate. In the given range there are $87$ normal numbers ($99$ new values each), $6$ square numbers ($50$ new values each), $2$ cubes ($50$ new values each), $2$ fourth powers ($41$ new values each), and a fifth and a sixth power ($51$ and $37$ new values respectively). So: $87\cdot99+6\cdot50+2\cdot50+2\cdot41+51+37=9183$.
 
 \section{Digit fifth powers}
 \textbf{Difficulty rating}: 5\%.
@@ -632,7 +633,7 @@ The easiest way to do this, by far, is to generate all the palindromes in base $
 
 \textbf{Programming techniques used}: custom combination generator.
 
-I don't think that providing an explicit limit for the Eraatahostenes sieve is cheating or anything like that. If I had found fewer than $11$ primes, I would have increased the amount of digits.
+I don't think that providing an explicit limit for the Erathostenes sieve is cheating or anything like that. If I had found fewer than $11$ primes, I would have increased the amount of digits.
 
 Anyway: I generate all the candidates (numbers that can start with any odd number or 2, and where the rest of the digits are odd and not $5$), and for each of them, I check whether they are truncatable with the help of a premade Erathostenes sieve. Not much more complicated than that.
 
@@ -679,14 +680,14 @@ We need to generate all the primitive Pythagorean triples with perimeter smaller
 It's all about being careful about how numbers are being generated. I divided the decimals in ``chunks'' of numbers with fixed amounts of digits: $9$ with $1$ digit, $90$ with $2$, and so on. In the end:
 \begin{itemize}
 \item The $1$st digit is $1$, of course.
-\item The $10$th digit is the $1$ in $10$.
-\item The $100$th digit is the first $5$ (tens) in $55$.
-\item The $1000$th digit is the $3$ in $370$.
-\item The $10000$th digit is the unit $7$ in $2777$.
-\item The $100000$th digit is the $2$ in the thousands from $22222$.
-\item Finally, the millionth digit is the first one (hundreds of thousands) from $185185$.
+\item The $10$th digit is the $1$ in $10$ (note that $1/9=0.\overline1$).
+\item The $100$th digit is the first $5$ (tens) in $55$ (note that $1/18=0.0\overline5$).
+\item The $1000$th digit is the $3$ in $370$ (note that $1/27=0.\overline{037}$).
+\item The $10000$th digit is the unit $7$ in $2777$ (note that $1/36=0.2\overline7$).
+\item The $100000$th digit is the $2$ in the thousands from $22222$ (note that $1/45=0.0\overline2$).
+\item Finally, the millionth digit is the first one (hundreds of thousands) from $185185$ (note that $1/54=0.0\overline{185}$).
 \end{itemize}
-It takes a bit too long ($25$ milliseconds), for something that can be reasonably done by hand in a couple minutes top.
+Beautiful hidden pattern, right? But it takes a bit too long ($25$ milliseconds), for something that can be reasonably done by hand in a couple minutes top.
 
 \section{Pandigital prime}
 \textbf{Difficulty rating}: 5\%.
@@ -957,9 +958,7 @@ This explanation is too long for problem $57$, yes. However, it's not too long f
 
 \textbf{Programming techniques used}: none.
 
-Unlike that awful problem 28, this one spirals in the right, positive direction. The problem itself is pretty easy, because we can keep counters for each branch tip: $f_{\llave{1\ldots4}}={3,5,7,9}$ at the start, and then, starting with $i=4$ and in increments of two we can do $f_k=f_{k-1}+i$ (starting with $f_1=f_4+i$) and check primalities as we go.
-
-This problem is the first one where my execution time exceeds half a second ($\approx0.6$s). EDIT: after the Miller-Rabin refactor, reduced to about $0.1$ seconds.
+Unlike that awful problem 28, this one spirals in the right, positive direction. The problem itself is pretty easy, because we can keep counters for each branch tip: $f_{\llave{1\ldots4}}={3,5,7,9}$ at the start, and then, starting with $i=4$ and in increments of two we can do $f_k=f_{k-1}+i$ (starting with $f_1=f_4+i$) and check primalities as we go. $0.1$s with non-BigInteger Miller-Rabin.
 
 \section{Spiral primes}
 \textbf{Difficulty rating}: 5\%.
@@ -985,7 +984,7 @@ Easy, but fun. The idea is that the english text will contain the string ``the''
 
 I find that $20\%$ quite reasonable. It's not like this is a super difficult method, but it's tricky to get it right, there is no obvious solution (no, the solution is not the one for $4$ primes plus an additional one) and getting it efficiently can be a challenge. I used a complicated structure with trees where for each prime I stored possible combinations of less than $5$ primes verifying the conditions. For each prime, and for $n\in\llave{0,3}$, I have a tree storing the combinations including the prime and $n$ additional numbers. So, each time I add a prime, I need to traverse the structure for each prime less than the one given, and if I can traverse successfully a tree of level $3$, then I can add the three associated numbers, plus the prime ``owner'' of the tree, plus the prime we're currently iterating. It's a bit weird but it's efficient and the code is not that complicated.
 
-This is also the first problem where my algorithm took more than $1$ second. A bit more than $5$ seconds, in fact (EDIT: reduced to less than $0.5$s after refactoring Miller-Rabin). The final solution is composed of these primes: $\llave{13,5197,5701,6733,8389}$.
+I was able to use Miller-Rabin without resorting to BigIntegers, for a runtime of less than $0.5$s. The final solution is composed of these primes: $\llave{13,5197,5701,6733,8389}$.
 
 \section{Cyclical figurate numbers}
 \textbf{Difficulty rating}: 20\%.
@@ -1106,7 +1105,7 @@ In hindsight, it's surprising that we need to go as far as problem $69$ to find 
 
 I can see three approaches to this problem: first, brute force, as in counting the divisors by hand. This is $O\paren{n^2}$ and therefore it's not really bruteforceable, which I guess is why the difficulty rating is $10\%$ and not $5\%$. Second, ``kind of'' brute force, that is, calculating $\dfrac n{\varphi\paren n}$ for all $n$ and taking the maximum. This is much more reasonable (and this is how I solved this for the first time), but then there is the much better third approach, which I'll explain in the next paragraphs.
 
-So, the totient function is multiplicative. This means that if $\mathrm{gcd}\paren{m,n}=1$, then $\varphi\paren{mn}=\varphi\paren m\varphi\paren n$. In particular, if the prime decomposition of $n$ is
+You see, the totient function is multiplicative. So, if $\mathrm{gcd}\paren{m,n}=1$, then $\varphi\paren{mn}=\varphi\paren m\varphi\paren n$. In particular, if the prime decomposition of $n$ is
 \begin{equation*}
 n=\prod_ip_i^{e_i},
 \end{equation*}
@@ -1353,9 +1352,9 @@ So we have the transition matrix $M$. The Markov chain theory says that the vect
 
 Finally, the equation $M'x'=v$ is solvable, and yes I used gaussian elimination in Java because why not. So we get the solution $x'$, append the $x_{40}=1$, and divide by $\sum_ix_i$ to get a normalised solution. Then we search for the three squares with highest probability, and done.
 
-Now, this gets me the right solution for both the $6$-sided case ($102400$) and the $4$-sided case ($101524$). So far so good. However, the probabilities I'm getting are NOT the same that the problem gives. I'm sure it has to do something with the fucking ``3rd double, go to jail'' rule (which I didn't expect to be meaningful), but that would require a more complicated analysis and frankly I'm not bothering. The analysis, roughly, would require a $120\times120$ matrix, and the current state would be determined by the pair (current square, amount of doubles). The solution would require some additional post-processing in order to condense the three instances of each square in the final vector.
+This is good enough to get the right solution, but it's actually a bit wrong since there is an additional rule that we need to comply with: that fucking ``3rd double, go to jail'' one. So, instead of using $40$ possible states (that is, the amount of squares) we need $120$ (the amount of squares, times the amount of doubles in last turns, which can be $0$, $1$ or $2$). So you need to carefully unfold the state space into a slightly different one, which is bigger. Otherwise the calculation is the same.
 
-UPDATE: it wasn't so complicated to solve the $120\times120$ problem. I'm getting the right probabilities for the $6$ sided dice (although I would have normalized the $3.095\ldots$ for the $00$ square as $3.10$, not $3.09$. Perhaps this is still wrong?), and the least probable square, barring the impossible square $30$, is square $07$ with a measly $0.86\%$ probability; the least probable non-card square is square $01$ with a probability of $2.13\%$. And for $4$ sided dice I'm getting these results:
+With the $120$ states, I'm getting the right probabilities for the $6$ sided dice (although I would have normalized the $3.095\ldots$ for the $00$ square as $3.10$, not $3.09$. Perhaps this is still wrong?), and the least probable square, barring the impossible square $30$, is square $07$ with a measly $0.86\%$ probability; the least probable non-card square is square $01$ with a probability of $2.13\%$. And for $4$ sided dice I'm getting these results:
 \begin{itemize}
 \item $P=7.02\%$ for square $10$.
 \item $P=3.62\%$ for square $15$.
@@ -1519,7 +1518,9 @@ The longest chain has a length of $28$ and the highest number is $629072$.
 
 \textbf{Programming techniques used}: arc consistency.
 
-For something that I've written so much times, this Sudoku solving algorithm sure gave me a lot of headaches. From very subtle errors after translating my old C++ code, to other very subtle errors detecting inconsistencies in half solved puzzles. Anyway the final algorithm is reasonably fast, with a run time of $0.3$s, give or take, which means a nice average of about $5$ms per Sudoku. Surely there are faster ways to do this, but I'm happy with my result.
+For something that I've written so much times, this Sudoku solving algorithm sure gave me a lot of headaches. From very subtle errors after translating my old C++ code, to other very subtle errors detecting inconsistencies in half solved puzzles. Anyway the final algorithm is reasonably fast, with a run time of $0.3$s, give or take, which means a nice average of about $5$ or $6$ms per Sudoku. Surely there are faster ways to do this, but I'm happy with my result.
+
+The algorithm itself is just arc consistency (as I learned in Artificial Intelligence classes, long ago), with some weird tree search on top. We define a ``refining'' algorithm as follows: keep a bitset for each square, and whenever there is either one suitable value for a square, or one suitable square for a given value in a row, column or $3\times3$ block, update the rest of the cells accordingly; repeat until you can't do anything else. With this in mind, the complete algorithm is: refine; for every non-decided square, try every value, i.e. mark a cell with a fixed value, then refine; this generates a tree (one child per square and value). Partial solutions can be merged from the second level on, to speed up the process.
 
 \section{Large non-Mersenne prime}
 \textbf{Difficulty rating}: 5\%.
@@ -1691,7 +1692,7 @@ From now on, difficult problems appear without warning. This is what we came her
 
 \textbf{Programming techniques used}: none.
 
-Much easier than the previous one. Especially since it's an uber-standard problem for a first year Maths graduate. While it doesn't say it directly, the problem consists on calculating a minimal expansion tree. This can be done with a greedy algorithm called Kruskal's algorithm, as every discrete math student knows. I'm very surprised by that $35\%$ rating; I guess that at the time most of Project Euler participants came from CS backgrounds? But even then, they should know about Kruskal's algorithm. The only thing remotely difficult about this problem is how to determine that two vertices of a partial graph are connected, and ``remotely difficult'' still means ``almost trivially easy'' here.
+Much easier than the previous one. Especially since it's an über-standard problem for a first year Maths graduate. While it doesn't say it directly, the problem consists on calculating a minimal expansion tree. This can be done with a greedy algorithm called Kruskal's algorithm, as every discrete math student knows. I'm very surprised by that $35\%$ rating; I guess that at the time most of Project Euler participants came from CS backgrounds? But even then, they should know about Kruskal's algorithm. The only thing remotely difficult about this problem is how to determine that two vertices of a partial graph are connected, and ``remotely difficult'' still means ``almost trivially easy'' here.
 
 \section{Diophantine reciprocals I}
 \textbf{Difficulty rating}: 30\%.
@@ -1944,7 +1945,7 @@ At turn $n$, there is a probability $\dfrac1n$ of getting a blue disc, and $\dfr
 
 \textbf{Programming techniques used}: breadth-first search.
 
-Yes, after writing the algorithm I realised that it was actually a multiple, condensed breadth-first search. With a lot of implicit memoisation. It sounds like I'm throwing random polysyllabic words, but I promise that it makes sense.
+Yes, after writing the algorithm I realised that it was actually a multiple, condensed breadth-first search. With a lot of implicit memoisation. It sounds like I'm throwing random math-sounding polysyllabic words, but I promise that it makes sense.
 
 So, the problem looks like a standard partition problem, but it's more complicated (and that $40\%$ has reasons to be there). The important part is that dynamic programming won't work. Unless you generate \textit{all the possible ways} to generate each number. Which is not dynamic programming, but rather, brute force. A more elegant approach is to use a breadth-based search where you try to look for all the cases that can be generated at each depth level. And you store full ``paths'', meaning that if you are able to find $4$ with 2 steps, you need to store the full set of $\llave{1,2,4}$, because you will need to try all the combinations during the next level (actually you only need to combine $4$ with the other three? This would save some time, but it would require a more finely tuned structure). So far it seems kind of doable. However, if a number $x$'s optimum result is for depth $N$, then we need to make sure that \textit{every way of generating $x$ with $N$ multiplications is stored for the next level search}. Yes, this is necessary, otherwise you'll miss some cases and will get a wrong 1584 instead of the correct 1582. This took me off guard, because initially I was storing just the first path.
 
@@ -2202,7 +2203,8 @@ The generating function of the Fibonacci numbers is $F\paren x=\dfrac1{1-x-x^2}$
 xF\paren x=N\Rightarrow\dfrac x{1-x-x^2}=N\Rightarrow Nx^2+\paren{N+1}x-N=0\Rightarrow\\\Rightarrow x=\dfrac{-\paren{N+1}\pm\sqrt{5N^2+2N+1}}{2N}.
 \end{array}
 \end{equation*}
-Clearly this will be a rational number if an only if $5N^2+2N+1$ is a perfect square. Now here goes a complicated procedure involving a diophantine solution calculation (thanks once again, Alpertron), which yields the following solutions:
+Clearly this will be a rational number if an only if $5N^2+2N+1$ is a perfect square. Now here goes a complicated procedure involving a diophantine solution calculation (thanks once again, Alpertron), which yields the solutions in the form of a succession, $N\in\llave{g_n}$:
+
 \begin{eqnarray*}
 g_1&=&2,\\
 g_2&=&15,\\
@@ -2331,7 +2333,7 @@ So, the three numbers are members of a geometric progression of integers. Meanin
 \begin{equation*}
 n=dq+r=\paren{cN^2}\paren{cD^2}+cDN=c^2D^2N^2+cDN=cDN\paren{cDN+1}.
 \end{equation*}
-Since the product of two consecutive numbers can never be a square, the remainder must always be the smallest number. Therefore:
+Since the product of two consecutive positive integers can never be a square, the remainder must always be the smallest number. Therefore:
 \begin{equation*}
 n=dq+r=\paren{cN^2}\paren{cDN}+cD^2=c^2DN^3+cD^2.
 \end{equation*}
@@ -2390,6 +2392,8 @@ y&=&\dfrac{a-b}2=\dfrac{e+f}2,\\
 z&=&\dfrac{c-d}2=\dfrac{e-f}2.
 \end{eqnarray*}
 So the result $x+y+z$ can be calculated, for example, as $\dfrac{c+d}2+\dfrac{e+f}2+\dfrac{c-d}2=c+\dfrac{e+f}2$. In my machine it takes about $41$ms.
+
+By the way: $x=434657$; $y=420968$; $z=150568$; $x+y=925^2$; $x-y=117^2$; $x+z=765^2$; $x-z=533^2$; $y+z=756^2$; $y-z=520^2$.
 
 \section{Investigating the Torricelli point of a tri-angle}	% Another Bad Box averted.
 \textbf{Difficulty rating}: 65\%.
