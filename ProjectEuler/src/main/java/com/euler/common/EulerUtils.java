@@ -21,6 +21,7 @@ import com.google.common.collect.Multiset;
 import com.google.common.math.LongMath;
 import com.koloboke.collect.map.IntIntMap;
 import com.koloboke.collect.map.LongIntMap;
+import com.koloboke.collect.map.ObjLongMap;
 import com.koloboke.collect.map.hash.HashIntIntMaps;
 import com.koloboke.collect.set.LongSet;
 import com.koloboke.collect.set.hash.HashLongSets;
@@ -486,6 +487,9 @@ public class EulerUtils {
 		Long counter=map.get(key);
 		long newValue=tally+((counter==null)?0:counter.longValue());
 		map.put(key,newValue);
+	}
+	public static <K> void increaseCounter(ObjLongMap<K> map,K key,long tally)	{
+		map.compute(key,(K unusedKey,long oldKey)->oldKey+tally);
 	}
 	public static <K> void increaseCounter(Map<K,Long> map,K key,long tally,long mod)	{
 		Long counter=map.get(key);

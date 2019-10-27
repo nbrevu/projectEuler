@@ -48,6 +48,9 @@ public class Rational	{
 	public Rational multiply(Rational other)	{
 		return new Rational(num*other.num,den*other.den);
 	}
+	public Rational multiply(long other)	{
+		return new Rational(num*other,den);
+	}
 	public Rational divide(Rational other)	{
 		return new Rational(num*other.den,den*other.num);
 	}

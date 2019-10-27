@@ -2597,6 +2597,22 @@ S_{i,j,k}=\left\{\begin{array}{ll}k=0:&T_{i,j},\\k=1:&T_{i,j}+T_{i+1,j}+T_{i+1,j
 \end{equation*}
 At each step we only need the current row and the two previous ones, so there is no need to store the whole 3D array at all times. With this scheme I can find the solution in about $1.5$ seconds (I suspect that much of it comes from Java zeroing arrays upon allocation), and I don't think there is more room for improvement. The minimum triangle has its apex at row $7$, element $7$ (these are the \textit{eighth} elements. Unlike Python, this is an actual, serious programming language and arrays start at $0$) and $k=885$, i.e. the depth is $886$ and the triangle contains $392941$ elements.
 
+\section{Paper sheets of standard sizes: an ex-pected-value problem}
+\textbf{Difficulty rating}: 50\%.
+
+\textbf{Solution}: 0.464399. \textit{Solved: Tue, 8 Sep 2015, 09:51}.
+
+\textbf{Math knowledge used}: none.
+
+\textbf{Programming techniques used}: none.
+
+This is the first problem with a non-integer solution! They are a bit rare in the early problems, although later they appear more commonly, especially in problems related to Markov chains.
+
+I used a simulation of the whole process. That is: at each step, count all the possible cases (like ``at this point we might have either one A2, or two A3, or one A3 and two A4, or...''), mapping each of them to its frequency. The whole state of a path includes both this map and the amount of times that we have hit a single sheet. At each iteration, for every possible state, we generate all possible children (i.e. possible ways of choose one sheet and divide it), increasing the counter when we hit a case with a single sheet.
+
+The first sheet doesn't count and the second one can only be one case: exactly one A2, one A3, one A4 and one A5. Thirteen iterations later we get the fifteenth case, which is the one where we actually sum and get the expected value. I wanted to use rationals but apparently I was hitting an overflow somewhere (this is surprising, because my old C++ code didn't), so I resorted to BigInteger. Although they are usually slow, the problem is so simple that the answer is found in about $50$ms.
+
+
 
 
 \end{document}

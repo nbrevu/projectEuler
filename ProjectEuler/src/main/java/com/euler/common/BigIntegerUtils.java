@@ -1,12 +1,9 @@
 package com.euler.common;
 
 import static java.math.BigInteger.ONE;
-import static java.math.BigInteger.ZERO;
 import static java.math.BigInteger.valueOf;
 
-import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.math.MathContext;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -44,73 +41,6 @@ public class BigIntegerUtils {
 			exp/=2;
 		}
 		return prod;
-	}
-	public static class Fraction	{
-		public final BigInteger numerator;
-		public final BigInteger denominator;
-		private static BigInteger getGcd(BigInteger a,BigInteger b)	{
-			for (;;)	{
-				BigInteger r=a.mod(b);
-				if (r.equals(ZERO)) return b;
-				a=b;
-				b=r;
-			}
-		}
-		public Fraction()	{
-			numerator=ZERO;
-			denominator=ONE;
-		}
-		public Fraction(long n,long d)	{
-			this(BigInteger.valueOf(n),BigInteger.valueOf(d));
-		}
-		public Fraction(BigInteger n,BigInteger d)	{
-			BigInteger g=getGcd(n,d);
-			numerator=n.divide(g);
-			denominator=d.divide(g);
-		}
-		public Fraction multiply(Fraction other)	{
-			BigInteger newNumerator=numerator.multiply(other.numerator);
-			BigInteger newDenominator=denominator.multiply(other.denominator);
-			return new Fraction(newNumerator,newDenominator);
-		}
-		public Fraction multiply(BigInteger other)	{
-			BigInteger newNumerator=numerator.multiply(other);
-			return new Fraction(newNumerator,denominator);
-		}
-		public Fraction add(Fraction other)	{
-			BigInteger newNumerator=numerator.multiply(other.denominator).add(other.numerator.multiply(denominator));
-			BigInteger newDenominator=denominator.multiply(other.denominator);
-			return new Fraction(newNumerator,newDenominator);
-		}
-		public Fraction divide(BigInteger other)	{
-			BigInteger newDenominator=denominator.multiply(other);
-			return new Fraction(numerator,newDenominator);
-		}
-		public Fraction divide(Fraction other)	{
-			BigInteger newNumerator=numerator.multiply(other.denominator);
-			BigInteger newDenominator=denominator.multiply(other.numerator);
-			return new Fraction(newNumerator,newDenominator);
-		}
-		public Fraction subtract(Fraction other)	{
-			BigInteger newNumerator=numerator.multiply(other.denominator).subtract(other.numerator.multiply(denominator));
-			BigInteger newDenominator=denominator.multiply(other.denominator);
-			return new Fraction(newNumerator,newDenominator);
-		}
-		public Fraction negate()	{
-			return new Fraction(numerator.negate(),denominator);
-		}
-		public BigDecimal asBigDecimal()	{
-			return (new BigDecimal(numerator)).divide(new BigDecimal(denominator));
-		}
-		public BigDecimal asBigDecimal(MathContext mc)	{
-			return (new BigDecimal(numerator)).divide(new BigDecimal(denominator),mc);
-		}
-		@Override
-		public String toString()	{
-			StringBuilder sb=new StringBuilder();
-			sb.append(numerator.toString()).append('/').append(denominator.toString());
-			return sb.toString();
-		}
 	}
 	public static BigInteger[] factorials(int upTo)	{
 		BigInteger[] facts=new BigInteger[1+upTo];
