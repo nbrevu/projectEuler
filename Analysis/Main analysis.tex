@@ -2612,6 +2612,27 @@ I used a simulation of the whole process. That is: at each step, count all the p
 
 The first sheet doesn't count and the second one can only be one case: exactly one A2, one A3, one A4 and one A5. Thirteen iterations later we get the fifteenth case, which is the one where we actually sum and get the expected value. I wanted to use rationals but apparently I was hitting an overflow somewhere (this is surprising, because my old C++ code didn't), so I resorted to BigInteger. Although they are usually slow, the problem is so simple that the answer is found in about $50$ms.
 
+\section{Writing 1/2 as a sum of inverse squares}
+\textbf{Difficulty rating}: 65\%.
+
+\textbf{Solution}: 301. \textit{Solved: Tue, 8 Sep 2015, 10:11}.
+
+\textbf{Math knowledge used}: Bezout's Lemma.
+
+\textbf{Programming techniques used}: none.
+
+Hardest problem so far, no questions. I'm not going to lie: I copied this algorithm from the project Euler thread (because my very old code from $2011$ was complicated), and I don't understand it completely. I tried to write an algorithm from scratch but I couldn't hit the one minute rule. Here's the gist of the algorithm:
+\begin{itemize}
+\item First and foremost we identify one way in which any number $\dfrac1{n^2}$ (for $2\leq n\leq80$) can be expressed as sum of values of the form $\dfrac a{m^2}$.
+\item Then we generate an ``iteration order'' for the numbers in the range $\corch{2,L}$. This is the part I don't understand. The result seems reasonable at first (first we have $2$, then $3$ and $6$, then $5$, $10$, $15$ and $30$, etc), but the prime powers like $4$ appear in unexpectd positions. The algorithm itself is weird and apparently it uses some kind of ranking. I get that bit shifting is used to determine that certain values weigh double than others, but otherwise I don't follow.
+\item Now the algorithm itself: each number $n$ will have a (mutable) mark $k_n$. We start marking the $n=2$ as $k_n=2$, because we need $k_n\cdot\dfrac1{n^2}=\dfrac12$. Then we iterate in sort order (the recursion is weird, kind of backwards, but I see that the progress is done upon ``unrolling'' when you come back from the recursion), and for each number, if we have a mark $k_n\neq0$, we try using the precalculated split. If we get to the end of an iteration and all the $k_n$ are $0$, then there is a hit, so we increase the result.
+\end{itemize}
+So, the algorithm is weird, and it would need heavy modifications in order to get the actual numbers that are part of each sum, but it's damn fast. Less than $50$ milliseconds (about $\dfrac56$ of which go to the precalculation) when my brute force took nearly $3$ minutes.
+
+My very old algorithm iterated in a different way and used some kind of marks like for each number, to keep the state of the iteration. Apparently my intent was to use `?', `0' and `1' as marks, but apprently I had to unfold these last two into two separate states, so I used `O' and `I'. I didn't even use enums, just chars. I also don't understand that old algorithm fully.
+
+
+
 
 
 

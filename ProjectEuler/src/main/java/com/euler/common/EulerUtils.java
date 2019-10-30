@@ -766,4 +766,17 @@ public class EulerUtils {
 			mod=10*mod+1;
 		}
 	}
+	public static long extendedGcd(long a,long b,long[] coeffs)	{
+		// Gives Bezout lemma's coefficients in the "coeffs" output variable.
+		if (a==0)	{
+			coeffs[0]=0;
+			coeffs[1]=1;
+			return b;
+		}
+		long d=extendedGcd(b%a,a,coeffs);
+		long swap=coeffs[0];
+		coeffs[0]=coeffs[1]-(b/a)*coeffs[0];
+		coeffs[1]=swap;
+		return d;
+	}
 }

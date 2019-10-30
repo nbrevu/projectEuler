@@ -5,7 +5,7 @@ import static com.euler.common.EulerUtils.lcm;
 
 import java.util.NoSuchElementException;
 
-public class Rational	{
+public class Rational implements Comparable<Rational>	{
 	public final static Rational ZERO=new Rational(0,1);
 	public final static Rational ONE=new Rational(1,1);
 	private final long num;
@@ -77,5 +77,12 @@ public class Rational	{
 	}
 	public int signum()	{
 		return (int)(Math.signum(num)*Math.signum(den));
+	}
+	@Override
+	public int compareTo(Rational o) {
+		long gcd=EulerUtils.gcd(den,o.den);
+		long n1=num*(o.den/gcd);
+		long n2=o.num*(den/gcd);
+		return Long.compare(n1,n2);
 	}
 }
