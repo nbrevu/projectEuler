@@ -2623,7 +2623,7 @@ The first sheet doesn't count and the second one can only be one case: exactly o
 
 Hardest problem so far, no questions. I'm not going to lie: I copied this algorithm from the project Euler thread (because my very old code from $2011$ was complicated), and I don't understand it completely. I tried to write an algorithm from scratch but I couldn't hit the one minute rule. Here's the gist of the algorithm:
 \begin{itemize}
-\item First and foremost we identify one way in which any number $\dfrac1{n^2}$ (for $2\leq n\leq80$) can be expressed as sum of values of the form $\dfrac a{m^2}$.
+\item First and foremost we identify one way in which any number $\dfrac1{n^2}$ (for $2\leq n\leq80$) can be expressed as sum of two values of the form $\dfrac a{m^2}$.
 \item Then we generate an ``iteration order'' for the numbers in the range $\corch{2,L}$. This is the part I don't understand. The result seems reasonable at first (first we have $2$, then $3$ and $6$, then $5$, $10$, $15$ and $30$, etc), but the prime powers like $4$ appear in unexpectd positions. The algorithm itself is weird and apparently it uses some kind of ranking. I get that bit shifting is used to determine that certain values weigh double than others, but otherwise I don't follow.
 \item Now the algorithm itself: each number $n$ will have a (mutable) mark $k_n$. We start marking the $n=2$ as $k_n=2$, because we need $k_n\cdot\dfrac1{n^2}=\dfrac12$. Then we iterate in sort order (the recursion is weird, kind of backwards, but I see that the progress is done upon ``unrolling'' when you come back from the recursion), and for each number, if we have a mark $k_n\neq0$, we try using the precalculated split. If we get to the end of an iteration and all the $k_n$ are $0$, then there is a hit, so we increase the result.
 \end{itemize}
@@ -2631,8 +2631,28 @@ So, the algorithm is weird, and it would need heavy modifications in order to ge
 
 My very old algorithm iterated in a different way and used some kind of marks like for each number, to keep the state of the iteration. Apparently my intent was to use `?', `0' and `1' as marks, but apprently I had to unfold these last two into two separate states, so I used `O' and `I'. I didn't even use enums, just chars. I also don't understand that old algorithm fully.
 
+\section{Investigating Gaussian Integers}
+\textbf{Difficulty rating}: 65\%.
 
+\textbf{Solution}: 17971254122360635. \textit{Solved: Tue, 8 Sep 2015, 11:03}.
 
+\textbf{Math knowledge used}: Euclid's greater common divisor algorithm.
+
+\textbf{Programming techniques used}: none.
+
+Not as difficult as the previous one, but still hard to get in a reasonable amount of time. Given any number $N$, there are two kind of divisors: one comes from the normal, real, integer numbers; other comes from Gaussian integers, and for each $a^2+b^2=N$ (for $a$ and $b$ positive) we have four complex divisors: $a+bi$, $a-bi$, $b+ai$ and $b-ai$. The sum of these is $2a+2b$. At this point, it looks like there should be a clever way to enumerate divisors using Pythagorean triples, or using some other clever scheme; mathoverflow helpfully points out that we can use this formula:
+\begin{equation*}
+\paren{a^2+b^2}\paren{c^2+d^2}=\paren{ac+bd}^2+\paren{ad-bc}^2.
+\end{equation*}
+This approach works, but it's hellish and, worse, slow. A much better solution is to create a bruteforcish algorithm: for each pair $\paren{a,b}$, $a\leq b$, $a^2+b^2\leq L$, and $\mathrm{gcd}\paren{a,b}=1$, we have a ``prime'' sum of squares (we can skip ``non-prime'' ones if we generate them from the primitive ones). This pair generates $a+bi$, $a-bi$, $b+ai$ and $b-ai$; but aside from this, we now know that $\paren{2a+2bi}\paren{a-bi}=2\paren{a^2+b^2}$ is valid; it's not a sum of squares per se, but it's a gaussian integer multiplication. And $\paren{3a+3bi}\paren{a-bi}=3\paren{a^2+b^2}$, and so on. Therefore, the obvious thing would be to just add $2\paren{a+b}\cdot\floor{\dfrac L{a^2+b^2}}$, but instead, we need to add this:
+\begin{equation*}
+\sum_{k=1}^{\floor{L/\paren{a^2+b^2}}}k\cdot2\paren{a^2+b^2}\floor{\dfrac L{k\paren{a^2+b^2}}}.
+\end{equation*}
+An exception must be made for the case $a=b=1$ (which is the only pair $a=b$ with $a$ and $b$ coprime); instead of using $2\paren{a^2+b^2}$, we need to use $\paren{a^2+b^2}$, because otherwise we are counting factors twice.
+
+All of this is for gaussian integers. For normal integers, the procedure is much simpler. Given an integer $n$, it will divide a total of $\floor{\dfrac Ln}$ numbers, and as such, we need to add $n\floor{\dfrac Ln}$. This is one line; add about 10 or so for the gaussian integer calculations, and the resulting program returns the correct result in about $3.7$ seconds.
+
+In the problem thread there are some interesting discussions regarding the sigma function (sum of divisors) and things like that. The results are not much faster, since the order of magnitude of the loops is more or less the same.
 
 
 
