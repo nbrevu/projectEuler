@@ -2654,6 +2654,21 @@ All of this is for gaussian integers. For normal integers, the procedure is much
 
 In the problem thread there are some interesting discussions regarding the sigma function (sum of divisors) and things like that. The results are not much faster, since the order of magnitude of the loops is more or less the same.
 
+\section{Investigating Gaussian Integers}
+\textbf{Difficulty rating}: 65\%.
+
+\textbf{Solution}: 479742450. \textit{Solved: Tue, 8 Sep 2015, 13:15}.
+
+\textbf{Math knowledge used}: none.
+
+\textbf{Programming techniques used}: none.
+
+The problem description is very deceptive. Literally all of it is useless except the very last line. So, we need to calculate how many coefficients in the expansion of $\paren{x+y+z}^{200000}$ are multiples of $10^{12}$. In other words, we need to calculate how many values of the set $\llave{\dfrac{200000!}{i!j!k!}}$, with $i+j+k=200000$, are multiples of $10^{12}$. And, surprisingly, there isn't any convoluted by clever way to do it: you can take advantage of symmetries, save the amount of computations by caching some values, and so on, but the solution is still going to be $O\paren{n^2}$.
+
+First, create a cache with the amount of powers of $2$ and $5$ in every factorial from $0$ to $L=200000$. Then, iterate over $i\leq j\leq\dfrac{L-i}2$, and make $k=L-i-j$; at each iteration, use the cache to determine whether $2$ and $5$ appear more than $12$ times in $\dfrac{L!}{i!j!k!}$. Just that simple. I tweaked the iteration limits using some information from the problem thread, but there isn't that much gain. For some real speedup, take advantage from condition shortcuts: the condition for $5$ is much less frequent than for $2$, so check $5$ first and $2$ second. This is very surprising, but doing it this way reduces the computation time to less than half! (from $6.4$ down to $2.8$ seconds). Out of all that time, the cache computation (which takes more time per operation, but only has $O\paren n$ operations) takes about $10$ms, negligible compared with the rest.
+
+
+
 
 
 \end{document}
