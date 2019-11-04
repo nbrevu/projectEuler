@@ -17,7 +17,6 @@ import java.util.TreeMap;
 import java.util.TreeSet;
 
 import com.google.common.base.Function;
-import com.google.common.collect.Multiset;
 import com.google.common.math.LongMath;
 import com.koloboke.collect.map.IntIntMap;
 import com.koloboke.collect.map.LongIntMap;
@@ -621,16 +620,6 @@ public class EulerUtils {
 		return result;
 	}
 	
-	public static <T> void removeCarefully(Multiset<T> multiset,T element)	{
-		int times=multiset.count(element);
-		multiset.remove(element);
-		if (times>1) multiset.add(element,times-1);
-	}
-	
-	public static <T> void removeCarefully(Multiset<T> multiset,Collection<T> elements)	{
-		for (T element:elements) removeCarefully(multiset,element);
-	}
-
 	public static long primeAppearancesInFactorial(long prime,long factorial)	{
 		long res=0;
 		while (factorial>=prime)	{

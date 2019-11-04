@@ -54,6 +54,9 @@ public class Rational implements Comparable<Rational>	{
 	public Rational divide(Rational other)	{
 		return new Rational(num*other.den,den*other.num);
 	}
+	public Rational harmonicSum(Rational other)	{
+		return new Rational(num*other.num,num*other.den+den*other.num);
+	}
 	public Rational negate()	{
 		return new Rational(-num,den);
 	}

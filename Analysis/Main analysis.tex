@@ -1449,7 +1449,7 @@ My trusty CombinationIterator class saves the day again. There are only $\displa
 
 \textbf{Math knowledge used}: none.
 
-\textbf{Programming techniques used}: none.
+\textbf{Programming techniques used}: custom Rational class.
 
 I dislike this problem, but maybe it's just me. This is about enumeration, and the only tricky part is to ensure that you haven't missed any case. Fortunately this is not too tedious, since there are only three cases and they are simple to get:
 \begin{itemize}
@@ -1594,7 +1594,7 @@ b_0=21;&b_n=4a_{n-1}+2b_{n-1}-3.
 
 \textbf{Math knowledge used}: Lagrange interpolation.
 
-\textbf{Programming techniques used}: none.
+\textbf{Programming techniques used}: custom Rational class.
 
 I can't believe that I spent so much time debugging this. For once, it's a bit of Java's fault, in that translating an assignment of the form $a+=b\cdot c$ into named functions was erroneously interpreted as $a=b.\mathrm{mul}\paren c$ instead of $a=a.\mathrm{add}\paren{b.\mathrm{mul}\paren c}$. Definitely my fault; but Java verbosity, for once, was a hindrance (math expressions have always been Java's Achilles heel...). Aside from that, the problem is incredibly simple: for $n=1\ldots10$, get the original polynomial values for $k=1\ldots n$, interpolate to get the $k-1$-th degree polynomial, and evaluate for $k=n+1$ (theoretically you should find the first value for which the interpolated polynomial does not equal the original one; but it's always $k=n+1$), add the result, which took me about $40$ms to compute.
 
@@ -1607,7 +1607,7 @@ This problem shouldn't be rated so high. Not even close.
 
 \textbf{Math knowledge used}: algebraic geometry.
 
-\textbf{Programming techniques used}: none.
+\textbf{Programming techniques used}: custom Rational class.
 
 The issue here is: how to determine when does a triangle include the origin? It's quite easy. Given any two points, $p=\paren{p_x,p_y}$ and $q=\paren{q_x,q_y}$, we can extend the segment that joins these two points into a line whose equation is
 \begin{equation*}
@@ -2666,6 +2666,19 @@ In the problem thread there are some interesting discussions regarding the sigma
 The problem description is very deceptive. Literally all of it is useless except the very last line. So, we need to calculate how many coefficients in the expansion of $\paren{x+y+z}^{200000}$ are multiples of $10^{12}$. In other words, we need to calculate how many values of the set $\llave{\dfrac{200000!}{i!j!k!}}$, with $i+j+k=200000$, are multiples of $10^{12}$. And, surprisingly, there isn't any convoluted by clever way to do it: you can take advantage of symmetries, save the amount of computations by caching some values, and so on, but the solution is still going to be $O\paren{n^2}$.
 
 First, create a cache with the amount of powers of $2$ and $5$ in every factorial from $0$ to $L=200000$. Then, iterate over $i\leq j\leq\dfrac{L-i}2$, and make $k=L-i-j$; at each iteration, use the cache to determine whether $2$ and $5$ appear more than $12$ times in $\dfrac{L!}{i!j!k!}$. Just that simple. I tweaked the iteration limits using some information from the problem thread, but there isn't that much gain. For some real speedup, take advantage from condition shortcuts: the condition for $5$ is much less frequent than for $2$, so check $5$ first and $2$ second. This is very surprising, but doing it this way reduces the computation time to less than half! (from $6.4$ down to $2.8$ seconds). Out of all that time, the cache computation (which takes more time per operation, but only has $O\paren n$ operations) takes about $10$ms, negligible compared with the rest.
+
+\section{Counting Capacitor Circuits}
+\textbf{Difficulty rating}: 60\%.
+
+\textbf{Solution}: 3857447. \textit{Solved: Tue, 8 Sep 2015, 13:52}.
+
+\textbf{Math knowledge used}: none.
+
+\textbf{Programming techniques used}: custom Rational class.
+
+This one is not hard, but it has brutal complexity and I wasn't able to get it in less than $16$s. C++ is faster (probably by about half the run time), but aside from that, there really isn't any precise way. I tried to be clever avoiding results and I got a slighlty lower result. I really was stuck with the obvious procedure (and, judging by the comments, everyone else in project Euler is, as well): start with the result for a single capacitor, and then, for each $n$ up to $18$, try all the combinations of $k$ and $n-k$ for $1\leq k\leq\dfrac n2$, both in series and in parallel. Add only the values you haven't already visited, for a slight speed-up.
+
+The concept is simple and the program is kind of obvious; however, apparently this was a challenge to get in time for computers from $2007$, because of the relatively high memory requirements. Also, this is in OEIS (namely A051389), but since there is no formula, just the numbers, I didn't get anything from there. I mean, sure, I could have copied and pasted the result, but that's too close to cheating for me.
 
 
 
