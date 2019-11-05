@@ -2680,6 +2680,28 @@ This one is not hard, but it has brutal complexity and I wasn't able to get it i
 
 The concept is simple and the program is kind of obvious; however, apparently this was a challenge to get in time for computers from $2007$, because of the relatively high memory requirements. Also, this is in OEIS (namely A051389), but since there is no formula, just the numbers, I didn't get anything from there. I mean, sure, I could have copied and pasted the result, but that's too close to cheating for me.
 
+\section{Counting Digits}
+\textbf{Difficulty rating}: 70\%.
+
+\textbf{Solution}: 21295121502550. \textit{Solved: Tue, 8 Sep 2015, 14:26}.
+
+\textbf{Math knowledge used}: none.
+
+\textbf{Programming techniques used}: binary search.
+
+Maybe that $70\%$ sounds a bit too high, but this is one of those weird problems where you could feel overwhelmed by the problem definition before actually starting to code. First things first: the analytical value of $f\paren{n,d}$ can be found with this formula: $f\paren{n,d}=\displaystyle\sum_{k=0}^{\floor{\log_{10}n}}g\paren{n,\floor{\dfrac n{10^k}},10^k,d}$, where
+
+\begin{equation*}
+g\paren{n,m,p,d}=\left\{\begin{array}{ll}m<d\text{ (mod 10)}:&p\cdot\floor{\dfrac m{10}},\\m\equiv d\text{ (mod 10)}:&p\cdot\floor{\dfrac m{10}}+n-p\cdot m+1,\\m>d\text{ (mod 10)}:&p\paren{1+\floor{\dfrac m{10}}}.\end{array}\right.
+\end{equation*}
+
+So the calculation of $f\paren{n,d}$ can be done in $O\paren{\log_{10}n}$. Now, it can be proven that $f\paren{n,d}=n$ necessitates that $n<10^{11}$, since otherwise you always get $f\paren{n,d}>n$. This provides an upper bound. Now, what can we do? A binary search! It actually works. Start with the interval $\corch{1,10^{11}}$, and at each step calculate the value of $f$ in the the lower ($l$), middle ($m$) and upper ($u$) points. If $f\paren{m,d}\geq l$ and $m\geq f\paren{l,d}$, search again in the lower half, and in $f\paren{u,d}\geq m$ and $u\geq f\paren{m,d}$, search in the middle half. When the interval has length $1$, verify that $f\paren{n,d}=n$ and, if true, add the value to the set. It takes about $65$ms.
+
+Some curious details about the results: first, the distribution of values per digit is surprisingly random-looking, from the measly $4$ cases for $d=5$ (which, funnily enough, are: $10^{10}$, $2\cdot10^{10}$, $3\cdot10^{10}$ and $4\cdot10^{10}$), to the whooping $343$ for $d=8$. Second, repeated values do appear and literally every single one of them is a multiple of $10^6$. In fact it can be seen that in all of these common values there aren't any digit in common between the number and all the digits (like $n=39465000000$, shared between $d=7$ and $d=8$; and a very funny case, $10^{10}$ which is shared between literally every single digit except $d=1$). But in the non-common case, the norm is that $n$ does contain $d$ somewhere ($527$ values do contain it, against $1256$ that do not), even if it isn't strictly necessary.
+
+Solving the problem can take some time, but it ended up not being super complicated. The real fun was in analysing these results.
+
+
 
 
 
