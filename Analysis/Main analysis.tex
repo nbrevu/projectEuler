@@ -2701,6 +2701,22 @@ Some curious details about the results: first, the distribution of values per di
 
 Solving the problem can take some time, but it ended up not being super complicated. The real fun was in analysing these results.
 
+\section{Solving the diophantine equation $\dfrac1a+\dfrac1b=\dfrac p{10^n}$}
+\textbf{Difficulty rating}: 65\%.
+
+\textbf{Solution}: 53490. \textit{Solved: Mon, 14 Sep 2015, 01:58}.
+
+\textbf{Math knowledge used}: amount of divisors function.
+
+\textbf{Programming techniques used}: none.
+
+This looks like a continuation of problems $108$ and $110$, although it's a bit different. We can immediately see that $\dfrac1{pa}+\dfrac1{pb}=\dfrac1{10^n}$, so we can iterate over divisors of $10^{2n}$, but in this case we can do better if we try to iterate over coprime pairs $\llave{a,b}$ and then we get all values of $p$ that fit (this way of iteration will naturally include all the non-coprime pairs since $\dfrac1{ca}+\dfrac1{cb}=\dfrac p{10^n}$ implies that $\dfrac1a+\dfrac1b=\dfrac{cp}{10^n}$). It's clear that $p=\dfrac{10^n\paren{a+b}}{ab}$, and since $a$ and $b$ are coprime, neither $a$ nor $b$ can divide $a+b$, therefore $ab$ must be a divisor of $10^n$. We can just enumerate all the coprime pairs of divisors of $10^n$, which is easy to do since $10^n=2^n5^n$: there are only two kind of cases:
+\begin{itemize}
+\item $a=1$, $b$ is any divisor of $10^n$. These are $\paren{n+1}^2$ cases.
+\item $a=2^x$, $b=5^y$ with $0\leq x,y\leq n$. These are other $\paren{n+1}^2$ cases.
+\end{itemize}
+For each one of these, first we calculate $p=\dfrac{10^n}a+\dfrac{10^n}b$; then, since there is a solution for each divisor of $p$, we just need to decompose $p$ in prime factors and then calculate how many factors does $p$ have. The total result is the sum of these amount of factors, and the vast majority of the $28$ms that takes to compute this is spent precomputing primes for the decomposition (a first prime sieve is not recommended because the numbers are as big as $2\cdot10^9$, so the numbers are decomposed iterating over primes); the main algorithm takes negligible time, below one millisecond.
+
 
 
 
