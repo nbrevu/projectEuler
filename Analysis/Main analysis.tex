@@ -2717,6 +2717,17 @@ This looks like a continuation of problems $108$ and $110$, although it's a bit 
 \end{itemize}
 For each one of these, first we calculate $p=\dfrac{10^n}a+\dfrac{10^n}b$; then, since there is a solution for each divisor of $p$, we just need to decompose $p$ in prime factors and then calculate how many factors does $p$ have. The total result is the sum of these amount of factors, and the vast majority of the $28$ms that takes to compute this is spent precomputing primes for the decomposition (a first prime sieve is not recommended because the numbers are as big as $2\cdot10^9$, so the numbers are decomposed iterating over primes); the main algorithm takes negligible time, below one millisecond.
 
+\section{Exploring strings for which only one \\character comes lexicographically after its neighbour to the left}	% Getting rid of this particular bad box was ugly.
+\textbf{Difficulty rating}: 55\%.
+
+\textbf{Solution}: 409511334375. \textit{Solved: Wed, 9 Sep 2015, 03:41}.
+
+\textbf{Math knowledge used}: combinatorial numbers.
+
+\textbf{Programming techniques used}: none.
+
+Considerably simpler than the previous one. You can use dynamic programming, but there is actually a combinatorial solution that works. If the string length is $n$ and the ``offending'' character is at position $k$, there are $\displaystyle\binom nk-1$ ways to create the string. Therefore we have $\displaystyle\sum_{k=1}^n\paren{\binom nk-1}=2^n-n-1$ ways to create such a string; this value grows to $\displaystyle\binom Nn\paren{2^n-n-1}$ once we take into account the different ways to choose $n$ characters out of $N=26$. So we can calculate this for every $n\in\corch{0,N}$ and get the maximum; however, someone at the problem thread points out that the maximum is always found at $m=N-\floor{\dfrac N3}$ for $N\geq4$, so we can plug $m$ into the formula to get the direct result. Constant time, less than $9\mu$s of run time, and one of the few cases where it's feasible to get the result by hand.
+
 
 
 
