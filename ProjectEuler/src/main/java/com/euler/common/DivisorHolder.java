@@ -79,6 +79,11 @@ public class DivisorHolder	{
 		});
 		return result;
 	}
+	public int[] getSortedListOfDivisors()	{
+		int[] result=getUnsortedListOfDivisors().toIntArray();
+		Arrays.sort(result);
+		return result;
+	}
 	@Override
 	public int hashCode()	{
 		return factors.hashCode();

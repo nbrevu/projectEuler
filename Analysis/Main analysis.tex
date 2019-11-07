@@ -2728,6 +2728,24 @@ For each one of these, first we calculate $p=\dfrac{10^n}a+\dfrac{10^n}b$; then,
 
 Considerably simpler than the previous one. You can use dynamic programming, but there is actually a combinatorial solution that works. If the string length is $n$ and the ``offending'' character is at position $k$, there are $\displaystyle\binom nk-1$ ways to create the string. Therefore we have $\displaystyle\sum_{k=1}^n\paren{\binom nk-1}=2^n-n-1$ ways to create such a string; this value grows to $\displaystyle\binom Nn\paren{2^n-n-1}$ once we take into account the different ways to choose $n$ characters out of $N=26$. So we can calculate this for every $n\in\corch{0,N}$ and get the maximum; however, someone at the problem thread points out that the maximum is always found at $m=N-\floor{\dfrac N3}$ for $N\geq4$, so we can plug $m$ into the formula to get the direct result. Constant time, less than $9\mu$s of run time, and one of the few cases where it's feasible to get the result by hand.
 
+\section{Digital root sums of factorisations}
+\textbf{Difficulty rating}: 60\%.
+
+\textbf{Solution}: 14489159. \textit{Solved: Wed, 9 Sep 2015, 04:04}.
+
+\textbf{Math knowledge used}: none.
+
+\textbf{Programming techniques used}: dynamic programming.
+
+The digital sum of a number is its remainder after dividing by $9$, except that if it's $0$ you use a $9$ instead. Now, for one digit numbers it's clear that the maximum sum is going to be the digit itself, but for any other digit, the result is more complicated. We could enumerate every single partition (difficult to code, and horribly slow), but fortunately there is a reasonably simple dynamic programming scheme that works. It works like this: for every number, get a list with all its divisors. Then, for every number $N$, we can do this (where $\mathrm{drs}\paren N$ is the digital root sum of $N$):
+\begin{equation*}
+\mathrm{mdrs}\paren N=\max\llave{\mathrm{drs}\paren N,\max_{d|N}\paren{\mathrm{mdrs}\paren d+\mathrm{mdrs}\paren{\dfrac Nd}}}.
+\end{equation*}
+The obvious approach to this (generating divisors from every $N$) is approximately $O\paren{N\log N}$ if you can generate divisors quickly (for example, with a ``first prime'' sieve). In my machine it takes a bit less than $2$s, which is not a lot.
+
+There is an even better way, which iterates over divisors, instead of over $N$. I copied this approach from the problem thread, since it's easy to understand and a lot faster (something like $57$ ms).
+
+
 
 
 
