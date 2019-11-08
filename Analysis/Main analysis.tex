@@ -2745,6 +2745,28 @@ The obvious approach to this (generating divisors from every $N$) is approximate
 
 There is an even better way, which iterates over divisors, instead of over $N$. I copied this approach from the problem thread, since it's easy to understand and a lot faster (something like $57$ ms).
 
+\section{Factorial trailing digits}
+\textbf{Difficulty rating}: 60\%.
+
+\textbf{Solution}: 16576. \textit{Solved: Mon, 14 Sep 2015, 02:46}.
+
+\textbf{Math knowledge used}: none.
+
+\textbf{Programming techniques used}: binary exponentiation.
+
+This is much harder than it looks. I mean, at first glance it looks piss easy. But it's at least moderately hard, and that $60\%$ rating is perfectly fair.
+
+The problem is that you can't just calculate the trailing digits mod $10^5$ and exponentiate, i.e.you can't divide $10^{12}$ into $10^7$ ``similar'' segments of length $10^5$ (thereby calculating just the result mod $10^5$ and raising it to $10^7$ via modular exponentiation), because the distribution of powers of $5$ is different at each segment, so the results are not the same.
+
+There are several ways to do this, and in the end I opted for a reasonably simple and fast (about $90$ms) way I saw in the problem thread: first, precalculate the list of trailing digits for $\corch{0,10^5}$ (yes, $10^5$ included), and then use this recursive formula where $f$ is the function we are calculating and $D\paren n$ is the (precalculated) set of trailing digits for $n$:
+
+\begin{equation*}
+f\paren n=\left\{\begin{array}{ll}n<5:&D\paren n,\\\text{otherwise:}&\paren{f\paren{\floor{\dfrac n5}}\cdot\paren{D\paren{10^5}}^{\floor{\dfrac n{10^5}}}\cdot D\paren{\floor{\dfrac n{10^5}}}}\%10^5.\end{array}\right.
+\end{equation*}
+Of course, we use modular exponentiation for that big factor in the middle.
+
+
+
 
 
 
