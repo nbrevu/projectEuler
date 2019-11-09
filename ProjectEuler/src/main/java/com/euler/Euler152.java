@@ -8,7 +8,7 @@ import com.euler.common.Primes;
 import com.euler.common.Timing;
 
 public class Euler152 {
-	private static final int LIMIT=80;
+	private final static int LIMIT=80;
 	
 	private static class SumFinder	{
 		private final int[] primes;

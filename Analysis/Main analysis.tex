@@ -1354,7 +1354,7 @@ Finally, the equation $M'x'=v$ is solvable, and yes I used gaussian elimination 
 
 This is good enough to get the right solution, but it's actually a bit wrong since there is an additional rule that we need to comply with: that fucking ``3rd double, go to jail'' one. So, instead of using $40$ possible states (that is, the amount of squares) we need $120$ (the amount of squares, times the amount of doubles in last turns, which can be $0$, $1$ or $2$). So you need to carefully unfold the state space into a slightly different one, which is bigger. Otherwise the calculation is the same.
 
-With the $120$ states, I'm getting the right probabilities for the $6$ sided dice (although I would have normalized the $3.095\ldots$ for the $00$ square as $3.10$, not $3.09$. Perhaps this is still wrong?), and the least probable square, barring the impossible square $30$, is square $07$ with a measly $0.86\%$ probability; the least probable non-card square is square $01$ with a probability of $2.13\%$. And for $4$ sided dice I'm getting these results:
+With the $120$ states, I'm getting the right probabilities for the $6$ sided dice (although I would have normalised the $3.095\ldots$ for the $00$ square as $3.10$, not $3.09$. Perhaps this is still wrong?), and the least probable square, barring the impossible square $30$, is square $07$ with a measly $0.86\%$ probability; the least probable non-card square is square $01$ with a probability of $2.13\%$. And for $4$ sided dice I'm getting these results:
 \begin{itemize}
 \item $P=7.02\%$ for square $10$.
 \item $P=3.62\%$ for square $15$.
@@ -1949,7 +1949,7 @@ Yes, after writing the algorithm I realised that it was actually a multiple, con
 
 So, the problem looks like a standard partition problem, but it's more complicated (and that $40\%$ has reasons to be there). The important part is that dynamic programming won't work. Unless you generate \textit{all the possible ways} to generate each number. Which is not dynamic programming, but rather, brute force. A more elegant approach is to use a breadth-based search where you try to look for all the cases that can be generated at each depth level. And you store full ``paths'', meaning that if you are able to find $4$ with 2 steps, you need to store the full set of $\llave{1,2,4}$, because you will need to try all the combinations during the next level (actually you only need to combine $4$ with the other three? This would save some time, but it would require a more finely tuned structure). So far it seems kind of doable. However, if a number $x$'s optimum result is for depth $N$, then we need to make sure that \textit{every way of generating $x$ with $N$ multiplications is stored for the next level search}. Yes, this is necessary, otherwise you'll miss some cases and will get a wrong 1584 instead of the correct 1582. This took me off guard, because initially I was storing just the first path.
 
-Anyway. Non optimized, yet it takes eighty-something milliseconds. Good, even if there is a bit of room for improvement.
+Anyway. Non optimised, yet it takes eighty-something milliseconds. Good, even if there is a bit of room for improvement.
 
 By the way, the highest depth needed is $191$, with a depth of $11$. The generating set is $\llave{1,2,3,5,7,14,19,38,57,95,190}$. This is the only number with depth $11$, all the other can be obtained with $10$ or less.
 
@@ -2765,7 +2765,7 @@ f\paren n=\left\{\begin{array}{ll}n<5:&D\paren n,\\\text{otherwise:}&\paren{f\pa
 \end{equation*}
 Of course, we use modular exponentiation for that big factor in the middle.
 
-\section{Factorial trailing digits}
+\section{Triominoes}
 \textbf{Difficulty rating}: 70\%.
 
 \textbf{Solution}: 20574308184277971. \textit{Solved: Sun, 4 Oct 2015, 11:42}.
@@ -2785,6 +2785,33 @@ The recursive algorithm is quite simple, based on memoisation:
 \item Return the total counter summed during the previous loop, and also store it in the cache.
 \end{itemize}
 This is surprisingly fast, getting that $17$ digit result (highest one so far, even including concatenated string-like results, although there are some other $17$ digit solution in the previous problems, like $153$) in less than $0.5$ seconds.
+
+\section{Hexadecimal numbers}
+\textbf{Difficulty rating}: 45\%.
+
+\textbf{Solution}: 3D58725572C62302. \textit{Solved: Wed, 9 Sep 2015, 04:57}.
+
+\textbf{Math knowledge used}: inclusion-exclusion.
+
+\textbf{Programming techniques used}: dynamic programming.
+
+Very simple dynamic programming problem. That $45\%$ may look right for this relatively early problem, but for later problems' standard, this is ridiculously easy. There is a combinatorial solution, and then there is a dynamic programming solution. The combinatorial one is simple, but both take about the same time ($1.5$ms), because most of the time actually goes for the String formatting, which appears to be horribly slow. Without that, the combinatorial solution takes $9\mu$s and the dynamic programming one takes $28\mu$s.
+
+The combinatorial solution is based on inclusion-exclusion:
+\begin{equation*}
+S=16^N-43\dfrac{15^N-1}{15-1}+41\dfrac{14^N-1}{14-1}-13\dfrac{13^N-1}{13-1}-1.
+\end{equation*}
+
+For the dynamic programming solution, I initialised an array of length $8$ with $13$ at the position $0$ (13 digits that are not $0$, $1$ or $A$), and $1$ at positions $1$ and $2$. Then, at each step, I performed the following updates for $j\in\corch{0,7}$:
+\begin{itemize}
+\item $A_{i,j}$ is increased by $13A_{i-1,j}$.
+\item $A_{i,j|1}$, $A_{i,j|2}$ and $A_{i,j|4}$ are increased by $A_{i-1,j}$.
+\end{itemize}
+Then I just add all the $A_{i,7}$.
+
+The result, expressed as a decimal string, is $4420408745587516162$; one of the highest (if not the highest) non-mod integer result that has ever been a solution of a Project Euler problem (almost half the maximum Long value).
+
+
 
 
 

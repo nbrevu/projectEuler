@@ -7,7 +7,7 @@ import java.util.function.Function;
 import com.google.common.base.Functions;
 
 public class CombinationIterator implements Iterable<int[]>,Iterator<int[]>	{
-	private static final Function<int[],int[]> COPY_STRATEGY=(int[] array)->Arrays.copyOf(array,array.length);
+	private final static Function<int[],int[]> COPY_STRATEGY=(int[] array)->Arrays.copyOf(array,array.length);
 	
 	private final int size;
 	private final int maxValue;

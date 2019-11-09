@@ -9,7 +9,7 @@ import com.koloboke.collect.map.IntIntMap;
 import com.koloboke.collect.map.hash.HashIntIntMaps;
 
 public class CustomCombinationIterator implements Iterable<int[]>,Iterator<int[]>	{
-	private static final Function<int[],int[]> COPY_STRATEGY=(int[] array)->Arrays.copyOf(array,array.length);
+	private final static Function<int[],int[]> COPY_STRATEGY=(int[] array)->Arrays.copyOf(array,array.length);
 	
 	private final int size;
 	private final int[] values;
