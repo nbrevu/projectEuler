@@ -2824,6 +2824,19 @@ This problem is fucked up in a real sense. The solution can be found with a lot 
 
 I guess that you could also let the computer do the job: first you generate all the lines, then you generate all the points, and for each point you generate a list of the points connected to it. Then, for every pair of points in every line, count a triangle for each point that is ``visible'' from both of them, then subtract the colinear ones. It will take more to code and the run time will also be much larger, but in exchange, you retain more of your sanity.
 
+\section{Numbers for which no three consecutive digits have a sum greater than a given value}
+\textbf{Difficulty rating}: 45\%.
+
+\textbf{Solution}: 378158756814587. \textit{Solved: Wed, 9 Sep 2015, 05:30}.
+
+\textbf{Math knowledge used}: graph theory.
+
+\textbf{Programming techniques used}: dynamic programming.
+
+Yep, graph theory, albeit in a very simple form. Clearly dynamic programming is the way to go for this problem (although there is a gargantuan recursive formula in the problem thread). But not every state is needed. So I created a list with all the possible states (there are $220$), assigned an index to each of them, and looked for transitions between two consecutive states (i.e.: remove the first digit, add the last one, accept only if the new total sum verifies the conditions); there are $1210$. Now I just need these transitions in order to iterate. I start with an array with all the states for valid three digit combinations (without trailing zeroes!), and then, at each iteration (for $i\in\corch{4,20}$), I loop over the transitions: given the arrays $P$ (previous) and $N$ (next), starting with all zeroes for $N$, for every transition $a\rightarrow b$ I do $N\corch{b}=N\corch{b}+P\corch{a}$.
+
+The majority of the time goes for the fancy transition calculation. Only about $5\%$ goes to the actual update loop, and the total run time is about $66$ms.
+
 
 
 
