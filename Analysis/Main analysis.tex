@@ -2837,6 +2837,26 @@ Yep, graph theory, albeit in a very simple form. Clearly dynamic programming is 
 
 The majority of the time goes for the fancy transition calculation. Only about $5\%$ goes to the actual update loop, and the total run time is about $66$ms.
 
+\section{Intersections}
+\textbf{Difficulty rating}: 65\%.
+
+\textbf{Solution}: 2868868. \textit{Solved: Tue, 15 Sep 2015, 05:41}.
+
+\textbf{Math knowledge used}: algebraic geometry, Euclid's greater common divisor algorithm.
+
+\textbf{Programming techniques used}: custom Rational class.
+
+This is computationally very intensive and I don't think there is much room for improvement. It's just: generate segments, calculate intersections, ensure that there aren't repetitions. I tried to be somewhat clever and grouped segments by slope, but I must have done some
+
+The only ``difficulty'' is in the intersection formula, which is algebraic geometry at high school level. The segments can be codified as $\paren{x,y}+t\paren{\Delta x,\Delta y}$ where $t\in\corch{0,1}$; so, if the other segment is $\paren{x',y'}+u\paren{\Delta x',\Delta y'}$ with $u\in\corch{0,1}$, then the intersection point happens when
+\begin{eqnarray*}
+t&=&\dfrac{\Delta x'\paren{y'-y}-\Delta y'\paren{x'-x}}{\Delta x'\Delta y-\Delta x\Delta y'},\\
+u&=&\dfrac{\Delta x\paren{y'-y}-\Delta y\paren{x'-x}}{\Delta x'\Delta y-\Delta x\Delta y'}.
+\end{eqnarray*}
+If $t\in\paren{0,1}$ and $u\in\paren{0,1}$, we have found a valid intersection, so we calculate the intersection point using any of the two equations (either with $t$ or $u$). A set must be used in order to prevent duplicates, which do happen.
+
+As I mentioned, this is computationally intensive, so it takes about $4.4$ seconds. There isn't much I can do about that since the segments don't follow any pattern.
+
 
 
 
