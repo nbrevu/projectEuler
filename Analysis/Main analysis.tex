@@ -2811,6 +2811,20 @@ Then I just add all the $A_{i,7}$.
 
 The result, expressed as a decimal string, is $4420408745587516162$; one of the highest (if not the highest) non-mod integer result that has ever been a solution of a Project Euler problem (almost half the maximum Long value).
 
+\section{Cross-hatched triangles}
+\textbf{Difficulty rating}: 70\%.
+
+\textbf{Solution}: 343047. \textit{Solved: Mon, 14 Sep 2015, 05:05}.
+
+\textbf{Math knowledge used}: none.
+
+\textbf{Programming techniques used}: none.
+
+This problem is fucked up in a real sense. The solution can be found with a lot of pencil and paper, and it really is just counting all the different cases. The full explanation can be found at https://www.math.uni-bielefeld.de/~sillke/SEQUENCES/grid-triangles, and there are at least 12 subcases. Finding the formula is grueling, but the formula itself is kind of simple (as expected, only cubic polynomials are needed; and there are $7$ of them in the final formula), so the run time is a bit less $7\mu$s. At this point you might as well finish the job by hand, given that $N=36$ is small.
+
+I guess that you could also let the computer do the job: first you generate all the lines, then you generate all the points, and for each point you generate a list of the points connected to it. Then, for every pair of points in every line, count a triangle for each point that is ``visible'' from both of them, then subtract the colinear ones. It will take more to code and the run time will also be much larger, but in exchange, you retain more of your sanity.
+
+
 
 
 
