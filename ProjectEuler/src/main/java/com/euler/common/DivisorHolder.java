@@ -7,30 +7,30 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.SortedMap;
 import java.util.TreeMap;
-import java.util.function.IntConsumer;
+import java.util.function.LongConsumer;
 
 import com.google.common.base.Optional;
 import com.google.common.math.LongMath;
-import com.koloboke.collect.map.IntIntCursor;
-import com.koloboke.collect.map.IntIntMap;
-import com.koloboke.collect.map.hash.HashIntIntMaps;
-import com.koloboke.collect.set.IntSet;
-import com.koloboke.collect.set.hash.HashIntSets;
+import com.koloboke.collect.map.LongIntCursor;
+import com.koloboke.collect.map.LongIntMap;
+import com.koloboke.collect.map.hash.HashLongIntMaps;
+import com.koloboke.collect.set.LongSet;
+import com.koloboke.collect.set.hash.HashLongSets;
 
 public class DivisorHolder	{
-	private IntIntMap factors;
+	private LongIntMap factors;
 	public DivisorHolder()	{
-		factors=HashIntIntMaps.newMutableMap();
+		factors=HashLongIntMaps.newMutableMap();
 	}
-	private DivisorHolder(IntIntMap factors)	{
-		this.factors=HashIntIntMaps.newMutableMap(factors);
+	private DivisorHolder(LongIntMap factors)	{
+		this.factors=HashLongIntMaps.newMutableMap(factors);
 	}
-	public void addFactor(int prime,int power)	{
+	public void addFactor(long prime,int power)	{
 		Integer prevPow=factors.get(prime);
 		int newVal=power+((prevPow==null)?0:prevPow.intValue());
 		factors.put(prime,newVal);
 	}
-	public void removeFactor(int prime)	{
+	public void removeFactor(long prime)	{
 		int pow=factors.get(prime);
 		if (pow==1) factors.remove(prime);
 		else factors.put(prime,pow-1);
@@ -42,15 +42,15 @@ public class DivisorHolder	{
 	}
 	public long getDivisorSum()	{
 		long prod=1;
-		IntIntCursor cursor=factors.cursor();
+		LongIntCursor cursor=factors.cursor();
 		while (cursor.moveNext())	{
-			int prime=cursor.key();
+			long prime=cursor.key();
 			int power=cursor.value();
 			prod*=(LongMath.pow(prime,power+1)-1)/(prime-1);
 		}
 		return prod;
 	}
-	public IntIntMap getFactorMap()	{
+	public LongIntMap getFactorMap()	{
 		return factors;
 	}
 	public Decomposer getDecomposer()	{
@@ -58,29 +58,29 @@ public class DivisorHolder	{
 	}
 	public int removeSinglePrimes()	{
 		// Removes every non-repeated primes, returns the amount of removed primes.
-		IntSet toRemove=HashIntSets.newMutableSet();
-		factors.forEach((int key,int value)->{
+		LongSet toRemove=HashLongSets.newMutableSet();
+		factors.forEach((long key,int value)->{
 			if (value==1) toRemove.add(key);
 		});
-		toRemove.forEach((IntConsumer)factors::remove);
+		toRemove.forEach((LongConsumer)factors::remove);
 		return toRemove.size();
 	}
-	public IntSet getUnsortedListOfDivisors()	{
-		IntSet result=HashIntSets.newMutableSet((int)getAmountOfDivisors());
+	public LongSet getUnsortedListOfDivisors()	{
+		LongSet result=HashLongSets.newMutableSet((int)getAmountOfDivisors());
 		result.add(1);
-		factors.forEach((int prime,int power)->{
-			IntSet toAdd=HashIntSets.newMutableSet(result.size()*power);
-			int currentFactor=prime;
+		factors.forEach((long prime,int power)->{
+			LongSet toAdd=HashLongSets.newMutableSet(result.size()*power);
+			long currentFactor=prime;
 			for (int i=1;i<=power;++i)	{
-				for (int existing:result) toAdd.add(currentFactor*existing);
+				for (long existing:result) toAdd.add(currentFactor*existing);
 				currentFactor*=prime;
 			}
 			result.addAll(toAdd);
 		});
 		return result;
 	}
-	public int[] getSortedListOfDivisors()	{
-		int[] result=getUnsortedListOfDivisors().toIntArray();
+	public long[] getSortedListOfDivisors()	{
+		long[] result=getUnsortedListOfDivisors().toLongArray();
 		Arrays.sort(result);
 		return result;
 	}
@@ -97,8 +97,8 @@ public class DivisorHolder	{
 		if (factors.isEmpty()) return "1";
 		StringBuilder sb=new StringBuilder();
 		boolean first=true;
-		SortedMap<Integer,Integer> sorted=new TreeMap<>(factors);
-		for (Map.Entry<Integer,Integer> entry:sorted.entrySet())	{
+		SortedMap<Long,Integer> sorted=new TreeMap<>(factors);
+		for (Map.Entry<Long,Integer> entry:sorted.entrySet())	{
 			if (first) first=false;
 			else sb.append(" · ");
 			sb.append(entry.getKey()).append('^').append(entry.getValue());
@@ -109,20 +109,20 @@ public class DivisorHolder	{
 		// Negative numbers are allowed. This is quirky but it actually works to our advantage (see problem 650).
 		DivisorHolder result=new DivisorHolder();
 		if (n==0) return result;
-		factors.forEach((int key,int value)->result.addFactor(key,n*value));
+		factors.forEach((long key,int value)->result.addFactor(key,n*value));
 		return result;
 	}
 	// Use this after operations that might have resulted in empty powers.
 	public void clean()	{
-		IntSet toRemove=HashIntSets.newMutableSet();
-		factors.forEach((int key,int value)->{ 
+		LongSet toRemove=HashLongSets.newMutableSet();
+		factors.forEach((long key,int value)->{ 
 			if (value==0) toRemove.add(key);
 		});
-		toRemove.forEach((IntConsumer)factors::remove);
+		toRemove.forEach((LongConsumer)factors::remove);
 	}
 	public int getTotient()	{
 		int result=1;
-		IntIntCursor cursor=factors.cursor();
+		LongIntCursor cursor=factors.cursor();
 		while (cursor.moveNext())	{
 			result*=cursor.key()-1;
 			for (int i=1;i<cursor.value();++i) result*=cursor.key();
@@ -155,12 +155,12 @@ public class DivisorHolder	{
 	}
 	public static DivisorHolder combine(DivisorHolder d1,DivisorHolder d2)	{
 		DivisorHolder result=new DivisorHolder(d1.factors);
-		for (Map.Entry<Integer,Integer> entry:d2.factors.entrySet()) result.addFactor(entry.getKey(),entry.getValue());
+		for (Map.Entry<Long,Integer> entry:d2.factors.entrySet()) result.addFactor(entry.getKey(),entry.getValue());
 		return result;
 	}
 	public static DivisorHolder divide(DivisorHolder dividend,DivisorHolder divisor)	{
 		DivisorHolder result=new DivisorHolder(dividend.factors);
-		divisor.factors.forEach((int key,int value)->{
+		divisor.factors.forEach((long key,int value)->{
 			int existing=result.factors.getOrDefault(key,0);
 			int toRemove=value;
 			// Negative numbers might appear. We don't really care, each problem knows whether this makes sense or not.
@@ -172,15 +172,15 @@ public class DivisorHolder	{
 	public static DivisorHolder getLcm(Collection<DivisorHolder> numbers)	{
 		DivisorHolder result=new DivisorHolder();
 		for (DivisorHolder holder:numbers)	{
-			IntIntCursor cursor=holder.factors.cursor();
-			while (cursor.moveNext()) result.factors.compute(cursor.key(),(int key,int elem)->Math.max(elem,cursor.value()));
+			LongIntCursor cursor=holder.factors.cursor();
+			while (cursor.moveNext()) result.factors.compute(cursor.key(),(long key,int elem)->Math.max(elem,cursor.value()));
 		}
 		return result;
 	}
 	public long getAsLong()	{
 		// Assumes that the results fits in a long (i.e. 63 bits).
 		long result=1l;
-		IntIntCursor cursor=factors.cursor();
+		LongIntCursor cursor=factors.cursor();
 		while (cursor.moveNext()) result*=LongMath.pow(cursor.key(),cursor.value());
 		return result;
 	}
@@ -218,7 +218,7 @@ public class DivisorHolder	{
 		// In this case we're more interested in accessing through indices, therefore we use a pair of
 		// arrays instead of a map. As ugly as this may look, the alternative looks way uglier.
 		private final int howManyFactors;
-		private final int[] factors;
+		private final long[] factors;
 		private final int[] powers;
 		private final double[] primeLogs;
 		private int[] currentStatus;
@@ -227,13 +227,13 @@ public class DivisorHolder	{
 		private boolean isFinished;
 		private final double halfLog;
 		public Decomposer(DivisorHolder source)	{
-			SortedMap<Integer,Integer> divs=new TreeMap<>(source.getFactorMap());
+			SortedMap<Long,Integer> divs=new TreeMap<>(source.getFactorMap());
 			howManyFactors=divs.size();
 			int i=0;
-			factors=new int[howManyFactors];
+			factors=new long[howManyFactors];
 			powers=new int[howManyFactors];
 			primeLogs=new double[howManyFactors];
-			for (Map.Entry<Integer,Integer> entry:divs.entrySet())	{
+			for (Map.Entry<Long,Integer> entry:divs.entrySet())	{
 				factors[i]=entry.getKey();
 				powers[i]=entry.getValue();
 				primeLogs[i]=Math.log((double)factors[i]);
