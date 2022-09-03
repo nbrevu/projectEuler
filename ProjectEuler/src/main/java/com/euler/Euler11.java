@@ -99,7 +99,7 @@ public class Euler11 {
 	
 	private static long solve()	{
 		try	{
-			URL resource=Euler11.class.getResource("in11.txt");
+			URL resource=Euler11.class.getResource("in.txt");
 			List<String> lines=Files.lines(Paths.get(resource.toURI())).collect(Collectors.toList());
 			int[][] array=parseInts(lines);
 			List<int[]> curatedLines=getCuratedLines(array);

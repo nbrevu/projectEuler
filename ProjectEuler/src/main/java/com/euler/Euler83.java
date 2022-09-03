@@ -14,7 +14,7 @@ import com.euler.common.Timing;
 public class Euler83 {
 	private static long solve()	{
 		try	{
-			URL resource=Euler83.class.getResource("in81.txt");
+			URL resource=Euler83.class.getResource("in8.txt");
 			List<String> lines=Files.lines(Paths.get(resource.toURI())).collect(Collectors.toList());
 			int[][] originalMatrix=Euler81.parseLines(lines);
 			int[][] result=Euler81.arraySameSize(originalMatrix);

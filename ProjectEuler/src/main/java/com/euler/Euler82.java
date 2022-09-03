@@ -26,7 +26,7 @@ public class Euler82 {
 	
 	private static long solve()	{
 		try	{
-			URL resource=Euler82.class.getResource("in81.txt");
+			URL resource=Euler82.class.getResource("in8.txt");
 			List<String> lines=Files.lines(Paths.get(resource.toURI())).collect(Collectors.toList());
 			int[][] originalMatrix=Euler81.parseLines(lines);
 			int[][] result=Euler81.arraySameSize(originalMatrix);

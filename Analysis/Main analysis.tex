@@ -115,7 +115,7 @@
 
 \textbf{Programming techniques used}: none.
 
-It's very simple using inclusion-exclusion. We count how many multiples of $3$, $5$ and $15$ are there, then we use triangular numbers to determine each sum, then we return $\mathrm{sum}\paren3+\mathrm{sum}\paren5-\mathrm{sum}\paren{15}$.
+It's very simple using inclusion-exclusion. We count how many multiples of $3$, $5$ and $15$ are there, then we use triangular numbers to determine each sum, then we return $\mathrm{sum}\paren3+\mathrm{sum}\paren5-\mathrm{sum}\paren{15}$. So, if the limit is $L=1000$, we define $L_3=\floor{\dfrac L3}$, $L_5=\floor{\dfrac L5}$ and $L_{15}=\floor{\dfrac L{15}}$. The solution is $\dfrac{L_3\paren{L_3+1}}2+\dfrac{L_5\paren{L_5+1}}2-\dfrac{L_{15}\paren{L_{15}+1}}2$.
 
 \section{Even Fibonacci numbers}
 \textbf{Difficulty rating}: 5\%.
@@ -145,7 +145,7 @@ N=\floor{\dfrac{\log L}{3\log\varphi}}.
 
 Finally, since we need the sum, we use a basic summation formula (again, considering that the $\paren{1-\varphi}^{3n}$ terms tend quickly to zero):
 \begin{equation*}
-\sum_{n=0}^N\dfrac{\varphi^{3n}-\paren{1-\varphi}^{3n}}{\sqrt5}\approx\sum_{i=0}^n\dfrac{\varphi^{3n}}{\sqrt5}=\dfrac{\varphi^{3n+3}-\varphi^3}{\paren{\varphi^3-1}\sqrt5}.
+\sum_{n=0}^N\dfrac{\varphi^{3n}-\paren{1-\varphi}^{3n}}{\sqrt5}\approx\sum_{i=0}^N\dfrac{\varphi^{3n}}{\sqrt5}=\dfrac{\varphi^{3N+3}-\varphi^3}{\paren{\varphi^3-1}\sqrt5}.
 \end{equation*}
 Rounding this value into the nearest integer we get the solution.
 
@@ -352,7 +352,7 @@ I'm a bit torn about this problem. On one hand, the concept is kind of beautiful
 
 The obvious way to solve this problem is generating all the strings and counting all the letters. Super-tedious. What I did was different: I enumerated all the words and then counted, for each one, in how many words appeared (all the cases are reasonably simple). Multiplying by the word's length, and adding the results, yields the solution.
 
-\section{Number letter counts}
+\section{Maximum path sum I}
 \textbf{Difficulty rating}: 5\%.
 
 \textbf{Solution}: 1074. \textit{Solved: Sat, 8 Aug 2015, 13:03}.
@@ -372,7 +372,7 @@ Finally some actual algorithmics, even if very simple. A greedy algorithm that s
 
 \textbf{Programming techniques used}: none.
 
-This is stupidly simple but I kept getting the wrong result because I used a monday as a starting point, but this is not what I need to use since I must count from 1901 onwards and the date I'm given is from 1900, not 1901.
+This is stupidly simple but I kept getting the wrong result because I used a Monday as a starting point, but this is not what I need to use since I must count from 1901 onwards and the date I'm given is from 1900, not 1901.
 
 The method itself: well, there are only 14 types of years. So I count how many of each type are there in the period from 1901 to 2000, then for each year type I count how many months start on a Sunday. Multiply and accumulate the sum. End.
 
@@ -477,7 +477,7 @@ The keys to this algorithm are two: the first one is that the period length of $
 
 \textbf{Solution}: -59231. \textit{Solved: Sat, 8 Aug 2015, 15:20}.
 
-\textbf{Math knowledge used}: none.
+\textbf{Math knowledge used}: Erathostenes Sieve.
 
 \textbf{Programming techniques used}: none.
 
@@ -561,7 +561,7 @@ The first array for $c=1$ is all ones, and then we iterate for each one of the r
 
 \textbf{Programming techniques used}: none.
 
-This is a bit tedious, but the culling process is interesting. First, about the sizes of the numbers: the only valid sizes are $\paren2\times\paren3=\paren4$ and $\paren1\times\paren4=\paren4$. Just iterating over these sizes is enough (less than $20000$ products, not bad), but we can cull even more if we take into account that the moduli of the products have to verify $n1+n2+(n1\cdot n2)\equiv0$ (mod $9$). This leaves jsut a few cases: $\paren{1,4}$, $\paren{3,6}$, $\paren{7,7}$ and $\paren{0,0}$. In the first two cases we also need to consider the reverse pairs, $\paren{4,1}$ and $\paren{6,3}$. So, for each combination of (pair of sizes) and (pair of moduli) we generate the possible pairs using a mere arithmetic progression, and we verify the products. So for each pair or arithmetic progression we have a nested loop, and we can cull a bit further by breaking the inner loop when we hit a product with more than $4$ digits.
+This is a bit tedious, but the culling process is interesting. First, about the sizes of the numbers: the only valid sizes are $\paren2\times\paren3=\paren4$ and $\paren1\times\paren4=\paren4$. Just iterating over these sizes is enough (less than $20000$ products, not bad), but we can cull even more if we take into account that the moduli of the products have to verify $n1+n2+(n1\cdot n2)\equiv0$ (mod $9$). This leaves just a few cases: $\paren{1,4}$, $\paren{3,6}$, $\paren{7,7}$ and $\paren{0,0}$. In the first two cases we also need to consider the reverse pairs, $\paren{4,1}$ and $\paren{6,3}$. So, for each combination of (pair of sizes) and (pair of moduli) we generate the possible pairs using a mere arithmetic progression, and we verify the products. So for each pair or arithmetic progression we have a nested loop, and we can cull a bit further by breaking the inner loop when we hit a product with more than $4$ digits.
 
 The program takes a bit to write but it's very fast. There aren't too many solutions:
 \begin{itemize}
@@ -904,7 +904,7 @@ This is, so far, the problem which requires the largest code. By a wide margin.
 
 Not much to add. There are ways to speed up the process (such as remembering the intermediate number, i.e. if I found the chain $49\rightarrow143\rightarrow484$ when looking for $49$, I shouldn't need to do the calculations for $143$; or noting that any number whose digits are strictly below $5$ will result in a palindrome immediately), but frankly it's not worth the hassle. The procedure is basically described in the problem: iterate, check, return if the last iteration hasn't found anything.
 
-This problem warms my heart a little because it makes me nostalgic of certain very old maths book.
+This problem warms my heart a little because it makes me nostalgic of certain old maths book from my childhood.
 
 \section{Powerful digit sum}
 \textbf{Difficulty rating}: 5\%.
@@ -960,7 +960,7 @@ This explanation is too long for problem $57$, yes. However, it's not too long f
 
 Unlike that awful problem 28, this one spirals in the right, positive direction. The problem itself is pretty easy, because we can keep counters for each branch tip: $f_{\llave{1\ldots4}}={3,5,7,9}$ at the start, and then, starting with $i=4$ and in increments of two we can do $f_k=f_{k-1}+i$ (starting with $f_1=f_4+i$) and check primalities as we go. $0.1$s with non-BigInteger Miller-Rabin.
 
-\section{Spiral primes}
+\section{XOR decryption}
 \textbf{Difficulty rating}: 5\%.
 
 \textbf{Solution}: 129448. \textit{Solved: Mon, 10 Aug 2015, 10:43}.
@@ -1042,7 +1042,7 @@ Of course, you can always brute force and explicitly generate the numbers, but t
 
 \textbf{Programming techniques used}: none.
 
-Oooh! More contiuned fractions. Project Euler still holds your hand, but it forces you to be careful about precision. Anyway, having the PeriodicContinuedFraction class, this is trivial (although I had to add a new method to check the length of the period).
+Oooh! More continued fractions. Project Euler still holds your hand, but it forces you to be careful about precision. Anyway, having the PeriodicContinuedFraction class, this is trivial (although I had to add a new method to check the length of the period).
 
 See problem $57$ for a comprehensive description of the method used to generate continued fractions.
 
@@ -1135,7 +1135,7 @@ Unlike in the previous case, we want to maximise the quotient, so we need few pr
 \item It also can't be $p^2$ because if $p$ is prime then $\varphi\paren{p^2}=p^2-p$ and since $p$ is not a multiple of $9$ then $p^2\not\equiv\varphi\paren{p^2}$ (mod $9$), so $p^2$ can't be an anagram of $\varphi\paren{p^2}$.
 \item Then, ideally the result is the product of two primes. This is not \textit{strictly} true, but it's a very good heuristic; we can assume it and in this problem it gets the correct solution.
 \end{itemize}
-The obvious solution is to iterate over pairs of primes, but we can trim the search space even more. The properties of anagrams imply that, if our solution is $pq$, then $pq\equiv\paren{p-1}\paren{q-1}$ (mod $9$). Now this means that (excluding the case $p=3$, not important since $3$ is very small), if any of the primes is of the form $3k+1$, then $\varphi\paren{pq}$ is a multiple of $3$ and therefore it can't be an anagram of $pq$, which is not a multiple of $3$. This removes a lot. And now that we know that $p,q\equiv2$, $5$ or $8$ (mod $9$) we can analyze the six possibilities:
+The obvious solution is to iterate over pairs of primes, but we can trim the search space even more. The properties of anagrams imply that, if our solution is $pq$, then $pq\equiv\paren{p-1}\paren{q-1}$ (mod $9$). Now this means that (excluding the case $p=3$, not important since $3$ is very small), if any of the primes is of the form $3k+1$, then $\varphi\paren{pq}$ is a multiple of $3$ and therefore it can't be an anagram of $pq$, which is not a multiple of $3$. This removes a lot. And now that we know that $p,q\equiv2$, $5$ or $8$ (mod $9$) we can analyse the six possibilities:
 \begin{itemize}
 \item $p\equiv2$, $q\equiv2$. Then $pq\equiv4$, $\varphi\paren{pq}\equiv1$.
 \item $p\equiv2$, $q\equiv5$. Then $pq\equiv1$, $\varphi\paren{pq}\equiv4$.
@@ -1379,7 +1379,7 @@ The best way to iterate is this: iterate over one dimension, from $1$ to $\infty
 
 We only need to iterate up to $i=53$ since $T\paren{53}^2>2000000$. The best solution is found for a $36\cdot77$ rectangle, because $T\paren{36}=666$ and $T\paren{77}=3003$, giving an area of $1999998$.
 
-\section{Counting rectangles}
+\section{Cuboid route}
 \textbf{Difficulty rating}: 35\%.
 
 \textbf{Solution}: 1818. \textit{Solved: Tue, 11 Aug 2015, 23:31}.
@@ -1412,7 +1412,7 @@ I can't believe that this has a $20\%$ rating. I assume that people started dese
 
 \textbf{Programming techniques used}: dynamic programming.
 
-I don't quite agree with the difficulty rating: this is the highest rated problem from the first $100$ ($40\%$ is shared with $90$, but this one solved by fewer people), and I don't think it's that complicated, but then again, that might be my years of experience talking.
+I don't quite agree with the difficulty rating: this is the highest rated problem from the first $100$ ($40\%$ is shared with $90$, but this one has been solved by fewer people), and I don't think it's that complicated, but then again, that might be my years of experience talking.
 
 The gist of the problem is: we need to find all the decompositions of natural numbers as a product of numbers greater than $1$ (for example, for $12$ we have $2\cdot2\cdot3=2\cdot6=3\cdot4=12$; four decompositions, because yes, we include $\llave{12}$, which won't be used to generate candidates but is needed as a base for multiples of $12$). Now, for each decomposition we can add as many ones as we please. So, if we take (say) the case of $2\cdot6$, since the sum of these factors is $8$ (note that as long as there are two or more factors, and they are greater or equal than $2$, the product will always be higher than the sum, so we will add a positive amount of ones), we can add four ones and we will get a decomposition of $1\cdot1\cdot1\cdot1\cdot2\cdot6$, where the factors sum $12$. In general, if we have a list of $k$ factors whose product is $n$ and whose sum is $s$, we can add $n-s$ ones, so that the product is still $n$ (of course), the sum of the factors is now $\paren{n-s}+s=n$, and the final amount of factors is $k+n-s$. So far so good. This gives us a suitable candidate, $n$, for the case for $k+n-s$ factors.
 
@@ -1531,9 +1531,9 @@ The algorithm itself is just arc consistency (as I learned in Artificial Intelli
 
 \textbf{Programming techniques used}: binary exponentiation.
 
-Very stupid, streamlined problem. I hate that the mod is so big that BigInteger is required (it was either that or calculating the power linearly instead of with binary exponentiation). Fortunately, modular binary exponentiation is very fast and BigIntegers won't grow much because $20$ digits is the highest amount needed during the calculations. So this gets solved in abot $2$ms.
+Very stupid, streamlined problem. I hate that the mod is so big that BigInteger is required (it was either that or calculating the power linearly instead of with binary exponentiation). Fortunately, modular binary exponentiation is very fast and BigIntegers won't grow much because $20$ digits is the highest amount needed during the calculations. So this gets solved in about $2$ms.
 
-Save for $206$, which we aren't going to tackle for a while, this is the last problem with $5\%$ difficulty.
+This is the last problem with $5\%$ difficulty in a while. There are more, but they are very sparsely found.
 
 \section{Anagramic squares}
 \textbf{Difficulty rating}: 35\%.
@@ -1800,7 +1800,7 @@ Total: $301040401775292608691432405$.
 
 \textbf{Programming techniques used}: none.
 
-I'm not super proud of this, but it's fast and frankly I'm not sure if there is a \textit{precise} method to determine whether we hit or not any bouncy digit limit in a range. So I used brute force. That's it, check any number starting from $n=101$ (no number from $1$ to $100$ can be bouncy) until the counter is such that the nonbouncy numbers are $1\%$ of the total. I guess that you could increase the counter in hundreds instead of ones, with a bit of additional logic. Whatever: this finishes is $24$ms.
+I'm not super proud of this, but it's fast and frankly I'm not sure if there is a \textit{precise} method to determine whether we hit or not any bouncy digit limit in a range. So I used brute force. That's it, check any number starting from $n=101$ (no number from $1$ to $100$ can be bouncy) until the counter is such that the nonbouncy numbers are $1\%$ of the total. I guess that you could increase the counter in hundreds instead of ones, with a bit of additional logic. Whatever: this finishes in $24$ms.
 
 \section{Non-bouncy numbers}
 \textbf{Difficulty rating}: 30\%.
@@ -1811,7 +1811,7 @@ I'm not super proud of this, but it's fast and frankly I'm not sure if there is 
 
 \textbf{Programming techniques used}: dynamic programming.
 
-Now we're talking This problem is a bit more interesting than the previous one even if it's just a standard dynamic programming problem with a small twist. We need to count the amount of increasing numbers (dynamic programming with digits from $1$ to $9$; at each step, the value for digit $d$ is the sum of values for digits from $1$ to $d$ from the previous step) and the amount of decreasing numbers (dynamic programming with digits from $0$ to $9$; at each step, the value for digit $d$ is the sum of values for digits from $d$ to $9$ from the previous step), minus the $9\times100$ digits with same digits at all position, which have been counted twice because they appear in both cases. Finishes in less than one third of a millisecond!
+Now we're talking. This problem is a bit more interesting than the previous one even if it's just a standard dynamic programming problem with a small twist. We need to count the amount of increasing numbers (dynamic programming with digits from $1$ to $9$; at each step, the value for digit $d$ is the sum of values for digits from $1$ to $d$ from the previous step) and the amount of decreasing numbers (dynamic programming with digits from $0$ to $9$; at each step, the value for digit $d$ is the sum of values for digits from $d$ to $9$ from the previous step), minus the $9\times100$ digits with same digits at all position, which have been counted twice because they appear in both cases. Finishes in less than one third of a millisecond!
 
 \section{Counting block combinations I}
 \textbf{Difficulty rating}: 35\%.
@@ -1964,7 +1964,7 @@ By the way, the highest depth needed is $191$, with a depth of $11$. The generat
 
 This can be tricky to get right because of two reasons: 1) indices are, infuriatingly, starting from $0$ and not from $1$ (this makes sense mathematically, but fucks with calculations a bit), 2) we need to make sure that only odd indices are valid.
 
-We determined in problem $120$ (using Newton's binomial theorem, which is otherwise not used at all in this problem, but it's necessary for the formula so I have included it) that $r=2$ if $n$ is even, and $r\equiv2na$ (mod $a^2$) if $n$ is odd. With this in mind, I did the following: first I generated an array of primes (I need the connection between primes and its index here!). Since Java arrays are $0$ based, \textbf{as they obviously and rightfully should be}\footnote{Have I mentioned today how \textit{much} do I hate Python?}, if the index of a prime $p$ in the array is $i$, the actual value of $n$ is $i+1$. Therefore I need to consider only \text{even} values of $i$. I also can start the search from the first prime that exceeds $10000$ (which can be found in the array with a binary search), and after that it's just a matter of iterating onwards. The prime limit I used was $1000000$, and the prime is actually $237733$, found in about $16$ ms.
+We determined in problem $120$ (using Newton's binomial theorem, which is otherwise not used at all in this problem, but it's necessary for the formula so I have included it) that $r=2$ if $n$ is even, and $r\equiv2na$ (mod $a^2$) if $n$ is odd. With this in mind, I did the following: first I generated an array of primes (I need the connection between primes and its index here!). Since Java arrays are $0$ based, \textbf{as they obviously and rightfully should be}\footnote{Yes, Matlab, I'm looking at you.}, if the index of a prime $p$ in the array is $i$, the actual value of $n$ is $i+1$. Therefore I need to consider only \text{even} values of $i$. I also can start the search from the first prime that exceeds $10000$ (which can be found in the array with a binary search), and after that it's just a matter of iterating onwards. The prime limit I used was $1000000$, and the prime is actually $237733$, found in about $16$ ms.
 
 \section{Ordered radicals}
 \textbf{Difficulty rating}: 25\%.
@@ -2093,7 +2093,7 @@ Some of the numbers from this series are somewhat interesting:
 
 I remember having a lot of fun solving this one, back in the day. Here's the thing: there is a very simple standard way of finding values of $p$ so that $n^3+n^2p$ is a cube, so we just need to generate these and keep the prime ones.
 
-I want $n^3+n^2p=n^2\paren{n+p}$ to be a perfect cube. Since $p$ is prime, the only possibility is that both $n^2$ and $n+p$ are cubes, meaning that $n$ is a cube and so is $n+p$, therefore $p$ is the difference of two cubes. However, the difference between two cubes can only be prime if they are consecutive primes; otherwise $b^3-a^3=\paren{b-a}\paren{a^2+ab+b^2}$ can't be prime since it would have two factors bigger than $1$. So $n=k^3$, $p=\paren{k+1}^3-k^3$, and $n^2+np=\paren{k^2\paren{k+1}}^3$.
+I want $n^3+n^2p=n^2\paren{n+p}$ to be a perfect cube. Since $p$ is prime, the only possibility is that both $n^2$ and $n+p$ are cubes, meaning that $n$ is a cube and so is $n+p$, therefore $p$ is the difference of two cubes. However, the difference between two cubes can only be prime if they are consecutive numbers; otherwise $b^3-a^3=\paren{b-a}\paren{a^2+ab+b^2}$ can't be prime since it would have two factors bigger than $1$. So $n=k^3$, $p=\paren{k+1}^3-k^3$, and $n^2+np=\paren{k^2\paren{k+1}}^3$.
 
 The algorithm from here is simple: iterate over cube differences until the difference exceeds $10^6$ (this should happen around $n=\ceil{\sqrt{\dfrac{10^6}3}}=578$), increase a counter when a prime is found. About $8$ms of runtime, and I assume that most of it goes to the sieve generation.
 
@@ -2235,7 +2235,7 @@ f_{n+6}&=&4f_{n+3}+f_n,\\
 f_{n+8}&=&7f_{n+4}-f_n,\\
 f_{n+10}&=&11f_{n+5}+f_n\ldots
 \end{eqnarray*}
-This suggests that the formulas are always $f_{n+2a}=A_nf_{n+a}+B_nf_n$ where $A_n=L_{n-1}$ is a Lucas number and $B_n=\paren{-1}^n+1$. The formula even holds for $a=0$: $f_n=2f_n-f_n$.
+This suggests that the formulas are always $f_{n+2a}=A_nf_{n+a}+B_nf_n$ where $A_n=L_{n-1}$ is a Lucas number and $B_n=\paren{-1}^{n+1}$. The formula even holds for $a=0$: $f_n=2f_n-f_n$.
 
 \section{Special isosceles triangles}
 \textbf{Difficulty rating}: 45\%.
@@ -2563,7 +2563,7 @@ Getting to this formula requires a bit of pen and paper, but not much. As usual,
 
 A purely algorithmic problem, without any math aside from addition and subtraction. These are increasingly rare. This is basically problem $11$ on steroids, with the added difficulty that we don't know the length of the chain, because the de facto limits are the negative numbers. The iterating scheme is basically the same (for every horizontal, vertical or $\pm45$ diagonal direction, look in all the lines), but in order to get the maximum, we do this for every streak:
 \begin{itemize}
-\item Keep a currentSum value. Initialize at 0. At each step, increase the currentSum with the value we're iterating over. But if the result is negative, set currentSum to 0.
+\item Keep a currentSum value. Initialise at 0. At each step, increase the currentSum with the value we're iterating over. But if the result is negative, set currentSum to 0.
 \item Also at each step, update the maximum with currentSum if needed.
 \end{itemize}
 That's it. Single pass, no complex storage required, $0.26$ seconds ($0.05$ of which go to the matrix generation).
@@ -2579,7 +2579,7 @@ The greatest streak is composed of $1828$ numbers, found in the $270$th column (
 
 \textbf{Programming techniques used}: dynamic programming.
 
-Another purely algorithmic problem, superficially similar to the previous one but quite different. We need some level of memoisation-slash-dynamic programming; the brute force algorithm is $O\paren{n^5}$ or at best $O\paren{n^4}$, which is feasible but somewhat prohibitive; but there are ``only'' $O\paren{n^3}$, so we should be able to reduce the count. There are $N=1000$ levels of elements; at level $i\in\corch{1,N}$ we have exactly $i$ elements, each of which is the apex of $N+1-i$ different triangles; therefore (thanks once again, Faulhaber) we have exactly
+Another purely algorithmic problem, superficially similar to the previous one but quite different. We need some level of memoisation-slash-dynamic programming; the brute force algorithm is $O\paren{n^5}$ or at best $O\paren{n^4}$, which is feasible but somewhat prohibitive; but there are ``only'' $O\paren{n^3}$ triangles, so we should be able to reduce the count. There are $N=1000$ levels of elements; at level $i\in\corch{1,N}$ we have exactly $i$ elements, each of which is the apex of $N+1-i$ different triangles; therefore (thanks once again, Faulhaber) we have exactly
 \begin{equation*}
 \sum_{i=1}^Ni\paren{N+1-i}=\paren{N+1}\sum_{i=1}^Ni-\sum_{i=1}^Ni^2=\dfrac{N^3+3N^2+2N}6
 \end{equation*}
@@ -2595,7 +2595,7 @@ The trick to reuse calculations and calculate each triangle in constant time lie
 \begin{equation*}
 S_{i,j,k}=\left\{\begin{array}{ll}k=0:&T_{i,j},\\k=1:&T_{i,j}+T_{i+1,j}+T_{i+1,j+1},\\k\geq2:&T_{i,j}+S_{i+1,j,k-1}+S_{i+1,j+1,k-1}-S_{i+2,j+1,k-2}.\end{array}\right.
 \end{equation*}
-At each step we only need the current row and the two previous ones, so there is no need to store the whole 3D array at all times. With this scheme I can find the solution in about $1.5$ seconds (I suspect that much of it comes from Java zeroing arrays upon allocation), and I don't think there is more room for improvement. The minimum triangle has its apex at row $7$, element $7$ (these are the \textit{eighth} elements. Unlike Python, this is an actual, serious programming language and arrays start at $0$) and $k=885$, i.e. the depth is $886$ and the triangle contains $392941$ elements.
+At each step we only need the current row and the two previous ones, so there is no need to store the whole 3D array at all times. With this scheme I can find the solution in about $1.5$ seconds (I suspect that much of it comes from Java zeroing arrays upon allocation), and I don't think there is more room for improvement. The minimum triangle has its apex at row $7$, element $7$ (these are the \textit{eighth} elements. Unlike others, Java is an actual, serious programming language and arrays start at $0$) and $k=885$, i.e. the depth is $886$ and the triangle contains $392941$ elements.
 
 \section{Paper sheets of standard sizes: an ex-pected-value problem}
 \textbf{Difficulty rating}: 50\%.
@@ -2763,7 +2763,7 @@ There are several ways to do this, and in the end I opted for a reasonably simpl
 \begin{equation*}
 f\paren n=\left\{\begin{array}{ll}n<5:&D\paren n,\\\text{otherwise:}&\paren{f\paren{\floor{\dfrac n5}}\cdot\paren{D\paren{10^5}}^{\floor{\dfrac n{10^5}}}\cdot D\paren{\floor{\dfrac n{10^5}}}}\%10^5.\end{array}\right.
 \end{equation*}
-Of course, we use modular exponentiation for that big factor in the middle.
+Of course, we use binary exponentiation for that big factor in the middle.
 
 \section{Triominoes}
 \textbf{Difficulty rating}: 70\%.
@@ -2846,7 +2846,7 @@ The majority of the time goes for the fancy transition calculation. Only about $
 
 \textbf{Programming techniques used}: custom Rational class.
 
-This is computationally very intensive and I don't think there is much room for improvement. It's just: generate segments, calculate intersections, ensure that there aren't repetitions. I tried to be somewhat clever and grouped segments by slope, but I must have done some
+This is computationally very intensive and I don't think there is much room for improvement. It's just: generate segments, calculate intersections, ensure that there aren't repetitions. I tried to be somewhat clever and grouped segments by slope, but I must have done some ??? ZUTUN! ¿Qué falta aquí D:?
 
 The only ``difficulty'' is in the intersection formula, which is algebraic geometry at high school level. The segments can be codified as $\paren{x,y}+t\paren{\Delta x,\Delta y}$ where $t\in\corch{0,1}$; so, if the other segment is $\paren{x',y'}+u\paren{\Delta x',\Delta y'}$ with $u\in\corch{0,1}$, then the intersection point happens when
 \begin{eqnarray*}

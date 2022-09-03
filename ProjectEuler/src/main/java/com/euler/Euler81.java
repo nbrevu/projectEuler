@@ -32,7 +32,7 @@ public class Euler81 {
 	
 	private static long solve()	{
 		try	{
-			URL resource=Euler81.class.getResource("in81.txt");
+			URL resource=Euler81.class.getResource("in8.txt");
 			List<String> lines=Files.lines(Paths.get(resource.toURI())).collect(Collectors.toList());
 			int[][] originalMatrix=parseLines(lines);
 			int[][] result=arraySameSize(originalMatrix);
